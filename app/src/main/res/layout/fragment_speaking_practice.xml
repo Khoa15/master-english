@@ -45,6 +45,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:id="@+id/speakingSubtitle"
                     android:text="@string/speaking_subtitle"
                     android:textColor="@color/ds_muted"
                     android:textSize="12sp" />

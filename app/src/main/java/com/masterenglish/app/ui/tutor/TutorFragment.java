@@ -5,18 +5,19 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.masterenglish.app.R;
 import com.masterenglish.app.data.local.prefs.AppPreferences;
 import com.masterenglish.app.data.local.prefs.OnboardingAnswers;
 import com.masterenglish.app.databinding.FragmentTutorBinding;
+import com.masterenglish.app.databinding.ItemTopicCardBinding;
 import com.masterenglish.app.ui.common.SkeletonView;
 import com.masterenglish.app.ui.common.TabFragment;
 import com.masterenglish.app.ui.redesign.TopicCardAdapter;
@@ -36,7 +37,6 @@ public class TutorFragment extends TabFragment {
     AppPreferences preferences;
 
     private FragmentTutorBinding binding;
-    private TopicCardAdapter topicAdapter;
 
     /** Speaking topics as shown on the Tutor artboard: id, title, level, minutes, success line, recommended. */
     private static final String[][] TOPICS = {
@@ -62,15 +62,9 @@ public class TutorFragment extends TabFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        topicAdapter = new TopicCardAdapter(card -> openTopic(card.id), null);
-        binding.topicList.setLayoutManager(new GridLayoutManager(requireContext(), 2));
-        binding.topicList.setAdapter(topicAdapter);
-
-        binding.startCustomButton.setOnClickListener(v -> {
-            Bundle args = new Bundle();
-            args.putString("topicId", "custom");
-            NavHostFragment.findNavController(this).navigate(R.id.action_tutor_to_speaking, args);
-        });
+        // The custom card opens its own page with the "Create new" button and saved situations.
+        binding.customCard.setOnClickListener(v ->
+                NavHostFragment.findNavController(this).navigate(R.id.action_tutor_to_custom));
     }
 
     @Override
@@ -78,7 +72,7 @@ public class TutorFragment extends TabFragment {
         if (binding == null) {
             return;
         }
-        topicAdapter.submit(new ArrayList<>());
+        binding.topicGrid.removeAllViews();
         binding.interestChips.removeAllViews();
         showSkeleton();
     }
@@ -99,8 +93,39 @@ public class TutorFragment extends TabFragment {
             cards.add(new TopicCardAdapter.Card(t[0], t[1], t[2] + " · " + t[3] + " min", t[4], recommended, false));
         }
         cards.sort((a, b) -> Boolean.compare(b.badge, a.badge));
-        topicAdapter.submit(cards);
+        bindTopics(cards);
         hideSkeleton();
+    }
+
+    /** Two cards per row, added to the page so the whole Tutor screen scrolls as one. */
+    private void bindTopics(List<TopicCardAdapter.Card> cards) {
+        binding.topicGrid.removeAllViews();
+        LayoutInflater inflater = LayoutInflater.from(requireContext());
+        int margin = dp(5);
+        for (int i = 0; i < cards.size(); i += 2) {
+            LinearLayout row = new LinearLayout(requireContext());
+            row.setOrientation(LinearLayout.HORIZONTAL);
+            for (int j = i; j < Math.min(i + 2, cards.size()); j++) {
+                TopicCardAdapter.Card card = cards.get(j);
+                ItemTopicCardBinding item = ItemTopicCardBinding.inflate(inflater, row, false);
+                item.topicTitle.setText(card.title);
+                item.topicMeta.setText(card.meta);
+                item.topicStat.setText(card.stat);
+                item.topicBadge.setVisibility(card.badge ? View.VISIBLE : View.GONE);
+                item.topicAction.setVisibility(View.GONE);
+                item.card.setOnClickListener(v -> openTopic(card.id));
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0,
+                        LinearLayout.LayoutParams.WRAP_CONTENT, 1f);
+                params.setMargins(margin, margin, margin, margin);
+                row.addView(item.getRoot(), params);
+            }
+            if (cards.size() - i < 2) {
+                // Keep a lone last card at half width.
+                View filler = new View(requireContext());
+                row.addView(filler, new LinearLayout.LayoutParams(0, 0, 1f));
+            }
+            binding.topicGrid.addView(row);
+        }
     }
 
     private void openTopic(String topicId) {

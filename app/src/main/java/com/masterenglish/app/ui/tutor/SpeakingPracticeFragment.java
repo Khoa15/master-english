@@ -36,11 +36,16 @@ public class SpeakingPracticeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         String topicId = requireArguments().getString("topicId", "job-interview");
+        String customText = requireArguments().getString("customText");
+        if (customText != null) {
+            binding.speakingSubtitle.setText(customText);
+        }
 
         binding.backButton.setOnClickListener(v -> NavHostFragment.findNavController(this).navigateUp());
         binding.endButton.setOnClickListener(v -> {
             Bundle args = new Bundle();
             args.putString("topicId", topicId);
+            args.putString("customText", customText);
             NavHostFragment.findNavController(this).navigate(R.id.action_speaking_to_summary, args);
         });
         binding.stopButton.setOnClickListener(v -> {

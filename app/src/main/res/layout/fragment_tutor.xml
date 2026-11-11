@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/ds_paper"
-    android:clipToPadding="false"
-    android:paddingBottom="140dp">
+    android:clipToPadding="false">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -40,6 +39,27 @@
                     app:tint="#B3541E" />
             </LinearLayout>
 
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/customCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:cardBackgroundColor="@color/ds_ink"
+            app:cardCornerRadius="18dp"
+            app:cardElevation="0dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="@string/tutor_custom_title"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </com.google.android.material.card.MaterialCardView>
+
         <TextView android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -64,71 +84,18 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/topicList"
+        <!-- Topics are plain rows inside this page's own scroll, so they size to their content. -->
+        <LinearLayout
+            android:id="@+id/topicGrid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:nestedScrollingEnabled="false" />
+            android:orientation="vertical" />
 
-        <com.google.android.material.card.MaterialCardView
+        <!-- Spacer inside the scrolling content so the last topic clears the floating tab bar. -->
+        <View
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:cardBackgroundColor="@color/ds_ink"
-            app:cardCornerRadius="18dp"
-            app:cardElevation="0dp">
+            android:layout_height="140dp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/tutor_custom_title"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="@string/tutor_custom_label"
-                    android:textColor="#D9D5CA"
-                    android:textSize="13sp" />
-
-                <EditText
-                    android:id="@+id/customTopic"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/bg_ds_custom_input"
-                    android:gravity="top"
-                    android:hint="@string/tutor_custom_hint"
-                    android:inputType="textMultiLine"
-                    android:lines="2"
-                    android:padding="12dp"
-                    android:textColor="@color/white"
-                    android:textColorHint="#A29F95"
-                    android:textSize="15sp" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/startCustomButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:backgroundTint="@color/ds_amber"
-                    android:minHeight="48dp"
-                    android:text="@string/tutor_start_speaking"
-                    android:textAllCaps="false"
-                    android:textColor="@color/ds_ink"
-                    android:textStyle="bold"
-                    app:cornerRadius="12dp" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
 </ScrollView>

@@ -42,6 +42,18 @@
         <action
             android:id="@+id/action_tutor_to_speaking"
             app:destination="@id/speakingPracticeFragment" />
+        <action
+            android:id="@+id/action_tutor_to_custom"
+            app:destination="@id/customPracticeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/customPracticeFragment"
+        android:name="com.masterenglish.app.ui.tutor.CustomPracticeFragment"
+        android:label="custom_practice">
+        <action
+            android:id="@+id/action_custom_to_speaking"
+            app:destination="@id/speakingPracticeFragment" />
     </fragment>
 
     <fragment
@@ -110,6 +122,11 @@
             android:name="topicId"
             app:argType="string"
             android:defaultValue="job-interview" />
+        <argument
+            android:name="customText"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
         <action
             android:id="@+id/action_speaking_to_summary"
             app:destination="@id/speakingSummaryFragment" />

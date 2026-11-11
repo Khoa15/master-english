@@ -8,6 +8,7 @@ import com.masterenglish.app.data.local.dao.AiDao;
 import com.masterenglish.app.data.local.dao.BadgeDao;
 import com.masterenglish.app.data.local.dao.ContentDao;
 import com.masterenglish.app.data.local.dao.ProgressDao;
+import com.masterenglish.app.data.local.dao.SpeakingScenarioDao;
 import com.masterenglish.app.data.local.dao.UserDao;
 import com.masterenglish.app.data.local.entity.AiChatMessageEntity;
 import com.masterenglish.app.data.local.entity.AiChatSessionEntity;
@@ -20,6 +21,7 @@ import com.masterenglish.app.data.local.entity.ListeningEntity;
 import com.masterenglish.app.data.local.entity.ReadingEntity;
 import com.masterenglish.app.data.local.entity.RoadmapNodeEntity;
 import com.masterenglish.app.data.local.entity.RoadmapStageEntity;
+import com.masterenglish.app.data.local.entity.SpeakingScenarioEntity;
 import com.masterenglish.app.data.local.entity.UserBadgeEntity;
 import com.masterenglish.app.data.local.entity.UserEntity;
 import com.masterenglish.app.data.local.entity.UserItemRetentionEntity;
@@ -51,9 +53,10 @@ import com.masterenglish.app.data.local.entity.VocabularyEntity;
                 AiChatMessageEntity.class,
                 BadgeEntity.class,
                 UserBadgeEntity.class,
-                DailyStudyLogEntity.class
+                DailyStudyLogEntity.class,
+                SpeakingScenarioEntity.class
         },
-        version = 1,
+        version = 2,
         exportSchema = false)
 @TypeConverters(Converters.class)
 public abstract class AppDatabase extends RoomDatabase {
@@ -69,4 +72,6 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract AiDao aiDao();
 
     public abstract BadgeDao badgeDao();
+
+    public abstract SpeakingScenarioDao speakingScenarioDao();
 }

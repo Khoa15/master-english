@@ -38,6 +38,9 @@
     <string name="profile_strong_title">Strongest</string>
     <string name="profile_weak_title">Needs work</string>
     <string name="tutor_custom_label">Describe a situation</string>
+    <string name="tutor_create_new">Create new</string>
+    <string name="tutor_saved_title">Your situations</string>
+    <string name="tutor_saved_empty">No situations yet. Create one to start.</string>
 
     <!-- Topic detail -->
 
