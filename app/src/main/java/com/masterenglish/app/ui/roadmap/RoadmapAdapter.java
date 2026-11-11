@@ -19,7 +19,9 @@ import com.masterenglish.app.data.local.Enums.NodeStatus;
 import com.masterenglish.app.data.local.Enums.NodeType;
 import com.masterenglish.app.data.repository.RoadmapItem;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Renders roadmap nodes in a zig-zag. Each node is offset horizontally along a sine
@@ -33,18 +35,19 @@ public class RoadmapAdapter extends ListAdapter<RoadmapItem, RoadmapAdapter.Node
     static final float SWING_DP = 64f;
 
     public interface OnNodeClick {
-        /** Called when a locked node is tapped. */
-        void onNodeClicked(RoadmapItem item);
-
-        /** Called when the action button under an unlocked node is tapped. */
+        /** Called when the action button under a node is tapped. */
         void onActionClicked(RoadmapItem item);
+
+        /** Called when a node is expanded or collapsed by a tap. */
+        void onNodeToggled(RoadmapItem item, boolean expanded);
     }
 
     private final OnNodeClick listener;
-    /** Id of the node whose action button is currently shown, or null. */
-    private String selectedId;
-    /** Id of the first AVAILABLE node, i.e. the one the learner should work on next. */
-    private String frontierId;
+    private final RoadmapSelection selection = new RoadmapSelection();
+    /** Ids of nodes whose next bind should play the expand/collapse animation. */
+    private final Set<String> pendingAnimations = new HashSet<>();
+    /** Id of the current node (see {@link RoadmapActionPolicy#currentNodeId}). */
+    private String currentNodeId;
 
     public RoadmapAdapter(OnNodeClick listener) {
         super(new DiffUtil.ItemCallback<RoadmapItem>() {
@@ -64,13 +67,7 @@ public class RoadmapAdapter extends ListAdapter<RoadmapItem, RoadmapAdapter.Node
     @Override
     public void onCurrentListChanged(@NonNull List<RoadmapItem> previousList, @NonNull List<RoadmapItem> currentList) {
         super.onCurrentListChanged(previousList, currentList);
-        frontierId = null;
-        for (RoadmapItem item : currentList) {
-            if (item.status == NodeStatus.AVAILABLE) {
-                frontierId = item.node.id;
-                break;
-            }
-        }
+        currentNodeId = RoadmapActionPolicy.currentNodeId(currentList);
     }
 
     @NonNull
@@ -85,21 +82,26 @@ public class RoadmapAdapter extends ListAdapter<RoadmapItem, RoadmapAdapter.Node
         RoadmapItem item = getItem(position);
         float density = holder.itemView.getResources().getDisplayMetrics().density;
         holder.itemView.setTranslationX((float) (Math.sin(position * 0.9) * SWING_DP * density));
-        boolean expanded = item.status != NodeStatus.LOCKED && item.node.id.equals(selectedId);
-        holder.bind(item, expanded, actionFor(item),
+        holder.bind(item,
+                selection.isSelected(item.node.id),
+                labelFor(RoadmapActionPolicy.actionFor(item, currentNodeId)),
+                pendingAnimations.remove(item.node.id),
                 () -> onNodeTapped(item),
                 () -> listener.onActionClicked(item));
     }
 
     private void onNodeTapped(RoadmapItem item) {
-        if (item.status == NodeStatus.LOCKED) {
-            listener.onNodeClicked(item);
-            return;
+        String previous = selection.toggle(item.node.id);
+        String selected = selection.selectedId();
+        if (previous != null) {
+            pendingAnimations.add(previous);
         }
-        String previous = selectedId;
-        selectedId = item.node.id.equals(previous) ? null : item.node.id;
+        if (selected != null) {
+            pendingAnimations.add(selected);
+        }
         refreshNode(previous);
-        refreshNode(selectedId);
+        refreshNode(selected);
+        listener.onNodeToggled(item, selection.isSelected(item.node.id));
     }
 
     /** Re-binds the node with the given id so its action button shows or hides. */
@@ -116,16 +118,16 @@ public class RoadmapAdapter extends ListAdapter<RoadmapItem, RoadmapAdapter.Node
         }
     }
 
-    /** Label for the action button under a node, or 0 when the node is locked. */
     @StringRes
-    private int actionFor(RoadmapItem item) {
-        if (item.status == NodeStatus.COMPLETED || item.status == NodeStatus.MASTERED) {
-            return R.string.roadmap_action_practice;
+    private static int labelFor(RoadmapActionPolicy.Action action) {
+        switch (action) {
+            case START:
+                return R.string.lesson_start;
+            case PRACTICE:
+                return R.string.roadmap_action_practice;
+            default:
+                return R.string.roadmap_action_challenge;
         }
-        if (item.status == NodeStatus.AVAILABLE) {
-            return item.node.id.equals(frontierId) ? R.string.lesson_start : R.string.roadmap_action_challenge;
-        }
-        return 0;
     }
 
     static final class NodeHolder extends RecyclerView.ViewHolder {
@@ -146,27 +148,46 @@ public class RoadmapAdapter extends ListAdapter<RoadmapItem, RoadmapAdapter.Node
             actionButton = itemView.findViewById(R.id.nodeActionButton);
         }
 
-        void bind(RoadmapItem item, boolean expanded, @StringRes int actionRes, Runnable onTap, Runnable onAction) {
+        void bind(RoadmapItem item, boolean expanded, @StringRes int actionRes, boolean animate,
+                  Runnable onTap, Runnable onAction) {
             title.setText(item.node.title);
             stageHeader.setText(item.stageTitle == null ? "" : item.stageTitle);
             stageHeader.setVisibility(item.stageTitle == null ? View.GONE : View.VISIBLE);
-            icon.setImageResource(iconFor(item.node.nodeType, item.status));
+            // Vector drawables are costly to load, so only swap them when the resource really changes.
+            setImageIfChanged(icon, iconFor(item.node.nodeType, item.status));
             circle.setBackgroundResource(backgroundFor(item.node.nodeType, item.status));
             icon.setImageTintList(null);
             for (int i = 0; i < starRow.getChildCount(); i++) {
-                ((ImageView) starRow.getChildAt(i)).setImageResource(i < item.stars ? R.drawable.ic_star : R.drawable.ic_star_empty);
+                setImageIfChanged((ImageView) starRow.getChildAt(i), i < item.stars ? R.drawable.ic_star : R.drawable.ic_star_empty);
             }
             starRow.setVisibility(item.status == NodeStatus.LOCKED ? View.INVISIBLE : View.VISIBLE);
             itemView.setAlpha(item.status == NodeStatus.LOCKED ? 0.85f : 1f);
-            itemView.setOnClickListener(v -> onTap.run());
+            // Only the node itself is tappable. The row spans the full width, so a listener on
+            // itemView would also fire for taps on empty space beside the node.
+            itemView.setOnClickListener(null);
+            circle.setOnClickListener(v -> onTap.run());
+            title.setOnClickListener(v -> onTap.run());
 
-            if (expanded && actionRes != 0) {
+            boolean showButton = expanded && actionRes != 0;
+            if (showButton) {
                 actionButton.setText(actionRes);
                 actionButton.setOnClickListener(v -> onAction.run());
-                actionButton.setVisibility(View.VISIBLE);
             } else {
                 actionButton.setOnClickListener(null);
-                actionButton.setVisibility(View.GONE);
+            }
+            // The button is INVISIBLE, not GONE, when hidden: the space is reserved so showing
+            // it never moves the nodes below.
+            RoadmapToggleAnimator.applyButton(actionButton, showButton, animate);
+            if (animate) {
+                RoadmapToggleAnimator.pulse(circle);
+            }
+        }
+
+        private static void setImageIfChanged(ImageView view, int resId) {
+            Object current = view.getTag(R.id.roadmapImageRes);
+            if (!(current instanceof Integer) || (Integer) current != resId) {
+                view.setImageResource(resId);
+                view.setTag(R.id.roadmapImageRes, resId);
             }
         }
 

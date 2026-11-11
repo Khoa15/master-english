@@ -7,6 +7,8 @@ import com.masterenglish.app.data.remote.ApiService;
 import com.masterenglish.app.data.remote.dto.SyncAck;
 import com.masterenglish.app.data.remote.dto.SyncPayload;
 import com.masterenglish.app.data.local.entity.UserItemRetentionEntity;
+import com.masterenglish.app.utils.AppExecutors;
+import com.masterenglish.app.utils.Callback;
 
 import java.io.IOException;
 
@@ -27,17 +29,41 @@ public class SyncRepository {
     private final ProgressRepository progressRepository;
     private final AiRepository aiRepository;
     private final AppPreferences preferences;
+    private final AppExecutors executors;
 
     @Inject
     public SyncRepository(ApiService api, ProgressRepository progressRepository, AiRepository aiRepository,
-                          AppPreferences preferences) {
+                          AppPreferences preferences, AppExecutors executors) {
         this.api = api;
         this.progressRepository = progressRepository;
         this.aiRepository = aiRepository;
         this.preferences = preferences;
+        this.executors = executors;
+    }
+
+    /**
+     * Non-blocking {@link #syncNow}, for pull-to-refresh. Runs on a background thread and reports
+     * whether the sync succeeded on the main thread.
+     */
+    public void syncInBackground(String userId, Callback<Boolean> onDone) {
+        executors.diskIO().execute(() -> {
+            boolean success;
+            try {
+                syncNow(userId);
+                success = true;
+            } catch (Exception e) {
+                success = false;
+            }
+            boolean result = success;
+            executors.mainThread().execute(() -> onDone.onResult(result));
+        });
     }
 
     public void syncNow(String userId) throws IOException {
+        // Guest accounts only exist on this device, so there is nothing to sync with the server.
+        if (userId == null || userId.startsWith("guest-")) {
+            return;
+        }
         SyncPayload outgoing = new SyncPayload();
         outgoing.userId = userId;
         outgoing.sentAt = System.currentTimeMillis();

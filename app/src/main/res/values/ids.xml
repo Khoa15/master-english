@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Tag key: remembers which drawable an ImageView shows, so rebinding can skip reloading it. -->
+    <item name="roadmapImageRes" type="id" />
+</resources>

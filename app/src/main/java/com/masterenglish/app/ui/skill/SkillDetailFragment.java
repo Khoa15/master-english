@@ -15,6 +15,8 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.masterenglish.app.R;
 import com.masterenglish.app.data.repository.SkillProgress;
+import com.masterenglish.app.ui.common.PullToRefresh;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.masterenglish.app.databinding.FragmentSkillDetailBinding;
 import com.masterenglish.app.ui.redesign.Rows;
 
@@ -25,13 +27,20 @@ import dagger.hilt.android.AndroidEntryPoint;
 public class SkillDetailFragment extends Fragment {
 
     private FragmentSkillDetailBinding binding;
+    private SkillDetailViewModel viewModel;
+    private SwipeRefreshLayout refreshLayout;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         binding = FragmentSkillDetailBinding.inflate(inflater, container, false);
-        return binding.getRoot();
+        refreshLayout = PullToRefresh.wrap(requireContext(), binding.getRoot(), binding.skillScroll, this::onRefresh);
+        return refreshLayout;
+    }
+
+    private void onRefresh() {
+        viewModel.refresh(success -> PullToRefresh.finish(refreshLayout, success, binding == null ? null : binding.getRoot()));
     }
 
     @Override
@@ -47,7 +56,7 @@ public class SkillDetailFragment extends Fragment {
         binding.practiceButton.setOnClickListener(v -> NavHostFragment.findNavController(this).navigate(R.id.reviewFragment));
 
 
-        SkillDetailViewModel viewModel = new ViewModelProvider(this).get(SkillDetailViewModel.class);
+        viewModel = new ViewModelProvider(this).get(SkillDetailViewModel.class);
         viewModel.skills().observe(getViewLifecycleOwner(), skills -> {
             SkillProgress.Summary skill = skills.get(skillId);
             if (skill != null) {

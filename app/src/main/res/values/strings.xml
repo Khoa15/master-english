@@ -195,6 +195,7 @@
     <string name="profile_saved_toast">Settings saved</string>
     <string name="profile_sign_out_done">Signed out</string>
     <string name="profile_sync_done">Sync complete</string>
+    <string name="sync_failed">Couldn\'t sync. Check your connection and try again.</string>
     <string name="profile_notification_denied">Allow notifications to receive reminders.</string>
     <string name="profile_badge_condition_prefix">How to unlock: </string>
     <string name="profile_reminder_time_title">Pick a reminder time</string>

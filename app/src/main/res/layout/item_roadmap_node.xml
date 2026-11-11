@@ -4,8 +4,10 @@
     android:layout_height="wrap_content"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:paddingTop="14dp"
-    android:paddingBottom="14dp">
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:paddingTop="22dp"
+    android:paddingBottom="22dp">
 
     <TextView
         android:id="@+id/stageHeader"
@@ -80,5 +82,5 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:minWidth="140dp"
-        android:visibility="gone" />
+        android:visibility="invisible" />
 </LinearLayout>

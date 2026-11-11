@@ -46,6 +46,9 @@ import com.masterenglish.app.service.reminder.ReminderScheduler;
 import com.masterenglish.app.service.sync.SyncScheduler;
 import com.masterenglish.app.utils.Levels;
 import com.masterenglish.app.utils.SoundManager;
+import com.masterenglish.app.ui.common.PullToRefresh;
+
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -71,6 +74,7 @@ public class ProfileFragment extends TabFragment {
 
     private FragmentProfileBinding binding;
     private ProfileViewModel viewModel;
+    private SwipeRefreshLayout refreshLayout;
     private BadgeAdapter badgeAdapter;
 
 
@@ -79,7 +83,13 @@ public class ProfileFragment extends TabFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         binding = FragmentProfileBinding.inflate(inflater, container, false);
-        return withSkeleton(binding.getRoot(), SkeletonView.Variant.PROFILE);
+        // The root is the page's ScrollView, so it decides when a pull may start.
+        refreshLayout = PullToRefresh.wrap(requireContext(), binding.getRoot(), binding.getRoot(), this::onRefresh);
+        return withSkeleton(refreshLayout, SkeletonView.Variant.PROFILE);
+    }
+
+    private void onRefresh() {
+        viewModel.refresh(success -> PullToRefresh.finish(refreshLayout, success, binding == null ? null : binding.getRoot()));
     }
 
     @Override

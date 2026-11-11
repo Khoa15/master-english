@@ -29,6 +29,9 @@ import com.masterenglish.app.service.reminder.NotificationHelper;
 import com.masterenglish.app.service.reminder.ReminderScheduler;
 import com.masterenglish.app.service.sync.SyncScheduler;
 import com.masterenglish.app.utils.SoundManager;
+import com.masterenglish.app.ui.common.PullToRefresh;
+
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.Arrays;
 import java.util.Locale;
@@ -52,6 +55,7 @@ public class SettingsFragment extends Fragment {
 
     private FragmentSettingsBinding binding;
     private SettingsViewModel viewModel;
+    private SwipeRefreshLayout refreshLayout;
     private UserSettingsEntity currentSettings;
     private boolean bindingSettings;
 
@@ -70,7 +74,12 @@ public class SettingsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         binding = FragmentSettingsBinding.inflate(inflater, container, false);
-        return binding.getRoot();
+        refreshLayout = PullToRefresh.wrap(requireContext(), binding.getRoot(), binding.settingsScroll, this::onRefresh);
+        return refreshLayout;
+    }
+
+    private void onRefresh() {
+        viewModel.refresh(success -> PullToRefresh.finish(refreshLayout, success, binding == null ? null : binding.getRoot()));
     }
 
     @Override
