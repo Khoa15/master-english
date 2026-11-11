@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- English copy for the redesigned Tutor, Practice, Vocabulary and Skill screens. -->
+<resources>
+    <!-- Bottom navigation -->
+    <string name="nav_tab_roadmap">Roadmap</string>
+    <string name="nav_tab_practice">Practice</string>
+    <string name="nav_tab_tutor">Tutor</string>
+    <string name="nav_tab_profile">Profile</string>
+    <string name="vocab_fab_desc">Practice vocabulary</string>
+
+    <!-- Shared -->
+    <string name="ds_for_you">For you</string>
+    <string name="ds_practice">Practice</string>
+    <string name="ds_practice_again">Practice again</string>
+    <string name="ds_back">Back</string>
+    <string name="ds_close">Close</string>
+    <string name="ds_done">Done</string>
+    <string name="ds_start">Start</string>
+    <string name="ds_check">Check</string>
+    <string name="ds_continue">Continue</string>
+    <string name="ds_correct">Correct!</string>
+    <string name="ds_not_quite">Not quite.</string>
+    <string name="profile_title">Profile</string>
+
+    <!-- Tutor -->
+    <string name="tutor_title">Tutor</string>
+    <string name="tutor_subtitle">Speak out loud. Topics are picked for you.</string>
+    <string name="tutor_onboarding_title">FROM YOUR ONBOARDING</string>
+    <string name="tutor_onboarding_body">Goal: %1$s</string>
+    <string name="tutor_custom_title">Create your own practice</string>
+    <string name="tutor_custom_hint">e.g. Ask a hotel receptionist about late check-out</string>
+    <string name="tutor_start_speaking">Start speaking</string>
+
+    <!-- Topic detail -->
+
+    <!-- Speaking practice -->
+    <string name="speaking_title">Speaking practice</string>
+    <string name="speaking_subtitle">Job interview · B1</string>
+    <string name="speaking_end">End</string>
+    <string name="speaking_today">Today</string>
+    <string name="speaking_tutor_initial">T</string>
+    <string name="speaking_tutor_message">Hi! Let\'s practise a job interview. Tell me about yourself.</string>
+    <string name="speaking_learner_duration">Your voice · 0:12</string>
+    <string name="speaking_learner_transcript">"I am Anna. I have worked as a designer for three years."</string>
+    <string name="speaking_tip_label">TIP</string>
+    <string name="speaking_tip_body">Say "I have worked" for experience that continues today, and "I worked" for finished jobs.</string>
+    <string name="speaking_recording">Recording… 0:04</string>
+    <string name="speaking_tap_to_stop">Tap to stop</string>
+    <string name="speaking_stop">Stop recording</string>
+    <string name="speaking_hint">Ask for a hint</string>
+    <string name="speaking_hint_symbol">?</string>
+    <string name="speaking_hint_text">Try starting with \"I have worked\" for your experience.</string>
+
+    <!-- Speaking summary -->
+    <string name="summary_header">Speaking summary</string>
+    <string name="summary_title">Session summary</string>
+    <string name="summary_body">Good work. Your answers were clear, and two grammar points need practice.</string>
+    <string name="summary_corrections">Top corrections</string>
+    <string name="summary_words">Words you used</string>
+    <string name="summary_stat_time">talking time</string>
+    <string name="summary_stat_turns">your turns</string>
+    <string name="summary_stat_clear">clear answers</string>
+    <string name="summary_no_value">—</string>
+
+    <!-- Vocabulary -->
+    <string name="vocab_title">Vocabulary</string>
+    <string name="vocab_topics_title">Topics</string>
+    <string name="vocab_learned_of">of %1$d words</string>
+    <string name="vocab_mastered_of">of %1$d words</string>
+    <string name="vocab_review_all">Review all %1$d non-mastered words</string>
+    <string name="vocab_word_count">%1$d words</string>
+    <string name="vocab_topic_header">Vocabulary topic</string>
+    <string name="vocab_words_title">Words in this topic</string>
+    <string name="vocab_count_total">total</string>
+    <string name="vocab_count_learned">learned</string>
+    <string name="vocab_count_mastered">mastered</string>
+    <string name="vocab_more_words">+ %1$d more words</string>
+    <string name="vocab_speak_tap">Tap and say the word</string>
+    <string name="vocab_complete_header">Vocabulary practice</string>
+    <string name="vocab_complete_title">Practice complete</string>
+    <string name="vocab_complete_body">You got %1$d of %2$d right.</string>
+    <string name="vocab_stat_correct">correct</string>
+    <string name="vocab_stat_moved">moved up</string>
+    <string name="vocab_stat_mastered">mastered</string>
+    <string name="vocab_still_review">Still to review</string>
+    <string name="vocab_topic_level">Level %1$s</string>
+    <string name="vocab_chip_word">Word</string>
+    <string name="vocab_practice_empty">No words to practise yet. Finish a lesson to add words.</string>
+    <string name="vocab_status_new">New</string>
+    <string name="vocab_status_learning">Learning</string>
+    <string name="vocab_status_mastered">Mastered</string>
+    <string name="vocab_stat_fraction">%1$d/%2$d</string>
+
+    <!-- Skill detail -->
+    <string name="skill_working_title">What is working</string>
+    <string name="skill_focus_title">Focus next</string>
+    <string name="skill_practice">Practice %1$s</string>
+    <string name="skill_progress_label">%1$d of %2$d lessons completed</string>
+    <string name="skill_chip">%1$s · %2$s</string>
+    <string name="skill_recent_title">Recent mistakes</string>
+    <string name="skill_mistake_count">%1$d mistakes</string>
+    <string name="skill_none">Nothing here yet</string>
+    <string name="practice_subtitle">Fix your gaps and try new lessons at your level.</string>
+    <string name="practice_section_listening">Listening</string>
+    <string name="practice_section_reading">Reading</string>
+    <string name="practice_section_grammar">Grammar</string>
+    <string name="practice_section_writing">Writing</string>
+    <string name="practice_section_speaking">Speaking</string>
+    <string name="practice_section_empty">No lessons yet.</string>
+</resources>

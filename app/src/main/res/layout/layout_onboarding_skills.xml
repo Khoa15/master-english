@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/TextAppearance.Onboarding.Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/onboard_skills_title" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/onboard_skills_body"
+            android:textColor="@color/onboarding_muted"
+            android:textSize="15sp" />
+
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/skillsGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:orientation="vertical"
+            app:selectionRequired="true"
+            app:singleSelection="false">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/skillGrammar"
+                style="@style/Widget.Onboarding.Option"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+                android:text="@string/onboard_skill_grammar" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/skillVocabulary"
+                style="@style/Widget.Onboarding.Option"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+                android:text="@string/onboard_skill_vocabulary" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/skillListening"
+                style="@style/Widget.Onboarding.Option"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+                android:text="@string/onboard_skill_listening" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/skillReading"
+                style="@style/Widget.Onboarding.Option"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+                android:text="@string/onboard_skill_reading" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/skillWriting"
+                style="@style/Widget.Onboarding.Option"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+                android:text="@string/onboard_skill_writing" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/skillSpeaking"
+                style="@style/Widget.Onboarding.Option"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/onboard_skill_speaking" />
+        </com.google.android.material.button.MaterialButtonToggleGroup>
+
+    </LinearLayout>
+</ScrollView>

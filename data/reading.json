@@ -1,0 +1,686 @@
+[
+  {
+    "id": "read_001",
+    "title": "Hello, I Am Minh",
+    "cefr_level": "A1",
+    "domain": "IT / Self-Introduction",
+    "passage": "Hello. My name is Minh. I am twenty-four years old and I am from Hue. I am a web developer. I work for a small company in Da Nang. There are six people in my team. I start work at nine o'clock. I use a computer every day. I like my job.",
+    "questions": [
+      {
+        "question_id": "q_001",
+        "question": "What is Minh's job?",
+        "options": [
+          "A) Teacher",
+          "B) Web developer",
+          "C) Doctor",
+          "D) Manager"
+        ],
+        "answer": "B",
+        "explanation_vi": "Đoạn văn viết: 'I am a web developer'."
+      },
+      {
+        "question_id": "q_002",
+        "question": "How many people are in Minh's team?",
+        "options": [
+          "A) Four",
+          "B) Five",
+          "C) Six",
+          "D) Nine"
+        ],
+        "answer": "C",
+        "explanation_vi": "Đoạn văn viết: 'There are six people in my team'."
+      }
+    ],
+    "key_vocabulary": [
+      "developer",
+      "company",
+      "team"
+    ]
+  },
+  {
+    "id": "read_002",
+    "title": "A Short Job Interview",
+    "cefr_level": "A1",
+    "domain": "IT Job Interview",
+    "passage": "Lan has an interview today. The office is big and new. A man asks Lan some questions. He says, 'Do you know Java?' Lan says, 'Yes, I do. I can write Java.' He says, 'Do you speak English?' Lan says, 'Yes, a little.' The interview is short. Lan is happy.",
+    "questions": [
+      {
+        "question_id": "q_003",
+        "question": "What can Lan write?",
+        "options": [
+          "A) Java",
+          "B) Python",
+          "C) PHP",
+          "D) Ruby"
+        ],
+        "answer": "A",
+        "explanation_vi": "Lan nói: 'I can write Java'."
+      },
+      {
+        "question_id": "q_004",
+        "question": "How does Lan feel at the end?",
+        "options": [
+          "A) Sad",
+          "B) Angry",
+          "C) Tired",
+          "D) Happy"
+        ],
+        "answer": "D",
+        "explanation_vi": "Câu cuối viết: 'Lan is happy'."
+      }
+    ],
+    "key_vocabulary": [
+      "interview",
+      "question",
+      "office"
+    ]
+  },
+  {
+    "id": "read_003",
+    "title": "Our Website",
+    "cefr_level": "A1",
+    "domain": "IT / Simple System Description",
+    "passage": "This is our website. It has three pages. The first page is the home page. The second page has photos of our shop. The third page has our phone number and email. People can open the website on a phone or a computer. The website is simple, and it is fast.",
+    "questions": [
+      {
+        "question_id": "q_005",
+        "question": "How many pages does the website have?",
+        "options": [
+          "A) One",
+          "B) Two",
+          "C) Four",
+          "D) Three"
+        ],
+        "answer": "D",
+        "explanation_vi": "Đoạn văn viết: 'It has three pages'."
+      },
+      {
+        "question_id": "q_006",
+        "question": "What is on the second page?",
+        "options": [
+          "A) The email",
+          "B) Photos of the shop",
+          "C) The phone number",
+          "D) The home page"
+        ],
+        "answer": "B",
+        "explanation_vi": "Đoạn văn viết: 'The second page has photos of our shop'."
+      }
+    ],
+    "key_vocabulary": [
+      "website",
+      "page",
+      "open"
+    ]
+  },
+  {
+    "id": "read_004",
+    "title": "My First Year as a Tester",
+    "cefr_level": "A2",
+    "domain": "IT / Self-Introduction",
+    "passage": "My name is Hoa. I finished university in 2023 and got my first job last year. I am a software tester at a company that makes apps for banks. Every morning, our team has a short meeting. Then I test new features and write reports. At first, the work was difficult because I didn't know our software well. My colleagues helped me a lot. Now I am learning to write automatic tests. Next year, I am going to take an English course because I want to work with foreign customers.",
+    "questions": [
+      {
+        "question_id": "q_007",
+        "question": "Why was the work difficult at first?",
+        "options": [
+          "A) Hoa didn't know the software well",
+          "B) The meetings were too long",
+          "C) Hoa's colleagues were unfriendly",
+          "D) The company was too big"
+        ],
+        "answer": "A",
+        "explanation_vi": "Hoa viết rằng công việc khó vì 'I didn't know our software well'."
+      },
+      {
+        "question_id": "q_008",
+        "question": "Why does Hoa want to take an English course?",
+        "options": [
+          "A) To pass a university exam",
+          "B) To travel abroad",
+          "C) To work with foreign customers",
+          "D) To teach her colleagues"
+        ],
+        "answer": "C",
+        "explanation_vi": "Đoạn văn viết: 'I want to work with foreign customers'."
+      }
+    ],
+    "key_vocabulary": [
+      "software",
+      "colleague",
+      "feature"
+    ]
+  },
+  {
+    "id": "read_005",
+    "title": "Preparing for an Interview",
+    "cefr_level": "A2",
+    "domain": "IT Job Interview",
+    "passage": "Tuan has a job interview next Tuesday. Yesterday he read about the company on its website. Today he is practising his answers with a friend. His friend asks, 'What are your skills?' and 'Why do you want this job?' Tuan is also preparing his computer because the interview is online. He has to check his camera and his internet. He is a little nervous, but he is ready. After the interview, he is going to send a short email to say thank you.",
+    "questions": [
+      {
+        "question_id": "q_009",
+        "question": "What did Tuan do yesterday?",
+        "options": [
+          "A) He checked his camera",
+          "B) He read about the company",
+          "C) He sent an email",
+          "D) He met the manager"
+        ],
+        "answer": "B",
+        "explanation_vi": "Đoạn văn viết: 'Yesterday he read about the company on its website'."
+      },
+      {
+        "question_id": "q_010",
+        "question": "What is Tuan going to do after the interview?",
+        "options": [
+          "A) Call his friend",
+          "B) Buy a new camera",
+          "C) Read the website again",
+          "D) Send a thank-you email"
+        ],
+        "answer": "D",
+        "explanation_vi": "Đoạn văn viết: 'he is going to send a short email to say thank you'."
+      }
+    ],
+    "key_vocabulary": [
+      "interview",
+      "skill",
+      "online"
+    ]
+  },
+  {
+    "id": "read_006",
+    "title": "How Our Online Shop Works",
+    "cefr_level": "A2",
+    "domain": "IT / Simple System Description",
+    "passage": "Our online shop is easy to use. First, a customer chooses a product and clicks the 'Buy' button. Then the customer writes an address and pays by card. The website saves the order. After that, it sends an email to the customer and a message to our team. Last month, the website was very slow because we had too many customers. So we bought a bigger server. Now the website is faster than before.",
+    "questions": [
+      {
+        "question_id": "q_011",
+        "question": "Why was the website slow last month?",
+        "options": [
+          "A) The email system stopped",
+          "B) The card payments failed",
+          "C) There were too many customers",
+          "D) The team deleted some files"
+        ],
+        "answer": "C",
+        "explanation_vi": "Đoạn văn viết: 'very slow because we had too many customers'."
+      },
+      {
+        "question_id": "q_012",
+        "question": "What did the company do to solve the problem?",
+        "options": [
+          "A) It bought a bigger server",
+          "B) It closed the shop",
+          "C) It stopped sending emails",
+          "D) It changed the 'Buy' button"
+        ],
+        "answer": "A",
+        "explanation_vi": "Đoạn văn viết: 'So we bought a bigger server'."
+      }
+    ],
+    "key_vocabulary": [
+      "online",
+      "click",
+      "server"
+    ]
+  },
+  {
+    "id": "read_007",
+    "title": "From Network Technician to Developer",
+    "cefr_level": "B1",
+    "domain": "IT / Self-Introduction",
+    "passage": "I used to work as a network technician, fixing routers and helping staff with their computers. Although I enjoyed helping people, I wanted to create something of my own, so I started learning JavaScript in the evenings. After a year of practice, I built a small application for managing the company's equipment. My manager liked it and offered me a position in the development team. I have worked as a front-end developer for three years now, and I am responsible for the customer dashboard. My networking background is still useful, because I often understand why a request is failing before anyone else does.",
+    "questions": [
+      {
+        "question_id": "q_013",
+        "question": "How did the writer get a position in the development team?",
+        "options": [
+          "A) By completing a university degree",
+          "B) By building an application that the manager liked",
+          "C) By applying to a different company",
+          "D) By fixing the manager's router"
+        ],
+        "answer": "B",
+        "explanation_vi": "Tác giả xây dựng ứng dụng quản lý thiết bị và quản lý đã đề nghị một vị trí trong nhóm phát triển."
+      },
+      {
+        "question_id": "q_014",
+        "question": "Why is the writer's networking background still useful?",
+        "options": [
+          "A) It helps with designing the dashboard",
+          "B) It helps with teaching other staff",
+          "C) It helps with understanding failed requests",
+          "D) It helps with buying equipment"
+        ],
+        "answer": "C",
+        "explanation_vi": "Đoạn văn viết: 'I often understand why a request is failing before anyone else does'."
+      }
+    ],
+    "key_vocabulary": [
+      "background",
+      "responsible",
+      "application"
+    ]
+  },
+  {
+    "id": "read_008",
+    "title": "Answering 'What Is Your Greatest Weakness?'",
+    "cefr_level": "B1",
+    "domain": "IT Job Interview",
+    "passage": "Many candidates are afraid of the question 'What is your greatest weakness?' Interviewers do not ask it to make you feel bad. They want to see whether you can think honestly about your work. A good answer has two parts. First, describe a real weakness that will not stop you from doing the job. Next, explain what you are doing to improve. For example, a developer might say that she sometimes spends too long solving a problem alone, so she now asks for help if she is stuck for more than an hour. Avoid answers like 'I work too hard', because they do not sound honest.",
+    "questions": [
+      {
+        "question_id": "q_015",
+        "question": "According to the passage, why do interviewers ask this question?",
+        "options": [
+          "A) To check whether candidates can think honestly about their work",
+          "B) To make candidates feel nervous",
+          "C) To find a reason to reject candidates",
+          "D) To test candidates' technical knowledge"
+        ],
+        "answer": "A",
+        "explanation_vi": "Đoạn văn viết: 'They want to see whether you can think honestly about your work'."
+      },
+      {
+        "question_id": "q_016",
+        "question": "Why should candidates avoid saying 'I work too hard'?",
+        "options": [
+          "A) It is too long",
+          "B) It shows a serious weakness",
+          "C) It is too technical",
+          "D) It does not sound honest"
+        ],
+        "answer": "D",
+        "explanation_vi": "Đoạn văn viết: 'they do not sound honest'."
+      }
+    ],
+    "key_vocabulary": [
+      "candidate",
+      "weakness",
+      "improve"
+    ]
+  },
+  {
+    "id": "read_009",
+    "title": "How a Web Request Works",
+    "cefr_level": "B1",
+    "domain": "IT / System Description",
+    "passage": "When you type an address into your browser, several things happen in less than a second. First, the browser finds the IP address of the website. Then a request is sent over the network to a server. The server reads the request and, if necessary, gets information from a database. A response is then created and sent back to the browser, which displays the page. If the server cannot find the page, it returns a 404 error. If something goes wrong on the server itself, the browser will show a 500 error. Developers use these codes to find out where a problem has happened.",
+    "questions": [
+      {
+        "question_id": "q_017",
+        "question": "What does the server do if it needs more information?",
+        "options": [
+          "A) It asks the user",
+          "B) It restarts the browser",
+          "C) It gets information from a database",
+          "D) It sends a 404 error"
+        ],
+        "answer": "C",
+        "explanation_vi": "Đoạn văn viết: 'gets information from a database'."
+      },
+      {
+        "question_id": "q_018",
+        "question": "What does a 500 error show?",
+        "options": [
+          "A) A problem on the server",
+          "B) A problem with the user's keyboard",
+          "C) A page that loads quickly",
+          "D) A successful request"
+        ],
+        "answer": "A",
+        "explanation_vi": "Đoạn văn viết: 'If something goes wrong on the server itself, the browser will show a 500 error'."
+      }
+    ],
+    "key_vocabulary": [
+      "server",
+      "database",
+      "network"
+    ]
+  },
+  {
+    "id": "read_010",
+    "title": "Writing a Strong Professional Summary",
+    "cefr_level": "B2",
+    "domain": "IT / Self-Introduction",
+    "passage": "A professional summary should give a recruiter a clear reason to keep reading. Rather than listing every technology you have touched, focus on what you have delivered and the scale at which you have worked. Compare 'Experienced developer who knows many languages' with 'Backend engineer with five years of experience building payment APIs that handle two million requests per day.' The second version is more convincing because it is specific and measurable. Despite the temptation to sound impressive, you should only include claims you can defend in an interview. An experienced interviewer will quickly ask how you achieved those numbers, and vague answers can damage your credibility.",
+    "questions": [
+      {
+        "question_id": "q_019",
+        "question": "Why is the second summary more convincing?",
+        "options": [
+          "A) It lists more programming languages",
+          "B) It is specific and measurable",
+          "C) It is shorter than the first one",
+          "D) It avoids mentioning experience"
+        ],
+        "answer": "B",
+        "explanation_vi": "Đoạn văn viết: 'more convincing because it is specific and measurable'."
+      },
+      {
+        "question_id": "q_020",
+        "question": "What risk does the writer warn about?",
+        "options": [
+          "A) Writing a summary that is too short",
+          "B) Mentioning payment systems",
+          "C) Applying to too many companies",
+          "D) Making claims you cannot defend"
+        ],
+        "answer": "D",
+        "explanation_vi": "Tác giả khuyên chỉ nêu những điều có thể bảo vệ được trong phỏng vấn, vì câu trả lời mơ hồ làm giảm uy tín."
+      }
+    ],
+    "key_vocabulary": [
+      "recruiter",
+      "measurable",
+      "credibility"
+    ]
+  },
+  {
+    "id": "read_011",
+    "title": "Thinking Aloud in a Coding Interview",
+    "cefr_level": "B2",
+    "domain": "IT Job Interview / Coding",
+    "passage": "In a coding interview, the final solution matters less than many candidates assume. Interviewers are trying to understand how you approach an unfamiliar problem, which is difficult if you work in complete silence. Before writing any code, clarify the requirements and ask about edge cases, such as empty input or very large values. Then describe a simple solution, even if it is inefficient, and explain its time complexity. This gives you something to improve and shows that you can reason about trade-offs. If you get stuck, say what you have tried and why it did not work. Interviewers will often offer a hint, but they can only do so if they know where your thinking has stopped.",
+    "questions": [
+      {
+        "question_id": "q_021",
+        "question": "Why should you explain a simple solution first?",
+        "options": [
+          "A) It gives you something to improve and shows reasoning about trade-offs",
+          "B) Interviewers only accept simple solutions",
+          "C) It avoids the need to discuss complexity",
+          "D) It removes the need to ask questions"
+        ],
+        "answer": "A",
+        "explanation_vi": "Đoạn văn viết: 'This gives you something to improve and shows that you can reason about trade-offs'."
+      },
+      {
+        "question_id": "q_022",
+        "question": "What does the writer imply about working in silence?",
+        "options": [
+          "A) It helps candidates concentrate and is recommended",
+          "B) It is required in most interviews",
+          "C) It prevents interviewers from helping you",
+          "D) It makes the code run faster"
+        ],
+        "answer": "C",
+        "explanation_vi": "Người phỏng vấn chỉ có thể gợi ý 'if they know where your thinking has stopped', nên im lặng khiến họ khó giúp."
+      }
+    ],
+    "key_vocabulary": [
+      "edge case",
+      "time complexity",
+      "trade-off"
+    ]
+  },
+  {
+    "id": "read_012",
+    "title": "Why We Added a Cache",
+    "cefr_level": "B2",
+    "domain": "IT / System Design",
+    "passage": "As our product catalogue grew, the most popular pages began to take over three seconds to load. Profiling showed that the same expensive queries were being executed thousands of times per minute, making the database our main bottleneck. We introduced Redis as a cache in front of the database so that frequently requested data could be returned from memory. Average response times dropped to around 200 milliseconds. However, caching brought a new problem: customers occasionally saw outdated prices. To address this, we now remove the relevant cache entry whenever a price is updated, and every entry also expires after ten minutes as a safety measure.",
+    "questions": [
+      {
+        "question_id": "q_023",
+        "question": "What was identified as the main bottleneck?",
+        "options": [
+          "A) The network",
+          "B) The Redis server",
+          "C) The user's browser",
+          "D) The database"
+        ],
+        "answer": "D",
+        "explanation_vi": "Đoạn văn viết: 'making the database our main bottleneck'."
+      },
+      {
+        "question_id": "q_024",
+        "question": "What new problem did caching cause?",
+        "options": [
+          "A) Pages loaded more slowly",
+          "B) Customers sometimes saw outdated prices",
+          "C) The database stopped working",
+          "D) Prices could not be updated"
+        ],
+        "answer": "B",
+        "explanation_vi": "Đoạn văn viết: 'customers occasionally saw outdated prices'."
+      }
+    ],
+    "key_vocabulary": [
+      "bottleneck",
+      "cache",
+      "profiling"
+    ]
+  },
+  {
+    "id": "read_013",
+    "title": "Telling Your Career Story",
+    "cefr_level": "C1",
+    "domain": "IT Interview / Self-Introduction",
+    "passage": "Senior candidates frequently undersell themselves by reciting their job history in chronological order. What interviewers actually want is a coherent narrative that explains why each move made sense and how it prepared you for the role in question. Having spent six years in fintech, for instance, you might frame your trajectory as a steady progression from implementing features to owning the reliability of entire platforms. It is equally important to distinguish your contribution from that of your team; the habitual use of 'we' can leave an interviewer unsure of what you personally accomplished. Not only does a well-structured story demonstrate self-awareness, but it also signals the communication skills expected at a senior level.",
+    "questions": [
+      {
+        "question_id": "q_025",
+        "question": "What weakness does the passage identify in the habitual use of 'we'?",
+        "options": [
+          "A) It sounds overly formal",
+          "B) It suggests a lack of technical knowledge",
+          "C) It obscures the candidate's personal contribution",
+          "D) It makes the narrative too long"
+        ],
+        "answer": "C",
+        "explanation_vi": "Đoạn văn cho biết dùng 'we' có thể khiến người phỏng vấn không rõ cá nhân ứng viên đã làm được gì."
+      },
+      {
+        "question_id": "q_026",
+        "question": "What does a well-structured career story signal, according to the writer?",
+        "options": [
+          "A) Communication skills expected at a senior level",
+          "B) A preference for fintech companies",
+          "C) A desire to change careers",
+          "D) Experience with reliability tools"
+        ],
+        "answer": "A",
+        "explanation_vi": "Câu cuối nêu câu chuyện có cấu trúc tốt thể hiện kỹ năng giao tiếp được kỳ vọng ở cấp senior."
+      }
+    ],
+    "key_vocabulary": [
+      "trajectory",
+      "self-awareness",
+      "coherent"
+    ]
+  },
+  {
+    "id": "read_014",
+    "title": "Explaining a Legacy Monolith Migration to Microservices",
+    "cefr_level": "C1",
+    "domain": "IT Interview / System Architecture",
+    "passage": "During the technical interview, the candidate described the strategy used to decouple a monolithic application into domain-driven microservices. Rather than attempting a complete rewrite, which had failed at a previous employer, her team applied the strangler fig pattern: a routing layer gradually redirected individual capabilities to new services while the monolith continued to serve everything else. It was the data, she stressed, that proved hardest to separate, since numerous modules relied on shared tables. The team therefore introduced change data capture to keep the old and new stores synchronised during the transition. Had they not defined clear domain boundaries at the outset, she argued, they would merely have produced a distributed monolith.",
+    "questions": [
+      {
+        "question_id": "q_027",
+        "question": "Which aspect of the migration proved most difficult?",
+        "options": [
+          "A) Training new engineers",
+          "B) Choosing a programming language",
+          "C) Configuring the routing layer",
+          "D) Separating data held in shared tables"
+        ],
+        "answer": "D",
+        "explanation_vi": "Đoạn văn viết: 'It was the data... that proved hardest to separate'."
+      },
+      {
+        "question_id": "q_028",
+        "question": "What would have happened without clear domain boundaries?",
+        "options": [
+          "A) The rewrite would have been cheaper",
+          "B) The result would have been a distributed monolith",
+          "C) Change data capture would have been unnecessary",
+          "D) The monolith would have been shut down sooner"
+        ],
+        "answer": "B",
+        "explanation_vi": "Câu cuối dùng điều kiện loại 3: thiếu ranh giới rõ ràng thì họ chỉ tạo ra 'a distributed monolith'."
+      }
+    ],
+    "key_vocabulary": [
+      "monolithic",
+      "decouple",
+      "domain-driven"
+    ]
+  },
+  {
+    "id": "read_015",
+    "title": "What a Blameless Postmortem Revealed",
+    "cefr_level": "C1",
+    "domain": "IT / DevOps",
+    "passage": "The outage lasted forty-seven minutes and originated, superficially at least, in a mistyped configuration value. Yet the postmortem deliberately refrained from attributing the failure to the engineer who made the change. Instead, it examined why such an error could reach production at all. Three contributing factors emerged: the configuration bypassed the validation applied to application code, the deployment reached every region simultaneously, and alert thresholds had been loosened months earlier to reduce noise. Each decision had seemed reasonable in isolation. The resulting remediation introduced schema validation, staged regional rollouts and a review of alert thresholds, thereby addressing systemic weaknesses that a narrower focus on individual error would have left intact.",
+    "questions": [
+      {
+        "question_id": "q_029",
+        "question": "Why did the postmortem not blame the engineer?",
+        "options": [
+          "A) It aimed to understand why the error could reach production",
+          "B) The engineer had left the company",
+          "C) The configuration value was correct",
+          "D) The outage was too short to matter"
+        ],
+        "answer": "A",
+        "explanation_vi": "Đoạn văn viết bản phân tích tập trung vào 'why such an error could reach production at all'."
+      },
+      {
+        "question_id": "q_030",
+        "question": "Which of the following was NOT a contributing factor?",
+        "options": [
+          "A) Configuration skipped code validation",
+          "B) Deployment reached all regions at once",
+          "C) Too few engineers were on call",
+          "D) Alert thresholds had been loosened"
+        ],
+        "answer": "C",
+        "explanation_vi": "Ba yếu tố được nêu không bao gồm việc thiếu kỹ sư trực."
+      }
+    ],
+    "key_vocabulary": [
+      "postmortem",
+      "remediation",
+      "systemic"
+    ]
+  },
+  {
+    "id": "read_016",
+    "title": "On Describing Oneself at Staff Level",
+    "cefr_level": "C2",
+    "domain": "IT Interview / Self-Introduction",
+    "passage": "At staff level and beyond, the conventional inventory of technologies mastered is not merely insufficient but faintly counterproductive, implying as it does that one's value resides in tooling rather than judgement. Far more persuasive is an account of consequential decisions: the migration one argued against, the headcount one forfeited in order to consolidate two overlapping teams, the deceptively small interface whose design obviated a year of downstream work. Much as candidates may wish to foreground their successes, it is often their candour regarding a misjudgement, and the reasoning it subsequently reshaped, that distinguishes the seasoned practitioner. Influence exercised without formal authority, albeit notoriously hard to evidence, remains the attribute that hiring committees probe most assiduously.",
+    "questions": [
+      {
+        "question_id": "q_031",
+        "question": "Why does the writer consider a list of technologies counterproductive at this level?",
+        "options": [
+          "A) It takes too long to present",
+          "B) It implies that value lies in tools rather than judgement",
+          "C) Hiring committees cannot understand it",
+          "D) It reveals outdated knowledge"
+        ],
+        "answer": "B",
+        "explanation_vi": "Tác giả viết danh sách đó hàm ý giá trị nằm ở 'tooling rather than judgement'."
+      },
+      {
+        "question_id": "q_032",
+        "question": "What, according to the passage, do hiring committees probe most assiduously?",
+        "options": [
+          "A) Mastery of programming languages",
+          "B) Willingness to accept lower pay",
+          "C) Number of direct reports managed",
+          "D) Influence exercised without formal authority"
+        ],
+        "answer": "D",
+        "explanation_vi": "Câu cuối xác định ảnh hưởng không dựa vào quyền hạn chính thức là điều được thăm dò kỹ nhất."
+      }
+    ],
+    "key_vocabulary": [
+      "consequential",
+      "obviate",
+      "candour"
+    ]
+  },
+  {
+    "id": "read_017",
+    "title": "The Interview Question Behind the Question",
+    "cefr_level": "C2",
+    "domain": "IT Job Interview / Distributed Systems",
+    "passage": "Asked how they would guarantee exactly-once delivery, inexperienced candidates tend to enumerate broker configuration flags, oblivious to the fact that the question is, in the strict sense, a trap. Exactly-once delivery across an unreliable network is unattainable; what practitioners colloquially call by that name is at-least-once delivery coupled with idempotent processing, so that duplicates, though inevitable, are rendered inconsequential. The candidate who articulates this distinction, and who then interrogates the requirement itself, asking whether the business would in fact tolerate occasional duplication, reveals a sophistication no recitation of documentation could convey. Were the interviewer to press further, the conversation would naturally turn to the deduplication window and the cost of retaining keys indefinitely.",
+    "questions": [
+      {
+        "question_id": "q_033",
+        "question": "According to the passage, what is usually meant by 'exactly-once' in practice?",
+        "options": [
+          "A) At-least-once delivery combined with idempotent processing",
+          "B) At-most-once delivery with no retries",
+          "C) A broker setting that eliminates duplicates",
+          "D) Delivery over a perfectly reliable network"
+        ],
+        "answer": "A",
+        "explanation_vi": "Đoạn văn viết thuật ngữ đó thực chất là 'at-least-once delivery coupled with idempotent processing'."
+      },
+      {
+        "question_id": "q_034",
+        "question": "What distinguishes the sophisticated candidate?",
+        "options": [
+          "A) Memorising broker configuration flags",
+          "B) Refusing to answer the question",
+          "C) Drawing the distinction and questioning the requirement",
+          "D) Promising that duplicates will never occur"
+        ],
+        "answer": "C",
+        "explanation_vi": "Ứng viên giỏi nêu rõ sự khác biệt và chất vấn chính yêu cầu nghiệp vụ."
+      }
+    ],
+    "key_vocabulary": [
+      "idempotent",
+      "deduplication",
+      "enumerate"
+    ]
+  },
+  {
+    "id": "read_018",
+    "title": "The Seductive Economics of Eventual Consistency",
+    "cefr_level": "C2",
+    "domain": "IT / System Design",
+    "passage": "Eventual consistency is commonly presented as a straightforward concession to physics, a price exacted by the CAP theorem. This framing, while not inaccurate, elides the degree to which the burden is merely displaced from the datastore onto the application developer, who must henceforth reason about stale reads, conflicting writes and the semantics of reconciliation. Conflict-free replicated data types ameliorate certain of these difficulties, albeit only for operations amenable to commutative merging; an account balance constrained to remain non-negative is not among them. Should an organisation adopt such a model without a commensurate investment in testing and observability, it is apt to find that the availability it purchased has been paid for in subtle, irreproducible anomalies.",
+    "questions": [
+      {
+        "question_id": "q_035",
+        "question": "What does the writer say the common framing of eventual consistency leaves out?",
+        "options": [
+          "A) That the CAP theorem is false",
+          "B) That datastores become slower",
+          "C) That replication is expensive",
+          "D) That the burden shifts to application developers"
+        ],
+        "answer": "D",
+        "explanation_vi": "Tác giả viết cách trình bày này bỏ qua việc gánh nặng chuyển sang lập trình viên ứng dụng ('displaced... onto the application developer')."
+      },
+      {
+        "question_id": "q_036",
+        "question": "Why are CRDTs unsuitable for a non-negative account balance?",
+        "options": [
+          "A) They need a central coordinator",
+          "B) That constraint is not amenable to commutative merging",
+          "C) They cannot store numeric values",
+          "D) They are incompatible with observability tools"
+        ],
+        "answer": "B",
+        "explanation_vi": "CRDT chỉ hiệu quả với thao tác hợp nhất giao hoán, và ràng buộc số dư không âm không thuộc nhóm đó."
+      }
+    ],
+    "key_vocabulary": [
+      "eventual consistency",
+      "ameliorate",
+      "commensurate"
+    ]
+  }
+]

@@ -1,0 +1,111 @@
+plugins {
+    id 'com.android.application'
+    id 'com.google.dagger.hilt.android'
+}
+
+// Firebase is optional at build time: the plugin is applied only when
+// app/google-services.json exists. Without it the app still builds and runs
+// in Guest Mode; Email/Google sign-in is disabled with a clear message.
+if (file('google-services.json').exists()) {
+    apply plugin: 'com.google.gms.google-services'
+}
+
+def localProps = new Properties()
+def localPropsFile = rootProject.file('local.properties')
+if (localPropsFile.exists()) {
+    localPropsFile.withInputStream { localProps.load(it) }
+}
+
+android {
+    namespace 'com.masterenglish.app'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId 'com.masterenglish.app'
+        minSdk 26
+        targetSdk 34
+        versionCode 1
+        versionName '1.0.0'
+
+        // Secrets and endpoints live in local.properties (git-ignored).
+        buildConfigField 'String', 'GEMINI_API_KEY', "\"${localProps.getProperty('gemini.api.key', '')}\""
+        buildConfigField 'String', 'GEMINI_MODEL', "\"${localProps.getProperty('gemini.model', 'gemini-1.5-flash')}\""
+        buildConfigField 'String', 'API_BASE_URL', "\"${localProps.getProperty('api.base.url', 'https://api.masterenglish.invalid/api/')}\""
+    }
+
+    buildFeatures {
+        buildConfig true
+        viewBinding true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    testOptions {
+        unitTests.includeAndroidResources = true
+    }
+}
+
+dependencies {
+    // AndroidX UI
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'com.google.android.material:material:1.12.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.recyclerview:recyclerview:1.3.2'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.viewpager2:viewpager2:1.1.0'
+    implementation 'androidx.fragment:fragment:1.8.4'
+    implementation 'androidx.activity:activity:1.9.2'
+
+    // Navigation 2.8 exposes kotlinx.serialization types in its API; Java callers need them on the classpath.
+    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-core:1.6.3'
+
+    // Lifecycle / Navigation (Single Activity)
+    implementation 'androidx.lifecycle:lifecycle-viewmodel:2.8.6'
+    implementation 'androidx.lifecycle:lifecycle-livedata:2.8.6'
+    implementation 'androidx.lifecycle:lifecycle-runtime:2.8.6'
+    implementation 'androidx.navigation:navigation-fragment:2.8.2'
+    implementation 'androidx.navigation:navigation-ui:2.8.2'
+
+    // Room (offline-first local DB)
+    implementation 'androidx.room:room-runtime:2.6.1'
+    annotationProcessor 'androidx.room:room-compiler:2.6.1'
+
+    // Hilt DI + WorkManager integration
+    implementation 'com.google.dagger:hilt-android:2.51.1'
+    annotationProcessor 'com.google.dagger:hilt-android-compiler:2.51.1'
+    implementation 'androidx.work:work-runtime:2.9.1'
+    implementation 'androidx.hilt:hilt-work:1.2.0'
+    annotationProcessor 'androidx.hilt:hilt-compiler:1.2.0'
+
+    // Network: Retrofit 2 + OkHttp 3 (OkHttp 3.x is the version Retrofit 2.11 pins)
+    implementation 'com.squareup.retrofit2:retrofit:2.11.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.11.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.14.9'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.14.9'
+    implementation 'com.google.code.gson:gson:2.11.0'
+
+    // Firebase Auth + Google Sign-In
+    implementation platform('com.google.firebase:firebase-bom:33.1.2')
+    implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.google.android.gms:play-services-auth:21.2.0'
+
+    // Animation, particles, charts
+    implementation 'com.airbnb.android:lottie:6.4.0'
+    implementation 'nl.dionsegijn:konfetti-xml:2.0.4'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+    testImplementation 'junit:junit:4.13.2'
+    // Robolectric runs the Room + repository pipeline on the JVM against an in-memory database.
+    testImplementation 'org.robolectric:robolectric:4.13'
+    testImplementation 'androidx.test:core:1.6.1'
+}

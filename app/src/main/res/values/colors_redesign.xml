@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Palette from the Master English design canvas, used by the redesigned screens. -->
+<resources>
+    <color name="ds_paper">#F6F4EE</color>
+    <color name="ds_card">#FFFFFF</color>
+    <color name="ds_ink">#1B1A17</color>
+    <color name="ds_body">#4A4840</color>
+    <color name="ds_muted">#6B6860</color>
+    <color name="ds_line">#E4E0D6</color>
+    <color name="ds_chip">#ECE9E0</color>
+    <color name="ds_amber">#E0A030</color>
+    <color name="ds_amber_tint">#FBEBCB</color>
+    <color name="ds_amber_ink">#8A4B12</color>
+    <color name="ds_green">#2E7D5B</color>
+    <color name="ds_green_tint">#DDF0E6</color>
+    <color name="ds_green_ink">#1F5C41</color>
+    <color name="ds_blue">#2D62C4</color>
+    <color name="ds_blue_tint">#E3ECFB</color>
+    <color name="ds_red">#C2412D</color>
+    <color name="ds_red_tint">#FBE4DF</color>
+    <color name="ds_purple">#6B4FA0</color>
+    <color name="ds_purple_tint">#ECE6F7</color>
+    <color name="ds_orange">#B3541E</color>
+    <color name="ds_orange_tint">#F9E3D6</color>
+    <color name="ds_track">#E9E6DE</color>
+</resources>

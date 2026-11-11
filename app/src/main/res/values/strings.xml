@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Master English</string>
+
+    <!-- Replace with the Web client ID from Firebase console (Google Sign-In). -->
+    <string name="google_web_client_id" translatable="false">YOUR_WEB_CLIENT_ID.apps.googleusercontent.com</string>
+
+    <string name="channel_reminder_name">Daily reminder</string>
+    <string name="channel_reminder_desc">Keep your daily streak</string>
+    <string name="reminder_title">Your owl misses you! 🦉</string>
+    <string name="reminder_body">Finish today\'s lesson to keep your streak.</string>
+
+    <!-- Bottom navigation -->
+    <string name="nav_roadmap">Roadmap</string>
+    <string name="nav_review">Practice</string>
+    <string name="nav_profile">Profile</string>
+
+    <!-- Onboarding -->
+    <string name="onboard_brand">Master English</string>
+    <string name="onboard_welcome_title">Let\'s build your English plan.</string>
+    <string name="onboard_welcome_body">Six quick questions, about two minutes. We\'ll shape lessons around your life, your job and what you want English to do for you.</string>
+    <string name="onboard_welcome_note">You can change every answer later.</string>
+    <string name="onboard_step_format">%1$d of %2$d</string>
+    <string name="onboard_get_started">Get started</string>
+    <string name="onboard_back">Back</string>
+    <string name="onboard_continue">Continue</string>
+    <string name="onboard_start_learning">Start learning</string>
+
+    <string name="onboard_who_title">Who are you?</string>
+    <string name="onboard_who_body">Tell us your name and which best describes you.</string>
+    <string name="onboard_name_hint">Your first name</string>
+    <string name="onboard_role_student">Student</string>
+    <string name="onboard_role_professional">Working professional</string>
+    <string name="onboard_role_teacher">Teacher</string>
+    <string name="onboard_role_job_seeker">Job seeker</string>
+
+    <string name="onboard_age_title">What is your age?</string>
+    <string name="onboard_age_body">This helps us pick examples and topics that fit you.</string>
+    <string name="onboard_age_under_18">Under 18</string>
+    <string name="onboard_age_18_24">18 - 24</string>
+    <string name="onboard_age_25_34">25 - 34</string>
+    <string name="onboard_age_35_44">35 - 44</string>
+    <string name="onboard_age_45_54">45 - 54</string>
+    <string name="onboard_age_55_plus">55 or older</string>
+
+    <string name="onboard_goal_title">What is your goal?</string>
+    <string name="onboard_goal_body">Pick the one that matters most right now.</string>
+    <string name="onboard_goal_exam">Pass an exam (IELTS, TOEIC, TOEFL)</string>
+    <string name="onboard_goal_career">Advance my career</string>
+    <string name="onboard_goal_abroad">Study abroad</string>
+    <string name="onboard_goal_overseas">Move or work overseas</string>
+    <string name="onboard_goal_travel">Travel with confidence</string>
+    <string name="onboard_goal_chat">Chat with friends and family</string>
+
+    <string name="onboard_time_title">How much time can you spend each day?</string>
+    <string name="onboard_time_body">Even ten minutes a day adds up fast.</string>
+    <string name="onboard_time_10">10 minutes</string>
+    <string name="onboard_time_20">20 minutes</string>
+    <string name="onboard_time_30">30 minutes</string>
+    <string name="onboard_time_45">45 minutes or more</string>
+    <string name="onboard_minutes_format">%d minutes</string>
+
+    <string name="onboard_skills_title">Which skills do you want to build?</string>
+    <string name="onboard_skills_body">Choose up to three. You can change this later.</string>
+    <string name="onboard_skill_grammar">Grammar</string>
+    <string name="onboard_skill_vocabulary">Vocabulary</string>
+    <string name="onboard_skill_listening">Listening</string>
+    <string name="onboard_skill_reading">Reading</string>
+    <string name="onboard_skill_writing">Writing</string>
+    <string name="onboard_skill_speaking">Speaking</string>
+
+    <string name="onboard_job_title">What is your job?</string>
+    <string name="onboard_job_body">We\'ll use work examples you can actually use.</string>
+    <string name="onboard_job_software">Software and IT</string>
+    <string name="onboard_job_healthcare">Healthcare</string>
+    <string name="onboard_job_business">Business and sales</string>
+    <string name="onboard_job_education">Education</string>
+    <string name="onboard_job_creative">Creative and media</string>
+    <string name="onboard_job_finance">Finance and law</string>
+    <string name="onboard_job_not_working">Not working right now</string>
+
+    <string name="onboard_ready_title">Your plan is ready.</string>
+    <string name="onboard_ready_body">Here is what we set up. You can change any of it later.</string>
+    <string name="onboard_ready_who">Who</string>
+    <string name="onboard_ready_age">Age</string>
+    <string name="onboard_ready_goal">Goal</string>
+    <string name="onboard_ready_time">Daily time</string>
+    <string name="onboard_ready_focus">Focus</string>
+    <string name="onboard_ready_job">Job</string>
+
+    <!-- Auth -->
+    <string name="auth_title">Sign in to save your progress</string>
+    <string name="auth_email_hint">Email</string>
+    <string name="auth_password_hint">Password (at least 6 characters)</string>
+    <string name="auth_login">Sign in</string>
+    <string name="auth_register">Create account</string>
+    <string name="auth_switch_to_register">No account yet? Sign up</string>
+    <string name="auth_switch_to_login">Already have an account? Sign in</string>
+    <string name="auth_google">Continue with Google</string>
+    <string name="auth_guest">Try as guest</string>
+    <string name="auth_invalid_email">Invalid email</string>
+    <string name="auth_short_password">Password needs at least 6 characters</string>
+
+    <!-- Roadmap -->
+    <string name="roadmap_preparing">Preparing your roadmap…</string>
+    <string name="roadmap_locked_hint">Finish the previous lesson to unlock</string>
+    <string name="roadmap_mascot_tip">Owl tip</string>
+    <string name="roadmap_streak_format">%d days</string>
+    <string name="lesson_start">START</string>
+    <string name="lesson_preview_hint">This lesson has multiple choice, fill-in-the-blank, matching, reordering and speaking questions.</string>
+
+    <!-- Lesson -->
+    <string name="lesson_check">CHECK</string>
+    <string name="lesson_continue">CONTINUE</string>
+    <string name="lesson_finish">FINISH</string>
+    <string name="lesson_correct">Correct! 🎉</string>
+    <string name="lesson_wrong">Not quite. See the explanation below.</string>
+    <string name="lesson_result_title">Lesson complete!</string>
+    <string name="lesson_result_stats">%1$d/%2$d correct · +%3$d XP · +%4$d 💎</string>
+    <string name="lesson_exit_title">Leave the lesson?</string>
+    <string name="lesson_exit_message">Progress for this lesson will not be saved.</string>
+    <string name="lesson_exit_confirm">Leave</string>
+    <string name="lesson_cancel">Stay</string>
+    <string name="lesson_empty">This lesson has no questions yet.</string>
+    <string name="voice_hint">Tap the mic and read the English sentence aloud</string>
+    <string name="voice_or_type">Or type your answer</string>
+    <string name="voice_listening">Listening…</string>
+    <string name="voice_no_permission">Microphone permission is needed for speaking practice.</string>
+    <string name="matching_hint">Tap a word on the left, then its meaning on the right.</string>
+    <string name="reorder_hint">Tap the words to put them in the right order.</string>
+    <string name="fill_hint">Choose the right word to fill the gap.</string>
+
+    <!-- Review -->
+    <string name="review_clinic_title">Weak Spots to Fix</string>
+    <string name="review_clinic_empty">No weak spots yet. Great!</string>
+    <string name="review_due_format">%d cards due for review</string>
+    <string name="review_tab_vocab">Vocabulary</string>
+    <string name="review_tab_grammar">Grammar</string>
+    <string name="review_tab_listening">Listening</string>
+    <string name="review_tab_reading">Reading</string>
+    <string name="review_start_flashcards">Review SRS cards</string>
+    <string name="review_ai_title">Challenge the owl AI</string>
+    <string name="review_ai_body">The owl role-plays and catches your mistakes as you answer.</string>
+    <string name="flash_show_answer">Flip card</string>
+    <string name="flash_again">Again</string>
+    <string name="flash_hard">Hard</string>
+    <string name="flash_good">Good</string>
+    <string name="flash_easy">Easy</string>
+    <string name="flash_done">You\'ve finished all the cards due today!</string>
+    <string name="listen_play">Play</string>
+    <string name="listen_pause">Pause</string>
+    <string name="listen_show_transcript">Show transcript</string>
+    <string name="listen_hide_transcript">Hide transcript</string>
+    <string name="listen_speed">Speed</string>
+    <string name="check_answer">Check answer</string>
+    <string name="reading_key_vocab">Key vocabulary</string>
+    <string name="reading_not_in_dict">Not in the app dictionary yet.</string>
+    <string name="ai_send">Send</string>
+    <string name="ai_input_hint">Write your English sentence…</string>
+    <string name="ai_start">Start challenge</string>
+    <string name="ai_mistake_title">Mistake recorded</string>
+    <string name="ai_correction">Suggested fix: %s</string>
+    <string name="ai_thinking">The owl is thinking…</string>
+
+    <!-- Profile -->
+    <string name="profile_xp_format">%d XP · %s</string>
+    <string name="profile_badges">Badges</string>
+    <string name="profile_badge_locked">Locked</string>
+    <string name="profile_badge_unlocked">Unlocked</string>
+    <string name="profile_weekly">Study time, last 7 days (min)</string>
+    <string name="profile_settings">Settings</string>
+    <string name="profile_sound">Sound</string>
+    <string name="profile_notifications">Daily reminder</string>
+    <string name="profile_reminder_time">Reminder time: %s</string>
+    <string name="profile_ai_difficulty">AI challenge difficulty</string>
+    <string name="profile_gemini_key">Gemini API key (optional)</string>
+    <string name="profile_save">Save</string>
+    <string name="profile_sync_now">Sync now</string>
+    <string name="profile_sync_started">Syncing with the server…</string>
+    <string name="profile_saved">Saved</string>
+    <string name="profile_logout">Sign out</string>
+    <string name="profile_guest_name">Guest</string>
+    <string name="profile_target_minutes">Daily goal</string>
+    <string name="profile_minutes_chip">%d min</string>
+    <string name="badge_flip_hint">Tap to see how to unlock</string>
+    <string name="weakness_count_format">%d mistakes</string>
+    <string name="reading_meta_format">%1$d words · %2$s</string>
+    <string name="profile_study_days">Study days</string>
+    <string name="profile_saved_toast">Settings saved</string>
+    <string name="profile_sign_out_done">Signed out</string>
+    <string name="profile_sync_done">Sync complete</string>
+    <string name="profile_notification_denied">Allow notifications to receive reminders.</string>
+    <string name="profile_key_hint">Paste your API key from Google AI Studio</string>
+    <string name="profile_badge_condition_prefix">How to unlock: </string>
+    <string name="profile_reminder_time_title">Pick a reminder time</string>
+    <string name="profile_guest_note">You\'re in guest mode. Sign in to sync your progress to the server.</string>
+    <string name="reading_tap_hint">Tap any word to see its meaning.</string>
+    <string name="profile_minutes_5">5 min</string>
+    <string name="profile_minutes_10">10 min</string>
+    <string name="profile_minutes_15">15 min</string>
+</resources>

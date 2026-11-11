@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Master English Android: runtime architecture",
+    "output": ".archify/architecture-master-english-runtime-20261111-061138/master-english-runtime.html",
+    "quality_profile": "showcase",
+    "repository": {
+      "url": "https://github.com/Khoa15/master-english.git",
+      "provider": "github",
+      "link_mode": "web",
+      "revision": "aba00e8fb00d9743793328482f4da635de57391c"
+    }
+  },
+  "components": [
+    { "id": "learner", "type": "external", "label": "Learner", "sublabel": "Phone", "icon": "person", "pos": [30, 180], "size": [120, 64] },
+    { "id": "firebase", "type": "security", "label": "Firebase Auth", "sublabel": "Email · Google", "tag": "optional", "pos": [270, 40], "size": [160, 64],
+      "sources": [{ "path": "app/src/main/java/com/masterenglish/app/data/repository/AuthRepository.java", "line": 64, "end_line": 69, "label": "sign-in call" }] },
+    { "id": "ui", "type": "frontend", "label": "Lesson & Mascot UI", "sublabel": "ViewModels (lesson, AI)", "pos": [270, 180], "size": [160, 64],
+      "sources": [
+        { "path": "app/src/main/java/com/masterenglish/app/ui/lesson/LessonViewModel.java", "line": 94, "end_line": 98, "label": "completeLesson call" },
+        { "path": "app/src/main/java/com/masterenglish/app/ui/review/AiChallengeViewModel.java", "line": 45, "end_line": 54, "label": "tutor calls" }
+      ] },
+    { "id": "progress", "type": "backend", "label": "ProgressRepository", "sublabel": "XP · SM-2 · weaknesses", "pos": [550, 180], "size": [160, 64],
+      "sources": [
+        { "path": "app/src/main/java/com/masterenglish/app/data/repository/ProgressRepository.java", "line": 110, "end_line": 118, "label": "completeLesson" },
+        { "path": "app/src/main/java/com/masterenglish/app/data/repository/ProgressRepository.java", "line": 36, "end_line": 39, "label": "write contract" }
+      ] },
+    { "id": "room", "type": "database", "label": "Room AppDatabase", "sublabel": "offline-first store", "pos": [830, 180], "size": [160, 64],
+      "sources": [{ "path": "app/src/main/java/com/masterenglish/app/data/local/AppDatabase.java", "line": 31, "end_line": 34, "label": "store role" }] },
+    { "id": "sync", "type": "backend", "label": "Sync worker", "sublabel": "repository · WorkManager", "pos": [830, 320], "size": [160, 64],
+      "sources": [
+        { "path": "app/src/main/java/com/masterenglish/app/service/sync/SyncWorker.java", "line": 36, "end_line": 49, "label": "doWork" },
+        { "path": "app/src/main/java/com/masterenglish/app/service/sync/SyncScheduler.java", "line": 28, "end_line": 34, "label": "6 h schedule" },
+        { "path": "app/src/main/java/com/masterenglish/app/data/repository/SyncRepository.java", "line": 40, "end_line": 59, "label": "push then pull" }
+      ] },
+    { "id": "ai", "type": "backend", "label": "AI tutor", "sublabel": "Gemini client · tagging", "pos": [270, 320], "size": [160, 64],
+      "sources": [
+        { "path": "app/src/main/java/com/masterenglish/app/service/ai/AiTutorService.java", "line": 110, "end_line": 122, "label": "runTurn" },
+        { "path": "app/src/main/java/com/masterenglish/app/service/ai/GeminiClient.java", "line": 41, "end_line": 51, "label": "generate" }
+      ] },
+    { "id": "gemini", "type": "external", "label": "Gemini API", "sublabel": "generateContent", "pos": [30, 320], "size": [120, 64],
+      "sources": [{ "path": "app/src/main/java/com/masterenglish/app/data/remote/gemini/GeminiApi.java", "line": 9, "end_line": 13, "label": "endpoint" }] },
+    { "id": "mysql", "type": "cloud", "label": "MySQL sync server", "sublabel": "api.base.url", "tag": "not in repo", "pos": [830, 460], "size": [160, 64],
+      "sources": [{ "path": "app/src/main/java/com/masterenglish/app/data/remote/ApiService.java", "line": 13, "end_line": 19, "label": "sync endpoints" }] }
+  ],
+  "boundaries": [
+    { "kind": "region", "label": "Android device · app sandbox", "wraps": ["ui", "progress", "room", "sync", "ai"] }
+  ],
+  "connections": [
+    { "id": "learner-answers", "from": "learner", "to": "ui", "label": "answers", "variant": "emphasis" },
+    { "id": "save-lesson", "from": "ui", "to": "progress", "label": "saves lesson", "variant": "emphasis" },
+    { "id": "write-rows", "from": "progress", "to": "room", "label": "writes rows", "variant": "emphasis" },
+    { "id": "pending-rows", "from": "room", "to": "sync", "label": "pending rows", "variant": "emphasis", "fromSide": "bottom", "toSide": "top" },
+    { "id": "push-pull", "from": "sync", "to": "mysql", "label": "push / pull", "variant": "emphasis", "fromSide": "bottom", "toSide": "top" },
+    { "id": "sign-in", "from": "ui", "to": "firebase", "label": "sign in", "variant": "security", "fromSide": "top", "toSide": "bottom" },
+    { "id": "ai-chat", "from": "ui", "to": "ai", "label": "challenge & chat", "fromSide": "bottom", "toSide": "top" },
+    { "id": "ai-generate", "from": "ai", "to": "gemini", "label": "generate", "variant": "security", "fromSide": "left", "toSide": "right" }
+  ],
+  "cards": [
+    { "dot": "emerald", "title": "Primary path: lesson to server", "items": [
+      "LessonViewModel calls completeLesson when the last question finishes (LessonViewModel.java:94-98)",
+      "ProgressRepository runs the write on the disk executor, off the UI thread (ProgressRepository.java:110-118)",
+      "Room is the store the UI reads; MySQL is the long-term store per its own docs (AppDatabase.java:31-34)",
+      "SyncRepository pushes progress, retention, weaknesses and AI memories, then pulls and merges (SyncRepository.java:40-59)",
+      "Conflicts resolve last-write-wins per row on updated_at (SyncRepository.java:61-83)"
+    ] },
+    { "dot": "rose", "title": "Trust boundaries", "items": [
+      "Device region holds every Room row, the user id and any Gemini key; only three edges leave it: sign in, generate and push / pull",
+      "Gemini key: a value typed in Settings is kept in SharedPreferences (AppPreferences.java:79-85); otherwise it is compiled in from local.properties (app/build.gradle:31)",
+      "Sync sends userId as a query parameter and sets no auth header (ApiService.java:15-19); server-side auth is not in this repo",
+      "Gemini key travels in the x-goog-api-key header, not in the URL (GeminiApi.java:9-13)",
+      "Guest accounts skip sync, so guest data never leaves the device (SyncWorker.java:40-41)"
+    ] },
+    { "dot": "amber", "title": "External dependencies", "items": [
+      "Google Gemini REST at generativelanguage.googleapis.com (NetworkModule.java:25)",
+      "Firebase Auth and Google Sign-In: optional, needs app/google-services.json (AuthRepository.java:24-27)",
+      "MySQL server: base URL from api.base.url, placeholder .invalid by default (app/build.gradle:33); server code is not in this repo",
+      "Android OS: WorkManager, exact AlarmManager alarms for reminders (ReminderScheduler.java:25-39)"
+    ] },
+    { "dot": "violet", "title": "Background work and permissions", "items": [
+      "SyncScheduler enqueues a 6-hour periodic sync that needs a network, started from MasterEnglishApp.onCreate (MasterEnglishApp.java:35)",
+      "Reminder alarms are re-armed by AlarmReceiver and BootReceiver after a reboot",
+      "Declared permissions include INTERNET, RECORD_AUDIO, POST_NOTIFICATIONS and SCHEDULE_EXACT_ALARM (AndroidManifest.xml:5-11)"
+    ] },
+    { "dot": "slate", "title": "Scope of this view", "items": [
+      "Snapshot at committed revision aba00e8; line references use committed bytes",
+      "Working tree has uncommitted changes, so current line numbers may differ",
+      "Not shown: UI screens, seed loading, and the reminder receivers"
+    ] }
+  ]
+}

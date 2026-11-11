@@ -1,0 +1,1060 @@
+[
+  {
+    "id": "list_001",
+    "title": "Meeting a New Colleague",
+    "cefr_level": "A1",
+    "domain": "IT / Self-Introduction",
+    "context": "Hai người gặp nhau trong ngày đầu tiên ở văn phòng.",
+    "transcript": [
+      {
+        "speaker": "Nam",
+        "text": "Hello. I'm Nam. What's your name?"
+      },
+      {
+        "speaker": "Mai",
+        "text": "Hi, Nam. My name is Mai. I'm new here."
+      },
+      {
+        "speaker": "Nam",
+        "text": "Nice to meet you, Mai. What's your job?"
+      },
+      {
+        "speaker": "Mai",
+        "text": "I'm a tester. And you?"
+      },
+      {
+        "speaker": "Nam",
+        "text": "I'm a developer. Our desks are near the window."
+      }
+    ],
+    "questions": [
+      {
+        "question_id": "l_q001",
+        "question": "What is Mai's job?",
+        "options": [
+          "A) Developer",
+          "B) Manager",
+          "C) Tester",
+          "D) Teacher"
+        ],
+        "answer": "C",
+        "explanation_vi": "Mai nói: 'I'm a tester'."
+      },
+      {
+        "question_id": "l_q002",
+        "question": "Where are their desks?",
+        "options": [
+          "A) Near the window",
+          "B) Near the door",
+          "C) In the kitchen",
+          "D) In another office"
+        ],
+        "answer": "A",
+        "explanation_vi": "Nam nói: 'Our desks are near the window'."
+      }
+    ]
+  },
+  {
+    "id": "list_002",
+    "title": "A Simple Interview Question",
+    "cefr_level": "A1",
+    "domain": "IT Job Interview",
+    "context": "Người phỏng vấn hỏi ứng viên những câu đơn giản về kỹ năng.",
+    "transcript": [
+      {
+        "speaker": "Interviewer",
+        "text": "Good morning. Do you use a computer every day?"
+      },
+      {
+        "speaker": "Candidate",
+        "text": "Yes, I do. I use it at home and at work."
+      },
+      {
+        "speaker": "Interviewer",
+        "text": "Can you write Python?"
+      },
+      {
+        "speaker": "Candidate",
+        "text": "No, I can't. But I can write HTML."
+      },
+      {
+        "speaker": "Interviewer",
+        "text": "Good. Do you like working in a team?"
+      },
+      {
+        "speaker": "Candidate",
+        "text": "Yes. I like my team very much."
+      }
+    ],
+    "questions": [
+      {
+        "question_id": "l_q003",
+        "question": "What can the candidate write?",
+        "options": [
+          "A) Python",
+          "B) Java",
+          "C) C++",
+          "D) HTML"
+        ],
+        "answer": "D",
+        "explanation_vi": "Ứng viên nói: 'I can write HTML'."
+      },
+      {
+        "question_id": "l_q004",
+        "question": "Where does the candidate use a computer?",
+        "options": [
+          "A) Only at home",
+          "B) At home and at work",
+          "C) Only at work",
+          "D) At school"
+        ],
+        "answer": "B",
+        "explanation_vi": "Ứng viên nói: 'I use it at home and at work'."
+      }
+    ]
+  },
+  {
+    "id": "list_003",
+    "title": "The Computer Is Slow",
+    "cefr_level": "A1",
+    "domain": "IT / Basic Support",
+    "context": "Một nhân viên gọi cho bộ phận hỗ trợ vì máy tính chậm.",
+    "transcript": [
+      {
+        "speaker": "Staff",
+        "text": "Hello. My computer is very slow."
+      },
+      {
+        "speaker": "Support",
+        "text": "Is the internet slow too?"
+      },
+      {
+        "speaker": "Staff",
+        "text": "No, the internet is good."
+      },
+      {
+        "speaker": "Support",
+        "text": "OK. Please close all the windows and start the computer again."
+      },
+      {
+        "speaker": "Staff",
+        "text": "Thank you. Now it is fast."
+      }
+    ],
+    "questions": [
+      {
+        "question_id": "l_q005",
+        "question": "What is the problem?",
+        "options": [
+          "A) The computer is slow",
+          "B) The phone is broken",
+          "C) The internet is slow",
+          "D) The password is wrong"
+        ],
+        "answer": "A",
+        "explanation_vi": "Nhân viên nói: 'My computer is very slow'."
+      },
+      {
+        "question_id": "l_q006",
+        "question": "What does the support person say to do?",
+        "options": [
+          "A) Buy a new computer",
+          "B) Call the manager",
+          "C) Close the windows and start the computer again",
+          "D) Open a new email"
+        ],
+        "answer": "C",
+        "explanation_vi": "Bộ phận hỗ trợ nói: 'close all the windows and start the computer again'."
+      }
+    ]
+  },
+  {
+    "id": "list_004",
+    "title": "Talking About Your Last Job",
+    "cefr_level": "A2",
+    "domain": "IT / Self-Introduction",
+    "context": "Hai đồng nghiệp trò chuyện về công việc trước đây trong giờ nghỉ.",
+    "transcript": [
+      {
+        "speaker": "Anna",
+        "text": "Where did you work before you came here?"
+      },
+      {
+        "speaker": "Duc",
+        "text": "I worked at a small game company in Hanoi for two years."
+      },
+      {
+        "speaker": "Anna",
+        "text": "Did you like it?"
+      },
+      {
+        "speaker": "Duc",
+        "text": "Yes, the people were friendly, but the salary wasn't very good."
+      },
+      {
+        "speaker": "Anna",
+        "text": "Is this job better?"
+      },
+      {
+        "speaker": "Duc",
+        "text": "Yes, it is. The work is harder, but I'm learning more."
+      }
+    ],
+    "questions": [
+      {
+        "question_id": "l_q007",
+        "question": "How long did Duc work at the game company?",
+        "options": [
+          "A) One year",
+          "B) Three years",
+          "C) Five years",
+          "D) Two years"
+        ],
+        "answer": "D",
+        "explanation_vi": "Duc nói: 'for two years'."
+      },
+      {
+        "question_id": "l_q008",
+        "question": "What was the problem with Duc's old job?",
+        "options": [
+          "A) The people were unfriendly",
+          "B) The salary wasn't very good",
+          "C) The office was too far",
+          "D) The work was too hard"
+        ],
+        "answer": "B",
+        "explanation_vi": "Duc nói: 'the salary wasn't very good'."
+      }
+    ]
+  },
+  {
+    "id": "list_005",
+    "title": "Scheduling an Online Interview",
+    "cefr_level": "A2",
+    "domain": "IT Job Interview",
+    "context": "Nhân viên nhân sự gọi điện để hẹn lịch phỏng vấn trực tuyến.",
+    "transcript": [
+      {
+        "speaker": "Recruiter",
+        "text": "Hello, is that Thu? I'm calling about your application."
+      },
+      {
+        "speaker": "Thu",
+        "text": "Yes, this is Thu. Thank you for calling."
+      },
+      {
+        "speaker": "Recruiter",
+        "text": "Can you do an online interview on Thursday at ten?"
+      },
+      {
+        "speaker": "Thu",
+        "text": "Sorry, I'm busy on Thursday morning. Is the afternoon possible?"
+      },
+      {
+        "speaker": "Recruiter",
+        "text": "Yes. How about two o'clock?"
+      },
+      {
+        "speaker": "Thu",
+        "text": "That's perfect."
+      },
+      {
+        "speaker": "Recruiter",
+        "text": "Great. I'm going to send you the link by email."
+      }
+    ],
+    "questions": [
+      {
+        "question_id": "l_q009",
+        "question": "When is the interview?",
+        "options": [
+          "A) Thursday at two o'clock",
+          "B) Thursday at ten o'clock",
+          "C) Friday at two o'clock",
+          "D) Tuesday at ten o'clock"
+        ],
+        "answer": "A",
+        "explanation_vi": "Hai bên thống nhất vào chiều thứ Năm, lúc hai giờ."
+      },
+      {
+        "question_id": "l_q010",
+        "question": "How will Thu get the link?",
+        "options": [
+          "A) By text message",
+          "B) From the website",
+          "C) By email",
+          "D) From a friend"
+        ],
+        "answer": "C",
+        "explanation_vi": "Nhà tuyển dụng nói: 'send you the link by email'."
+      }
+    ]
+  },
+  {
+    "id": "list_006",
+    "title": "Daily Stand-up Meeting",
+    "cefr_level": "A2",
+    "domain": "IT / Workplace",
+    "context": "Nhóm phát triển báo cáo nhanh công việc trong cuộc họp buổi sáng.",
+    "transcript": [
+      {
+        "speaker": "Manager",
+        "text": "Good morning. Quang, what are you doing today?"
+      },
+      {
+        "speaker": "Quang",
+        "text": "Yesterday I finished the search page. Today I'm working on the login page."
+      },
+      {
+        "speaker": "Manager",
+        "text": "Any problems?"
+      },
+      {
+        "speaker": "Quang",
+        "text": "Yes, I can't download the new photos. I need a password."
+      },
+      {
+        "speaker": "Manager",
+        "text": "OK, I'm going to send it to you after this meeting."
+      }
+    ],
+    "questions": [
+      {
+        "question_id": "l_q011",
+        "question": "What did Quang finish yesterday?",
+        "options": [
+          "A) The login page",
+          "B) The home page",
+          "C) The photo page",
+          "D) The search page"
+        ],
+        "answer": "D",
+        "explanation_vi": "Quang nói: 'Yesterday I finished the search page'."
+      },
+      {
+        "question_id": "l_q012",
+        "question": "What does Quang need?",
+        "options": [
+          "A) A new computer",
+          "B) A password",
+          "C) More photos",
+          "D) A longer meeting"
+        ],
+        "answer": "B",
+        "explanation_vi": "Quang nói: 'I need a password'."
+      }
+    ]
+  },
+  {
+    "id": "list_007",
+    "title": "Walk Me Through Your CV",
+    "cefr_level": "B1",
+    "domain": "IT Job Interview / Self-Introduction",
+    "context": "Ứng viên trình bày ngắn gọn học vấn và kinh nghiệm làm việc.",
+    "transcript": [
+      {
+        "speaker": "Interviewer",
+        "text": "Could you tell me a bit about yourself?"
+      },
+      {
+        "speaker": "Candidate",
+        "text": "Of course. I studied computer science in Can Tho and graduated in 2021."
+      },
+      {
+        "speaker": "Candidate",
+        "text": "Since then, I've worked as a mobile developer at a travel company."
+      },
+      {
+        "speaker": "Interviewer",
+        "text": "What are you responsible for there?"
+      },
+      {
+        "speaker": "Candidate",
+        "text": "I'm responsible for the Android app, and I also help to test new features."
+      },
+      {
+        "speaker": "Interviewer",
+        "text": "And why do you want to leave?"
+      },
+      {
+        "speaker": "Candidate",
+        "text": "I enjoy my job, but I'd like to work on a larger product with a bigger team."
+      }
+    ],
+    "questions": [
+      {
+        "question_id": "l_q013",
+        "question": "What is the candidate responsible for?",
+        "options": [
+          "A) The company website",
+          "B) The Android app",
+          "C) Customer support",
+          "D) The database"
+        ],
+        "answer": "B",
+        "explanation_vi": "Ứng viên nói: 'I'm responsible for the Android app'."
+      },
+      {
+        "question_id": "l_q014",
+        "question": "Why does the candidate want to leave?",
+        "options": [
+          "A) To work on a larger product with a bigger team",
+          "B) To earn a higher salary",
+          "C) Because the job is boring",
+          "D) To move to another city"
+        ],
+        "answer": "A",
+        "explanation_vi": "Ứng viên muốn làm 'a larger product with a bigger team'."
+      }
+    ]
+  },
+  {
+    "id": "list_008",
+    "title": "Describing a Difficult Bug",
+    "cefr_level": "B1",
+    "domain": "IT Job Interview",
+    "context": "Ứng viên kể về một lỗi khó mà họ đã tìm ra và sửa.",
+    "transcript": [
+      {
+        "speaker": "Interviewer",
+        "text": "Can you tell me about a difficult bug you fixed?"
+      },
+      {
+        "speaker": "Candidate",
+        "text": "Yes. Last year, our app crashed for some users, but only on older phones."
+      },
+      {
+        "speaker": "Interviewer",
+        "text": "How did you find the cause?"
+      },
+      {
+        "speaker": "Candidate",
+        "text": "I borrowed an old phone and read the error logs. The app was using too much memory because the photos were too large."
+      },
+      {
+        "speaker": "Interviewer",
+        "text": "So what did you do?"
+      },
+      {
+        "speaker": "Candidate",
+        "text": "I made the photos smaller before loading them. After that, the crashes stopped."
+      }
+    ],
+    "questions": [
+      {
+        "question_id": "l_q015",
+        "question": "Which users had the problem?",
+        "options": [
+          "A) All users",
+          "B) Users of new phones",
+          "C) Users of older phones",
+          "D) Users outside the country"
+        ],
+        "answer": "C",
+        "explanation_vi": "Ứng viên nói: 'only on older phones'."
+      },
+      {
+        "question_id": "l_q016",
+        "question": "What caused the crashes?",
+        "options": [
+          "A) A slow network",
+          "B) An old database",
+          "C) A wrong password",
+          "D) Too much memory used because of large photos"
+        ],
+        "answer": "D",
+        "explanation_vi": "Ứng dụng dùng quá nhiều bộ nhớ vì ảnh quá lớn."
+      }
+    ]
+  },
+  {
+    "id": "list_009",
+    "title": "Explaining a Deployment Process",
+    "cefr_level": "B1",
+    "domain": "IT / DevOps",
+    "context": "Một kỹ sư giải thích quy trình phát hành cho nhân viên mới.",
+    "transcript": [
+      {
+        "speaker": "New Hire",
+        "text": "How is the code released to customers?"
+      },
+      {
+        "speaker": "Engineer",
+        "text": "First, you open a pull request. Then the tests are run automatically."
+      },
+      {
+        "speaker": "New Hire",
+        "text": "What happens if a test fails?"
+      },
+      {
+        "speaker": "Engineer",
+        "text": "If a test fails, you can't merge your code. You have to fix it first."
+      },
+      {
+        "speaker": "New Hire",
+        "text": "And after the merge?"
+      },
+      {
+        "speaker": "Engineer",
+        "text": "The code is deployed to a test server. If everything is fine, we release it on Tuesday."
+      }
+    ],
+    "questions": [
+      {
+        "question_id": "l_q017",
+        "question": "What happens if a test fails?",
+        "options": [
+          "A) The code cannot be merged",
+          "B) The code is released anyway",
+          "C) The manager is called",
+          "D) The server is restarted"
+        ],
+        "answer": "A",
+        "explanation_vi": "Kỹ sư nói: 'If a test fails, you can't merge your code'."
+      },
+      {
+        "question_id": "l_q018",
+        "question": "When is the code released?",
+        "options": [
+          "A) Every day",
+          "B) On Tuesday",
+          "C) On Friday",
+          "D) Once a month"
+        ],
+        "answer": "B",
+        "explanation_vi": "Kỹ sư nói: 'we release it on Tuesday'."
+      }
+    ]
+  },
+  {
+    "id": "list_010",
+    "title": "Self-Introduction in a Technical Interview",
+    "cefr_level": "B2",
+    "domain": "IT Job Interview / Self-Introduction",
+    "context": "Ứng viên đang giới thiệu về kinh nghiệm backend và cloud infrastructure.",
+    "transcript": [
+      {
+        "speaker": "Interviewer",
+        "text": "Could you walk me through your background and your recent experience?"
+      },
+      {
+        "speaker": "Candidate",
+        "text": "Sure. I have over three years of experience as a backend developer, focusing on high-availability PostgreSQL clusters."
+      },
+      {
+        "speaker": "Interviewer",
+        "text": "What have you been working on recently?"
+      },
+      {
+        "speaker": "Candidate",
+        "text": "For the past eight months, I've been moving our services from virtual machines to Kubernetes on AWS."
+      },
+      {
+        "speaker": "Interviewer",
+        "text": "What has been the biggest benefit so far?"
+      },
+      {
+        "speaker": "Candidate",
+        "text": "Our deployment time has dropped from about an hour to under ten minutes, which means we can release much more often."
+      }
+    ],
+    "questions": [
+      {
+        "question_id": "l_q019",
+        "question": "How many years of experience does the candidate have as a backend developer?",
+        "options": [
+          "A) Less than one year",
+          "B) Exactly two years",
+          "C) Over three years",
+          "D) Five years"
+        ],
+        "answer": "C",
+        "explanation_vi": "Ứng viên nói rõ: 'I have over three years of experience as a backend developer'."
+      },
+      {
+        "question_id": "l_q020",
+        "question": "What has been the main benefit of the move?",
+        "options": [
+          "A) Lower cloud costs",
+          "B) Fewer engineers needed",
+          "C) Better PostgreSQL performance",
+          "D) Much shorter deployment time"
+        ],
+        "answer": "D",
+        "explanation_vi": "Thời gian triển khai giảm từ khoảng một giờ xuống dưới mười phút."
+      }
+    ]
+  },
+  {
+    "id": "list_011",
+    "title": "SQL or NoSQL?",
+    "cefr_level": "B2",
+    "domain": "IT Job Interview / Databases",
+    "context": "Người phỏng vấn hỏi ứng viên cách chọn cơ sở dữ liệu cho một ứng dụng đặt vé.",
+    "transcript": [
+      {
+        "speaker": "Interviewer",
+        "text": "Which database would you choose for a ticket booking system?"
+      },
+      {
+        "speaker": "Candidate",
+        "text": "I'd go with a relational database, mainly because we need transactions to stop two people from booking the same seat."
+      },
+      {
+        "speaker": "Interviewer",
+        "text": "But what if traffic grew tenfold?"
+      },
+      {
+        "speaker": "Candidate",
+        "text": "If that happened, I'd first add read replicas and a cache for browsing events, since most traffic is read-only."
+      },
+      {
+        "speaker": "Interviewer",
+        "text": "Would you ever use NoSQL here?"
+      },
+      {
+        "speaker": "Candidate",
+        "text": "Possibly for storing user activity, although I'd keep the bookings themselves in the relational store."
+      }
+    ],
+    "questions": [
+      {
+        "question_id": "l_q021",
+        "question": "Why does the candidate prefer a relational database?",
+        "options": [
+          "A) It is free to use",
+          "B) Transactions prevent double booking of seats",
+          "C) It is easier to learn",
+          "D) It requires no maintenance"
+        ],
+        "answer": "B",
+        "explanation_vi": "Ứng viên nói cần transaction để ngăn hai người đặt cùng một ghế."
+      },
+      {
+        "question_id": "l_q022",
+        "question": "What would the candidate do first if traffic grew tenfold?",
+        "options": [
+          "A) Add read replicas and a cache",
+          "B) Move all data to NoSQL",
+          "C) Buy a larger single server",
+          "D) Limit the number of users"
+        ],
+        "answer": "A",
+        "explanation_vi": "Ứng viên nói: 'I'd first add read replicas and a cache'."
+      }
+    ]
+  },
+  {
+    "id": "list_012",
+    "title": "Handling Disagreement in a Code Review",
+    "cefr_level": "B2",
+    "domain": "IT Job Interview / Behavioural",
+    "context": "Ứng viên trả lời câu hỏi hành vi về bất đồng với đồng nghiệp.",
+    "transcript": [
+      {
+        "speaker": "Interviewer",
+        "text": "Tell me about a time you disagreed with a colleague."
+      },
+      {
+        "speaker": "Candidate",
+        "text": "A senior engineer wanted to add a new library for a feature I thought we could build in a few lines."
+      },
+      {
+        "speaker": "Interviewer",
+        "text": "How did you handle it?"
+      },
+      {
+        "speaker": "Candidate",
+        "text": "Rather than arguing in the comments, I suggested a quick call and we compared both options."
+      },
+      {
+        "speaker": "Interviewer",
+        "text": "What was the outcome?"
+      },
+      {
+        "speaker": "Candidate",
+        "text": "Despite my initial view, I realised the library handled several edge cases I'd missed, so we kept it."
+      }
+    ],
+    "questions": [
+      {
+        "question_id": "l_q023",
+        "question": "What did the candidate suggest instead of arguing in comments?",
+        "options": [
+          "A) Asking the manager to decide",
+          "B) Removing the feature",
+          "C) A quick call to compare the options",
+          "D) Writing a formal document"
+        ],
+        "answer": "C",
+        "explanation_vi": "Ứng viên nói: 'I suggested a quick call and we compared both options'."
+      },
+      {
+        "question_id": "l_q024",
+        "question": "What was the final decision?",
+        "options": [
+          "A) They built the feature without the library",
+          "B) They postponed the feature",
+          "C) They replaced the senior engineer's code",
+          "D) They kept the library"
+        ],
+        "answer": "D",
+        "explanation_vi": "Ứng viên nói: 'so we kept it'."
+      }
+    ]
+  },
+  {
+    "id": "list_013",
+    "title": "Presenting Yourself for a Lead Role",
+    "cefr_level": "C1",
+    "domain": "IT Interview / Self-Introduction",
+    "context": "Ứng viên vị trí trưởng nhóm kỹ thuật trình bày hành trình nghề nghiệp.",
+    "transcript": [
+      {
+        "speaker": "Interviewer",
+        "text": "What makes you the right person to lead this team?"
+      },
+      {
+        "speaker": "Candidate",
+        "text": "What I'd highlight is the transition I led at my current company, where we went from one fragile release a month to deploying several times a day."
+      },
+      {
+        "speaker": "Interviewer",
+        "text": "What was your specific role in that?"
+      },
+      {
+        "speaker": "Candidate",
+        "text": "I wrote the original proposal and secured buy-in from leadership, but the part I'm proudest of is having coached two engineers who now own the platform."
+      },
+      {
+        "speaker": "Interviewer",
+        "text": "So you've stepped back from it?"
+      },
+      {
+        "speaker": "Candidate",
+        "text": "Deliberately, yes. I see my job as making myself redundant in any given area."
+      }
+    ],
+    "questions": [
+      {
+        "question_id": "l_q025",
+        "question": "What is the candidate proudest of?",
+        "options": [
+          "A) Coaching two engineers who now own the platform",
+          "B) Writing the original proposal",
+          "C) Reducing the size of the team",
+          "D) Personally deploying every release"
+        ],
+        "answer": "A",
+        "explanation_vi": "Ứng viên nói phần tự hào nhất là đã kèm cặp hai kỹ sư hiện làm chủ nền tảng."
+      },
+      {
+        "question_id": "l_q026",
+        "question": "What does the candidate mean by 'making myself redundant'?",
+        "options": [
+          "A) Planning to leave the company soon",
+          "B) Building teams that no longer depend on them in that area",
+          "C) Avoiding responsibility for failures",
+          "D) Reducing the company's headcount"
+        ],
+        "answer": "B",
+        "explanation_vi": "Ý là bồi dưỡng người khác để nhóm không còn phụ thuộc vào cá nhân họ ở mảng đó."
+      }
+    ]
+  },
+  {
+    "id": "list_014",
+    "title": "Designing a URL Shortener",
+    "cefr_level": "C1",
+    "domain": "IT Job Interview / System Design",
+    "context": "Buổi phỏng vấn system design về dịch vụ rút gọn liên kết.",
+    "transcript": [
+      {
+        "speaker": "Interviewer",
+        "text": "Let's design a URL shortener. Where would you begin?"
+      },
+      {
+        "speaker": "Candidate",
+        "text": "I'd start by clarifying the read-to-write ratio. Assuming it's heavily skewed towards reads, say a hundred to one, the design should be optimised around redirects."
+      },
+      {
+        "speaker": "Interviewer",
+        "text": "How would you generate the short codes?"
+      },
+      {
+        "speaker": "Candidate",
+        "text": "Hashing the URL invites collisions, so I'd favour a pre-allocated counter range per application server, encoded in base 62."
+      },
+      {
+        "speaker": "Interviewer",
+        "text": "What happens if a server dies with part of its range unused?"
+      },
+      {
+        "speaker": "Candidate",
+        "text": "Those codes are simply lost. Given a keyspace in the trillions, that's a trade-off I'd happily accept in exchange for avoiding coordination on every write."
+      }
+    ],
+    "questions": [
+      {
+        "question_id": "l_q027",
+        "question": "Why does the candidate avoid hashing the URL?",
+        "options": [
+          "A) Hashing is too slow",
+          "B) Hashes cannot be encoded",
+          "C) Hashing invites collisions",
+          "D) Hashing requires more servers"
+        ],
+        "answer": "C",
+        "explanation_vi": "Ứng viên nói: 'Hashing the URL invites collisions'."
+      },
+      {
+        "question_id": "l_q028",
+        "question": "What does the candidate accept as a trade-off?",
+        "options": [
+          "A) Slower redirects for most users",
+          "B) Higher write coordination costs",
+          "C) Occasional duplicate short codes",
+          "D) Losing some unused codes when a server dies"
+        ],
+        "answer": "D",
+        "explanation_vi": "Mã chưa dùng bị mất, đổi lại không cần phối hợp trên mỗi thao tác ghi."
+      }
+    ]
+  },
+  {
+    "id": "list_015",
+    "title": "Reviewing an Incident",
+    "cefr_level": "C1",
+    "domain": "IT / DevOps",
+    "context": "Nhóm kỹ thuật họp phân tích sau một sự cố kéo dài.",
+    "transcript": [
+      {
+        "speaker": "Facilitator",
+        "text": "Let's establish the timeline. When did we first become aware of the issue?"
+      },
+      {
+        "speaker": "Engineer",
+        "text": "Customers reported errors at 14:05, whereas our alerts didn't fire until 14:22."
+      },
+      {
+        "speaker": "Facilitator",
+        "text": "Why the seventeen-minute gap?"
+      },
+      {
+        "speaker": "Engineer",
+        "text": "The alert was tied to average latency, which masked a failure affecting only one region."
+      },
+      {
+        "speaker": "Facilitator",
+        "text": "And had it been per region?"
+      },
+      {
+        "speaker": "Engineer",
+        "text": "We would have been paged within two minutes. It's the aggregation, rather than the threshold, that needs changing."
+      }
+    ],
+    "questions": [
+      {
+        "question_id": "l_q029",
+        "question": "What was the gap between customer reports and the alert?",
+        "options": [
+          "A) Seventeen minutes",
+          "B) Two minutes",
+          "C) Five minutes",
+          "D) Twenty-two minutes"
+        ],
+        "answer": "A",
+        "explanation_vi": "Khách báo lỗi lúc 14:05, cảnh báo kích hoạt lúc 14:22, chênh lệch mười bảy phút."
+      },
+      {
+        "question_id": "l_q030",
+        "question": "What does the engineer believe needs changing?",
+        "options": [
+          "A) The alert threshold",
+          "B) The way metrics are aggregated",
+          "C) The on-call schedule",
+          "D) The region hosting the service"
+        ],
+        "answer": "B",
+        "explanation_vi": "Kỹ sư nói: 'It's the aggregation, rather than the threshold, that needs changing'."
+      }
+    ]
+  },
+  {
+    "id": "list_016",
+    "title": "The Staff Engineer's Pitch",
+    "cefr_level": "C2",
+    "domain": "IT Interview / Self-Introduction",
+    "context": "Cuộc trò chuyện giữa giám đốc kỹ thuật và ứng viên cấp staff về phạm vi ảnh hưởng.",
+    "transcript": [
+      {
+        "speaker": "Director",
+        "text": "Your CV is remarkably light on the usual trophies. Why is that?"
+      },
+      {
+        "speaker": "Candidate",
+        "text": "Much as I could list launches, the work I'd stand behind is largely invisible: the outages that never happened and the projects I talked us out of."
+      },
+      {
+        "speaker": "Director",
+        "text": "That's a difficult thing to verify."
+      },
+      {
+        "speaker": "Candidate",
+        "text": "Admittedly. Which is why I'd point you to the decision records. Three years on, the reasoning has either held up or it hasn't, and I've annotated where mine didn't."
+      },
+      {
+        "speaker": "Director",
+        "text": "You kept a record of your own errors?"
+      },
+      {
+        "speaker": "Candidate",
+        "text": "I'd contend that's the only part of the archive worth reading."
+      }
+    ],
+    "questions": [
+      {
+        "question_id": "l_q031",
+        "question": "How does the candidate propose to substantiate their claims?",
+        "options": [
+          "A) By providing references from former managers",
+          "B) By listing product launches",
+          "C) By demonstrating code samples",
+          "D) By pointing to annotated decision records"
+        ],
+        "answer": "D",
+        "explanation_vi": "Ứng viên đề nghị xem 'the decision records', có ghi chú những chỗ họ đã sai."
+      },
+      {
+        "question_id": "l_q032",
+        "question": "What does the candidate imply about the record of their errors?",
+        "options": [
+          "A) It is the most valuable part of the archive",
+          "B) It should be kept confidential",
+          "C) It was a requirement of the company",
+          "D) It contains very few entries"
+        ],
+        "answer": "A",
+        "explanation_vi": "Ứng viên nói đó là 'the only part of the archive worth reading'."
+      }
+    ]
+  },
+  {
+    "id": "list_017",
+    "title": "Debating Consistency Guarantees",
+    "cefr_level": "C2",
+    "domain": "IT Interview / Distributed Systems",
+    "context": "Hai kỹ sư tranh luận về mức nhất quán cho một hệ thống tồn kho đa vùng.",
+    "transcript": [
+      {
+        "speaker": "Engineer A",
+        "text": "I'd insist that inventory counts be linearizable. Anything less and we oversell."
+      },
+      {
+        "speaker": "Engineer B",
+        "text": "Only if you model stock as a single number. Partition it into per-region allocations and each region can decrement independently, without a cross-region round trip."
+      },
+      {
+        "speaker": "Engineer A",
+        "text": "Until one region exhausts its share while another sits on a surplus."
+      },
+      {
+        "speaker": "Engineer B",
+        "text": "Granted, in which case it requests a transfer, and only that rare path need pay for coordination."
+      },
+      {
+        "speaker": "Engineer A",
+        "text": "So you'd confine consensus to the exceptional case."
+      },
+      {
+        "speaker": "Engineer B",
+        "text": "Precisely. Should a transfer stall, we'd reject the sale, which the business has told us it prefers to overselling."
+      }
+    ],
+    "questions": [
+      {
+        "question_id": "l_q033",
+        "question": "How does Engineer B avoid a cross-region round trip on every sale?",
+        "options": [
+          "A) By using a stronger consensus protocol",
+          "B) By ignoring overselling",
+          "C) By partitioning stock into per-region allocations",
+          "D) By moving all inventory to one region"
+        ],
+        "answer": "C",
+        "explanation_vi": "Kỹ sư B đề xuất 'per-region allocations' để mỗi vùng tự trừ độc lập."
+      },
+      {
+        "question_id": "l_q034",
+        "question": "What happens if a transfer between regions stalls?",
+        "options": [
+          "A) The sale proceeds and is reconciled later",
+          "B) The sale is rejected",
+          "C) The system retries indefinitely",
+          "D) Stock is borrowed from a supplier"
+        ],
+        "answer": "B",
+        "explanation_vi": "Kỹ sư B nói: 'Should a transfer stall, we'd reject the sale'."
+      }
+    ]
+  },
+  {
+    "id": "list_018",
+    "title": "Is Kubernetes Justified Here?",
+    "cefr_level": "C2",
+    "domain": "IT / System Design Review",
+    "context": "Một buổi đánh giá kiến trúc phản biện đề xuất áp dụng Kubernetes cho một đội nhỏ.",
+    "transcript": [
+      {
+        "speaker": "Reviewer",
+        "text": "You're proposing Kubernetes for four services and a team of five. Forgive me, but the case strikes me as tenuous."
+      },
+      {
+        "speaker": "Architect",
+        "text": "The current scripts have become untenable. Each deployment hinges on tacit knowledge held by one person."
+      },
+      {
+        "speaker": "Reviewer",
+        "text": "That argues for better automation, not necessarily for an orchestrator whose operational overhead may well exceed the problem it solves."
+      },
+      {
+        "speaker": "Architect",
+        "text": "Were we self-hosting, I'd concede the point. A managed control plane obviates most of that burden."
+      },
+      {
+        "speaker": "Reviewer",
+        "text": "Most, perhaps. Upgrades, networking and security policy remain yours, however."
+      },
+      {
+        "speaker": "Architect",
+        "text": "Fair. Let's trial a managed container service first and revisit this only if we outgrow it."
+      }
+    ],
+    "questions": [
+      {
+        "question_id": "l_q035",
+        "question": "What problem with the current scripts does the architect identify?",
+        "options": [
+          "A) They run too slowly",
+          "B) They are written in an old language",
+          "C) They cost too much to host",
+          "D) Deployment relies on one person's tacit knowledge"
+        ],
+        "answer": "D",
+        "explanation_vi": "Kiến trúc sư nói mỗi lần triển khai phụ thuộc vào 'tacit knowledge held by one person'."
+      },
+      {
+        "question_id": "l_q036",
+        "question": "What do they finally agree to do?",
+        "options": [
+          "A) Trial a managed container service first",
+          "B) Self-host Kubernetes immediately",
+          "C) Keep the current scripts unchanged",
+          "D) Hire a dedicated operations team"
+        ],
+        "answer": "A",
+        "explanation_vi": "Kiến trúc sư đề xuất 'trial a managed container service first'."
+      }
+    ]
+  }
+]
