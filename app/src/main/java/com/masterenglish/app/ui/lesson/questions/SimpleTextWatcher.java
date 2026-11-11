@@ -4,11 +4,11 @@ import android.text.Editable;
 import android.text.TextWatcher;
 
 /** TextWatcher that only cares that the text changed. */
-final class SimpleTextWatcher implements TextWatcher {
+public final class SimpleTextWatcher implements TextWatcher {
 
     private final Runnable onChanged;
 
-    SimpleTextWatcher(Runnable onChanged) {
+    public SimpleTextWatcher(Runnable onChanged) {
         this.onChanged = onChanged;
     }
 

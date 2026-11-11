@@ -44,7 +44,8 @@ public class ProgressRepository {
     public static final float WEAK_THRESHOLD = 0.6f;
     private static final int WEAKNESS_LIMIT = 10;
     private static final long ONE_DAY_MILLIS = 24L * 60 * 60 * 1000;
-    private static final int RETENTION_MASTERED_REPETITIONS = 3;
+    /** Repetitions in a row before a vocabulary card counts as mastered. */
+    public static final int MASTERED_REPETITIONS = 3;
 
     private final ProgressDao progressDao;
     private final ContentDao contentDao;
@@ -279,7 +280,33 @@ public class ProgressRepository {
     }
 
     public LiveData<Integer> observeMasteredVocabulary(String userId) {
-        return progressDao.observeMastered(userId, ItemType.VOCABULARY, RETENTION_MASTERED_REPETITIONS);
+        return progressDao.observeMastered(userId, ItemType.VOCABULARY, MASTERED_REPETITIONS);
+    }
+
+    /** Retention rows for the learner's vocabulary cards, keyed by vocabulary id. */
+    public void loadVocabularyRetention(String userId, Callback<Map<String, UserItemRetentionEntity>> callback) {
+        executors.diskIO().execute(() -> {
+            Map<String, UserItemRetentionEntity> byItem = new HashMap<>();
+            for (UserItemRetentionEntity row : progressDao.getRetentionByType(userId, ItemType.VOCABULARY)) {
+                byItem.put(row.itemId, row);
+            }
+            if (callback != null) {
+                executors.mainThread().execute(() -> callback.onResult(byItem));
+            }
+        });
+    }
+
+    /** Per-skill progress, lessons and weaknesses, keyed by the skill ids used on Profile. */
+    public void loadSkillSummaries(String userId, Callback<Map<String, SkillProgress.Summary>> callback) {
+        executors.diskIO().execute(() -> {
+            Map<String, SkillProgress.Summary> summaries = SkillProgress.build(
+                    contentDao.getAllNodes(),
+                    progressDao.getNodeProgress(userId),
+                    progressDao.getWeaknesses(userId, Float.MAX_VALUE, Integer.MAX_VALUE));
+            if (callback != null) {
+                executors.mainThread().execute(() -> callback.onResult(summaries));
+            }
+        });
     }
 
     /** Vocabulary cards due for review now, oldest first. */
@@ -314,7 +341,7 @@ public class ProgressRepository {
     }
 
     public int countMasteredVocabularyNow(String userId) {
-        return progressDao.countMastered(userId, ItemType.VOCABULARY, RETENTION_MASTERED_REPETITIONS);
+        return progressDao.countMastered(userId, ItemType.VOCABULARY, MASTERED_REPETITIONS);
     }
 
     public int countCompletedGrammarNow(String userId) {

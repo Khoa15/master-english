@@ -1,58 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
-    android:orientation="vertical">
+    android:fillViewport="true">
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/mascot_thinking" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/onboard_question_goal"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="@color/neutral_text" />
-
-    <com.google.android.material.button.MaterialButtonToggleGroup
-        android:id="@+id/goalGroup"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:selectionRequired="true"
-        app:singleSelection="true"
         android:orientation="vertical">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/goalWork"
-            style="@style/Widget.MasterEnglish.Button.Outlined"
+        <TextView
+            style="@style/TextAppearance.Onboarding.Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:text="@string/onboard_goal_work" />
+            android:text="@string/onboard_goal_title" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/goalInterview"
-            style="@style/Widget.MasterEnglish.Button.Outlined"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:text="@string/onboard_goal_interview" />
+            android:layout_marginTop="8dp"
+            android:text="@string/onboard_goal_body"
+            android:textColor="@color/onboarding_muted"
+            android:textSize="15sp" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/goalDocs"
-            style="@style/Widget.MasterEnglish.Button.Outlined"
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/goalGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/onboard_goal_docs" />
-    </com.google.android.material.button.MaterialButtonToggleGroup>
+            android:layout_marginTop="24dp"
+            android:orientation="vertical"
+            app:selectionRequired="true"
+            app:singleSelection="true">
 
-</LinearLayout>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/goalExam"
+                style="@style/Widget.Onboarding.Option"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+                android:text="@string/onboard_goal_exam" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/goalCareer"
+                style="@style/Widget.Onboarding.Option"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+                android:text="@string/onboard_goal_career" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/goalAbroad"
+                style="@style/Widget.Onboarding.Option"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+                android:text="@string/onboard_goal_abroad" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/goalOverseas"
+                style="@style/Widget.Onboarding.Option"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+                android:text="@string/onboard_goal_overseas" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/goalTravel"
+                style="@style/Widget.Onboarding.Option"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+                android:text="@string/onboard_goal_travel" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/goalChat"
+                style="@style/Widget.Onboarding.Option"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/onboard_goal_chat" />
+        </com.google.android.material.button.MaterialButtonToggleGroup>
+
+    </LinearLayout>
+</ScrollView>

@@ -54,6 +54,9 @@ public interface ProgressDao {
             + "ORDER BY next_review_at ASC LIMIT :limit")
     List<UserItemRetentionEntity> getDueRetention(String userId, long now, int limit);
 
+    @Query("SELECT * FROM user_item_retention WHERE user_id = :userId AND item_type = :type")
+    List<UserItemRetentionEntity> getRetentionByType(String userId, ItemType type);
+
     @Query("SELECT COUNT(*) FROM user_item_retention WHERE user_id = :userId AND next_review_at <= :now")
     LiveData<Integer> observeDueCount(String userId, long now);
 

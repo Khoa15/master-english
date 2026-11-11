@@ -124,7 +124,8 @@ public class GuestModeScreenshotTest {
     }
 
     private static TabLayout findTabs(AppCompatActivity activity) {
-        return activity.findViewById(R.id.tabs);
+        // The Practice tab no longer has a tab bar.
+        return null;
     }
 
     private static BottomSheetDialogFragment findSheet(AppCompatActivity activity) {

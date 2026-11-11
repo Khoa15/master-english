@@ -26,6 +26,7 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
 import com.masterenglish.app.R;
@@ -35,6 +36,7 @@ import com.masterenglish.app.data.local.entity.UserBadgeEntity;
 import com.masterenglish.app.data.local.entity.UserEntity;
 import com.masterenglish.app.data.local.entity.UserSettingsEntity;
 import com.masterenglish.app.data.local.prefs.AppPreferences;
+import com.masterenglish.app.data.repository.SkillProgress;
 import com.masterenglish.app.databinding.FragmentProfileBinding;
 import com.masterenglish.app.service.reminder.NotificationHelper;
 import com.masterenglish.app.service.reminder.ReminderScheduler;
@@ -50,6 +52,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 
 import javax.inject.Inject;
@@ -96,7 +99,13 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        binding.skillListening.setOnClickListener(v -> openSkill(SkillProgress.LISTENING));
+        binding.skillReading.setOnClickListener(v -> openSkill(SkillProgress.READING));
+        binding.skillSpeaking.setOnClickListener(v -> openSkill(SkillProgress.SPEAKING));
+        binding.skillWriting.setOnClickListener(v -> openSkill(SkillProgress.WRITING));
+        binding.skillGrammar.setOnClickListener(v -> openSkill(SkillProgress.GRAMMAR));
         viewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
+        viewModel.skills().observe(getViewLifecycleOwner(), this::bindSkillChips);
 
         badgeAdapter = new BadgeAdapter();
         binding.badgeList.setLayoutManager(new GridLayoutManager(requireContext(), 3));
@@ -325,5 +334,28 @@ public class ProfileFragment extends Fragment {
     public void onDestroyView() {
         binding = null;
         super.onDestroyView();
+    }
+
+    /** Each skill chip shows its name and, once there are lessons for it, the CEFR level. */
+    private void bindSkillChips(Map<String, SkillProgress.Summary> skills) {
+        bindSkillChip(binding.skillListening, R.string.onboard_skill_listening, skills.get(SkillProgress.LISTENING));
+        bindSkillChip(binding.skillReading, R.string.onboard_skill_reading, skills.get(SkillProgress.READING));
+        bindSkillChip(binding.skillSpeaking, R.string.onboard_skill_speaking, skills.get(SkillProgress.SPEAKING));
+        bindSkillChip(binding.skillWriting, R.string.onboard_skill_writing, skills.get(SkillProgress.WRITING));
+        bindSkillChip(binding.skillGrammar, R.string.onboard_skill_grammar, skills.get(SkillProgress.GRAMMAR));
+    }
+
+    private void bindSkillChip(MaterialButton chip, int nameRes, @Nullable SkillProgress.Summary summary) {
+        String name = getString(nameRes);
+        chip.setText(summary == null || summary.level == null
+                ? name
+                : getString(R.string.skill_chip, name, summary.level));
+    }
+
+    private void openSkill(String skillId) {
+        android.os.Bundle args = new android.os.Bundle();
+        args.putString("skillId", skillId);
+        androidx.navigation.fragment.NavHostFragment.findNavController(this)
+                .navigate(R.id.action_profile_to_skill, args);
     }
 }

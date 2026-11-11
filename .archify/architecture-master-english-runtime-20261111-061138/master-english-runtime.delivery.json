@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "c3f054b7-073f-4634-a23a-3447d82ac8d7",
+  "status": "current",
+  "command": "deliver",
+  "type": "architecture",
+  "input": "/data/workspace/master-english/.archify/architecture-master-english-runtime-20261111-061138/candidate.json",
+  "output": "/data/workspace/master-english/.archify/architecture-master-english-runtime-20261111-061138/master-english-runtime.html",
+  "specification": {
+    "sha256": "8371e726809b54e54dedf7e59947ba9a694fc5499b873439adcf43e7272a3e61",
+    "bytes": 7742
+  },
+  "artifact": {
+    "sha256": "8e3caf2159fa24cfe6e0e0b392505e7ff49bfbcff1b3d6ee7c29460505b23521",
+    "bytes": 852358
+  }
+}

@@ -12,6 +12,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.masterenglish.app.R;
 import com.masterenglish.app.data.local.prefs.AppPreferences;
+import com.masterenglish.app.data.local.prefs.OnboardingAnswers;
 
 import java.util.UUID;
 
@@ -127,15 +128,20 @@ public class AuthRepository {
         });
     }
 
-    /** Copies the onboarding survey into the profile and the mascot's memory. */
+    /** Copies the onboarding answers into the profile and the mascot's memory. */
     private void applyOnboardingAnswers(String userId) {
-        String goal = preferences.getOnboardingGoal();
-        String level = preferences.getOnboardingLevel();
-        if (goal == null || level == null) {
+        OnboardingAnswers answers = preferences.getOnboardingAnswers();
+        if (answers == null) {
             return;
         }
-        userRepository.saveTargetMinutes(userId, preferences.getOnboardingMinutes());
-        aiRepository.remember(userId, "learning_goal", goal, 1f);
-        aiRepository.remember(userId, "start_level", level, 1f);
+        if (!answers.name.trim().isEmpty()) {
+            userRepository.updateDisplayName(userId, answers.name.trim());
+        }
+        userRepository.saveTargetMinutes(userId, answers.dailyMinutes);
+        aiRepository.remember(userId, "learning_goal", answers.goal, 1f);
+        aiRepository.remember(userId, "job", answers.job, 1f);
+        aiRepository.remember(userId, "role", answers.role, 1f);
+        aiRepository.remember(userId, "age_range", answers.ageRange, 1f);
+        aiRepository.remember(userId, "focus_skills", String.join(", ", answers.skills), 1f);
     }
 }

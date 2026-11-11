@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 
 import androidx.annotation.Nullable;
 
+import com.google.gson.Gson;
+
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -21,9 +23,7 @@ public class AppPreferences {
     private static final String PREFS = "master_english_prefs";
     private static final String KEY_USER_ID = "current_user_id";
     private static final String KEY_ONBOARDED = "onboarding_done";
-    private static final String KEY_GOAL = "onboarding_goal";
-    private static final String KEY_LEVEL = "onboarding_level";
-    private static final String KEY_MINUTES = "onboarding_minutes";
+    private static final String KEY_ONBOARDING_ANSWERS = "onboarding_answers";
     private static final String KEY_GEMINI_KEY = "gemini_api_key";
     private static final String KEY_LAST_SYNC = "last_sync_at";
     private static final String KEY_REMINDER_ENABLED = "reminder_enabled";
@@ -31,6 +31,7 @@ public class AppPreferences {
     private static final String KEY_REMINDER_MINUTE = "reminder_minute";
 
     private final SharedPreferences prefs;
+    private final Gson gson = new Gson();
 
     @Inject
     public AppPreferences(@ApplicationContext Context context) {
@@ -54,26 +55,14 @@ public class AppPreferences {
         prefs.edit().putBoolean(KEY_ONBOARDED, done).apply();
     }
 
-    public void saveOnboardingAnswers(String goal, String level, int dailyMinutes) {
-        prefs.edit()
-                .putString(KEY_GOAL, goal)
-                .putString(KEY_LEVEL, level)
-                .putInt(KEY_MINUTES, dailyMinutes)
-                .apply();
+    public void saveOnboardingAnswers(OnboardingAnswers answers) {
+        prefs.edit().putString(KEY_ONBOARDING_ANSWERS, gson.toJson(answers)).apply();
     }
 
     @Nullable
-    public String getOnboardingGoal() {
-        return prefs.getString(KEY_GOAL, null);
-    }
-
-    @Nullable
-    public String getOnboardingLevel() {
-        return prefs.getString(KEY_LEVEL, null);
-    }
-
-    public int getOnboardingMinutes() {
-        return prefs.getInt(KEY_MINUTES, 15);
+    public OnboardingAnswers getOnboardingAnswers() {
+        String json = prefs.getString(KEY_ONBOARDING_ANSWERS, null);
+        return json == null ? null : gson.fromJson(json, OnboardingAnswers.class);
     }
 
     @Nullable

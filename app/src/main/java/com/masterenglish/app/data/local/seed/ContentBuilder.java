@@ -45,7 +45,7 @@ import java.util.Set;
  */
 public final class ContentBuilder {
 
-    static final String[] LEVELS = {"A1", "A2", "B1", "B2", "C1", "C2"};
+    public static final String[] LEVELS = {"A1", "A2", "B1", "B2", "C1", "C2"};
 
     private static final String[] STAGE_DESCRIPTIONS = {
             "Giới thiệu bản thân và công việc IT",

@@ -75,6 +75,16 @@ public class ContentRepository {
         executors.diskIO().execute(() -> deliver(callback, contentDao.getQuestions(type, parentId)));
     }
 
+    /** Questions attached to the given vocabulary words, in one query. */
+    public void loadVocabularyQuestions(List<String> vocabularyIds, Callback<List<LessonQuestionEntity>> callback) {
+        executors.diskIO().execute(() -> {
+            List<LessonQuestionEntity> questions = vocabularyIds.isEmpty()
+                    ? new ArrayList<>()
+                    : contentDao.getQuestionsForParents(ParentType.VOCABULARY, vocabularyIds);
+            deliver(callback, questions);
+        });
+    }
+
     public void findVocabulary(String word, Callback<VocabularyEntity> callback) {
         executors.diskIO().execute(() -> deliver(callback, contentDao.findVocabularyByWord(word)));
     }

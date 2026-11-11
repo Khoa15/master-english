@@ -22,7 +22,7 @@ import javax.inject.Inject;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
-/** Single Activity host: a NavHostFragment with a bottom bar for the three main tabs. */
+/** Single Activity host: a NavHostFragment with a bottom bar for the four main tabs and a vocabulary button. */
 @AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {
 
@@ -58,8 +58,12 @@ public class MainActivity extends AppCompatActivity {
         navController.setGraph(graph);
 
         NavigationUI.setupWithNavController(binding.bottomNav, navController);
-        navController.addOnDestinationChangedListener((controller, destination, arguments) ->
-                binding.bottomNav.setVisibility(isMainTab(destination.getId()) ? View.VISIBLE : View.GONE));
+        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+            boolean mainTab = isMainTab(destination.getId());
+            binding.bottomNav.setVisibility(mainTab ? View.VISIBLE : View.GONE);
+            binding.vocabFab.setVisibility(mainTab ? View.VISIBLE : View.GONE);
+        });
+        binding.vocabFab.setOnClickListener(v -> navController.navigate(R.id.vocabularyFragment));
 
         if (signedIn) {
             observeSoundSetting();
@@ -89,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
     private static boolean isMainTab(int destinationId) {
         return destinationId == R.id.roadmapFragment
                 || destinationId == R.id.reviewFragment
+                || destinationId == R.id.tutorFragment
                 || destinationId == R.id.profileFragment;
     }
 }

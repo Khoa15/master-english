@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/roadmapFragment"
         android:name="com.masterenglish.app.ui.roadmap.RoadmapFragment"
-        android:label="@string/nav_roadmap">
+        android:label="@string/nav_tab_roadmap">
         <action
             android:id="@+id/action_roadmap_to_lesson"
             app:destination="@id/lessonFragment" />
@@ -17,7 +17,7 @@
     <fragment
         android:id="@+id/reviewFragment"
         android:name="com.masterenglish.app.ui.review.ReviewFragment"
-        android:label="@string/nav_review">
+        android:label="@string/nav_tab_practice">
         <action
             android:id="@+id/action_review_to_flashcards"
             app:destination="@id/flashcardFragment" />
@@ -30,17 +30,32 @@
         <action
             android:id="@+id/action_review_to_ai"
             app:destination="@id/aiChallengeFragment" />
+        <action
+            android:id="@+id/action_review_to_speaking"
+            app:destination="@id/speakingPracticeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/tutorFragment"
+        android:name="com.masterenglish.app.ui.tutor.TutorFragment"
+        android:label="@string/nav_tab_tutor">
+        <action
+            android:id="@+id/action_tutor_to_speaking"
+            app:destination="@id/speakingPracticeFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.masterenglish.app.ui.profile.ProfileFragment"
-        android:label="@string/nav_profile">
+        android:label="@string/nav_tab_profile">
         <action
             android:id="@+id/action_profile_to_auth"
             app:destination="@id/authFragment"
             app:popUpTo="@id/nav_graph"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_profile_to_skill"
+            app:destination="@id/skillDetailFragment" />
     </fragment>
 
     <!-- Flows outside the tabs -->
@@ -71,6 +86,82 @@
         <argument
             android:name="nodeId"
             app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/speakingPracticeFragment"
+        android:name="com.masterenglish.app.ui.tutor.SpeakingPracticeFragment"
+        android:label="speaking">
+        <argument
+            android:name="topicId"
+            app:argType="string"
+            android:defaultValue="job-interview" />
+        <action
+            android:id="@+id/action_speaking_to_summary"
+            app:destination="@id/speakingSummaryFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/speakingSummaryFragment"
+        android:name="com.masterenglish.app.ui.tutor.SpeakingSummaryFragment"
+        android:label="speaking_summary">
+        <argument
+            android:name="topicId"
+            app:argType="string"
+            android:defaultValue="job-interview" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/vocabularyFragment"
+        android:name="com.masterenglish.app.ui.vocab.VocabularyFragment"
+        android:label="vocabulary">
+        <action
+            android:id="@+id/action_vocab_to_topic"
+            app:destination="@id/vocabTopicFragment" />
+        <action
+            android:id="@+id/action_vocab_to_practice"
+            app:destination="@id/vocabPracticeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/vocabTopicFragment"
+        android:name="com.masterenglish.app.ui.vocab.VocabTopicFragment"
+        android:label="vocab_topic">
+        <argument
+            android:name="topicId"
+            app:argType="string"
+            android:defaultValue="A1" />
+        <action
+            android:id="@+id/action_vocab_topic_to_practice"
+            app:destination="@id/vocabPracticeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/vocabPracticeFragment"
+        android:name="com.masterenglish.app.ui.vocab.VocabPracticeFragment"
+        android:label="vocab_practice">
+        <argument
+            android:name="topicId"
+            app:argType="string"
+            android:defaultValue="all" />
+        <action
+            android:id="@+id/action_vocab_practice_to_complete"
+            app:destination="@id/vocabCompleteFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/vocabCompleteFragment"
+        android:name="com.masterenglish.app.ui.vocab.VocabCompleteFragment"
+        android:label="vocab_complete" />
+
+    <fragment
+        android:id="@+id/skillDetailFragment"
+        android:name="com.masterenglish.app.ui.skill.SkillDetailFragment"
+        android:label="skill_detail">
+        <argument
+            android:name="skillId"
+            app:argType="string"
+            android:defaultValue="listening" />
     </fragment>
 
     <fragment
