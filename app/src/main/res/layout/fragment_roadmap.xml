@@ -3,12 +3,42 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/ds_paper"
     android:orientation="vertical">
 
     <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="20dp"
+            android:paddingTop="20dp"
+            android:paddingEnd="20dp">
+    
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/nav_tab_roadmap"
+                android:textColor="@color/ds_ink"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:letterSpacing="-0.02" />
+    
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/bg_header_badge"
+                android:contentDescription="@null"
+                android:padding="10dp"
+                android:src="@drawable/ic_flame"
+                app:tint="#B3541E" />
+        </LinearLayout>
+
+    <LinearLayout android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@color/ds_paper"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingStart="16dp"
@@ -62,7 +92,7 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-    <ProgressBar
+    <ProgressBar android:visibility="gone"
         android:id="@+id/tierProgress"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
@@ -93,15 +123,5 @@
             android:textColor="@color/neutral_subtext"
             android:visibility="gone" />
 
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/mascotButton"
-            android:layout_width="96dp"
-            android:layout_height="96dp"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="16dp"
-            android:contentDescription="@string/roadmap_mascot_tip"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            app:lottie_rawRes="@raw/mascot_wave" />
     </FrameLayout>
 </LinearLayout>

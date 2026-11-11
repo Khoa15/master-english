@@ -23,21 +23,6 @@ public final class AnimationUtils {
                 .setInterpolator(new OvershootInterpolator(2.2f)).start();
     }
 
-    /** Endless breathing pulse, used for the active roadmap node. */
-    public static AnimatorSet pulse(View view) {
-        ObjectAnimator sx = ObjectAnimator.ofFloat(view, View.SCALE_X, 1f, 1.12f, 1f);
-        ObjectAnimator sy = ObjectAnimator.ofFloat(view, View.SCALE_Y, 1f, 1.12f, 1f);
-        for (ObjectAnimator animator : new ObjectAnimator[]{sx, sy}) {
-            animator.setDuration(1400);
-            animator.setRepeatCount(ValueAnimator.INFINITE);
-            animator.setInterpolator(new AccelerateDecelerateInterpolator());
-        }
-        AnimatorSet set = new AnimatorSet();
-        set.playTogether(sx, sy);
-        set.start();
-        return set;
-    }
-
     /** Horizontal shake for a wrong answer. */
     public static void shake(View view) {
         view.animate().cancel();

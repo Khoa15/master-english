@@ -3,7 +3,7 @@ package com.masterenglish.app.di;
 import com.google.gson.Gson;
 import com.masterenglish.app.BuildConfig;
 import com.masterenglish.app.data.remote.ApiService;
-import com.masterenglish.app.data.remote.gemini.GeminiApi;
+import com.masterenglish.app.data.remote.agent.AgentApi;
 
 import java.util.concurrent.TimeUnit;
 
@@ -22,7 +22,8 @@ import javax.inject.Singleton;
 @InstallIn(SingletonComponent.class)
 public abstract class NetworkModule {
 
-    private static final String GEMINI_BASE_URL = "https://generativelanguage.googleapis.com/";
+    /** Placeholder only: the AI Agent URL is per-user and supplied at call time through @Url. */
+    private static final String AGENT_PLACEHOLDER_BASE_URL = "https://agent-gateway.invalid/";
 
     @Provides
     @Singleton
@@ -57,12 +58,12 @@ public abstract class NetworkModule {
 
     @Provides
     @Singleton
-    static GeminiApi provideGeminiApi(OkHttpClient client, Gson gson) {
+    static AgentApi provideAgentApi(OkHttpClient client, Gson gson) {
         return new Retrofit.Builder()
-                .baseUrl(GEMINI_BASE_URL)
+                .baseUrl(AGENT_PLACEHOLDER_BASE_URL)
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build()
-                .create(GeminiApi.class);
+                .create(AgentApi.class);
     }
 }

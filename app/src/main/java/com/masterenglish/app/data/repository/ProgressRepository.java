@@ -11,6 +11,7 @@ import com.masterenglish.app.data.local.dao.ContentDao;
 import com.masterenglish.app.data.local.dao.ProgressDao;
 import com.masterenglish.app.data.local.entity.LessonQuestionEntity;
 import com.masterenglish.app.data.local.entity.RoadmapNodeEntity;
+import com.masterenglish.app.data.local.entity.RoadmapStageEntity;
 import com.masterenglish.app.data.local.entity.UserItemRetentionEntity;
 import com.masterenglish.app.data.local.entity.UserNodeProgressEntity;
 import com.masterenglish.app.data.local.entity.UserWeaknessEntity;
@@ -74,10 +75,34 @@ public class ProgressRepository {
     public LiveData<List<RoadmapItem>> observeRoadmap(String userId) {
         LiveData<List<RoadmapNodeEntity>> nodes = contentDao.observeNodes();
         LiveData<List<UserNodeProgressEntity>> progress = progressDao.observeNodeProgress(userId);
+        LiveData<List<RoadmapStageEntity>> stages = contentDao.observeStages();
         MediatorLiveData<List<RoadmapItem>> merged = new MediatorLiveData<>();
-        merged.addSource(nodes, n -> merged.setValue(buildRoadmap(n, progress.getValue())));
-        merged.addSource(progress, p -> merged.setValue(buildRoadmap(nodes.getValue(), p)));
+        merged.addSource(nodes, n -> merged.setValue(buildRoadmap(n, progress.getValue(), stages.getValue())));
+        merged.addSource(progress, p -> merged.setValue(buildRoadmap(nodes.getValue(), p, stages.getValue())));
+        merged.addSource(stages, s -> merged.setValue(buildRoadmap(nodes.getValue(), progress.getValue(), s)));
         return merged;
+    }
+
+    /** Same as {@link #buildRoadmap(List, List)}, and marks the first node of each stage with the stage title. */
+    public static List<RoadmapItem> buildRoadmap(List<RoadmapNodeEntity> nodes, List<UserNodeProgressEntity> progress,
+                                                 List<RoadmapStageEntity> stages) {
+        List<RoadmapItem> items = buildRoadmap(nodes, progress);
+        if (stages == null) {
+            return items;
+        }
+        Map<Integer, RoadmapStageEntity> byId = new HashMap<>();
+        for (RoadmapStageEntity stage : stages) {
+            byId.put(stage.id, stage);
+        }
+        int previousStage = -1;
+        for (RoadmapItem item : items) {
+            if (item.node.stageId != previousStage) {
+                RoadmapStageEntity stage = byId.get(item.node.stageId);
+                item.stageTitle = stage == null ? null : stage.title;
+                previousStage = item.node.stageId;
+            }
+        }
+        return items;
     }
 
     public static List<RoadmapItem> buildRoadmap(List<RoadmapNodeEntity> nodes, List<UserNodeProgressEntity> progress) {

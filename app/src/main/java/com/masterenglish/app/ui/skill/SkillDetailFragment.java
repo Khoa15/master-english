@@ -46,8 +46,6 @@ public class SkillDetailFragment extends Fragment {
         binding.practiceButton.setText(getString(R.string.skill_practice, name));
         binding.practiceButton.setOnClickListener(v -> NavHostFragment.findNavController(this).navigate(R.id.reviewFragment));
 
-        // The summary sentence was placeholder copy; the real figures are the progress bar and label.
-        binding.skillSummary.setVisibility(View.GONE);
 
         SkillDetailViewModel viewModel = new ViewModelProvider(this).get(SkillDetailViewModel.class);
         viewModel.skills().observe(getViewLifecycleOwner(), skills -> {
@@ -72,9 +70,15 @@ public class SkillDetailFragment extends Fragment {
         }
 
         binding.skillProgress.setProgressCompat(skill.percent(), false);
-        binding.skillProgressLabel.setText(skill.total == 0
-                ? getString(R.string.practice_section_empty)
-                : getString(R.string.skill_progress_label, skill.completed, skill.total));
+        // Design: "You are working at B1." and "58% to B2" under the bar.
+        if (skill.level == null) {
+            binding.skillSummary.setText(R.string.skill_none);
+            binding.skillProgressLabel.setText(R.string.practice_section_empty);
+        } else {
+            binding.skillSummary.setText(getString(R.string.skill_summary_format, skill.level));
+            binding.skillProgressLabel.setText(getString(R.string.skill_next_label, skill.percent(),
+                    nextLevel(skill.level)));
+        }
 
         int green = ContextCompat.getColor(requireContext(), R.color.ds_green_ink);
         int greenTint = ContextCompat.getColor(requireContext(), R.color.ds_green_tint);
@@ -127,5 +131,15 @@ public class SkillDetailFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    private static String nextLevel(String level) {
+        String[] levels = {"A1", "A2", "B1", "B2", "C1", "C2"};
+        for (int i = 0; i < levels.length - 1; i++) {
+            if (levels[i].equals(level)) {
+                return levels[i + 1];
+            }
+        }
+        return level;
     }
 }

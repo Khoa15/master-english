@@ -26,6 +26,7 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
+import android.widget.TextView;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
@@ -38,6 +39,8 @@ import com.masterenglish.app.data.local.entity.UserSettingsEntity;
 import com.masterenglish.app.data.local.prefs.AppPreferences;
 import com.masterenglish.app.data.repository.SkillProgress;
 import com.masterenglish.app.databinding.FragmentProfileBinding;
+import com.masterenglish.app.ui.common.SkeletonView;
+import com.masterenglish.app.ui.common.TabFragment;
 import com.masterenglish.app.service.reminder.NotificationHelper;
 import com.masterenglish.app.service.reminder.ReminderScheduler;
 import com.masterenglish.app.service.sync.SyncScheduler;
@@ -48,6 +51,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -59,41 +63,23 @@ import javax.inject.Inject;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
-/** Profile tab: stats, badges, the week's study chart, and settings. */
+/** Profile tab: stats, badges and the week's study chart. Settings live on their own page. */
 @AndroidEntryPoint
-public class ProfileFragment extends Fragment {
+public class ProfileFragment extends TabFragment {
 
-    private static final String[] DIFFICULTIES = {"EASY", "MEDIUM", "HARD", "ADAPTIVE"};
-    private static final int[] TARGET_MINUTES = {5, 10, 15};
 
-    @Inject
-    AppPreferences preferences;
-
-    @Inject
-    SoundManager soundManager;
 
     private FragmentProfileBinding binding;
     private ProfileViewModel viewModel;
     private BadgeAdapter badgeAdapter;
-    private UserSettingsEntity currentSettings;
-    private boolean bindingSettings;
 
-    private final ActivityResultLauncher<String> notificationPermission =
-            registerForActivityResult(new ActivityResultContracts.RequestPermission(), granted -> {
-                if (granted) {
-                    turnReminderOn();
-                } else {
-                    binding.notifSwitch.setChecked(false);
-                    Toast.makeText(requireContext(), R.string.profile_notification_denied, Toast.LENGTH_LONG).show();
-                }
-            });
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         binding = FragmentProfileBinding.inflate(inflater, container, false);
-        return binding.getRoot();
+        return withSkeleton(binding.getRoot(), SkeletonView.Variant.PROFILE);
     }
 
     @Override
@@ -112,52 +98,12 @@ public class ProfileFragment extends Fragment {
         binding.badgeList.setAdapter(badgeAdapter);
         binding.badgeList.setNestedScrollingEnabled(false);
 
-        binding.difficultySpinner.setAdapter(new ArrayAdapter<>(requireContext(),
-                android.R.layout.simple_spinner_dropdown_item, Arrays.asList(DIFFICULTIES)));
-        binding.difficultySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (!bindingSettings && currentSettings != null) {
-                    currentSettings.aiChallengeDifficulty = DIFFICULTIES[position];
-                    save();
-                }
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-
-        binding.soundSwitch.setOnCheckedChangeListener(this::onSoundToggled);
-        binding.notifSwitch.setOnCheckedChangeListener(this::onNotificationsToggled);
-        binding.reminderTimeButton.setOnClickListener(v -> pickReminderTime());
-        binding.minutesGroup.addOnButtonCheckedListener((group, checkedId, isChecked) -> {
-            if (!isChecked || bindingSettings || currentSettings == null) {
-                return;
-            }
-            currentSettings.targetLearningMinutes = minutesFor(checkedId);
-            save();
-        });
-        binding.saveKeyButton.setOnClickListener(v -> {
-            viewModel.saveGeminiKey(binding.geminiKeyInput.getText() == null ? ""
-                    : binding.geminiKeyInput.getText().toString());
-            Toast.makeText(requireContext(), R.string.profile_saved_toast, Toast.LENGTH_SHORT).show();
-        });
-        binding.syncButton.setOnClickListener(v -> {
-            SyncScheduler.syncNow(requireContext());
-            Toast.makeText(requireContext(), R.string.profile_sync_started, Toast.LENGTH_SHORT).show();
-        });
-        binding.logoutButton.setOnClickListener(v -> {
-            viewModel.signOut();
-            Toast.makeText(requireContext(), R.string.profile_sign_out_done, Toast.LENGTH_SHORT).show();
-            NavHostFragment.findNavController(this).navigate(R.id.action_profile_to_auth);
-        });
-
-        binding.geminiKeyInput.setText(viewModel.geminiKey());
         binding.guestNote.setVisibility(viewModel.isGuest() ? View.VISIBLE : View.GONE);
+        binding.settingsRow.setOnClickListener(v -> NavHostFragment.findNavController(this)
+                .navigate(R.id.action_profile_to_settings));
 
         viewModel.user().observe(getViewLifecycleOwner(), this::bindUser);
-        viewModel.settings().observe(getViewLifecycleOwner(), this::bindSettings);
         viewModel.studyLog().observe(getViewLifecycleOwner(), this::bindChart);
         viewModel.badges().observe(getViewLifecycleOwner(), badges -> refreshBadges());
         viewModel.unlocked().observe(getViewLifecycleOwner(), unlocked -> refreshBadges());
@@ -168,6 +114,7 @@ public class ProfileFragment extends Fragment {
         if (user == null || binding == null) {
             return;
         }
+        hideSkeleton();
         binding.nameText.setText(user.displayName);
         binding.emailText.setText(user.isGuest() ? getString(R.string.profile_guest_name) : user.email);
         binding.tierText.setText(Levels.tierName(user.experiencePoints));
@@ -178,26 +125,45 @@ public class ProfileFragment extends Fragment {
         binding.gemText.setText(String.valueOf(user.gemCount));
     }
 
-    private void bindSettings(UserSettingsEntity settings) {
-        if (settings == null || binding == null) {
+
+    @Override
+    public void onTabHidden() {
+        if (binding == null) {
             return;
         }
-        currentSettings = settings;
-        bindingSettings = true;
-        binding.soundSwitch.setChecked(settings.soundFxEnabled);
-        binding.notifSwitch.setChecked(settings.notificationsEnabled);
-        binding.difficultySpinner.setSelection(Arrays.asList(DIFFICULTIES).indexOf(settings.aiChallengeDifficulty));
-        binding.minutesGroup.check(checkedIdFor(settings.targetLearningMinutes));
-        binding.reminderTimeButton.setText(getString(R.string.profile_reminder_time,
-                settings.dailyReminderTime.substring(0, 5)));
-        bindingSettings = false;
+        badgeAdapter.submit(new ArrayList<>(), new HashSet<>());
+        binding.weeklyChart.clear();
+        binding.cefrScale.removeAllViews();
+        binding.skillRows.removeAllViews();
+        binding.grammarErrors.removeAllViews();
+        binding.strongSkills.removeAllViews();
+        binding.weakSkills.removeAllViews();
+        showSkeleton();
+    }
+
+    @Override
+    public void onTabShown() {
+        if (binding == null) {
+            return;
+        }
+        Map<String, SkillProgress.Summary> skills = viewModel.skills().getValue();
+        if (skills != null) {
+            bindSkillChips(skills);
+        }
+        bindChart(viewModel.studyLog().getValue());
+        refreshBadges();
+        UserEntity user = viewModel.user().getValue();
+        if (user != null) {
+            bindUser(user);
+        }
     }
 
     private void refreshBadges() {
         if (binding == null) {
             return;
         }
-        List<BadgeEntity> catalogue = viewModel.badges().getValue();
+        List<BadgeEntity> catalogue = viewModel.badges().getValue() == null
+                ? new ArrayList<>() : new ArrayList<>(viewModel.badges().getValue());
         List<UserBadgeEntity> unlocked = viewModel.unlocked().getValue();
         Set<String> unlockedIds = new HashSet<>();
         if (unlocked != null) {
@@ -205,7 +171,16 @@ public class ProfileFragment extends Fragment {
                 unlockedIds.add(row.badgeId);
             }
         }
-        badgeAdapter.submit(catalogue == null ? new ArrayList<>() : catalogue, unlockedIds);
+        // Unlocked badges first (stable, so catalogue order is kept within each group).
+        catalogue.sort(Comparator.comparing((BadgeEntity badge) -> !unlockedIds.contains(badge.id)));
+        badgeAdapter.submit(catalogue, unlockedIds);
+        int unlockedCount = 0;
+        for (BadgeEntity badge : catalogue) {
+            if (unlockedIds.contains(badge.id)) {
+                unlockedCount++;
+            }
+        }
+        binding.badgeCount.setText(getString(R.string.profile_badges_count, unlockedCount, catalogue.size()));
     }
 
     private void setupChart() {
@@ -254,81 +229,6 @@ public class ProfileFragment extends Fragment {
         binding.weeklyChart.invalidate();
     }
 
-    private void onSoundToggled(CompoundButton button, boolean checked) {
-        soundManager.setEnabled(checked);
-        if (!bindingSettings && currentSettings != null) {
-            currentSettings.soundFxEnabled = checked;
-            save();
-        }
-    }
-
-    private void onNotificationsToggled(CompoundButton button, boolean checked) {
-        if (bindingSettings || currentSettings == null) {
-            return;
-        }
-        currentSettings.notificationsEnabled = checked;
-        save();
-        if (!checked) {
-            preferences.saveReminder(false, preferences.getReminderHour(), preferences.getReminderMinute());
-            ReminderScheduler.cancel(requireContext());
-            return;
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
-                && !NotificationHelper.hasNotificationPermission(requireContext())) {
-            notificationPermission.launch(Manifest.permission.POST_NOTIFICATIONS);
-            return;
-        }
-        turnReminderOn();
-    }
-
-    private void turnReminderOn() {
-        preferences.saveReminder(true, preferences.getReminderHour(), preferences.getReminderMinute());
-        ReminderScheduler.schedule(requireContext(), preferences.getReminderHour(), preferences.getReminderMinute());
-    }
-
-    private void pickReminderTime() {
-        MaterialTimePicker picker = new MaterialTimePicker.Builder()
-                .setTimeFormat(TimeFormat.CLOCK_24H)
-                .setHour(preferences.getReminderHour())
-                .setMinute(preferences.getReminderMinute())
-                .setTitleText(R.string.profile_reminder_time_title)
-                .build();
-        picker.addOnPositiveButtonClickListener(v -> {
-            int hour = picker.getHour();
-            int minute = picker.getMinute();
-            if (currentSettings != null) {
-                currentSettings.dailyReminderTime = String.format(Locale.ROOT, "%02d:%02d:00", hour, minute);
-                save();
-            }
-            preferences.saveReminder(preferences.isReminderEnabled(), hour, minute);
-            if (preferences.isReminderEnabled()) {
-                ReminderScheduler.schedule(requireContext(), hour, minute);
-            }
-            binding.reminderTimeButton.setText(getString(R.string.profile_reminder_time,
-                    String.format(Locale.ROOT, "%02d:%02d", hour, minute)));
-        });
-        picker.show(getChildFragmentManager(), "reminder_time");
-    }
-
-    private void save() {
-        if (currentSettings != null) {
-            viewModel.saveSettings(currentSettings);
-        }
-    }
-
-    private static int minutesFor(int checkedId) {
-        if (checkedId == R.id.profileMin5) {
-            return TARGET_MINUTES[0];
-        }
-        return checkedId == R.id.profileMin15 ? TARGET_MINUTES[2] : TARGET_MINUTES[1];
-    }
-
-    private static int checkedIdFor(int minutes) {
-        if (minutes <= TARGET_MINUTES[0]) {
-            return R.id.profileMin5;
-        }
-        return minutes >= TARGET_MINUTES[2] ? R.id.profileMin15 : R.id.profileMin10;
-    }
 
     @Override
     public void onDestroyView() {
@@ -343,6 +243,179 @@ public class ProfileFragment extends Fragment {
         bindSkillChip(binding.skillSpeaking, R.string.onboard_skill_speaking, skills.get(SkillProgress.SPEAKING));
         bindSkillChip(binding.skillWriting, R.string.onboard_skill_writing, skills.get(SkillProgress.WRITING));
         bindSkillChip(binding.skillGrammar, R.string.onboard_skill_grammar, skills.get(SkillProgress.GRAMMAR));
+        bindProfileSections(skills);
+    }
+
+    private static final String[] CEFR_LEVELS = {"A1", "A2", "B1", "B2", "C1", "C2"};
+    private static final String[] SKILL_IDS = {SkillProgress.LISTENING, SkillProgress.READING, SkillProgress.SPEAKING,
+            SkillProgress.WRITING, SkillProgress.GRAMMAR};
+    private static final int[] SKILL_NAME_RES = {R.string.onboard_skill_listening, R.string.onboard_skill_reading,
+            R.string.onboard_skill_speaking, R.string.onboard_skill_writing, R.string.onboard_skill_grammar};
+
+    /** Fills the CEFR scale, the skill rows, grammar errors and the strongest and weakest skills. */
+    private void bindProfileSections(Map<String, SkillProgress.Summary> skills) {
+        // Current level: the highest CEFR level any skill is working in.
+        int current = 0;
+        for (SkillProgress.Summary summary : skills.values()) {
+            if (summary == null || summary.level == null) {
+                continue;
+            }
+            for (int i = 0; i < CEFR_LEVELS.length; i++) {
+                if (CEFR_LEVELS[i].equals(summary.level)) {
+                    current = Math.max(current, i);
+                }
+            }
+        }
+
+        binding.cefrScale.removeAllViews();
+        for (int i = 0; i < CEFR_LEVELS.length; i++) {
+            TextView step = new TextView(requireContext());
+            step.setText(CEFR_LEVELS[i]);
+            step.setGravity(android.view.Gravity.CENTER);
+            step.setTextSize(13);
+            step.setTypeface(null, android.graphics.Typeface.BOLD);
+            int bg = i < current ? 0xFFDDF0E6 : i == current ? 0xFFE0A030 : 0xFFFFFFFF;
+            int ink = i < current ? 0xFF1F5C41 : i == current ? 0xFF1B1A17 : 0xFF9C978A;
+            step.setBackgroundColor(bg);
+            step.setTextColor(ink);
+            android.widget.LinearLayout.LayoutParams params = new android.widget.LinearLayout.LayoutParams(0,
+                    dp(40), 1f);
+            params.setMarginEnd(dp(4));
+            binding.cefrScale.addView(step, params);
+        }
+
+        binding.skillRows.removeAllViews();
+        for (int i = 0; i < SKILL_IDS.length; i++) {
+            SkillProgress.Summary summary = skills.get(SKILL_IDS[i]);
+            android.widget.LinearLayout row = new android.widget.LinearLayout(requireContext());
+            row.setOrientation(android.widget.LinearLayout.VERTICAL);
+            row.setPadding(0, dp(10), 0, dp(10));
+            android.widget.LinearLayout head = new android.widget.LinearLayout(requireContext());
+            head.setOrientation(android.widget.LinearLayout.HORIZONTAL);
+            TextView name = new TextView(requireContext());
+            name.setText(getString(SKILL_NAME_RES[i]));
+            name.setTextSize(15);
+            name.setTextColor(0xFF1B1A17);
+            name.setTypeface(null, android.graphics.Typeface.BOLD);
+            android.widget.LinearLayout.LayoutParams nameParams = new android.widget.LinearLayout.LayoutParams(0,
+                    android.widget.LinearLayout.LayoutParams.WRAP_CONTENT, 1f);
+            head.addView(name, nameParams);
+            TextView level = new TextView(requireContext());
+            level.setText(summary == null || summary.level == null ? "—" : summary.level);
+            level.setTextSize(13);
+            level.setTypeface(null, android.graphics.Typeface.BOLD);
+            level.setTextColor(0xFF1B1A17);
+            level.setBackgroundResource(R.drawable.bg_ds_pill);
+            level.setPadding(dp(10), dp(3), dp(10), dp(3));
+            head.addView(level);
+            row.addView(head);
+            android.widget.ProgressBar bar = new android.widget.ProgressBar(requireContext(), null,
+                    android.R.attr.progressBarStyleHorizontal);
+            bar.setMax(100);
+            bar.setProgress(summary == null ? 0 : summary.percent());
+            bar.setProgressTintList(android.content.res.ColorStateList.valueOf(0xFF2E7D5B));
+            android.widget.LinearLayout.LayoutParams barParams = new android.widget.LinearLayout.LayoutParams(
+                    android.widget.LinearLayout.LayoutParams.MATCH_PARENT, dp(6));
+            barParams.topMargin = dp(8);
+            row.addView(bar, barParams);
+            String skillId = SKILL_IDS[i];
+            row.setOnClickListener(v -> openSkill(skillId));
+            binding.skillRows.addView(row);
+        }
+
+        // Grammar errors: each recurring tag with a bar scaled to the most frequent one.
+        binding.grammarErrors.removeAllViews();
+        SkillProgress.Summary grammar = skills.get(SkillProgress.GRAMMAR);
+        if (grammar == null || grammar.recent.isEmpty()) {
+            TextView empty = new TextView(requireContext());
+            empty.setText("—");
+            empty.setTextColor(0xFF6B6860);
+            binding.grammarErrors.addView(empty);
+        } else {
+            int max = 1;
+            for (SkillProgress.Mistake m : grammar.recent) {
+                max = Math.max(max, m.count);
+            }
+            for (SkillProgress.Mistake m : grammar.recent) {
+                android.widget.LinearLayout row = new android.widget.LinearLayout(requireContext());
+                row.setOrientation(android.widget.LinearLayout.HORIZONTAL);
+                row.setGravity(android.view.Gravity.CENTER_VERTICAL);
+                row.setPadding(0, dp(4), 0, dp(4));
+                TextView tag = new TextView(requireContext());
+                tag.setText(m.tag);
+                tag.setTextSize(13);
+                tag.setTextColor(0xFF1B1A17);
+                row.addView(tag, new android.widget.LinearLayout.LayoutParams(dp(130),
+                        android.widget.LinearLayout.LayoutParams.WRAP_CONTENT));
+                android.widget.ProgressBar bar = new android.widget.ProgressBar(requireContext(), null,
+                        android.R.attr.progressBarStyleHorizontal);
+                bar.setMax(max);
+                bar.setProgress(m.count);
+                bar.setProgressTintList(android.content.res.ColorStateList.valueOf(0xFFC2412D));
+                row.addView(bar, new android.widget.LinearLayout.LayoutParams(0, dp(8), 1f));
+                TextView count = new TextView(requireContext());
+                count.setText(String.valueOf(m.count));
+                count.setTextSize(13);
+                count.setTypeface(null, android.graphics.Typeface.BOLD);
+                count.setTextColor(0xFF1B1A17);
+                count.setPadding(dp(8), 0, 0, 0);
+                row.addView(count);
+                binding.grammarErrors.addView(row);
+            }
+        }
+
+        // Strongest and weakest skills, ordered by completion.
+        List<SkillProgress.Summary> ranked = new java.util.ArrayList<>();
+        for (String id : SKILL_IDS) {
+            SkillProgress.Summary summary = skills.get(id);
+            if (summary != null && summary.total > 0) {
+                ranked.add(summary);
+            }
+        }
+        ranked.sort((a, b) -> Integer.compare(b.percent(), a.percent()));
+        fillRanking(binding.strongSkills, R.string.profile_strong_title, ranked, true);
+        fillRanking(binding.weakSkills, R.string.profile_weak_title, ranked, false);
+    }
+
+    private void fillRanking(android.widget.LinearLayout container, int titleRes,
+                             List<SkillProgress.Summary> ranked, boolean strongest) {
+        container.removeAllViews();
+        TextView title = new TextView(requireContext());
+        title.setText(titleRes);
+        title.setTextSize(13);
+        title.setTypeface(null, android.graphics.Typeface.BOLD);
+        title.setTextColor(strongest ? 0xFF1F5C41 : 0xFFC2412D);
+        container.addView(title);
+        if (ranked.isEmpty()) {
+            TextView empty = new TextView(requireContext());
+            empty.setText("—");
+            empty.setTextColor(0xFF6B6860);
+            container.addView(empty);
+            return;
+        }
+        int count = Math.min(3, ranked.size());
+        for (int i = 0; i < count; i++) {
+            SkillProgress.Summary summary = strongest ? ranked.get(i) : ranked.get(ranked.size() - 1 - i);
+            TextView line = new TextView(requireContext());
+            line.setText(skillName(summary.skillId) + "  " + summary.percent() + "%");
+            line.setTextSize(13);
+            line.setTextColor(0xFF1B1A17);
+            line.setPadding(0, dp(6), 0, 0);
+            container.addView(line);
+        }
+    }
+
+    private String skillName(String skillId) {
+        for (int i = 0; i < SKILL_IDS.length; i++) {
+            if (SKILL_IDS[i].equals(skillId)) {
+                return getString(SKILL_NAME_RES[i]);
+            }
+        }
+        return skillId;
+    }
+
+    private int dp(int value) {
+        return Math.round(value * getResources().getDisplayMetrics().density);
     }
 
     private void bindSkillChip(MaterialButton chip, int nameRes, @Nullable SkillProgress.Summary summary) {

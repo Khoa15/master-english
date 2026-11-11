@@ -9,6 +9,8 @@ public final class RoadmapItem {
     public final RoadmapNodeEntity node;
     public final NodeStatus status;
     public final int stars;
+    /** Stage title shown above this node when it opens a new stage; null otherwise. */
+    public String stageTitle;
 
     public RoadmapItem(RoadmapNodeEntity node, NodeStatus status, int stars) {
         this.node = node;

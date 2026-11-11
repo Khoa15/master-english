@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/TextAppearance.Onboarding.Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/onboard_language_title" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/onboard_language_body"
+            android:textColor="@color/onboarding_muted"
+            android:textSize="15sp" />
+
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/languageGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:orientation="vertical"
+            app:singleSelection="true">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/langVietnamese"
+                style="@style/Widget.Onboarding.Option"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:text="@string/lang_vietnamese" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/langEnglish"
+                style="@style/Widget.Onboarding.Option"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:text="@string/lang_english" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/langJapanese"
+                style="@style/Widget.Onboarding.Option"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:text="@string/lang_japanese" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/langKorean"
+                style="@style/Widget.Onboarding.Option"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:text="@string/lang_korean" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/langChinese"
+                style="@style/Widget.Onboarding.Option"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/lang_chinese" />
+        </com.google.android.material.button.MaterialButtonToggleGroup>
+
+    </LinearLayout>
+</ScrollView>

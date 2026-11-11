@@ -18,14 +18,22 @@ import com.masterenglish.app.data.local.Enums.NodeStatus;
 import com.masterenglish.app.data.local.entity.UserEntity;
 import com.masterenglish.app.data.repository.RoadmapItem;
 import com.masterenglish.app.databinding.FragmentRoadmapBinding;
+import com.masterenglish.app.ui.common.SkeletonView;
+import com.masterenglish.app.ui.common.TabFragment;
 import com.masterenglish.app.utils.Levels;
 import com.masterenglish.app.utils.AnimationUtils;
+import com.masterenglish.app.utils.SoundManager;
+
+import javax.inject.Inject;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
 /** Main tab: streak, gems, XP and the winding roadmap. */
 @AndroidEntryPoint
-public class RoadmapFragment extends Fragment implements LessonPreviewSheet.Listener {
+public class RoadmapFragment extends TabFragment {
+
+    @Inject
+    SoundManager soundManager;
 
     private FragmentRoadmapBinding binding;
     private RoadmapViewModel viewModel;
@@ -36,7 +44,7 @@ public class RoadmapFragment extends Fragment implements LessonPreviewSheet.List
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         binding = FragmentRoadmapBinding.inflate(inflater, container, false);
-        return binding.getRoot();
+        return withSkeleton(binding.getRoot(), SkeletonView.Variant.ROADMAP);
     }
 
     @Override
@@ -44,17 +52,25 @@ public class RoadmapFragment extends Fragment implements LessonPreviewSheet.List
         super.onViewCreated(view, savedInstanceState);
         viewModel = new ViewModelProvider(this).get(RoadmapViewModel.class);
 
-        adapter = new RoadmapAdapter(this::onNodeClicked);
+        adapter = new RoadmapAdapter(new RoadmapAdapter.OnNodeClick() {
+            @Override
+            public void onNodeClicked(RoadmapItem item) {
+                onLockedNodeClicked();
+            }
+
+            @Override
+            public void onActionClicked(RoadmapItem item) {
+                soundManager.play(SoundManager.Effect.POP);
+                onStartLesson(item.node.id);
+            }
+        });
         binding.roadmapList.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.roadmapList.setAdapter(adapter);
         binding.roadmapList.addItemDecoration(new RoadmapPathDecoration(
                 getResources().getDimension(R.dimen.path_stroke)));
 
-        binding.mascotButton.setOnClickListener(v -> showTip());
-
         viewModel.user().observe(getViewLifecycleOwner(), this::bindHeader);
         viewModel.roadmap().observe(getViewLifecycleOwner(), this::bindRoadmap);
-        AnimationUtils.springPop(binding.mascotButton);
     }
 
     private void bindHeader(UserEntity user) {
@@ -69,6 +85,10 @@ public class RoadmapFragment extends Fragment implements LessonPreviewSheet.List
     }
 
     private void bindRoadmap(java.util.List<RoadmapItem> items) {
+        if (binding == null) {
+            return;
+        }
+        hideSkeleton();
         if (items == null || items.isEmpty()) {
             binding.emptyText.setVisibility(View.VISIBLE);
             return;
@@ -84,16 +104,33 @@ public class RoadmapFragment extends Fragment implements LessonPreviewSheet.List
         }
     }
 
-    private void onNodeClicked(RoadmapItem item) {
-        if (item.status == NodeStatus.LOCKED) {
-            Snackbar.make(binding.getRoot(), R.string.roadmap_locked_hint, Snackbar.LENGTH_SHORT).show();
+    @Override
+    public void onTabHidden() {
+        if (binding == null) {
             return;
         }
-        LessonPreviewSheet.newInstance(item).show(getChildFragmentManager(), "lesson_preview");
+        adapter.submitList(null);
+        binding.emptyText.setVisibility(View.GONE);
+        showSkeleton();
     }
 
     @Override
-    public void onStartLesson(String nodeId) {
+    public void onTabShown() {
+        if (binding == null) {
+            return;
+        }
+        bindHeader(viewModel.user().getValue());
+        java.util.List<RoadmapItem> cached = viewModel.roadmap().getValue();
+        if (cached != null) {
+            bindRoadmap(cached);
+        }
+    }
+
+    private void onLockedNodeClicked() {
+        Snackbar.make(binding.getRoot(), R.string.roadmap_locked_hint, Snackbar.LENGTH_SHORT).show();
+    }
+
+    private void onStartLesson(String nodeId) {
         Bundle args = new Bundle();
         args.putString("nodeId", nodeId);
         NavHostFragment.findNavController(this).navigate(R.id.action_roadmap_to_lesson, args);

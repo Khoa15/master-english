@@ -16,12 +16,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.button.MaterialButtonToggleGroup;
-import com.google.android.material.textfield.TextInputEditText;
 import com.masterenglish.app.MainActivity;
 import com.masterenglish.app.R;
 import com.masterenglish.app.data.local.prefs.OnboardingAnswers;
 import com.masterenglish.app.databinding.FragmentOnboardingBinding;
-import com.masterenglish.app.ui.lesson.questions.SimpleTextWatcher;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,19 +28,23 @@ import java.util.function.Consumer;
 import dagger.hilt.android.AndroidEntryPoint;
 
 /**
- * Eight screens: a welcome, six survey questions with a progress bar, then a summary of the plan
- * before sign-in. Each screen is its own layout; the pager only moves between them.
+ * Nine screens: a language list (required), a welcome, six survey questions with a progress bar,
+ * then a summary of the plan before sign-in. Each screen is its own layout; the pager only moves
+ * between them.
  */
 @AndroidEntryPoint
 public class OnboardingFragment extends Fragment {
 
-    private static final int PAGE_WELCOME = 0;
-    private static final int PAGE_SUMMARY = 7;
-    private static final int PAGE_COUNT = 8;
+    private static final int PAGE_LANGUAGE = 0;
+    private static final int PAGE_WELCOME = 1;
+    private static final int PAGE_FIRST_QUESTION = 2;
+    private static final int PAGE_SUMMARY = 8;
+    private static final int PAGE_COUNT = 9;
     private static final int QUESTION_COUNT = 6;
     private static final int MAX_SKILLS = 3;
 
     private static final int[] PAGE_LAYOUTS = {
+            R.layout.layout_onboarding_language,
             R.layout.layout_onboarding_welcome,
             R.layout.layout_onboarding_who,
             R.layout.layout_onboarding_age,
@@ -52,6 +54,11 @@ public class OnboardingFragment extends Fragment {
             R.layout.layout_onboarding_job,
             R.layout.layout_onboarding_ready
     };
+
+    private static final int[] LANGUAGE_BUTTONS = {R.id.langVietnamese, R.id.langEnglish, R.id.langJapanese,
+            R.id.langKorean, R.id.langChinese};
+    private static final int[] LANGUAGE_LABELS = {R.string.lang_vietnamese, R.string.lang_english,
+            R.string.lang_japanese, R.string.lang_korean, R.string.lang_chinese};
 
     private static final int[] ROLE_BUTTONS = {R.id.roleStudent, R.id.roleProfessional, R.id.roleTeacher, R.id.roleJobSeeker};
     private static final int[] ROLE_LABELS = {R.string.onboard_role_student, R.string.onboard_role_professional,
@@ -123,13 +130,16 @@ public class OnboardingFragment extends Fragment {
 
     /** Updates the header, the button label and the back gesture for the visible screen. */
     private void showPage(int position) {
-        boolean questionPage = position >= 1 && position < PAGE_SUMMARY;
+        boolean questionPage = position >= PAGE_FIRST_QUESTION && position < PAGE_SUMMARY;
         binding.header.setVisibility(questionPage ? View.VISIBLE : View.INVISIBLE);
         if (questionPage) {
-            binding.progress.setProgressCompat(position * 100 / QUESTION_COUNT, true);
-            binding.progressLabel.setText(getString(R.string.onboard_step_format, position, QUESTION_COUNT));
+            int step = position - PAGE_FIRST_QUESTION + 1;
+            binding.progress.setProgressCompat(step * 100 / QUESTION_COUNT, true);
+            binding.progressLabel.setText(getString(R.string.onboard_step_format, step, QUESTION_COUNT));
         }
         binding.nextButton.setText(nextLabel(position));
+        // The language screen cannot continue until a language has been chosen.
+        binding.nextButton.setEnabled(position != PAGE_LANGUAGE || !viewModel.answers().language.isEmpty());
         backCallback.setEnabled(position > 0);
         if (position == PAGE_SUMMARY) {
             // The summary shows answers given on earlier screens, so refresh it each time it opens.
@@ -208,24 +218,28 @@ public class OnboardingFragment extends Fragment {
     /** Wires each screen's controls once, when it is created. Listeners stay with the view. */
     private void bindPage(View page, int position) {
         switch (position) {
-            case 1:
-                bindWho(page);
+            case PAGE_LANGUAGE:
+                bindLanguage(page.findViewById(R.id.languageGroup));
                 break;
-            case 2:
+            case PAGE_FIRST_QUESTION:
+                bindChoice(page.findViewById(R.id.roleGroup), ROLE_BUTTONS, ROLE_LABELS,
+                        viewModel.answers().role, value -> viewModel.answers().role = value);
+                break;
+            case PAGE_FIRST_QUESTION + 1:
                 bindChoice(page.findViewById(R.id.ageGroup), AGE_BUTTONS, AGE_LABELS,
                         viewModel.answers().ageRange, value -> viewModel.answers().ageRange = value);
                 break;
-            case 3:
+            case PAGE_FIRST_QUESTION + 2:
                 bindChoice(page.findViewById(R.id.goalGroup), GOAL_BUTTONS, GOAL_LABELS,
                         viewModel.answers().goal, value -> viewModel.answers().goal = value);
                 break;
-            case 4:
+            case PAGE_FIRST_QUESTION + 3:
                 bindMinutes(page.findViewById(R.id.minutesGroup));
                 break;
-            case 5:
+            case PAGE_FIRST_QUESTION + 4:
                 bindSkills(page.findViewById(R.id.skillsGroup));
                 break;
-            case 6:
+            case PAGE_FIRST_QUESTION + 5:
                 bindChoice(page.findViewById(R.id.jobGroup), JOB_BUTTONS, JOB_LABELS,
                         viewModel.answers().job, value -> viewModel.answers().job = value);
                 break;
@@ -234,14 +248,16 @@ public class OnboardingFragment extends Fragment {
         }
     }
 
-    private void bindWho(View page) {
+    /** Single choice of display language. Picking one enables the Continue button. */
+    private void bindLanguage(MaterialButtonToggleGroup group) {
         OnboardingAnswers answers = viewModel.answers();
-        TextInputEditText nameInput = page.findViewById(R.id.nameInput);
-        nameInput.setText(answers.name);
-        nameInput.addTextChangedListener(new SimpleTextWatcher(
-                () -> answers.name = nameInput.getText() == null ? "" : nameInput.getText().toString()));
-        bindChoice(page.findViewById(R.id.roleGroup), ROLE_BUTTONS, ROLE_LABELS, answers.role,
-                value -> answers.role = value);
+        bindChoice(group, LANGUAGE_BUTTONS, LANGUAGE_LABELS, answers.language,
+                value -> answers.language = value);
+        group.addOnButtonCheckedListener((g, checkedId, isChecked) -> {
+            if (isChecked && binding != null) {
+                binding.nextButton.setEnabled(true);
+            }
+        });
     }
 
     /** Single choice: checks the button whose label matches the saved answer, then stores what is picked. */

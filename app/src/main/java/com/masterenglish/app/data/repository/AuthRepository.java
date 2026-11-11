@@ -134,9 +134,6 @@ public class AuthRepository {
         if (answers == null) {
             return;
         }
-        if (!answers.name.trim().isEmpty()) {
-            userRepository.updateDisplayName(userId, answers.name.trim());
-        }
         userRepository.saveTargetMinutes(userId, answers.dailyMinutes);
         aiRepository.remember(userId, "learning_goal", answers.goal, 1f);
         aiRepository.remember(userId, "job", answers.job, 1f);

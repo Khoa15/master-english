@@ -7,9 +7,6 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 
 import androidx.core.app.ActivityCompat;
@@ -57,7 +54,6 @@ public final class NotificationHelper {
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_REMINDER)
                 .setSmallIcon(R.drawable.ic_notification)
-                .setLargeIcon(mascotBitmap(context))
                 .setContentTitle(context.getString(R.string.reminder_title))
                 .setContentText(context.getString(R.string.reminder_body))
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(context.getString(R.string.reminder_body)))
@@ -65,19 +61,6 @@ public final class NotificationHelper {
                 .setAutoCancel(true)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
         NotificationManagerCompat.from(context).notify(NOTIFICATION_ID, builder.build());
-    }
-
-    private static Bitmap mascotBitmap(Context context) {
-        Drawable drawable = ContextCompat.getDrawable(context, R.drawable.ic_mascot_owl);
-        if (drawable == null) {
-            return null;
-        }
-        int size = 192;
-        Bitmap bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-        drawable.setBounds(0, 0, size, size);
-        drawable.draw(canvas);
-        return bitmap;
     }
 
     /** Lets the Activity ask for POST_NOTIFICATIONS on Android 13+. */

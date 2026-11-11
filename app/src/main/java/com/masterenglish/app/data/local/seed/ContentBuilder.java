@@ -28,6 +28,7 @@ import com.masterenglish.app.utils.TextUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -102,6 +103,17 @@ public final class ContentBuilder {
                                Map<String, Integer> listeningDurations) {
         ContentBuilder builder = new ContentBuilder(vocabulary, grammar, reading, listening, listeningDurations);
         return builder.run();
+    }
+
+    /**
+     * The static badge catalogue. Seeded on its own so installs that already have content (and therefore
+     * skip the content seed) still get their badges.
+     */
+    public static List<BadgeEntity> badgeCatalogue() {
+        ContentBuilder builder = new ContentBuilder(new ArrayList<>(), new ArrayList<>(), new ArrayList<>(),
+                new ArrayList<>(), new HashMap<>());
+        builder.buildBadges();
+        return builder.out.badges;
     }
 
     private Bundle run() {

@@ -14,15 +14,33 @@
         android:paddingHorizontal="16dp"
         android:paddingTop="16dp">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/tutor_title"
-            android:textColor="@color/ds_ink"
-            android:textSize="26sp"
-            android:textStyle="bold" />
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+        
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/tutor_title"
+                    android:textColor="@color/ds_ink"
+                    android:textSize="26sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="-0.02" />
+        
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/bg_header_badge"
+                    android:contentDescription="@null"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_flame"
+                    app:tint="#B3541E" />
+            </LinearLayout>
 
-        <TextView
+        <TextView android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -30,41 +48,28 @@
             android:textColor="@color/ds_body"
             android:textSize="14sp" />
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/onboardingCard"
+        <LinearLayout
+            android:id="@+id/interestChips"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:cardBackgroundColor="@color/ds_card"
-            app:cardCornerRadius="18dp"
-            app:cardElevation="0dp"
-            app:strokeColor="@color/ds_line"
-            app:strokeWidth="1dp">
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/tutor_topics_title"
+            android:textColor="@color/ds_ink"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/tutor_onboarding_title"
-                    android:textColor="@color/ds_muted"
-                    android:textSize="12sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:id="@+id/onboardingBody"
-                    android:text="@string/tutor_onboarding_body"
-                    android:textColor="@color/ds_body"
-                    android:textSize="14sp" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/topicList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:nestedScrollingEnabled="false" />
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
@@ -87,6 +92,14 @@
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/tutor_custom_label"
+                    android:textColor="#D9D5CA"
+                    android:textSize="13sp" />
 
                 <EditText
                     android:id="@+id/customTopic"

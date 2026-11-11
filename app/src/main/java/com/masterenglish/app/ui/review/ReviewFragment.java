@@ -19,6 +19,8 @@ import com.masterenglish.app.data.local.entity.GrammarEntity;
 import com.masterenglish.app.data.local.entity.ListeningEntity;
 import com.masterenglish.app.data.local.entity.ReadingEntity;
 import com.masterenglish.app.databinding.FragmentReviewBinding;
+import com.masterenglish.app.ui.common.SkeletonView;
+import com.masterenglish.app.ui.common.TabFragment;
 import com.masterenglish.app.ui.redesign.Rows;
 
 import java.util.ArrayList;
@@ -31,7 +33,7 @@ import dagger.hilt.android.AndroidEntryPoint;
  * challenge card and the SRS flashcard entry.
  */
 @AndroidEntryPoint
-public class ReviewFragment extends Fragment {
+public class ReviewFragment extends TabFragment {
 
     private static final int ROWS_PER_SECTION = 3;
 
@@ -61,7 +63,7 @@ public class ReviewFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         binding = FragmentReviewBinding.inflate(inflater, container, false);
-        return binding.getRoot();
+        return withSkeleton(binding.getRoot(), SkeletonView.Variant.SECTIONS);
     }
 
     @Override
@@ -74,8 +76,7 @@ public class ReviewFragment extends Fragment {
         binding.aiCard.setOnClickListener(v ->
                 NavHostFragment.findNavController(this).navigate(R.id.action_review_to_ai));
 
-        viewModel.dueCount().observe(getViewLifecycleOwner(), count ->
-                binding.dueText.setText(getString(R.string.review_due_format, count == null ? 0 : count)));
+        viewModel.dueCount().observe(getViewLifecycleOwner(), this::bindDue);
         viewModel.listening().observe(getViewLifecycleOwner(), items -> {
             listening = items == null ? new ArrayList<>() : items;
             render();
@@ -88,13 +89,48 @@ public class ReviewFragment extends Fragment {
             grammar = items == null ? new ArrayList<>() : items;
             render();
         });
-        render();
+    }
+
+    private void bindDue(Integer count) {
+        if (binding != null) {
+            binding.dueText.setText(getString(R.string.review_due_format, count == null ? 0 : count));
+        }
+    }
+
+    @Override
+    public void onTabHidden() {
+        if (binding == null) {
+            return;
+        }
+        listening = new ArrayList<>();
+        reading = new ArrayList<>();
+        grammar = new ArrayList<>();
+        binding.sectionsContainer.removeAllViews();
+        showSkeleton();
+    }
+
+    @Override
+    public void onTabShown() {
+        if (binding == null) {
+            return;
+        }
+        bindDue(viewModel.dueCount().getValue());
+        List<ListeningEntity> l = viewModel.listening().getValue();
+        List<ReadingEntity> r = viewModel.reading().getValue();
+        List<GrammarEntity> g = viewModel.grammar().getValue();
+        listening = l == null ? new ArrayList<>() : l;
+        reading = r == null ? new ArrayList<>() : r;
+        grammar = g == null ? new ArrayList<>() : g;
+        if (l != null || r != null || g != null) {
+            render();
+        }
     }
 
     private void render() {
         if (binding == null) {
             return;
         }
+        hideSkeleton();
         binding.sectionsContainer.removeAllViews();
 
         List<Item> listeningItems = new ArrayList<>();
@@ -155,7 +191,11 @@ public class ReviewFragment extends Fragment {
             card.addView(empty);
         }
         for (Item item : items.subList(0, Math.min(ROWS_PER_SECTION, items.size()))) {
-            View row = Rows.add(card, item.primary, item.secondary, item.tag, ink, tint, null, null, null);
+            // Status chip as on the Practice artboard: lessons that have not been started yet read "New".
+            int blue = ContextCompat.getColor(requireContext(), R.color.ds_blue);
+            int blueTint = ContextCompat.getColor(requireContext(), R.color.ds_blue_tint);
+            View row = Rows.add(card, item.primary, item.secondary, item.tag, ink, tint,
+                    getString(R.string.practice_status_new), blue, blueTint);
             if (item.onClick != null) {
                 row.setOnClickListener(v -> item.onClick.run());
             }

@@ -55,6 +55,7 @@
                 style="@style/Widget.Material3.Button.TonalButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/ds_chip"
                 android:text="@string/speaking_end"
                 android:textAllCaps="false"
                 android:textColor="@color/ds_ink" />
@@ -112,6 +113,37 @@
                         android:orientation="vertical"
                         android:padding="12dp">
 
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:background="@drawable/bg_ds_circle"
+                            android:contentDescription="@null"
+                            android:padding="9dp"
+                            android:src="@drawable/ic_play"
+                            app:tint="#8A867C" />
+
+                        <com.masterenglish.app.ui.tutor.WaveBarsView
+                            android:id="@+id/waveTutor"
+                            android:layout_width="88dp"
+                            android:layout_height="24dp"
+                            android:layout_marginStart="10dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text="0:08"
+                            android:textColor="#8A867C"
+                            android:textSize="12sp" />
+                    </LinearLayout>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -131,6 +163,37 @@
                     android:orientation="vertical"
                     android:padding="12dp">
 
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:background="@drawable/bg_ds_circle"
+                            android:contentDescription="@null"
+                            android:padding="9dp"
+                            android:src="@drawable/ic_play"
+                            app:tint="#FFFFFF" />
+
+                        <com.masterenglish.app.ui.tutor.WaveBarsView
+                            android:id="@+id/waveLearner"
+                            android:layout_width="88dp"
+                            android:layout_height="24dp"
+                            android:layout_marginStart="10dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text="0:12"
+                            android:textColor="#FFFFFF"
+                            android:textSize="12sp" />
+                    </LinearLayout>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

@@ -16,14 +16,14 @@ nhắc học đúng giờ và có mascot AI đối thoại, chấm lỗi và ghi
   (`mastery_score < 0.6`), luyện nghe có đổi tốc độ và karaoke transcript, luyện đọc có balloon tra từ.
 - **Hồ sơ:** cấp Bronze/Silver/Gold/Diamond, streak, lưới huy hiệu lật 3D, biểu đồ 7 ngày, cài đặt âm
   thanh, giờ nhắc, độ khó AI, đồng bộ và đăng xuất.
-- **Mascot AI (Gemini):** nhập vai thử thách theo điểm yếu, bắt lỗi trực tiếp và ghi vào Weakness Clinic.
+- **Mascot AI (AI Agent qua API Gateway):** nhập vai thử thách theo điểm yếu, bắt lỗi trực tiếp và ghi vào Weakness Clinic.
   Có bộ nhớ dài hạn (mục tiêu, lỗi hay gặp) đưa vào system prompt.
 - **Offline-first:** mọi dữ liệu đọc từ Room. Đồng bộ với máy chủ MySQL chạy nền bằng WorkManager.
 
 ## Công nghệ
 
 Java 17 · Clean Architecture + MVVM · Single Activity với Navigation Component · Hilt · Room (kèm
-converter JSON) · Retrofit 2 + OkHttp 3 · WorkManager · Firebase Auth · Google Gemini REST ·
+converter JSON) · Retrofit 2 + OkHttp 3 · WorkManager · Firebase Auth · AI Agent qua API Gateway ·
 Lottie · Konfetti · MPAndroidChart · SoundPool · AlarmManager (exact) · Gson.
 
 ## Cấu trúc
@@ -31,9 +31,9 @@ Lottie · Konfetti · MPAndroidChart · SoundPool · AlarmManager (exact) · Gso
 | Package | Nội dung |
 | --- | --- |
 | `data/local` | Entity, DAO, `AppDatabase`, `Converters`, `LocalDataSeeder` (nạp 4 file JSON trong `assets/data/`) |
-| `data/remote` | `ApiService` (đồng bộ), `GeminiApi` và DTO |
+| `data/remote` | `ApiService` (đồng bộ), `agent/AgentApi` và DTO |
 | `data/repository` | Repository offline-first cho nội dung, tiến độ, người dùng, AI, xác thực, đồng bộ |
-| `service/ai` | `AiTutorService`, `ChatMemoryManager`, `WeaknessDetector`, `GeminiClient` |
+| `service/ai` | `AiTutorService`, `ChatMemoryManager`, `WeaknessDetector`, `AgentClient` |
 | `service/reminder` | `ReminderScheduler`, `AlarmReceiver`, `NotificationHelper`, `BootReceiver` |
 | `service/sync`, `service/gamification` | `SyncWorker`, `SyncScheduler`, `BadgeEvaluator` |
 | `ui/roadmap`, `ui/lesson`, `ui/review`, `ui/profile`, `ui/auth` | Fragment và ViewModel |
@@ -49,10 +49,17 @@ Lottie · Konfetti · MPAndroidChart · SoundPool · AlarmManager (exact) · Gso
 
 ```properties
 sdk.dir=/path/to/Android/Sdk
-gemini.api.key=YOUR_GEMINI_KEY          # tuỳ chọn, cũng có thể nhập trong Hồ sơ → Cài đặt
-gemini.model=gemini-1.5-flash           # đổi nếu model này đã ngừng hỗ trợ
 api.base.url=https://your-server/api/   # máy chủ MySQL (tuỳ chọn)
 ```
+
+AI Agent (API Gateway): nhà phát triển khai báo trong `local.properties` (đã git-ignore) hoặc biến môi trường khi build CI:
+
+```properties
+agent.gateway.url=https://your-gateway.example.com/v1/agent/chat
+agent.gateway.token=YOUR_SECRET_TOKEN
+```
+
+Hoặc `AGENT_GATEWAY_URL` / `AGENT_GATEWAY_TOKEN` trong môi trường. Giá trị được nhúng vào `BuildConfig` (xem `AgentClient`), nên token nằm trong APK. Chỉ dùng token phạm vi hẹp và có thể thu hồi.
 
 Firebase (Email/Google): đặt `app/google-services.json` và thay `google_web_client_id` trong
 `res/values/strings.xml` bằng Web client ID. Nếu không có file này, app vẫn chạy ở chế độ Học thử.
@@ -81,4 +88,4 @@ Phần máy chủ chưa có trong repo này.
 - Đã build APK debug, 46 unit test pass, lint không có lỗi.
 - Đã kiểm chứng luồng học thử bằng Robolectric và chụp 13 ảnh màn hình.
 - Chưa chạy trên thiết bị hoặc emulator thật.
-- Chưa có máy chủ MySQL và chưa cấu hình Firebase/Gemini trong repo.
+- Chưa có máy chủ MySQL và chưa cấu hình Firebase/API Gateway trong repo.

@@ -25,24 +25,14 @@
                 android:src="@drawable/ic_close"
                 app:tint="@color/neutral_subtext" />
 
-            <ProgressBar
+            <com.masterenglish.app.ui.lesson.SegmentBarView
                 android:id="@+id/progressBar"
-                style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="0dp"
-                android:layout_height="14dp"
+                android:layout_height="10dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:layout_weight="1"
-                android:max="100"
-                android:progressDrawable="@drawable/bg_progress_xp"
-                android:progress="0" />
+                android:layout_weight="1" />
 
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/mascot"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
-                app:lottie_autoPlay="true"
-                app:lottie_loop="false" />
         </LinearLayout>
 
         <ScrollView
@@ -97,7 +87,9 @@
             style="@style/Widget.MasterEnglish.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/lesson_check" />
+            android:backgroundTint="@color/ds_amber"
+            android:text="@string/lesson_check"
+            android:textColor="@color/ds_ink" />
 
         <LinearLayout
             android:id="@+id/resultContainer"

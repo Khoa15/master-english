@@ -16,6 +16,9 @@
         <item name="android:navigationBarColor">@color/white</item>
         <item name="android:textColorPrimary">@color/neutral_text</item>
         <item name="shapeAppearanceSmallComponent">@style/ShapeSmall</item>
+        <!-- Inter, the design's typeface, for every text view. -->
+        <item name="android:fontFamily">@font/inter</item>
+        <item name="fontFamily">@font/inter</item>
     </style>
 
     <style name="ShapeSmall" parent="">
@@ -65,6 +68,23 @@
         <item name="cornerRadius">28dp</item>
         <item name="backgroundTint">@color/onboarding_green</item>
         <item name="android:textColor">@color/white</item>
+    </style>
+
+    <!-- Floating nav: the selected tab is a dark ink disc (design: Roadmap artboard, nav). -->
+    <style name="Widget.MasterEnglish.NavIndicator" parent="">
+        <item name="android:width">44dp</item>
+        <item name="android:height">44dp</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.MasterEnglish.Circle</item>
+        <item name="android:color">@android:color/transparent</item>
+    </style>
+
+    <style name="ShapeAppearance.MasterEnglish.Circle" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="ThemeOverlay.MasterEnglish.GlassNav" parent="ThemeOverlay.Material3.Light">
+        <item name="colorSecondaryContainer">@color/ds_ink</item>
     </style>
 
     <style name="TextAppearance.Onboarding.Title" parent="android:TextAppearance">

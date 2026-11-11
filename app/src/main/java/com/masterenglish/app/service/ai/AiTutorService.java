@@ -26,16 +26,16 @@ import javax.inject.Singleton;
  *   <li>Challenge engine: role-play prompts aimed at the learner's weak tags.</li>
  *   <li>Direct error catching: each reply is checked, tagged and written to user_weaknesses.</li>
  * </ul>
- * Without a Gemini key the service answers offline with a helpful notice instead.
+ * Until the AI Agent gateway is configured in Settings, the service answers offline with a helpful notice.
  */
 @Singleton
 public class AiTutorService {
 
     private static final String CHALLENGE_REQUEST = "Start a short role-play challenge in a work setting (IT team, "
             + "interview or meeting). Target my weak points: %s. Ask me one question and wait for my answer.";
-    private static final String NO_KEY_REPLY = "Mascot đang ngủ vì chưa có Gemini API key. "
-            + "Thêm key trong Hồ sơ → Cài đặt để bật trò chuyện AI.";
-    private static final String OFFLINE_REPLY = "Mình chưa kết nối được tới Gemini. Bạn thử lại sau nhé!";
+    private static final String NO_KEY_REPLY = "Mascot đang ngủ vì AI Agent chưa được cấu hình. "
+            + "Nhà phát triển cần khai báo agent.gateway.url và agent.gateway.token.";
+    private static final String OFFLINE_REPLY = "Mình chưa kết nối được tới AI Agent. Bạn thử lại sau nhé!";
 
     /** Result of one AI turn. */
     public static final class Evaluation {
@@ -63,16 +63,16 @@ public class AiTutorService {
     }
 
     private final ChatMemoryManager memoryManager;
-    private final GeminiClient gemini;
+    private final AgentClient agent;
     private final AiRepository aiRepository;
     private final ProgressRepository progressRepository;
     private final AppExecutors executors;
 
     @Inject
-    public AiTutorService(ChatMemoryManager memoryManager, GeminiClient gemini, AiRepository aiRepository,
+    public AiTutorService(ChatMemoryManager memoryManager, AgentClient agent, AiRepository aiRepository,
                           ProgressRepository progressRepository, AppExecutors executors) {
         this.memoryManager = memoryManager;
-        this.gemini = gemini;
+        this.agent = agent;
         this.aiRepository = aiRepository;
         this.progressRepository = progressRepository;
         this.executors = executors;
@@ -108,7 +108,7 @@ public class AiTutorService {
     }
 
     private Evaluation runTurn(String userId, String userText, String learnerSentence) {
-        if (!gemini.hasApiKey()) {
+        if (!agent.isConfigured()) {
             return new Evaluation(NO_KEY_REPLY, "", new ArrayList<>());
         }
         String sessionId = aiRepository.ensureSessionNow(userId);
@@ -116,7 +116,7 @@ public class AiTutorService {
             aiRepository.saveMessageNow(message(sessionId, Sender.USER, learnerSentence, null));
         }
         try {
-            String raw = gemini.generate(memoryManager.buildSystemPrompt(userId), userText);
+            String raw = agent.generate(memoryManager.buildSystemPrompt(userId), userText);
             Evaluation evaluation = parse(raw);
             for (Mistake mistake : evaluation.mistakes) {
                 progressRepository.recordMistake(userId, WeaknessDetector.normalizeTag(mistake.tag), mistake.skill);

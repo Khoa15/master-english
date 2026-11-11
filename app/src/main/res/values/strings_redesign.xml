@@ -30,6 +30,14 @@
     <string name="tutor_custom_title">Create your own practice</string>
     <string name="tutor_custom_hint">e.g. Ask a hotel receptionist about late check-out</string>
     <string name="tutor_start_speaking">Start speaking</string>
+    <string name="tutor_topics_title">Speaking topics</string>
+    <string name="profile_cefr_title">CEFR SCALE</string>
+    <string name="practice_status_new">New</string>
+    <string name="profile_skills_title">Skill levels</string>
+    <string name="profile_errors_title">Grammar errors</string>
+    <string name="profile_strong_title">Strongest</string>
+    <string name="profile_weak_title">Needs work</string>
+    <string name="tutor_custom_label">Describe a situation</string>
 
     <!-- Topic detail -->
 
@@ -100,6 +108,8 @@
     <string name="skill_recent_title">Recent mistakes</string>
     <string name="skill_mistake_count">%1$d mistakes</string>
     <string name="skill_none">Nothing here yet</string>
+    <string name="skill_summary_format">You are working at %1$s.</string>
+    <string name="skill_next_label">%1$d%% to %2$s</string>
     <string name="practice_subtitle">Fix your gaps and try new lessons at your level.</string>
     <string name="practice_section_listening">Listening</string>
     <string name="practice_section_reading">Reading</string>

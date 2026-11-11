@@ -7,7 +7,7 @@
     <!-- Main tabs (BottomNavigationView) -->
     <fragment
         android:id="@+id/roadmapFragment"
-        android:name="com.masterenglish.app.ui.roadmap.RoadmapFragment"
+        android:name="com.masterenglish.app.ui.common.TabPlaceholderFragment"
         android:label="@string/nav_tab_roadmap">
         <action
             android:id="@+id/action_roadmap_to_lesson"
@@ -16,7 +16,7 @@
 
     <fragment
         android:id="@+id/reviewFragment"
-        android:name="com.masterenglish.app.ui.review.ReviewFragment"
+        android:name="com.masterenglish.app.ui.common.TabPlaceholderFragment"
         android:label="@string/nav_tab_practice">
         <action
             android:id="@+id/action_review_to_flashcards"
@@ -37,7 +37,7 @@
 
     <fragment
         android:id="@+id/tutorFragment"
-        android:name="com.masterenglish.app.ui.tutor.TutorFragment"
+        android:name="com.masterenglish.app.ui.common.TabPlaceholderFragment"
         android:label="@string/nav_tab_tutor">
         <action
             android:id="@+id/action_tutor_to_speaking"
@@ -46,7 +46,7 @@
 
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.masterenglish.app.ui.profile.ProfileFragment"
+        android:name="com.masterenglish.app.ui.common.TabPlaceholderFragment"
         android:label="@string/nav_tab_profile">
         <action
             android:id="@+id/action_profile_to_auth"
@@ -56,6 +56,20 @@
         <action
             android:id="@+id/action_profile_to_skill"
             app:destination="@id/skillDetailFragment" />
+        <action
+            android:id="@+id/action_profile_to_settings"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.masterenglish.app.ui.settings.SettingsFragment"
+        android:label="@string/settings_title">
+        <action
+            android:id="@+id/action_settings_to_auth"
+            app:destination="@id/authFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <!-- Flows outside the tabs -->

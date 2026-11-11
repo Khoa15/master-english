@@ -7,6 +7,19 @@
     android:paddingTop="14dp"
     android:paddingBottom="14dp">
 
+    <TextView
+        android:id="@+id/stageHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/bg_ds_pill"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="4dp"
+        android:textColor="@color/ds_ink"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
     <FrameLayout
         android:id="@+id/nodeCircle"
         android:layout_width="@dimen/node_size"
@@ -59,4 +72,13 @@
         android:textColor="@color/neutral_text"
         android:textSize="13sp"
         android:textStyle="bold" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/nodeActionButton"
+        style="@style/Widget.MasterEnglish.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:minWidth="140dp"
+        android:visibility="gone" />
 </LinearLayout>

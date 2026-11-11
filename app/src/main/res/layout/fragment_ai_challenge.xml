@@ -31,13 +31,6 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/mascot"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            app:lottie_rawRes="@raw/mascot_wave" />
     </LinearLayout>
 
     <com.google.android.material.button.MaterialButton

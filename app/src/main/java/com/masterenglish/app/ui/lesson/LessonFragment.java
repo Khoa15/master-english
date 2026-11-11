@@ -17,7 +17,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.airbnb.lottie.LottieDrawable;
 import com.masterenglish.app.R;
 import com.masterenglish.app.data.local.entity.LessonQuestionEntity;
 import com.masterenglish.app.data.repository.LessonReward;
@@ -129,8 +128,7 @@ public class LessonFragment extends Fragment {
         binding.feedbackCard.setVisibility(View.GONE);
         binding.actionButton.setText(R.string.lesson_check);
         binding.actionButton.setEnabled(false);
-        AnimationUtils.tweenProgress(binding.progressBar, Math.round(100f * position / questions.size()));
-        playMascot(R.raw.mascot_wave, false);
+        binding.progressBar.setSteps(questions.size(), position);
     }
 
     /** Reorder and matching widgets report their initial state from their constructor, before {@code current} is set. */
@@ -156,12 +154,10 @@ public class LessonFragment extends Fragment {
 
         if (correct) {
             soundManager.play(SoundManager.Effect.DING);
-            playMascot(R.raw.mascot_celebrate, false);
         } else {
             soundManager.play(SoundManager.Effect.BUZZ_ERROR);
             Haptics.lightBuzz(requireContext());
             AnimationUtils.shake(binding.questionContainer);
-            playMascot(R.raw.mascot_thinking, true);
             current.reveal(QuestionModels.correctAnswer(currentQuestion));
         }
         binding.actionButton.setText(R.string.lesson_continue);
@@ -184,13 +180,12 @@ public class LessonFragment extends Fragment {
             return;
         }
         binding.actionButton.setVisibility(View.GONE);
-        binding.progressBar.setProgress(100);
+        binding.progressBar.setSteps(questions.size(), questions.size());
         binding.resultContainer.setVisibility(View.VISIBLE);
         binding.resultTitle.setText(R.string.lesson_result_title);
         binding.resultStats.setText(getString(R.string.lesson_result_stats,
                 viewModel.correctCount(), questions.size(), reward.experience, reward.gems));
         binding.resultButton.setVisibility(View.VISIBLE);
-        playMascot(R.raw.mascot_celebrate, false);
         soundManager.play(reward.firstCompletion ? SoundManager.Effect.VICTORY : SoundManager.Effect.LEVEL_UP);
         celebrate();
         if (!reward.newBadges.isEmpty()) {
@@ -210,12 +205,6 @@ public class LessonFragment extends Fragment {
                 .timeToLive(3000L)
                 .build();
         binding.konfettiView.start(party);
-    }
-
-    private void playMascot(int rawRes, boolean once) {
-        binding.mascot.setAnimation(rawRes);
-        binding.mascot.setRepeatCount(once ? 0 : com.airbnb.lottie.LottieDrawable.INFINITE);
-        binding.mascot.playAnimation();
     }
 
     private void confirmExit() {

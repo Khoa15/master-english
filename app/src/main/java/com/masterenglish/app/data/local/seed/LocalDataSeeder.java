@@ -51,6 +51,8 @@ public class LocalDataSeeder {
     }
 
     public synchronized void seedIfEmpty() {
+        // Badges are idempotent (IGNORE on conflict) and must exist even when content was seeded by an older build.
+        database.badgeDao().insertBadges(ContentBuilder.badgeCatalogue());
         ContentDao content = database.contentDao();
         if (content.countVocabulary() > 0) {
             return;
@@ -79,7 +81,6 @@ public class LocalDataSeeder {
         content.insertReading(bundle.reading);
         content.insertListening(bundle.listening);
         content.insertQuestions(bundle.questions);
-        database.badgeDao().insertBadges(bundle.badges);
     }
 
     private <T> T read(String fileName, TypeToken<T> type) throws IOException {

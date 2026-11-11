@@ -14,8 +14,8 @@ import javax.inject.Singleton;
 import dagger.hilt.android.qualifiers.ApplicationContext;
 
 /**
- * Small device-level state: who is signed in, onboarding answers and the optional
- * Gemini key entered in Settings. Learner data itself lives in Room.
+ * Small device-level state: who is signed in, onboarding answers and reminder settings.
+ * Learner data itself lives in Room.
  */
 @Singleton
 public class AppPreferences {
@@ -24,7 +24,8 @@ public class AppPreferences {
     private static final String KEY_USER_ID = "current_user_id";
     private static final String KEY_ONBOARDED = "onboarding_done";
     private static final String KEY_ONBOARDING_ANSWERS = "onboarding_answers";
-    private static final String KEY_GEMINI_KEY = "gemini_api_key";
+    /** Legacy plain-text Gemini key from earlier builds; removed on startup, never read again. */
+    private static final String LEGACY_GEMINI_KEY = "gemini_api_key";
     private static final String KEY_LAST_SYNC = "last_sync_at";
     private static final String KEY_REMINDER_ENABLED = "reminder_enabled";
     private static final String KEY_REMINDER_HOUR = "reminder_hour";
@@ -36,6 +37,8 @@ public class AppPreferences {
     @Inject
     public AppPreferences(@ApplicationContext Context context) {
         this.prefs = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE);
+        // Drop the plain-text key left by earlier builds so it does not linger on the device.
+        prefs.edit().remove(LEGACY_GEMINI_KEY).apply();
     }
 
     @Nullable
@@ -63,15 +66,6 @@ public class AppPreferences {
     public OnboardingAnswers getOnboardingAnswers() {
         String json = prefs.getString(KEY_ONBOARDING_ANSWERS, null);
         return json == null ? null : gson.fromJson(json, OnboardingAnswers.class);
-    }
-
-    @Nullable
-    public String getGeminiApiKey() {
-        return prefs.getString(KEY_GEMINI_KEY, null);
-    }
-
-    public void setGeminiApiKey(@Nullable String key) {
-        prefs.edit().putString(KEY_GEMINI_KEY, key == null || key.trim().isEmpty() ? null : key.trim()).apply();
     }
 
     public long getLastSyncAt() {

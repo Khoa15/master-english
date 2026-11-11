@@ -28,4 +28,9 @@
     <color name="onboarding_line">#E4DDD2</color>
     <color name="onboarding_green">#2F6F5E</color>
     <color name="onboarding_green_soft">#E6EFEB</color>
+
+    <!-- Badges: locked badges are a dark grey silhouette -->
+    <color name="badge_locked_bg">#3A3A3F</color>
+    <color name="badge_locked_text">#B5B5BB</color>
+    <color name="badge_locked_sub">#8A8A91</color>
 </resources>

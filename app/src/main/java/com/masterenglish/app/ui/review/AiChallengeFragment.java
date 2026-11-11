@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.airbnb.lottie.LottieDrawable;
 import com.masterenglish.app.R;
 import com.masterenglish.app.databinding.FragmentAiChallengeBinding;
 
@@ -56,9 +55,6 @@ public class AiChallengeFragment extends Fragment {
         viewModel.thinking().observe(getViewLifecycleOwner(), busy -> {
             binding.thinkingText.setVisibility(Boolean.TRUE.equals(busy) ? View.VISIBLE : View.GONE);
             binding.sendButton.setEnabled(!Boolean.TRUE.equals(busy));
-            binding.mascot.setAnimation(Boolean.TRUE.equals(busy) ? R.raw.mascot_thinking : R.raw.mascot_wave);
-            binding.mascot.setRepeatCount(LottieDrawable.INFINITE);
-            binding.mascot.playAnimation();
         });
     }
 

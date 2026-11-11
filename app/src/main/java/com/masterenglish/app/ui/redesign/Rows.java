@@ -41,7 +41,17 @@ public final class Rows {
             if (markInk != null) {
                 b.mark.setTextColor(markInk);
             }
-            if (markTint != null) {
+            if (mark.length() > 2) {
+                // Words such as "New" need a pill, not the 26dp circle used for symbols.
+                android.view.ViewGroup.LayoutParams lp = b.mark.getLayoutParams();
+                lp.width = android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
+                b.mark.setLayoutParams(lp);
+                int padH = Math.round(10 * container.getResources().getDisplayMetrics().density);
+                b.mark.setPadding(padH, 0, padH, 0);
+                if (markTint != null) {
+                    b.mark.setBackground(pill(markTint));
+                }
+            } else if (markTint != null) {
                 b.mark.setBackground(circle(markTint));
             }
         }

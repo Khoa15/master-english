@@ -27,8 +27,14 @@
     <string name="onboard_start_learning">Start learning</string>
 
     <string name="onboard_who_title">Who are you?</string>
-    <string name="onboard_who_body">Tell us your name and which best describes you.</string>
-    <string name="onboard_name_hint">Your first name</string>
+    <string name="onboard_who_body">Tell us which best describes you.</string>
+    <string name="lang_vietnamese">Tiếng Việt</string>
+    <string name="lang_english">English</string>
+    <string name="lang_japanese">日本語</string>
+    <string name="lang_korean">한국어</string>
+    <string name="lang_chinese">中文</string>
+    <string name="onboard_language_title">Choose your language</string>
+    <string name="onboard_language_body">Pick the language you want the app to use. You can change it later.</string>
     <string name="onboard_role_student">Student</string>
     <string name="onboard_role_professional">Working professional</string>
     <string name="onboard_role_teacher">Teacher</string>
@@ -107,6 +113,8 @@
     <string name="roadmap_mascot_tip">Owl tip</string>
     <string name="roadmap_streak_format">%d days</string>
     <string name="lesson_start">START</string>
+    <string name="roadmap_action_practice">Practice</string>
+    <string name="roadmap_action_challenge">Challenge</string>
     <string name="lesson_preview_hint">This lesson has multiple choice, fill-in-the-blank, matching, reordering and speaking questions.</string>
 
     <!-- Lesson -->
@@ -173,8 +181,6 @@
     <string name="profile_notifications">Daily reminder</string>
     <string name="profile_reminder_time">Reminder time: %s</string>
     <string name="profile_ai_difficulty">AI challenge difficulty</string>
-    <string name="profile_gemini_key">Gemini API key (optional)</string>
-    <string name="profile_save">Save</string>
     <string name="profile_sync_now">Sync now</string>
     <string name="profile_sync_started">Syncing with the server…</string>
     <string name="profile_saved">Saved</string>
@@ -190,7 +196,6 @@
     <string name="profile_sign_out_done">Signed out</string>
     <string name="profile_sync_done">Sync complete</string>
     <string name="profile_notification_denied">Allow notifications to receive reminders.</string>
-    <string name="profile_key_hint">Paste your API key from Google AI Studio</string>
     <string name="profile_badge_condition_prefix">How to unlock: </string>
     <string name="profile_reminder_time_title">Pick a reminder time</string>
     <string name="profile_guest_note">You\'re in guest mode. Sign in to sync your progress to the server.</string>
@@ -198,4 +203,14 @@
     <string name="profile_minutes_5">5 min</string>
     <string name="profile_minutes_10">10 min</string>
     <string name="profile_minutes_15">15 min</string>
+
+    <!-- Settings page -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_section_reminders">Reminders and sound</string>
+    <string name="settings_section_ai">AI Mascot</string>
+    <string name="settings_section_account">Account</string>
+    <string name="profile_settings_row">Settings</string>
+    <string name="profile_settings_row_hint">Reminders, goals, AI Agent and account</string>
+    <string name="profile_streak_title">Streak and study time</string>
+    <string name="profile_badges_count">%1$d / %2$d unlocked</string>
 </resources>

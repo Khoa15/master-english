@@ -47,6 +47,9 @@ public interface ContentDao {
     @Query("SELECT * FROM roadmap_stages ORDER BY stage_number ASC")
     List<RoadmapStageEntity> getAllStages();
 
+    @Query("SELECT * FROM roadmap_stages ORDER BY stage_number ASC")
+    LiveData<List<RoadmapStageEntity>> observeStages();
+
     // ----- Vocabulary ----------------------------------------------------
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

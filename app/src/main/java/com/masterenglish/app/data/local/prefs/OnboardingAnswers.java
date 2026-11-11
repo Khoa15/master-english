@@ -9,7 +9,8 @@ import java.util.List;
  */
 public class OnboardingAnswers {
 
-    public String name = "";
+    /** Display language picked on the first screen. Empty until the learner chooses one. */
+    public String language = "";
     public String role = "Student";
     public String ageRange = "25 - 34";
     public String goal = "Advance my career";

@@ -4,14 +4,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/nav_host"
-        android:name="androidx.navigation.fragment.NavHostFragment"
+    <!-- Content: the four main tabs live in tab_container (kept alive, only shown or hidden); the
+         NavHost on top holds every other screen and an empty placeholder for the tabs. -->
+    <FrameLayout
+        android:id="@+id/content_root"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:defaultNavHost="true"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_nav"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/tab_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/nav_host"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:defaultNavHost="true" />
+    </FrameLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/vocabFab"
@@ -25,18 +38,30 @@
         app:fabSize="normal"
         app:layout_constraintBottom_toTopOf="@+id/bottom_nav"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_skill_vocab"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.MasterEnglish.Circle"
+        app:srcCompat="@drawable/ic_vocab_book"
         app:tint="@color/ds_ink" />
 
+    <!-- Floating glass pill: compact, icons only, sits above the content. -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        app:itemIconTint="@color/brand_green"
-        app:itemTextColor="@color/neutral_text"
-        app:labelVisibilityMode="labeled"
+        android:layout_width="216dp"
+        android:layout_height="58dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/bg_nav_glass"
+        android:elevation="0dp"
+        android:theme="@style/ThemeOverlay.MasterEnglish.GlassNav"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="6dp"
+        app:elevation="0dp"
+        app:itemActiveIndicatorStyle="@style/Widget.MasterEnglish.NavIndicator"
+        app:itemBackground="@drawable/bg_nav_active"
+        app:itemIconSize="22dp"
+        app:itemIconTint="@color/nav_item_tint"
+        app:labelVisibilityMode="unlabeled"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_nav_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
