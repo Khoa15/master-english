@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="brand_green">#58CC02</color>
+    <color name="brand_green_dark">#46A302</color>
+    <color name="brand_green_light">#D7FFB8</color>
+    <color name="accent_gold">#FFC800</color>
+    <color name="accent_gold_dark">#E5A500</color>
+    <color name="accent_blue">#1CB0F6</color>
+    <color name="accent_blue_dark">#1899D6</color>
+    <color name="accent_purple">#CE82FF</color>
+    <color name="accent_purple_dark">#A568CC</color>
+    <color name="accent_orange">#FF9600</color>
+    <color name="danger_red">#FF4B4B</color>
+    <color name="danger_red_light">#FFDFE0</color>
+    <color name="neutral_text">#3C3C3C</color>
+    <color name="neutral_subtext">#777777</color>
+    <color name="neutral_bg">#F7F7F7</color>
+    <color name="neutral_border">#E5E5E5</color>
+    <color name="neutral_locked">#E5E5E5</color>
+    <color name="neutral_locked_dark">#CFCFCF</color>
+    <color name="white">#FFFFFF</color>
+    <color name="owl_body">#1CB0F6</color>
+</resources>

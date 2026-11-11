@@ -1,0 +1,866 @@
+[
+  {
+    "id": "gram_001",
+    "topic": "Verb 'to be' for Self-Introductions",
+    "cefr_level": "A1",
+    "domain": "IT / Self-Introduction",
+    "explanation_vi": "Động từ 'to be' (am/is/are) dùng để nói tên, nghề nghiệp và quê quán.",
+    "formula": "Subject + am/is/are + noun/adjective",
+    "usage_context": "Dùng khi giới thiệu tên, vị trí công việc của bản thân và đồng nghiệp.",
+    "examples": [
+      {
+        "en": "I am a tester.",
+        "vi": "Tôi là nhân viên kiểm thử."
+      },
+      {
+        "en": "She is from Da Nang. She is a developer.",
+        "vi": "Cô ấy đến từ Đà Nẵng. Cô ấy là lập trình viên."
+      }
+    ],
+    "common_mistakes": {
+      "incorrect": "I developer.",
+      "correct": "I am a developer.",
+      "reason_vi": "Tiếng Anh cần động từ 'to be' và mạo từ 'a' trước danh từ chỉ nghề nghiệp số ít."
+    }
+  },
+  {
+    "id": "gram_002",
+    "topic": "Present Simple for Daily Work",
+    "cefr_level": "A1",
+    "domain": "IT / Workplace",
+    "explanation_vi": "Thì hiện tại đơn diễn tả thói quen và công việc lặp lại hằng ngày. Ngôi thứ ba số ít thêm -s/-es.",
+    "formula": "Subject + V(s/es) + object",
+    "usage_context": "Dùng để mô tả công việc hằng ngày.",
+    "examples": [
+      {
+        "en": "I write code every day.",
+        "vi": "Tôi viết mã mỗi ngày."
+      },
+      {
+        "en": "He works in a small team.",
+        "vi": "Anh ấy làm việc trong một nhóm nhỏ."
+      }
+    ],
+    "common_mistakes": {
+      "incorrect": "She work at a bank.",
+      "correct": "She works at a bank.",
+      "reason_vi": "Chủ ngữ ngôi thứ ba số ít phải thêm -s vào động từ."
+    }
+  },
+  {
+    "id": "gram_003",
+    "topic": "Possessive Adjectives",
+    "cefr_level": "A1",
+    "domain": "IT / Self-Introduction",
+    "explanation_vi": "Tính từ sở hữu (my, your, his, her, our, their) đứng trước danh từ để chỉ quyền sở hữu.",
+    "formula": "my/your/his/her/our/their + noun",
+    "usage_context": "Dùng khi nói về tên, nhóm, công ty của mình.",
+    "examples": [
+      {
+        "en": "My name is Linh.",
+        "vi": "Tên tôi là Linh."
+      },
+      {
+        "en": "Our office is small.",
+        "vi": "Văn phòng của chúng tôi nhỏ."
+      }
+    ],
+    "common_mistakes": {
+      "incorrect": "Name my is Nam.",
+      "correct": "My name is Nam.",
+      "reason_vi": "Tính từ sở hữu đứng trước danh từ, khác với trật tự trong tiếng Việt."
+    }
+  },
+  {
+    "id": "gram_004",
+    "topic": "There is / There are",
+    "cefr_level": "A1",
+    "domain": "IT / Workplace",
+    "explanation_vi": "Dùng để nói một vật hoặc người tồn tại ở đâu đó. 'There is' đi với số ít, 'There are' đi với số nhiều.",
+    "formula": "There is + singular noun / There are + plural noun",
+    "usage_context": "Dùng để mô tả văn phòng, nhóm hoặc số lượng thiết bị.",
+    "examples": [
+      {
+        "en": "There is a computer on the desk.",
+        "vi": "Có một máy tính trên bàn."
+      },
+      {
+        "en": "There are six people in my team.",
+        "vi": "Có sáu người trong nhóm của tôi."
+      }
+    ],
+    "common_mistakes": {
+      "incorrect": "It has two servers in the room.",
+      "correct": "There are two servers in the room.",
+      "reason_vi": "Người Việt hay dịch 'có' thành 'has'; để nói sự tồn tại phải dùng 'there is/are'."
+    }
+  },
+  {
+    "id": "gram_005",
+    "topic": "Can for Ability",
+    "cefr_level": "A1",
+    "domain": "IT / Self-Introduction",
+    "explanation_vi": "'Can' diễn tả khả năng. Sau 'can' là động từ nguyên mẫu không 'to'.",
+    "formula": "Subject + can/can't + base verb",
+    "usage_context": "Dùng để nói về những kỹ năng bạn có hoặc không có.",
+    "examples": [
+      {
+        "en": "I can use Python.",
+        "vi": "Tôi biết dùng Python."
+      },
+      {
+        "en": "He can't speak Japanese.",
+        "vi": "Anh ấy không biết nói tiếng Nhật."
+      }
+    ],
+    "common_mistakes": {
+      "incorrect": "I can to write HTML.",
+      "correct": "I can write HTML.",
+      "reason_vi": "Sau động từ khuyết thiếu 'can' không dùng 'to'."
+    }
+  },
+  {
+    "id": "gram_006",
+    "topic": "Yes/No Questions with Do and Does",
+    "cefr_level": "A1",
+    "domain": "IT Job Interview",
+    "explanation_vi": "Câu hỏi Yes/No ở hiện tại đơn dùng trợ động từ Do/Does; động từ chính giữ nguyên mẫu.",
+    "formula": "Do/Does + subject + base verb?",
+    "usage_context": "Dùng để hỏi đáp đơn giản về công việc.",
+    "examples": [
+      {
+        "en": "Do you use Git?",
+        "vi": "Bạn có dùng Git không?"
+      },
+      {
+        "en": "Does she work from home?",
+        "vi": "Cô ấy có làm việc tại nhà không?"
+      }
+    ],
+    "common_mistakes": {
+      "incorrect": "Does he works here?",
+      "correct": "Does he work here?",
+      "reason_vi": "Khi đã có 'does', động từ chính trở về nguyên mẫu."
+    }
+  },
+  {
+    "id": "gram_007",
+    "topic": "Past Simple for Past Work",
+    "cefr_level": "A2",
+    "domain": "IT / Self-Introduction",
+    "explanation_vi": "Thì quá khứ đơn diễn tả hành động đã kết thúc tại một thời điểm xác định trong quá khứ.",
+    "formula": "Subject + V2/ed + object + past time",
+    "usage_context": "Dùng để kể về công việc trước đây hoặc sự cố đã xảy ra.",
+    "examples": [
+      {
+        "en": "I finished university in 2022.",
+        "vi": "Tôi tốt nghiệp đại học năm 2022."
+      },
+      {
+        "en": "We fixed the bug yesterday.",
+        "vi": "Hôm qua chúng tôi đã sửa lỗi đó."
+      }
+    ],
+    "common_mistakes": {
+      "incorrect": "I work there in 2021.",
+      "correct": "I worked there in 2021.",
+      "reason_vi": "Mốc thời gian quá khứ yêu cầu động từ chia ở quá khứ đơn."
+    }
+  },
+  {
+    "id": "gram_008",
+    "topic": "Present Continuous for Current Projects",
+    "cefr_level": "A2",
+    "domain": "IT / Workplace",
+    "explanation_vi": "Thì hiện tại tiếp diễn diễn tả việc đang xảy ra hoặc đang làm trong giai đoạn này.",
+    "formula": "Subject + am/is/are + V-ing",
+    "usage_context": "Dùng để báo cáo công việc đang làm trong buổi họp hằng ngày.",
+    "examples": [
+      {
+        "en": "I am working on the login page.",
+        "vi": "Tôi đang làm trang đăng nhập."
+      },
+      {
+        "en": "They are testing the new app this week.",
+        "vi": "Tuần này họ đang kiểm thử ứng dụng mới."
+      }
+    ],
+    "common_mistakes": {
+      "incorrect": "I working on a new feature.",
+      "correct": "I am working on a new feature.",
+      "reason_vi": "Thì tiếp diễn bắt buộc có 'am/is/are' trước V-ing."
+    }
+  },
+  {
+    "id": "gram_009",
+    "topic": "Comparatives",
+    "cefr_level": "A2",
+    "domain": "IT / Workplace",
+    "explanation_vi": "So sánh hơn: tính từ ngắn thêm -er, tính từ dài dùng 'more', và theo sau là 'than'.",
+    "formula": "adjective-er / more + adjective + than",
+    "usage_context": "Dùng để so sánh công cụ, thiết bị hoặc tốc độ.",
+    "examples": [
+      {
+        "en": "This server is faster than the old one.",
+        "vi": "Máy chủ này nhanh hơn máy cũ."
+      },
+      {
+        "en": "Python is easier than C++ for beginners.",
+        "vi": "Với người mới, Python dễ hơn C++."
+      }
+    ],
+    "common_mistakes": {
+      "incorrect": "This tool is more fast than that one.",
+      "correct": "This tool is faster than that one.",
+      "reason_vi": "Tính từ ngắn một âm tiết như 'fast' thêm -er, không dùng 'more'."
+    }
+  },
+  {
+    "id": "gram_010",
+    "topic": "Be Going To for Plans",
+    "cefr_level": "A2",
+    "domain": "IT / Workplace",
+    "explanation_vi": "'Be going to' diễn tả kế hoạch đã dự định trong tương lai.",
+    "formula": "Subject + am/is/are + going to + base verb",
+    "usage_context": "Dùng để nói về kế hoạch phát hành và học tập.",
+    "examples": [
+      {
+        "en": "We are going to update the app next week.",
+        "vi": "Tuần sau chúng tôi sẽ cập nhật ứng dụng."
+      },
+      {
+        "en": "I am going to learn Docker this year.",
+        "vi": "Năm nay tôi sẽ học Docker."
+      }
+    ],
+    "common_mistakes": {
+      "incorrect": "I going to install it.",
+      "correct": "I am going to install it.",
+      "reason_vi": "Không được bỏ 'am/is/are' trong cấu trúc 'be going to'."
+    }
+  },
+  {
+    "id": "gram_011",
+    "topic": "Uncountable Nouns in IT",
+    "cefr_level": "A2",
+    "domain": "IT / Technical Writing",
+    "explanation_vi": "Các từ như software, hardware, information, advice là danh từ không đếm được, không có dạng số nhiều và không đi với 'a/an'.",
+    "formula": "some/a lot of/much + uncountable noun",
+    "usage_context": "Dùng khi nói về phần mềm, thông tin và lời khuyên.",
+    "examples": [
+      {
+        "en": "We need some new software.",
+        "vi": "Chúng tôi cần một số phần mềm mới."
+      },
+      {
+        "en": "Can you give me some information about the job?",
+        "vi": "Bạn có thể cho tôi một vài thông tin về công việc không?"
+      }
+    ],
+    "common_mistakes": {
+      "incorrect": "I installed many softwares.",
+      "correct": "I installed a lot of software.",
+      "reason_vi": "'Software' không đếm được nên không thêm -s và không dùng với 'many'."
+    }
+  },
+  {
+    "id": "gram_012",
+    "topic": "Have To and Must for Rules",
+    "cefr_level": "A2",
+    "domain": "IT / Workplace",
+    "explanation_vi": "'Must' và 'have to' diễn tả sự bắt buộc. 'Don't have to' nghĩa là không cần, còn 'mustn't' nghĩa là bị cấm.",
+    "formula": "Subject + must/have to + base verb",
+    "usage_context": "Dùng để nêu quy định về bảo mật và quy trình trong nhóm.",
+    "examples": [
+      {
+        "en": "You must change your password every three months.",
+        "vi": "Bạn phải đổi mật khẩu ba tháng một lần."
+      },
+      {
+        "en": "You don't have to come to the office on Friday.",
+        "vi": "Thứ Sáu bạn không cần đến văn phòng."
+      }
+    ],
+    "common_mistakes": {
+      "incorrect": "She have to finish it today.",
+      "correct": "She has to finish it today.",
+      "reason_vi": "Ngôi thứ ba số ít dùng 'has to'."
+    }
+  },
+  {
+    "id": "gram_013",
+    "topic": "Passive Voice in Technical Documentation",
+    "cefr_level": "B1",
+    "domain": "IT / Technical Writing",
+    "explanation_vi": "Thể bị động được sử dụng rộng rãi trong tài liệu kỹ thuật và mô tả kiến trúc.",
+    "formula": "Subject + to be + Past Participle (V3/ed) + (by agent)",
+    "usage_context": "Dùng khi mô tả luồng dữ liệu, cấu hình hệ thống hoặc quy trình CI/CD.",
+    "examples": [
+      {
+        "en": "The Docker container is deployed automatically via GitHub Actions.",
+        "vi": "Container Docker được triển khai tự động thông qua GitHub Actions."
+      },
+      {
+        "en": "User passwords are stored as salted hashes.",
+        "vi": "Mật khẩu người dùng được lưu dưới dạng băm có thêm salt."
+      }
+    ],
+    "common_mistakes": {
+      "incorrect": "The database deployed by the script.",
+      "correct": "The database was deployed by the script.",
+      "reason_vi": "Thiếu động từ 'to be' trong cấu trúc bị động."
+    }
+  },
+  {
+    "id": "gram_014",
+    "topic": "Present Perfect for Experience",
+    "cefr_level": "B1",
+    "domain": "IT / Self-Introduction",
+    "explanation_vi": "Thì hiện tại hoàn thành nối quá khứ với hiện tại, thường dùng để nói về kinh nghiệm với 'for' và 'since'.",
+    "formula": "Subject + have/has + V3/ed + (for/since)",
+    "usage_context": "Dùng trong phần giới thiệu kinh nghiệm khi phỏng vấn.",
+    "examples": [
+      {
+        "en": "I have worked as a QA engineer for four years.",
+        "vi": "Tôi đã làm kỹ sư QA được bốn năm."
+      },
+      {
+        "en": "She has used AWS since 2021.",
+        "vi": "Cô ấy đã dùng AWS từ năm 2021."
+      }
+    ],
+    "common_mistakes": {
+      "incorrect": "I work here since 2020.",
+      "correct": "I have worked here since 2020.",
+      "reason_vi": "Hành động bắt đầu trong quá khứ và còn tiếp diễn cần thì hiện tại hoàn thành."
+    }
+  },
+  {
+    "id": "gram_015",
+    "topic": "First Conditional for System Behaviour",
+    "cefr_level": "B1",
+    "domain": "IT / Technical Writing",
+    "explanation_vi": "Câu điều kiện loại 1 diễn tả điều có thể xảy ra và kết quả của nó, rất phổ biến khi mô tả hành vi phần mềm.",
+    "formula": "If + present simple, will/can + base verb",
+    "usage_context": "Dùng để mô tả xử lý lỗi và các trường hợp đầu vào.",
+    "examples": [
+      {
+        "en": "If the token expires, the user will be logged out.",
+        "vi": "Nếu token hết hạn, người dùng sẽ bị đăng xuất."
+      },
+      {
+        "en": "If the request fails, the app will try again.",
+        "vi": "Nếu yêu cầu thất bại, ứng dụng sẽ thử lại."
+      }
+    ],
+    "common_mistakes": {
+      "incorrect": "If the build will fail, we will get an alert.",
+      "correct": "If the build fails, we will get an alert.",
+      "reason_vi": "Mệnh đề 'if' loại 1 dùng hiện tại đơn, không dùng 'will'."
+    }
+  },
+  {
+    "id": "gram_016",
+    "topic": "Defining Relative Clauses",
+    "cefr_level": "B1",
+    "domain": "IT / Technical Writing",
+    "explanation_vi": "Mệnh đề quan hệ xác định bổ sung thông tin cần thiết cho danh từ, dùng who (người), which/that (vật).",
+    "formula": "Noun + who/which/that + clause",
+    "usage_context": "Dùng để định nghĩa thuật ngữ và mô tả thành phần hệ thống.",
+    "examples": [
+      {
+        "en": "A compiler is a program that translates source code into machine code.",
+        "vi": "Trình biên dịch là chương trình dịch mã nguồn sang mã máy."
+      },
+      {
+        "en": "We need a developer who knows React.",
+        "vi": "Chúng tôi cần một lập trình viên biết React."
+      }
+    ],
+    "common_mistakes": {
+      "incorrect": "The service which it handles payments is down.",
+      "correct": "The service which handles payments is down.",
+      "reason_vi": "Đại từ quan hệ đã làm chủ ngữ nên không thêm 'it'."
+    }
+  },
+  {
+    "id": "gram_017",
+    "topic": "Gerunds After Prepositions",
+    "cefr_level": "B1",
+    "domain": "IT / Self-Introduction",
+    "explanation_vi": "Sau giới từ, động từ phải ở dạng V-ing.",
+    "formula": "Adjective/verb + preposition + V-ing",
+    "usage_context": "Dùng trong các cụm 'responsible for', 'interested in', 'good at' khi mô tả công việc.",
+    "examples": [
+      {
+        "en": "I am responsible for testing the mobile app.",
+        "vi": "Tôi chịu trách nhiệm kiểm thử ứng dụng di động."
+      },
+      {
+        "en": "She is good at explaining technical ideas.",
+        "vi": "Cô ấy giỏi giải thích các ý tưởng kỹ thuật."
+      }
+    ],
+    "common_mistakes": {
+      "incorrect": "I am interested in learn Kubernetes.",
+      "correct": "I am interested in learning Kubernetes.",
+      "reason_vi": "Sau giới từ 'in' động từ phải ở dạng V-ing."
+    }
+  },
+  {
+    "id": "gram_018",
+    "topic": "Used To for Past Habits",
+    "cefr_level": "B1",
+    "domain": "IT / Self-Introduction",
+    "explanation_vi": "'Used to' diễn tả thói quen hoặc trạng thái trong quá khứ mà nay không còn.",
+    "formula": "Subject + used to + base verb",
+    "usage_context": "Dùng để so sánh công việc hoặc quy trình cũ và hiện tại.",
+    "examples": [
+      {
+        "en": "I used to work as a network technician.",
+        "vi": "Tôi từng làm kỹ thuật viên mạng."
+      },
+      {
+        "en": "We used to deploy manually every month.",
+        "vi": "Chúng tôi từng triển khai thủ công mỗi tháng."
+      }
+    ],
+    "common_mistakes": {
+      "incorrect": "I use to write PHP before.",
+      "correct": "I used to write PHP before.",
+      "reason_vi": "Dạng khẳng định đúng là 'used to', có -d."
+    }
+  },
+  {
+    "id": "gram_019",
+    "topic": "Present Perfect Continuous for Ongoing Work",
+    "cefr_level": "B2",
+    "domain": "IT / Workplace",
+    "explanation_vi": "Thì hiện tại hoàn thành tiếp diễn nhấn mạnh quá trình kéo dài từ quá khứ đến hiện tại.",
+    "formula": "Subject + have/has been + V-ing + (for/since)",
+    "usage_context": "Dùng khi giải thích tiến độ của một nhiệm vụ hoặc cuộc điều tra sự cố.",
+    "examples": [
+      {
+        "en": "We have been investigating the memory leak since Monday.",
+        "vi": "Chúng tôi đã điều tra lỗi rò rỉ bộ nhớ từ thứ Hai đến giờ."
+      },
+      {
+        "en": "She has been leading the migration for six months.",
+        "vi": "Cô ấy đã dẫn dắt việc di chuyển hệ thống được sáu tháng."
+      }
+    ],
+    "common_mistakes": {
+      "incorrect": "I am working on this ticket since morning.",
+      "correct": "I have been working on this ticket since morning.",
+      "reason_vi": "Với 'since' và hành động còn tiếp diễn, không dùng hiện tại tiếp diễn."
+    }
+  },
+  {
+    "id": "gram_020",
+    "topic": "Second Conditional for Hypothetical Design",
+    "cefr_level": "B2",
+    "domain": "IT / System Design",
+    "explanation_vi": "Câu điều kiện loại 2 diễn tả tình huống giả định ở hiện tại hoặc tương lai, hữu ích khi bàn về phương án thiết kế.",
+    "formula": "If + past simple, would/could + base verb",
+    "usage_context": "Dùng trong phỏng vấn system design để đưa ra phương án giả định.",
+    "examples": [
+      {
+        "en": "If we had more traffic, I would add a read replica.",
+        "vi": "Nếu có nhiều lưu lượng hơn, tôi sẽ thêm một bản sao đọc."
+      },
+      {
+        "en": "If I were designing this today, I would choose PostgreSQL.",
+        "vi": "Nếu thiết kế hệ thống này vào hôm nay, tôi sẽ chọn PostgreSQL."
+      }
+    ],
+    "common_mistakes": {
+      "incorrect": "If we would have more users, we would need a cache.",
+      "correct": "If we had more users, we would need a cache.",
+      "reason_vi": "Mệnh đề 'if' loại 2 dùng quá khứ đơn, không dùng 'would'."
+    }
+  },
+  {
+    "id": "gram_021",
+    "topic": "Passive with Modal Verbs",
+    "cefr_level": "B2",
+    "domain": "IT / Technical Writing",
+    "explanation_vi": "Bị động với động từ khuyết thiếu dùng để nêu yêu cầu và khuyến nghị trong tài liệu kỹ thuật.",
+    "formula": "Subject + modal + be + V3/ed",
+    "usage_context": "Dùng cho hướng dẫn cấu hình, đặc tả yêu cầu.",
+    "examples": [
+      {
+        "en": "All input should be validated on the server.",
+        "vi": "Mọi dữ liệu đầu vào cần được kiểm tra hợp lệ ở máy chủ."
+      },
+      {
+        "en": "This setting can be changed at runtime.",
+        "vi": "Thiết lập này có thể được thay đổi lúc đang chạy."
+      }
+    ],
+    "common_mistakes": {
+      "incorrect": "The key must rotated every month.",
+      "correct": "The key must be rotated every month.",
+      "reason_vi": "Bị động với modal cần 'be' trước V3."
+    }
+  },
+  {
+    "id": "gram_022",
+    "topic": "Reported Speech in Status Updates",
+    "cefr_level": "B2",
+    "domain": "IT / Workplace",
+    "explanation_vi": "Câu tường thuật lùi thì khi thuật lại lời nói trong quá khứ.",
+    "formula": "Subject + said/told + (that) + backshifted clause",
+    "usage_context": "Dùng để thuật lại yêu cầu của khách hàng hoặc ý kiến của đồng nghiệp.",
+    "examples": [
+      {
+        "en": "The client said that the report was loading too slowly.",
+        "vi": "Khách hàng nói báo cáo tải quá chậm."
+      },
+      {
+        "en": "She told me she had already merged the fix.",
+        "vi": "Cô ấy nói với tôi rằng cô ấy đã gộp bản sửa rồi."
+      }
+    ],
+    "common_mistakes": {
+      "incorrect": "He said me that the server was down.",
+      "correct": "He told me that the server was down.",
+      "reason_vi": "'Tell' đi trực tiếp với tân ngữ chỉ người, còn 'say' thì không."
+    }
+  },
+  {
+    "id": "gram_023",
+    "topic": "Contrast with Although, Despite and However",
+    "cefr_level": "B2",
+    "domain": "IT Job Interview",
+    "explanation_vi": "'Although' theo sau bởi mệnh đề; 'despite' theo sau bởi danh từ hoặc V-ing; 'however' nối hai câu.",
+    "formula": "Although + clause / Despite + noun or V-ing / Sentence. However, sentence.",
+    "usage_context": "Dùng để trình bày ưu nhược điểm của một giải pháp.",
+    "examples": [
+      {
+        "en": "Although NoSQL scales well, it can make complex queries harder.",
+        "vi": "Mặc dù NoSQL mở rộng tốt, nó có thể khiến các truy vấn phức tạp khó hơn."
+      },
+      {
+        "en": "Despite the tight deadline, we released on time.",
+        "vi": "Bất chấp hạn chót gấp, chúng tôi vẫn phát hành đúng hẹn."
+      }
+    ],
+    "common_mistakes": {
+      "incorrect": "Despite the tests passed, the deployment failed.",
+      "correct": "Although the tests passed, the deployment failed.",
+      "reason_vi": "'Despite' không đứng trước một mệnh đề đầy đủ."
+    }
+  },
+  {
+    "id": "gram_024",
+    "topic": "Expressing Purpose",
+    "cefr_level": "B2",
+    "domain": "IT / System Design",
+    "explanation_vi": "'In order to' và 'so as to' đi với động từ nguyên mẫu; 'so that' đi với một mệnh đề.",
+    "formula": "in order to + base verb / so that + clause",
+    "usage_context": "Dùng để giải thích lý do của một quyết định kỹ thuật.",
+    "examples": [
+      {
+        "en": "We added an index in order to speed up the query.",
+        "vi": "Chúng tôi thêm chỉ mục để tăng tốc truy vấn."
+      },
+      {
+        "en": "Logs are centralised so that engineers can search them easily.",
+        "vi": "Log được tập trung để các kỹ sư có thể tìm kiếm dễ dàng."
+      }
+    ],
+    "common_mistakes": {
+      "incorrect": "We use a queue for avoid losing messages.",
+      "correct": "We use a queue to avoid losing messages.",
+      "reason_vi": "Để chỉ mục đích, dùng 'to + động từ', không dùng 'for + động từ nguyên mẫu'."
+    }
+  },
+  {
+    "id": "gram_025",
+    "topic": "Third Conditional in Postmortems",
+    "cefr_level": "C1",
+    "domain": "IT / DevOps",
+    "explanation_vi": "Câu điều kiện loại 3 phân tích một tình huống giả định trái với quá khứ, rất phù hợp khi rút kinh nghiệm sau sự cố.",
+    "formula": "If + past perfect, would/could have + V3",
+    "usage_context": "Dùng trong báo cáo phân tích sau sự cố.",
+    "examples": [
+      {
+        "en": "If we had set an alert on disk usage, the outage would have been avoided.",
+        "vi": "Nếu chúng tôi đã đặt cảnh báo về dung lượng đĩa, sự cố đã có thể tránh được."
+      },
+      {
+        "en": "The rollback could have been faster if the runbook had been up to date.",
+        "vi": "Việc quay lui đã có thể nhanh hơn nếu tài liệu vận hành được cập nhật."
+      }
+    ],
+    "common_mistakes": {
+      "incorrect": "If we would have tested it, we would have found the bug.",
+      "correct": "If we had tested it, we would have found the bug.",
+      "reason_vi": "Mệnh đề 'if' loại 3 dùng quá khứ hoàn thành."
+    }
+  },
+  {
+    "id": "gram_026",
+    "topic": "Negative Inversion for Emphasis",
+    "cefr_level": "C1",
+    "domain": "IT / Technical Presentation",
+    "explanation_vi": "Khi trạng ngữ phủ định đứng đầu câu, chủ ngữ và trợ động từ đảo vị trí để nhấn mạnh.",
+    "formula": "Negative adverbial + auxiliary + subject + verb",
+    "usage_context": "Dùng trong thuyết trình kỹ thuật và văn bản trang trọng.",
+    "examples": [
+      {
+        "en": "Not only did the migration reduce costs, but it also improved reliability.",
+        "vi": "Việc di chuyển hệ thống không chỉ giảm chi phí mà còn cải thiện độ tin cậy."
+      },
+      {
+        "en": "Rarely have we seen such a sharp increase in errors.",
+        "vi": "Hiếm khi chúng tôi thấy lỗi tăng mạnh đến vậy."
+      }
+    ],
+    "common_mistakes": {
+      "incorrect": "Only after the patch the errors stopped.",
+      "correct": "Only after the patch did the errors stop.",
+      "reason_vi": "Sau 'only after + cụm từ' đầu câu phải đảo trợ động từ lên trước chủ ngữ."
+    }
+  },
+  {
+    "id": "gram_027",
+    "topic": "Cleft Sentences",
+    "cefr_level": "C1",
+    "domain": "IT Job Interview",
+    "explanation_vi": "Câu chẻ tách một thành phần ra để nhấn mạnh thông tin quan trọng.",
+    "formula": "It was + focus + that/who + clause / What + clause + is/was + focus",
+    "usage_context": "Dùng để làm rõ nguyên nhân gốc rễ hoặc đóng góp cá nhân.",
+    "examples": [
+      {
+        "en": "It was the connection pool that caused the timeouts.",
+        "vi": "Chính connection pool đã gây ra các lỗi hết thời gian chờ."
+      },
+      {
+        "en": "What I enjoyed most was designing the event-driven pipeline.",
+        "vi": "Điều tôi thích nhất là thiết kế pipeline hướng sự kiện."
+      }
+    ],
+    "common_mistakes": {
+      "incorrect": "What we need it is better monitoring.",
+      "correct": "What we need is better monitoring.",
+      "reason_vi": "Mệnh đề 'what' đã làm chủ ngữ nên không thêm 'it'."
+    }
+  },
+  {
+    "id": "gram_028",
+    "topic": "Participle Clauses",
+    "cefr_level": "C1",
+    "domain": "IT / Technical Writing",
+    "explanation_vi": "Mệnh đề phân từ rút gọn câu, giúp văn phong súc tích. V-ing mang nghĩa chủ động, V3 mang nghĩa bị động; chủ ngữ phải trùng với mệnh đề chính.",
+    "formula": "V-ing / V3 + phrase, main clause",
+    "usage_context": "Dùng trong tài liệu thiết kế và mô tả kiến trúc.",
+    "examples": [
+      {
+        "en": "Built on Kafka, the platform processes millions of events per day.",
+        "vi": "Được xây dựng trên Kafka, nền tảng này xử lý hàng triệu sự kiện mỗi ngày."
+      },
+      {
+        "en": "Having analysed the logs, the team identified the root cause.",
+        "vi": "Sau khi phân tích log, nhóm đã xác định được nguyên nhân gốc rễ."
+      }
+    ],
+    "common_mistakes": {
+      "incorrect": "Having restarted the service, the errors disappeared.",
+      "correct": "Having restarted the service, we saw the errors disappear.",
+      "reason_vi": "Lỗi chủ ngữ treo: 'errors' không phải là bên khởi động lại dịch vụ."
+    }
+  },
+  {
+    "id": "gram_029",
+    "topic": "Nominalisation in Formal Writing",
+    "cefr_level": "C1",
+    "domain": "IT / Technical Writing",
+    "explanation_vi": "Danh từ hóa chuyển động từ hoặc tính từ thành danh từ, làm cho văn bản trang trọng và cô đọng hơn.",
+    "formula": "Verb/adjective → noun + of + object",
+    "usage_context": "Dùng trong đề xuất kiến trúc và báo cáo cho quản lý.",
+    "examples": [
+      {
+        "en": "The introduction of caching led to a significant reduction in load.",
+        "vi": "Việc đưa bộ nhớ đệm vào đã dẫn đến sự giảm tải đáng kể."
+      },
+      {
+        "en": "The failure of the primary node triggered an election.",
+        "vi": "Sự cố của nút chính đã kích hoạt một cuộc bầu chọn."
+      }
+    ],
+    "common_mistakes": {
+      "incorrect": "The reduce of costs was the main benefit.",
+      "correct": "The reduction in costs was the main benefit.",
+      "reason_vi": "Cần dùng đúng danh từ 'reduction' và giới từ 'in' đi kèm."
+    }
+  },
+  {
+    "id": "gram_030",
+    "topic": "Hedging in Technical Discussion",
+    "cefr_level": "C1",
+    "domain": "IT / Technical Discussion",
+    "explanation_vi": "Ngôn ngữ rào đón làm giảm mức độ khẳng định, giúp góp ý lịch sự và thể hiện sự thận trọng.",
+    "formula": "may/might/could + verb; it appears/seems that; arguably; to some extent",
+    "usage_context": "Dùng khi phản biện thiết kế hoặc nêu giả thuyết chưa có bằng chứng.",
+    "examples": [
+      {
+        "en": "It appears that the slowdown may be related to garbage collection.",
+        "vi": "Có vẻ như việc chậm lại có thể liên quan đến thu gom rác."
+      },
+      {
+        "en": "This approach could arguably introduce unnecessary complexity.",
+        "vi": "Có thể nói cách tiếp cận này có khả năng tạo ra sự phức tạp không cần thiết."
+      }
+    ],
+    "common_mistakes": {
+      "incorrect": "It seems that may be a race condition.",
+      "correct": "It seems that there may be a race condition.",
+      "reason_vi": "Mệnh đề sau 'that' cần có chủ ngữ; ở đây phải dùng 'there'."
+    }
+  },
+  {
+    "id": "gram_031",
+    "topic": "Mandative Subjunctive in Recommendations",
+    "cefr_level": "C2",
+    "domain": "IT / Architecture Decision Records",
+    "explanation_vi": "Thức giả định dùng động từ nguyên mẫu sau các động từ và tính từ chỉ đề nghị, bất kể chủ ngữ.",
+    "formula": "recommend/insist/essential + that + subject + base verb",
+    "usage_context": "Dùng trong văn bản quyết định kiến trúc và chính sách chính thức.",
+    "examples": [
+      {
+        "en": "We recommend that the service be isolated from the public network.",
+        "vi": "Chúng tôi đề nghị dịch vụ được cách ly khỏi mạng công cộng."
+      },
+      {
+        "en": "It is essential that every change undergo peer review.",
+        "vi": "Điều thiết yếu là mọi thay đổi đều phải qua đánh giá đồng cấp."
+      }
+    ],
+    "common_mistakes": {
+      "incorrect": "The auditors insisted that the key is rotated.",
+      "correct": "The auditors insisted that the key be rotated.",
+      "reason_vi": "Sau 'insist that' mang nghĩa yêu cầu, văn phong trang trọng dùng động từ nguyên mẫu 'be'."
+    }
+  },
+  {
+    "id": "gram_032",
+    "topic": "Mixed Conditionals",
+    "cefr_level": "C2",
+    "domain": "IT / System Design",
+    "explanation_vi": "Câu điều kiện hỗn hợp kết nối một điều kiện quá khứ với kết quả hiện tại, hoặc ngược lại.",
+    "formula": "If + past perfect, would + base verb / If + past simple, would have + V3",
+    "usage_context": "Dùng để lập luận về nợ kỹ thuật và hệ quả của các quyết định trước đây.",
+    "examples": [
+      {
+        "en": "Had we partitioned the table early on, we would not be facing this migration now.",
+        "vi": "Nếu đã phân vùng bảng từ sớm, giờ chúng tôi đã không phải đối mặt với việc di chuyển này."
+      },
+      {
+        "en": "If the protocol were not so chatty, the outage would never have spread.",
+        "vi": "Nếu giao thức không truyền nhiều thông điệp đến thế, sự cố đã không bao giờ lan rộng."
+      }
+    ],
+    "common_mistakes": {
+      "incorrect": "If we had chosen Kafka, we will not have these problems now.",
+      "correct": "If we had chosen Kafka, we would not have these problems now.",
+      "reason_vi": "Kết quả giả định ở hiện tại dùng 'would + nguyên mẫu', không dùng 'will'."
+    }
+  },
+  {
+    "id": "gram_033",
+    "topic": "Conditional Inversion",
+    "cefr_level": "C2",
+    "domain": "IT / Technical Writing",
+    "explanation_vi": "Trong văn phong trang trọng, có thể bỏ 'if' và đảo should/were/had lên đầu câu.",
+    "formula": "Should + subject + verb / Were + subject + to-verb / Had + subject + V3",
+    "usage_context": "Dùng trong đặc tả chính thức, SLA và hợp đồng dịch vụ.",
+    "examples": [
+      {
+        "en": "Should the primary fail, a replica will be promoted automatically.",
+        "vi": "Nếu nút chính gặp sự cố, một bản sao sẽ tự động được nâng lên."
+      },
+      {
+        "en": "Were the cluster to lose quorum, writes would be rejected.",
+        "vi": "Nếu cụm mất đa số đại biểu, các thao tác ghi sẽ bị từ chối."
+      }
+    ],
+    "common_mistakes": {
+      "incorrect": "Should the node will fail, traffic is rerouted.",
+      "correct": "Should the node fail, traffic is rerouted.",
+      "reason_vi": "Sau 'should' đảo lên đầu, động từ ở nguyên mẫu và không dùng 'will'."
+    }
+  },
+  {
+    "id": "gram_034",
+    "topic": "Ellipsis and Substitution",
+    "cefr_level": "C2",
+    "domain": "IT / Technical Discussion",
+    "explanation_vi": "Tỉnh lược và thay thế tránh lặp từ, tạo sự liên kết tinh tế trong lập luận.",
+    "formula": "auxiliary alone; so/not; one/ones; do so",
+    "usage_context": "Dùng trong tranh luận kỹ thuật và thuyết trình nâng cao.",
+    "examples": [
+      {
+        "en": "Some teams adopted the standard; others did not.",
+        "vi": "Một số nhóm áp dụng tiêu chuẩn; những nhóm khác thì không."
+      },
+      {
+        "en": "The system can recover automatically, and in most cases does so within seconds.",
+        "vi": "Hệ thống có thể tự phục hồi, và trong đa số trường hợp làm được điều đó chỉ trong vài giây."
+      }
+    ],
+    "common_mistakes": {
+      "incorrect": "Will the patch be ready? I think yes.",
+      "correct": "Will the patch be ready? I think so.",
+      "reason_vi": "Sau 'think' dùng 'so' để thay thế mệnh đề, không dùng 'yes'."
+    }
+  },
+  {
+    "id": "gram_035",
+    "topic": "Heavy Pre-modification in Noun Phrases",
+    "cefr_level": "C2",
+    "domain": "IT / Technical Writing",
+    "explanation_vi": "Văn bản kỹ thuật trình độ cao thường dồn nhiều bổ ngữ trước danh từ; các bổ ngữ ghép cần dấu gạch nối và danh từ bổ nghĩa giữ dạng số ít.",
+    "formula": "(adverb-participle) + compound modifier + noun modifier + head noun",
+    "usage_context": "Dùng trong tóm tắt kỹ thuật và tiêu đề thiết kế.",
+    "examples": [
+      {
+        "en": "We operate a globally distributed, multi-tenant event-streaming platform.",
+        "vi": "Chúng tôi vận hành một nền tảng truyền phát sự kiện đa người thuê, phân tán toàn cầu."
+      },
+      {
+        "en": "This is a three-node, strongly consistent key-value store.",
+        "vi": "Đây là một kho khóa-giá trị ba nút có tính nhất quán mạnh."
+      }
+    ],
+    "common_mistakes": {
+      "incorrect": "It is a three-nodes cluster.",
+      "correct": "It is a three-node cluster.",
+      "reason_vi": "Danh từ trong bổ ngữ ghép đứng trước danh từ chính phải ở dạng số ít."
+    }
+  },
+  {
+    "id": "gram_036",
+    "topic": "Concession with Albeit and Much As",
+    "cefr_level": "C2",
+    "domain": "IT / Technical Discussion",
+    "explanation_vi": "'Albeit' đứng trước cụm từ rút gọn, còn 'much as' đứng trước mệnh đề, để nhượng bộ một cách tinh tế.",
+    "formula": "albeit + adjective/phrase; Much as + clause, main clause",
+    "usage_context": "Dùng để phản biện lịch sự trong đánh giá thiết kế cấp cao.",
+    "examples": [
+      {
+        "en": "The new index improved performance, albeit at a considerable storage cost.",
+        "vi": "Chỉ mục mới đã cải thiện hiệu năng, dù phải trả giá lớn về dung lượng lưu trữ."
+      },
+      {
+        "en": "Much as I admire the elegance of this design, I doubt it will survive production traffic.",
+        "vi": "Dù tôi rất ngưỡng mộ sự thanh lịch của thiết kế này, tôi nghi ngờ nó sẽ trụ được trước lưu lượng thực tế."
+      }
+    ],
+    "common_mistakes": {
+      "incorrect": "The migration succeeded, albeit it took two years.",
+      "correct": "The migration succeeded, albeit after two years.",
+      "reason_vi": "'Albeit' thường đi với cụm từ rút gọn thay vì một mệnh đề đầy đủ."
+    }
+  }
+]

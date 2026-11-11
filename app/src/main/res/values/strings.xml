@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Master English</string>
+
+    <!-- Replace with the Web client ID from Firebase console (Google Sign-In). -->
+    <string name="google_web_client_id" translatable="false">YOUR_WEB_CLIENT_ID.apps.googleusercontent.com</string>
+
+    <string name="channel_reminder_name">Nhắc học mỗi ngày</string>
+    <string name="channel_reminder_desc">Giữ chuỗi học (streak) mỗi ngày</string>
+    <string name="reminder_title">Mascot nhớ bạn! 🦉</string>
+    <string name="reminder_body">Hoàn thành bài học hôm nay để giữ chuỗi streak nhé.</string>
+
+    <!-- Bottom navigation -->
+    <string name="nav_roadmap">Lộ trình</string>
+    <string name="nav_review">Ôn tập</string>
+    <string name="nav_profile">Hồ sơ</string>
+
+    <!-- Onboarding -->
+    <string name="onboard_title_1">Chào bạn, mình là Cú Minh!</string>
+    <string name="onboard_body_1">Mỗi ngày vài phút, bạn sẽ tiến bộ rõ rệt qua từ vựng, ngữ pháp, nghe và đọc.</string>
+    <string name="onboard_question_goal">Mục tiêu học của bạn là gì?</string>
+    <string name="onboard_goal_work">Giao tiếp trong công việc</string>
+    <string name="onboard_goal_interview">Phỏng vấn IT</string>
+    <string name="onboard_goal_docs">Đọc tài liệu kỹ thuật</string>
+    <string name="onboard_question_level">Trình độ hiện tại và thời gian mỗi ngày?</string>
+    <string name="onboard_minutes_format">%d phút mỗi ngày</string>
+    <string name="onboard_next">Tiếp tục</string>
+    <string name="onboard_start">Bắt đầu học</string>
+
+    <!-- Auth -->
+    <string name="auth_title">Đăng nhập để lưu tiến độ</string>
+    <string name="auth_email_hint">Email</string>
+    <string name="auth_password_hint">Mật khẩu (tối thiểu 6 ký tự)</string>
+    <string name="auth_login">Đăng nhập</string>
+    <string name="auth_register">Tạo tài khoản</string>
+    <string name="auth_switch_to_register">Chưa có tài khoản? Đăng ký</string>
+    <string name="auth_switch_to_login">Đã có tài khoản? Đăng nhập</string>
+    <string name="auth_google">Tiếp tục với Google</string>
+    <string name="auth_guest">Học thử (Guest Mode)</string>
+    <string name="auth_invalid_email">Email không hợp lệ</string>
+    <string name="auth_short_password">Mật khẩu cần ít nhất 6 ký tự</string>
+
+    <!-- Roadmap -->
+    <string name="roadmap_preparing">Đang chuẩn bị lộ trình…</string>
+    <string name="roadmap_locked_hint">Hoàn thành bài trước để mở khóa</string>
+    <string name="roadmap_mascot_tip">Mascot gợi ý</string>
+    <string name="roadmap_streak_format">%d ngày</string>
+    <string name="lesson_start">BẮT ĐẦU</string>
+    <string name="lesson_preview_hint">Bài học gồm các câu hỏi trắc nghiệm, điền từ, nối, sắp xếp và nói.</string>
+
+    <!-- Lesson -->
+    <string name="lesson_check">KIỂM TRA</string>
+    <string name="lesson_continue">TIẾP TỤC</string>
+    <string name="lesson_finish">HOÀN THÀNH</string>
+    <string name="lesson_correct">Chính xác! 🎉</string>
+    <string name="lesson_wrong">Chưa đúng, xem giải thích bên dưới.</string>
+    <string name="lesson_result_title">Bài học hoàn thành!</string>
+    <string name="lesson_result_stats">Đúng %1$d/%2$d câu · +%3$d EXP · +%4$d 💎</string>
+    <string name="lesson_exit_title">Thoát bài học?</string>
+    <string name="lesson_exit_message">Tiến độ của bài này sẽ không được lưu.</string>
+    <string name="lesson_exit_confirm">Thoát</string>
+    <string name="lesson_cancel">Ở lại</string>
+    <string name="lesson_empty">Bài học này chưa có câu hỏi.</string>
+    <string name="voice_hint">Nhấn micro và đọc to câu tiếng Anh</string>
+    <string name="voice_or_type">Hoặc gõ câu trả lời</string>
+    <string name="voice_listening">Đang nghe…</string>
+    <string name="voice_no_permission">Cần quyền micro để luyện nói.</string>
+    <string name="matching_hint">Chạm một từ bên trái, rồi chạm nghĩa tương ứng bên phải.</string>
+    <string name="reorder_hint">Chạm các từ để xếp thành câu đúng.</string>
+    <string name="fill_hint">Chọn từ phù hợp điền vào chỗ trống.</string>
+
+    <!-- Review -->
+    <string name="review_clinic_title">Điểm Yếu Cần Khắc Phục</string>
+    <string name="review_clinic_empty">Chưa có điểm yếu nào. Tuyệt vời!</string>
+    <string name="review_due_format">%d thẻ đến hạn ôn</string>
+    <string name="review_tab_vocab">Từ vựng</string>
+    <string name="review_tab_grammar">Ngữ pháp</string>
+    <string name="review_tab_listening">Luyện nghe</string>
+    <string name="review_tab_reading">Luyện đọc</string>
+    <string name="review_start_flashcards">Ôn thẻ SRS</string>
+    <string name="review_ai_title">Thử thách với Mascot AI</string>
+    <string name="review_ai_body">Mascot nhập vai và bắt lỗi trực tiếp câu trả lời của bạn.</string>
+    <string name="flash_show_answer">Lật thẻ</string>
+    <string name="flash_again">Học lại</string>
+    <string name="flash_hard">Khó</string>
+    <string name="flash_good">Tốt</string>
+    <string name="flash_easy">Dễ</string>
+    <string name="flash_done">Hôm nay bạn đã ôn xong các thẻ đến hạn!</string>
+    <string name="listen_play">Phát</string>
+    <string name="listen_pause">Tạm dừng</string>
+    <string name="listen_show_transcript">Hiện transcript</string>
+    <string name="listen_hide_transcript">Ẩn transcript</string>
+    <string name="listen_speed">Tốc độ</string>
+    <string name="check_answer">Kiểm tra đáp án</string>
+    <string name="reading_key_vocab">Từ vựng quan trọng</string>
+    <string name="reading_not_in_dict">Chưa có trong từ điển của ứng dụng.</string>
+    <string name="ai_send">Gửi</string>
+    <string name="ai_input_hint">Viết câu tiếng Anh của bạn…</string>
+    <string name="ai_start">Bắt đầu thử thách</string>
+    <string name="ai_mistake_title">Lỗi được ghi nhận</string>
+    <string name="ai_correction">Gợi ý sửa: %s</string>
+    <string name="ai_thinking">Mascot đang suy nghĩ…</string>
+
+    <!-- Profile -->
+    <string name="profile_xp_format">%d EXP · %s</string>
+    <string name="profile_badges">Huy hiệu</string>
+    <string name="profile_badge_locked">Chưa mở khóa</string>
+    <string name="profile_badge_unlocked">Đã mở khóa</string>
+    <string name="profile_weekly">Thời gian học 7 ngày qua (phút)</string>
+    <string name="profile_settings">Cài đặt</string>
+    <string name="profile_sound">Âm thanh</string>
+    <string name="profile_notifications">Nhắc học hằng ngày</string>
+    <string name="profile_reminder_time">Giờ nhắc: %s</string>
+    <string name="profile_ai_difficulty">Độ khó thử thách AI</string>
+    <string name="profile_gemini_key">Gemini API key (tuỳ chọn)</string>
+    <string name="profile_save">Lưu</string>
+    <string name="profile_sync_now">Đồng bộ ngay</string>
+    <string name="profile_sync_started">Đang đồng bộ với máy chủ…</string>
+    <string name="profile_saved">Đã lưu</string>
+    <string name="profile_logout">Đăng xuất</string>
+    <string name="profile_guest_name">Khách</string>
+    <string name="profile_target_minutes">Mục tiêu mỗi ngày</string>
+    <string name="profile_minutes_chip">%d phút</string>
+    <string name="badge_flip_hint">Chạm để xem điều kiện</string>
+    <string name="weakness_count_format">%d lần sai</string>
+    <string name="reading_meta_format">%1$d từ · %2$s</string>
+    <string name="profile_study_days">Ngày học</string>
+    <string name="profile_saved_toast">Đã lưu cài đặt</string>
+    <string name="profile_sign_out_done">Đã đăng xuất</string>
+    <string name="profile_sync_done">Đồng bộ hoàn tất</string>
+    <string name="profile_notification_denied">Bạn cần cấp quyền thông báo để nhận nhắc học.</string>
+    <string name="profile_key_hint">Dán API key từ Google AI Studio</string>
+    <string name="profile_badge_condition_prefix">Điều kiện: </string>
+    <string name="profile_reminder_time_title">Chọn giờ nhắc học</string>
+    <string name="profile_guest_note">Bạn đang học thử. Đăng nhập để đồng bộ tiến độ lên máy chủ.</string>
+    <string name="reading_tap_hint">Chạm vào từ bất kỳ để xem nghĩa.</string>
+    <string name="profile_minutes_5">5 phút</string>
+    <string name="profile_minutes_10">10 phút</string>
+    <string name="profile_minutes_15">15 phút</string>
+</resources>

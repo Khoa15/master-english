@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Cú Minh: the mascot used on screens and in the notification. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="200"
+    android:viewportHeight="200">
+    <path android:fillColor="#1CB0F6"
+        android:pathData="M100,22 C150,22 172,70 172,128 C172,176 142,190 100,190 C58,190 28,176 28,128 C28,70 50,22 100,22 Z" />
+    <path android:fillColor="#D2EEFF"
+        android:pathData="M100,88 C124,88 140,104 140,128 C140,160 122,172 100,172 C78,172 60,160 60,128 C60,104 76,88 100,88 Z" />
+    <path android:fillColor="#FFFFFF" android:pathData="M70,100 a24,24 0 1,0 48,0 a24,24 0 1,0 -48,0 Z" />
+    <path android:fillColor="#FFFFFF" android:pathData="M82,100 a24,24 0 1,0 48,0 a24,24 0 1,0 -48,0 Z" />
+    <path android:fillColor="#3C3C3C" android:pathData="M76,102 a9,9 0 1,0 18,0 a9,9 0 1,0 -18,0 Z" />
+    <path android:fillColor="#3C3C3C" android:pathData="M106,102 a9,9 0 1,0 18,0 a9,9 0 1,0 -18,0 Z" />
+    <path android:fillColor="#FF9600" android:pathData="M100,112 L90,128 L110,128 Z" />
+    <path android:fillColor="#1899D6"
+        android:pathData="M30,110 C18,126 20,150 40,164 C38,140 40,124 30,110 Z" />
+    <path android:fillColor="#1899D6"
+        android:pathData="M170,110 C182,126 180,150 160,164 C162,140 160,124 170,110 Z" />
+    <path android:fillColor="#FF9600" android:pathData="M78,186 L92,186 L92,194 L72,194 Z" />
+    <path android:fillColor="#FF9600" android:pathData="M108,186 L122,186 L128,194 L108,194 Z" />
+</vector>

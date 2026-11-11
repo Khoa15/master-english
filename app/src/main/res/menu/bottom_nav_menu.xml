@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/roadmapFragment"
+        android:icon="@drawable/ic_skill_reading"
+        android:title="@string/nav_roadmap" />
+    <item
+        android:id="@+id/reviewFragment"
+        android:icon="@drawable/ic_skill_vocab"
+        android:title="@string/nav_review" />
+    <item
+        android:id="@+id/profileFragment"
+        android:icon="@drawable/ic_skill_boss"
+        android:title="@string/nav_profile" />
+</menu>

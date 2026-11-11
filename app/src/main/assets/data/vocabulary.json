@@ -1,0 +1,1973 @@
+[
+  {
+    "id": "vocab_001",
+    "term": "job",
+    "ipa": "/dʒɒb/",
+    "part_of_speech": "noun",
+    "cefr_level": "A1",
+    "domain": "General English / Self-Introduction",
+    "definition_vi": "Công việc, nghề nghiệp.",
+    "example_en": "My job is very interesting.",
+    "example_vi": "Công việc của tôi rất thú vị.",
+    "synonyms": [
+      "work",
+      "occupation"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_002",
+    "term": "work",
+    "ipa": "/wɜːk/",
+    "part_of_speech": "verb",
+    "cefr_level": "A1",
+    "domain": "General English / Self-Introduction",
+    "definition_vi": "Làm việc.",
+    "example_en": "I work for a small IT company.",
+    "example_vi": "Tôi làm việc cho một công ty IT nhỏ.",
+    "synonyms": [
+      "labour"
+    ],
+    "antonyms": [
+      "rest"
+    ]
+  },
+  {
+    "id": "vocab_003",
+    "term": "office",
+    "ipa": "/ˈɒfɪs/",
+    "part_of_speech": "noun",
+    "cefr_level": "A1",
+    "domain": "General English / Workplace",
+    "definition_vi": "Văn phòng.",
+    "example_en": "Our office is in Ho Chi Minh City.",
+    "example_vi": "Văn phòng của chúng tôi ở Thành phố Hồ Chí Minh.",
+    "synonyms": [
+      "workplace"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_004",
+    "term": "team",
+    "ipa": "/tiːm/",
+    "part_of_speech": "noun",
+    "cefr_level": "A1",
+    "domain": "General English / Workplace",
+    "definition_vi": "Đội, nhóm làm việc.",
+    "example_en": "There are five people in my team.",
+    "example_vi": "Có năm người trong nhóm của tôi.",
+    "synonyms": [
+      "group"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_005",
+    "term": "computer",
+    "ipa": "/kəmˈpjuːtə(r)/",
+    "part_of_speech": "noun",
+    "cefr_level": "A1",
+    "domain": "IT / Basic Computing",
+    "definition_vi": "Máy tính.",
+    "example_en": "I use a computer every day.",
+    "example_vi": "Tôi dùng máy tính mỗi ngày.",
+    "synonyms": [
+      "PC"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_006",
+    "term": "internet",
+    "ipa": "/ˈɪntənet/",
+    "part_of_speech": "noun",
+    "cefr_level": "A1",
+    "domain": "IT / Basic Computing",
+    "definition_vi": "Mạng Internet.",
+    "example_en": "The internet is slow today.",
+    "example_vi": "Hôm nay Internet chậm.",
+    "synonyms": [
+      "the web"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_007",
+    "term": "website",
+    "ipa": "/ˈwebsaɪt/",
+    "part_of_speech": "noun",
+    "cefr_level": "A1",
+    "domain": "IT / Basic Computing",
+    "definition_vi": "Trang web.",
+    "example_en": "This is our company website.",
+    "example_vi": "Đây là trang web của công ty chúng tôi.",
+    "synonyms": [
+      "site"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_008",
+    "term": "email",
+    "ipa": "/ˈiːmeɪl/",
+    "part_of_speech": "noun",
+    "cefr_level": "A1",
+    "domain": "IT / Basic Computing",
+    "definition_vi": "Thư điện tử.",
+    "example_en": "Please send me an email.",
+    "example_vi": "Vui lòng gửi cho tôi một email.",
+    "synonyms": [
+      "e-mail"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_009",
+    "term": "phone",
+    "ipa": "/fəʊn/",
+    "part_of_speech": "noun",
+    "cefr_level": "A1",
+    "domain": "IT / Basic Computing",
+    "definition_vi": "Điện thoại.",
+    "example_en": "This app works on my phone.",
+    "example_vi": "Ứng dụng này chạy được trên điện thoại của tôi.",
+    "synonyms": [
+      "telephone",
+      "mobile"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_010",
+    "term": "page",
+    "ipa": "/peɪdʒ/",
+    "part_of_speech": "noun",
+    "cefr_level": "A1",
+    "domain": "IT / Basic Computing",
+    "definition_vi": "Trang (sách, web).",
+    "example_en": "The login page is not open.",
+    "example_vi": "Trang đăng nhập không mở được.",
+    "synonyms": [
+      "web page"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_011",
+    "term": "language",
+    "ipa": "/ˈlæŋɡwɪdʒ/",
+    "part_of_speech": "noun",
+    "cefr_level": "A1",
+    "domain": "General English / IT",
+    "definition_vi": "Ngôn ngữ (bao gồm ngôn ngữ lập trình).",
+    "example_en": "Python is my favourite language.",
+    "example_vi": "Python là ngôn ngữ tôi thích nhất.",
+    "synonyms": [
+      "tongue"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_012",
+    "term": "number",
+    "ipa": "/ˈnʌmbə(r)/",
+    "part_of_speech": "noun",
+    "cefr_level": "A1",
+    "domain": "General English",
+    "definition_vi": "Con số; số.",
+    "example_en": "What is your phone number?",
+    "example_vi": "Số điện thoại của bạn là gì?",
+    "synonyms": [
+      "digit",
+      "figure"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_013",
+    "term": "problem",
+    "ipa": "/ˈprɒbləm/",
+    "part_of_speech": "noun",
+    "cefr_level": "A1",
+    "domain": "General English / Workplace",
+    "definition_vi": "Vấn đề, sự cố.",
+    "example_en": "I have a problem with my computer.",
+    "example_vi": "Tôi gặp vấn đề với máy tính của mình.",
+    "synonyms": [
+      "issue",
+      "trouble"
+    ],
+    "antonyms": [
+      "solution"
+    ]
+  },
+  {
+    "id": "vocab_014",
+    "term": "question",
+    "ipa": "/ˈkwestʃən/",
+    "part_of_speech": "noun",
+    "cefr_level": "A1",
+    "domain": "General English / Interview",
+    "definition_vi": "Câu hỏi.",
+    "example_en": "Can I ask a question?",
+    "example_vi": "Tôi có thể hỏi một câu không?",
+    "synonyms": [
+      "query"
+    ],
+    "antonyms": [
+      "answer"
+    ]
+  },
+  {
+    "id": "vocab_015",
+    "term": "answer",
+    "ipa": "/ˈɑːnsə(r)/",
+    "part_of_speech": "noun",
+    "cefr_level": "A1",
+    "domain": "General English / Interview",
+    "definition_vi": "Câu trả lời.",
+    "example_en": "Your answer is correct.",
+    "example_vi": "Câu trả lời của bạn đúng.",
+    "synonyms": [
+      "reply",
+      "response"
+    ],
+    "antonyms": [
+      "question"
+    ]
+  },
+  {
+    "id": "vocab_016",
+    "term": "open",
+    "ipa": "/ˈəʊpən/",
+    "part_of_speech": "verb",
+    "cefr_level": "A1",
+    "domain": "General English / IT",
+    "definition_vi": "Mở (cửa, tệp, ứng dụng).",
+    "example_en": "Open the file, please.",
+    "example_vi": "Làm ơn mở tệp ra.",
+    "synonyms": [
+      "launch"
+    ],
+    "antonyms": [
+      "close"
+    ]
+  },
+  {
+    "id": "vocab_017",
+    "term": "close",
+    "ipa": "/kləʊz/",
+    "part_of_speech": "verb",
+    "cefr_level": "A1",
+    "domain": "General English / IT",
+    "definition_vi": "Đóng (cửa, tệp, ứng dụng).",
+    "example_en": "Close the window and go home.",
+    "example_vi": "Đóng cửa sổ lại và về nhà đi.",
+    "synonyms": [
+      "shut"
+    ],
+    "antonyms": [
+      "open"
+    ]
+  },
+  {
+    "id": "vocab_018",
+    "term": "start",
+    "ipa": "/stɑːt/",
+    "part_of_speech": "verb",
+    "cefr_level": "A1",
+    "domain": "General English / Workplace",
+    "definition_vi": "Bắt đầu; khởi động.",
+    "example_en": "I start work at nine o'clock.",
+    "example_vi": "Tôi bắt đầu làm việc lúc chín giờ.",
+    "synonyms": [
+      "begin"
+    ],
+    "antonyms": [
+      "stop",
+      "finish"
+    ]
+  },
+  {
+    "id": "vocab_019",
+    "term": "stop",
+    "ipa": "/stɒp/",
+    "part_of_speech": "verb",
+    "cefr_level": "A1",
+    "domain": "General English / IT",
+    "definition_vi": "Dừng lại.",
+    "example_en": "The program stops at line ten.",
+    "example_vi": "Chương trình dừng lại ở dòng mười.",
+    "synonyms": [
+      "halt"
+    ],
+    "antonyms": [
+      "start"
+    ]
+  },
+  {
+    "id": "vocab_020",
+    "term": "learn",
+    "ipa": "/lɜːn/",
+    "part_of_speech": "verb",
+    "cefr_level": "A1",
+    "domain": "General English / Self-Introduction",
+    "definition_vi": "Học, học hỏi.",
+    "example_en": "I want to learn English for my job.",
+    "example_vi": "Tôi muốn học tiếng Anh cho công việc của mình.",
+    "synonyms": [
+      "study"
+    ],
+    "antonyms": [
+      "forget"
+    ]
+  },
+  {
+    "id": "vocab_021",
+    "term": "software",
+    "ipa": "/ˈsɒftweə(r)/",
+    "part_of_speech": "noun",
+    "cefr_level": "A2",
+    "domain": "IT / Basic Computing",
+    "definition_vi": "Phần mềm.",
+    "example_en": "We make software for small shops.",
+    "example_vi": "Chúng tôi làm phần mềm cho các cửa hàng nhỏ.",
+    "synonyms": [
+      "program"
+    ],
+    "antonyms": [
+      "hardware"
+    ]
+  },
+  {
+    "id": "vocab_022",
+    "term": "password",
+    "ipa": "/ˈpɑːswɜːd/",
+    "part_of_speech": "noun",
+    "cefr_level": "A2",
+    "domain": "IT / Security",
+    "definition_vi": "Mật khẩu.",
+    "example_en": "I forgot my password again yesterday.",
+    "example_vi": "Hôm qua tôi lại quên mật khẩu.",
+    "synonyms": [
+      "passcode"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_023",
+    "term": "keyboard",
+    "ipa": "/ˈkiːbɔːd/",
+    "part_of_speech": "noun",
+    "cefr_level": "A2",
+    "domain": "IT / Hardware",
+    "definition_vi": "Bàn phím.",
+    "example_en": "This keyboard is quieter than my old one.",
+    "example_vi": "Bàn phím này êm hơn bàn phím cũ của tôi.",
+    "synonyms": [],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_024",
+    "term": "screen",
+    "ipa": "/skriːn/",
+    "part_of_speech": "noun",
+    "cefr_level": "A2",
+    "domain": "IT / Hardware",
+    "definition_vi": "Màn hình.",
+    "example_en": "Can you share your screen with us?",
+    "example_vi": "Bạn có thể chia sẻ màn hình với chúng tôi không?",
+    "synonyms": [
+      "monitor",
+      "display"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_025",
+    "term": "file",
+    "ipa": "/faɪl/",
+    "part_of_speech": "noun",
+    "cefr_level": "A2",
+    "domain": "IT / Basic Computing",
+    "definition_vi": "Tệp tin.",
+    "example_en": "I sent you the file this morning.",
+    "example_vi": "Sáng nay tôi đã gửi tệp cho bạn.",
+    "synonyms": [
+      "document"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_026",
+    "term": "download",
+    "ipa": "/ˌdaʊnˈləʊd/",
+    "part_of_speech": "verb",
+    "cefr_level": "A2",
+    "domain": "IT / Basic Computing",
+    "definition_vi": "Tải xuống.",
+    "example_en": "You can download the app for free.",
+    "example_vi": "Bạn có thể tải ứng dụng miễn phí.",
+    "synonyms": [
+      "fetch"
+    ],
+    "antonyms": [
+      "upload"
+    ]
+  },
+  {
+    "id": "vocab_027",
+    "term": "install",
+    "ipa": "/ɪnˈstɔːl/",
+    "part_of_speech": "verb",
+    "cefr_level": "A2",
+    "domain": "IT / Basic Computing",
+    "definition_vi": "Cài đặt.",
+    "example_en": "First, install Node.js on your laptop.",
+    "example_vi": "Trước tiên, hãy cài Node.js lên máy tính xách tay của bạn.",
+    "synonyms": [
+      "set up"
+    ],
+    "antonyms": [
+      "uninstall",
+      "remove"
+    ]
+  },
+  {
+    "id": "vocab_028",
+    "term": "update",
+    "ipa": "/ˌʌpˈdeɪt/",
+    "part_of_speech": "verb",
+    "cefr_level": "A2",
+    "domain": "IT / Basic Computing",
+    "definition_vi": "Cập nhật.",
+    "example_en": "Please update the app before the meeting.",
+    "example_vi": "Vui lòng cập nhật ứng dụng trước buổi họp.",
+    "synonyms": [
+      "upgrade",
+      "refresh"
+    ],
+    "antonyms": [
+      "downgrade"
+    ]
+  },
+  {
+    "id": "vocab_029",
+    "term": "online",
+    "ipa": "/ˌɒnˈlaɪn/",
+    "part_of_speech": "adjective",
+    "cefr_level": "A2",
+    "domain": "IT / Basic Computing",
+    "definition_vi": "Trực tuyến.",
+    "example_en": "We had an online meeting last Monday.",
+    "example_vi": "Chúng tôi có một buổi họp trực tuyến vào thứ Hai tuần trước.",
+    "synonyms": [
+      "connected"
+    ],
+    "antonyms": [
+      "offline"
+    ]
+  },
+  {
+    "id": "vocab_030",
+    "term": "save",
+    "ipa": "/seɪv/",
+    "part_of_speech": "verb",
+    "cefr_level": "A2",
+    "domain": "IT / Basic Computing",
+    "definition_vi": "Lưu (dữ liệu, tệp).",
+    "example_en": "Don't forget to save your work.",
+    "example_vi": "Đừng quên lưu lại công việc của bạn.",
+    "synonyms": [
+      "store"
+    ],
+    "antonyms": [
+      "discard"
+    ]
+  },
+  {
+    "id": "vocab_031",
+    "term": "delete",
+    "ipa": "/dɪˈliːt/",
+    "part_of_speech": "verb",
+    "cefr_level": "A2",
+    "domain": "IT / Basic Computing",
+    "definition_vi": "Xóa.",
+    "example_en": "I deleted the wrong file by mistake.",
+    "example_vi": "Tôi đã xóa nhầm tệp.",
+    "synonyms": [
+      "remove",
+      "erase"
+    ],
+    "antonyms": [
+      "restore"
+    ]
+  },
+  {
+    "id": "vocab_032",
+    "term": "click",
+    "ipa": "/klɪk/",
+    "part_of_speech": "verb",
+    "cefr_level": "A2",
+    "domain": "IT / Basic Computing",
+    "definition_vi": "Nhấp chuột.",
+    "example_en": "Click the blue button to log in.",
+    "example_vi": "Nhấp vào nút màu xanh để đăng nhập.",
+    "synonyms": [
+      "press",
+      "tap"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_033",
+    "term": "project",
+    "ipa": "/ˈprɒdʒekt/",
+    "part_of_speech": "noun",
+    "cefr_level": "A2",
+    "domain": "General English / Workplace",
+    "definition_vi": "Dự án.",
+    "example_en": "I am working on a new project this month.",
+    "example_vi": "Tháng này tôi đang làm một dự án mới.",
+    "synonyms": [
+      "assignment"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_034",
+    "term": "meeting",
+    "ipa": "/ˈmiːtɪŋ/",
+    "part_of_speech": "noun",
+    "cefr_level": "A2",
+    "domain": "General English / Workplace",
+    "definition_vi": "Cuộc họp.",
+    "example_en": "Our team has a short meeting every morning.",
+    "example_vi": "Nhóm chúng tôi có một cuộc họp ngắn mỗi sáng.",
+    "synonyms": [
+      "session"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_035",
+    "term": "colleague",
+    "ipa": "/ˈkɒliːɡ/",
+    "part_of_speech": "noun",
+    "cefr_level": "A2",
+    "domain": "General English / Workplace",
+    "definition_vi": "Đồng nghiệp.",
+    "example_en": "My colleagues helped me with the problem.",
+    "example_vi": "Các đồng nghiệp đã giúp tôi xử lý vấn đề đó.",
+    "synonyms": [
+      "co-worker",
+      "teammate"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_036",
+    "term": "manager",
+    "ipa": "/ˈmænɪdʒə(r)/",
+    "part_of_speech": "noun",
+    "cefr_level": "A2",
+    "domain": "General English / Workplace",
+    "definition_vi": "Người quản lý.",
+    "example_en": "My manager gave me a new task.",
+    "example_vi": "Quản lý đã giao cho tôi một nhiệm vụ mới.",
+    "synonyms": [
+      "supervisor",
+      "boss"
+    ],
+    "antonyms": [
+      "employee"
+    ]
+  },
+  {
+    "id": "vocab_037",
+    "term": "skill",
+    "ipa": "/skɪl/",
+    "part_of_speech": "noun",
+    "cefr_level": "A2",
+    "domain": "General English / Self-Introduction",
+    "definition_vi": "Kỹ năng.",
+    "example_en": "Good communication is an important skill.",
+    "example_vi": "Giao tiếp tốt là một kỹ năng quan trọng.",
+    "synonyms": [
+      "ability"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_038",
+    "term": "experience",
+    "ipa": "/ɪkˈspɪəriəns/",
+    "part_of_speech": "noun",
+    "cefr_level": "A2",
+    "domain": "General English / Self-Introduction",
+    "definition_vi": "Kinh nghiệm.",
+    "example_en": "I have two years of experience in web design.",
+    "example_vi": "Tôi có hai năm kinh nghiệm thiết kế web.",
+    "synonyms": [
+      "background"
+    ],
+    "antonyms": [
+      "inexperience"
+    ]
+  },
+  {
+    "id": "vocab_039",
+    "term": "message",
+    "ipa": "/ˈmesɪdʒ/",
+    "part_of_speech": "noun",
+    "cefr_level": "A2",
+    "domain": "General English / IT",
+    "definition_vi": "Tin nhắn; thông báo.",
+    "example_en": "I saw an error message on the screen.",
+    "example_vi": "Tôi thấy một thông báo lỗi trên màn hình.",
+    "synonyms": [
+      "note",
+      "notification"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_040",
+    "term": "salary",
+    "ipa": "/ˈsæləri/",
+    "part_of_speech": "noun",
+    "cefr_level": "A2",
+    "domain": "General English / Interview",
+    "definition_vi": "Tiền lương.",
+    "example_en": "The salary for this job is good.",
+    "example_vi": "Mức lương của công việc này tốt.",
+    "synonyms": [
+      "pay",
+      "wage"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_041",
+    "term": "developer",
+    "ipa": "/dɪˈveləpə(r)/",
+    "part_of_speech": "noun",
+    "cefr_level": "B1",
+    "domain": "IT / Software Engineering",
+    "definition_vi": "Lập trình viên, nhà phát triển phần mềm.",
+    "example_en": "She has been a mobile developer since she left university.",
+    "example_vi": "Cô ấy là lập trình viên di động kể từ khi rời đại học.",
+    "synonyms": [
+      "programmer",
+      "software engineer"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_042",
+    "term": "database",
+    "ipa": "/ˈdeɪtəbeɪs/",
+    "part_of_speech": "noun",
+    "cefr_level": "B1",
+    "domain": "IT / Software Engineering",
+    "definition_vi": "Cơ sở dữ liệu.",
+    "example_en": "All customer orders are stored in the database.",
+    "example_vi": "Tất cả đơn hàng của khách được lưu trong cơ sở dữ liệu.",
+    "synonyms": [
+      "data store"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_043",
+    "term": "server",
+    "ipa": "/ˈsɜːvə(r)/",
+    "part_of_speech": "noun",
+    "cefr_level": "B1",
+    "domain": "IT / Infrastructure",
+    "definition_vi": "Máy chủ.",
+    "example_en": "The website went down because the server ran out of memory.",
+    "example_vi": "Trang web bị sập vì máy chủ hết bộ nhớ.",
+    "synonyms": [
+      "host"
+    ],
+    "antonyms": [
+      "client"
+    ]
+  },
+  {
+    "id": "vocab_044",
+    "term": "network",
+    "ipa": "/ˈnetwɜːk/",
+    "part_of_speech": "noun",
+    "cefr_level": "B1",
+    "domain": "IT / Infrastructure",
+    "definition_vi": "Mạng (máy tính).",
+    "example_en": "You need to connect to the company network to use this tool.",
+    "example_vi": "Bạn cần kết nối vào mạng công ty để dùng công cụ này.",
+    "synonyms": [],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_045",
+    "term": "bug",
+    "ipa": "/bʌɡ/",
+    "part_of_speech": "noun",
+    "cefr_level": "B1",
+    "domain": "IT / Software Engineering",
+    "definition_vi": "Lỗi phần mềm.",
+    "example_en": "We found a bug that only happens on older phones.",
+    "example_vi": "Chúng tôi tìm thấy một lỗi chỉ xảy ra trên điện thoại đời cũ.",
+    "synonyms": [
+      "defect",
+      "error"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_046",
+    "term": "feature",
+    "ipa": "/ˈfiːtʃə(r)/",
+    "part_of_speech": "noun",
+    "cefr_level": "B1",
+    "domain": "IT / Software Engineering",
+    "definition_vi": "Tính năng.",
+    "example_en": "The new search feature will be released next week.",
+    "example_vi": "Tính năng tìm kiếm mới sẽ được phát hành vào tuần sau.",
+    "synonyms": [
+      "function",
+      "capability"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_047",
+    "term": "application",
+    "ipa": "/ˌæplɪˈkeɪʃn/",
+    "part_of_speech": "noun",
+    "cefr_level": "B1",
+    "domain": "IT / Software Engineering",
+    "definition_vi": "Ứng dụng; đơn xin việc.",
+    "example_en": "I built a web application to manage hotel bookings.",
+    "example_vi": "Tôi đã xây dựng một ứng dụng web để quản lý đặt phòng khách sạn.",
+    "synonyms": [
+      "app",
+      "program"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_048",
+    "term": "version",
+    "ipa": "/ˈvɜːʃn/",
+    "part_of_speech": "noun",
+    "cefr_level": "B1",
+    "domain": "IT / Software Engineering",
+    "definition_vi": "Phiên bản.",
+    "example_en": "This library does not work with the latest version of Python.",
+    "example_vi": "Thư viện này không chạy được với phiên bản Python mới nhất.",
+    "synonyms": [
+      "release",
+      "edition"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_049",
+    "term": "deadline",
+    "ipa": "/ˈdedlaɪn/",
+    "part_of_speech": "noun",
+    "cefr_level": "B1",
+    "domain": "General English / Workplace",
+    "definition_vi": "Hạn chót.",
+    "example_en": "We finished the release two days before the deadline.",
+    "example_vi": "Chúng tôi hoàn thành bản phát hành trước hạn chót hai ngày.",
+    "synonyms": [
+      "due date",
+      "time limit"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_050",
+    "term": "responsible",
+    "ipa": "/rɪˈspɒnsəbl/",
+    "part_of_speech": "adjective",
+    "cefr_level": "B1",
+    "domain": "General English / Self-Introduction",
+    "definition_vi": "Chịu trách nhiệm.",
+    "example_en": "I was responsible for testing the payment module.",
+    "example_vi": "Tôi chịu trách nhiệm kiểm thử mô-đun thanh toán.",
+    "synonyms": [
+      "accountable",
+      "in charge"
+    ],
+    "antonyms": [
+      "irresponsible"
+    ]
+  },
+  {
+    "id": "vocab_051",
+    "term": "improve",
+    "ipa": "/ɪmˈpruːv/",
+    "part_of_speech": "verb",
+    "cefr_level": "B1",
+    "domain": "General English / Workplace",
+    "definition_vi": "Cải thiện.",
+    "example_en": "We improved the page speed by compressing images.",
+    "example_vi": "Chúng tôi đã cải thiện tốc độ trang bằng cách nén ảnh.",
+    "synonyms": [
+      "enhance",
+      "optimise"
+    ],
+    "antonyms": [
+      "worsen"
+    ]
+  },
+  {
+    "id": "vocab_052",
+    "term": "solve",
+    "ipa": "/sɒlv/",
+    "part_of_speech": "verb",
+    "cefr_level": "B1",
+    "domain": "General English / Interview",
+    "definition_vi": "Giải quyết (vấn đề, bài toán).",
+    "example_en": "Tell me about a difficult problem you solved at work.",
+    "example_vi": "Hãy kể về một vấn đề khó mà bạn đã giải quyết trong công việc.",
+    "synonyms": [
+      "resolve",
+      "fix"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_053",
+    "term": "interview",
+    "ipa": "/ˈɪntəvjuː/",
+    "part_of_speech": "noun",
+    "cefr_level": "B1",
+    "domain": "IT Job Interview",
+    "definition_vi": "Cuộc phỏng vấn.",
+    "example_en": "I have a technical interview on Friday afternoon.",
+    "example_vi": "Tôi có một buổi phỏng vấn kỹ thuật vào chiều thứ Sáu.",
+    "synonyms": [
+      "screening"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_054",
+    "term": "candidate",
+    "ipa": "/ˈkændɪdət/",
+    "part_of_speech": "noun",
+    "cefr_level": "B1",
+    "domain": "IT Job Interview",
+    "definition_vi": "Ứng viên.",
+    "example_en": "The best candidate will join the backend team in June.",
+    "example_vi": "Ứng viên tốt nhất sẽ gia nhập nhóm backend vào tháng Sáu.",
+    "synonyms": [
+      "applicant"
+    ],
+    "antonyms": [
+      "interviewer"
+    ]
+  },
+  {
+    "id": "vocab_055",
+    "term": "background",
+    "ipa": "/ˈbækɡraʊnd/",
+    "part_of_speech": "noun",
+    "cefr_level": "B1",
+    "domain": "IT Job Interview / Self-Introduction",
+    "definition_vi": "Lý lịch, nền tảng kinh nghiệm và học vấn.",
+    "example_en": "I have a background in computer science and networking.",
+    "example_vi": "Tôi có nền tảng về khoa học máy tính và mạng.",
+    "synonyms": [
+      "experience",
+      "history"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_056",
+    "term": "strength",
+    "ipa": "/streŋθ/",
+    "part_of_speech": "noun",
+    "cefr_level": "B1",
+    "domain": "IT Job Interview / Self-Introduction",
+    "definition_vi": "Điểm mạnh.",
+    "example_en": "My main strength is finding the cause of a problem quickly.",
+    "example_vi": "Điểm mạnh chính của tôi là tìm ra nguyên nhân của vấn đề một cách nhanh chóng.",
+    "synonyms": [
+      "strong point",
+      "asset"
+    ],
+    "antonyms": [
+      "weakness"
+    ]
+  },
+  {
+    "id": "vocab_057",
+    "term": "weakness",
+    "ipa": "/ˈwiːknəs/",
+    "part_of_speech": "noun",
+    "cefr_level": "B1",
+    "domain": "IT Job Interview / Self-Introduction",
+    "definition_vi": "Điểm yếu.",
+    "example_en": "One weakness of mine is that I don't always ask for help early enough.",
+    "example_vi": "Một điểm yếu của tôi là không phải lúc nào cũng nhờ giúp đỡ đủ sớm.",
+    "synonyms": [
+      "shortcoming",
+      "flaw"
+    ],
+    "antonyms": [
+      "strength"
+    ]
+  },
+  {
+    "id": "vocab_058",
+    "term": "requirement",
+    "ipa": "/rɪˈkwaɪəmənt/",
+    "part_of_speech": "noun",
+    "cefr_level": "B1",
+    "domain": "IT / Software Engineering",
+    "definition_vi": "Yêu cầu.",
+    "example_en": "The client changed the requirements after we had started coding.",
+    "example_vi": "Khách hàng đã thay đổi yêu cầu sau khi chúng tôi bắt đầu viết mã.",
+    "synonyms": [
+      "specification",
+      "need"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_059",
+    "term": "debug",
+    "ipa": "/ˌdiːˈbʌɡ/",
+    "part_of_speech": "verb",
+    "cefr_level": "B1",
+    "domain": "IT / Software Engineering",
+    "definition_vi": "Gỡ lỗi.",
+    "example_en": "It took me all morning to debug that function.",
+    "example_vi": "Tôi mất cả buổi sáng để gỡ lỗi hàm đó.",
+    "synonyms": [
+      "troubleshoot"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_060",
+    "term": "achieve",
+    "ipa": "/əˈtʃiːv/",
+    "part_of_speech": "verb",
+    "cefr_level": "B1",
+    "domain": "General English / Self-Introduction",
+    "definition_vi": "Đạt được.",
+    "example_en": "Our team achieved its goal of zero failed releases this quarter.",
+    "example_vi": "Nhóm chúng tôi đạt được mục tiêu không có bản phát hành lỗi nào trong quý này.",
+    "synonyms": [
+      "accomplish",
+      "attain"
+    ],
+    "antonyms": [
+      "fail"
+    ]
+  },
+  {
+    "id": "vocab_061",
+    "term": "asynchronous",
+    "ipa": "/eɪˈsɪŋkrənəs/",
+    "part_of_speech": "adjective",
+    "cefr_level": "B2",
+    "domain": "IT / Software Engineering",
+    "definition_vi": "Xảy ra hoặc hoạt động không đồng thời; cho phép các tác vụ chạy ngầm mà không chặn luồng chính.",
+    "example_en": "The API uses asynchronous requests to fetch data without freezing the user interface.",
+    "example_vi": "API này sử dụng các yêu cầu bất đồng bộ để lấy dữ liệu mà không làm đóng băng giao diện người dùng.",
+    "synonyms": [
+      "non-blocking"
+    ],
+    "antonyms": [
+      "synchronous",
+      "blocking"
+    ]
+  },
+  {
+    "id": "vocab_062",
+    "term": "deploy",
+    "ipa": "/dɪˈplɔɪ/",
+    "part_of_speech": "verb",
+    "cefr_level": "B2",
+    "domain": "IT / DevOps",
+    "definition_vi": "Triển khai (phần mềm lên môi trường chạy).",
+    "example_en": "We deploy to production several times a week using a blue-green strategy.",
+    "example_vi": "Chúng tôi triển khai lên môi trường production vài lần một tuần bằng chiến lược blue-green.",
+    "synonyms": [
+      "release",
+      "roll out"
+    ],
+    "antonyms": [
+      "undeploy"
+    ]
+  },
+  {
+    "id": "vocab_063",
+    "term": "scalable",
+    "ipa": "/ˈskeɪləbl/",
+    "part_of_speech": "adjective",
+    "cefr_level": "B2",
+    "domain": "IT / System Design",
+    "definition_vi": "Có khả năng mở rộng khi tải tăng.",
+    "example_en": "A stateless design makes the service far more scalable.",
+    "example_vi": "Thiết kế không lưu trạng thái giúp dịch vụ dễ mở rộng hơn nhiều.",
+    "synonyms": [
+      "expandable"
+    ],
+    "antonyms": [
+      "unscalable"
+    ]
+  },
+  {
+    "id": "vocab_064",
+    "term": "latency",
+    "ipa": "/ˈleɪtənsi/",
+    "part_of_speech": "noun",
+    "cefr_level": "B2",
+    "domain": "IT / System Design",
+    "definition_vi": "Độ trễ.",
+    "example_en": "Moving the cache closer to users reduced latency by half.",
+    "example_vi": "Đưa bộ nhớ đệm đến gần người dùng hơn đã giảm độ trễ đi một nửa.",
+    "synonyms": [
+      "delay",
+      "lag"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_065",
+    "term": "framework",
+    "ipa": "/ˈfreɪmwɜːk/",
+    "part_of_speech": "noun",
+    "cefr_level": "B2",
+    "domain": "IT / Software Engineering",
+    "definition_vi": "Khung phần mềm, bộ khung phát triển.",
+    "example_en": "We chose this framework because of its strong community support.",
+    "example_vi": "Chúng tôi chọn framework này vì được cộng đồng hỗ trợ mạnh.",
+    "synonyms": [
+      "platform"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_066",
+    "term": "repository",
+    "ipa": "/rɪˈpɒzətri/",
+    "part_of_speech": "noun",
+    "cefr_level": "B2",
+    "domain": "IT / Software Engineering",
+    "definition_vi": "Kho lưu trữ mã nguồn.",
+    "example_en": "Every service has its own Git repository and release cycle.",
+    "example_vi": "Mỗi dịch vụ có kho Git và chu kỳ phát hành riêng.",
+    "synonyms": [
+      "repo",
+      "codebase"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_067",
+    "term": "refactor",
+    "ipa": "/ˌriːˈfæktə(r)/",
+    "part_of_speech": "verb",
+    "cefr_level": "B2",
+    "domain": "IT / Software Engineering",
+    "definition_vi": "Tái cấu trúc mã nguồn mà không thay đổi hành vi bên ngoài.",
+    "example_en": "Before adding the feature, I refactored the module to remove duplicated logic.",
+    "example_vi": "Trước khi thêm tính năng, tôi đã tái cấu trúc mô-đun để loại bỏ logic trùng lặp.",
+    "synonyms": [
+      "restructure"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_068",
+    "term": "authentication",
+    "ipa": "/ɔːˌθentɪˈkeɪʃn/",
+    "part_of_speech": "noun",
+    "cefr_level": "B2",
+    "domain": "IT / Security",
+    "definition_vi": "Xác thực danh tính.",
+    "example_en": "The gateway handles authentication before requests reach internal services.",
+    "example_vi": "Gateway xử lý xác thực trước khi yêu cầu đến các dịch vụ nội bộ.",
+    "synonyms": [
+      "identity verification"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_069",
+    "term": "encryption",
+    "ipa": "/ɪnˈkrɪpʃn/",
+    "part_of_speech": "noun",
+    "cefr_level": "B2",
+    "domain": "IT / Security",
+    "definition_vi": "Mã hóa dữ liệu.",
+    "example_en": "Personal data is protected by encryption both at rest and in transit.",
+    "example_vi": "Dữ liệu cá nhân được bảo vệ bằng mã hóa cả khi lưu trữ lẫn khi truyền.",
+    "synonyms": [
+      "ciphering"
+    ],
+    "antonyms": [
+      "decryption"
+    ]
+  },
+  {
+    "id": "vocab_070",
+    "term": "dependency",
+    "ipa": "/dɪˈpendənsi/",
+    "part_of_speech": "noun",
+    "cefr_level": "B2",
+    "domain": "IT / Software Engineering",
+    "definition_vi": "Thành phần phụ thuộc; thư viện mà mã nguồn cần để chạy.",
+    "example_en": "An outdated dependency introduced a serious security hole.",
+    "example_vi": "Một thư viện phụ thuộc đã lỗi thời gây ra một lỗ hổng bảo mật nghiêm trọng.",
+    "synonyms": [
+      "library",
+      "prerequisite"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_071",
+    "term": "pipeline",
+    "ipa": "/ˈpaɪplaɪn/",
+    "part_of_speech": "noun",
+    "cefr_level": "B2",
+    "domain": "IT / DevOps",
+    "definition_vi": "Quy trình tự động hóa nhiều bước (như CI/CD, xử lý dữ liệu).",
+    "example_en": "The CI pipeline runs all unit tests on every pull request.",
+    "example_vi": "Pipeline CI chạy toàn bộ unit test trên mỗi pull request.",
+    "synonyms": [
+      "workflow"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_072",
+    "term": "container",
+    "ipa": "/kənˈteɪnə(r)/",
+    "part_of_speech": "noun",
+    "cefr_level": "B2",
+    "domain": "IT / DevOps",
+    "definition_vi": "Container: đơn vị đóng gói ứng dụng cùng môi trường chạy của nó.",
+    "example_en": "Running the app in a container keeps development and production consistent.",
+    "example_vi": "Chạy ứng dụng trong container giúp môi trường phát triển và production nhất quán.",
+    "synonyms": [],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_073",
+    "term": "load balancer",
+    "ipa": "/ˈləʊd ˌbælənsə(r)/",
+    "part_of_speech": "noun",
+    "cefr_level": "B2",
+    "domain": "IT / System Design",
+    "definition_vi": "Bộ cân bằng tải.",
+    "example_en": "The load balancer distributes traffic evenly across three servers.",
+    "example_vi": "Bộ cân bằng tải phân phối lưu lượng đều trên ba máy chủ.",
+    "synonyms": [
+      "traffic distributor"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_074",
+    "term": "implement",
+    "ipa": "/ˈɪmplɪment/",
+    "part_of_speech": "verb",
+    "cefr_level": "B2",
+    "domain": "IT / Software Engineering",
+    "definition_vi": "Hiện thực hóa, triển khai (giải pháp, thuật toán).",
+    "example_en": "I implemented rate limiting to protect the public API.",
+    "example_vi": "Tôi đã triển khai giới hạn tần suất để bảo vệ API công khai.",
+    "synonyms": [
+      "build",
+      "carry out"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_075",
+    "term": "collaborate",
+    "ipa": "/kəˈlæbəreɪt/",
+    "part_of_speech": "verb",
+    "cefr_level": "B2",
+    "domain": "General English / Self-Introduction",
+    "definition_vi": "Cộng tác, hợp tác.",
+    "example_en": "I collaborate closely with designers and product managers.",
+    "example_vi": "Tôi cộng tác chặt chẽ với các nhà thiết kế và quản lý sản phẩm.",
+    "synonyms": [
+      "cooperate",
+      "work together"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_076",
+    "term": "maintain",
+    "ipa": "/meɪnˈteɪn/",
+    "part_of_speech": "verb",
+    "cefr_level": "B2",
+    "domain": "IT / Software Engineering",
+    "definition_vi": "Duy trì, bảo trì.",
+    "example_en": "Our team maintains several legacy services written in Java.",
+    "example_vi": "Nhóm chúng tôi bảo trì một số dịch vụ cũ viết bằng Java.",
+    "synonyms": [
+      "support",
+      "look after"
+    ],
+    "antonyms": [
+      "neglect"
+    ]
+  },
+  {
+    "id": "vocab_077",
+    "term": "stakeholder",
+    "ipa": "/ˈsteɪkhəʊldə(r)/",
+    "part_of_speech": "noun",
+    "cefr_level": "B2",
+    "domain": "IT / Project Management",
+    "definition_vi": "Bên liên quan.",
+    "example_en": "I presented the migration plan to the main stakeholders.",
+    "example_vi": "Tôi đã trình bày kế hoạch di chuyển với các bên liên quan chính.",
+    "synonyms": [
+      "interested party"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_078",
+    "term": "trade-off",
+    "ipa": "/ˈtreɪd ɒf/",
+    "part_of_speech": "noun",
+    "cefr_level": "B2",
+    "domain": "IT / System Design",
+    "definition_vi": "Sự đánh đổi giữa các lựa chọn.",
+    "example_en": "Using a cache is a trade-off between speed and data freshness.",
+    "example_vi": "Dùng bộ nhớ đệm là sự đánh đổi giữa tốc độ và độ mới của dữ liệu.",
+    "synonyms": [
+      "compromise"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_079",
+    "term": "bottleneck",
+    "ipa": "/ˈbɒtlnek/",
+    "part_of_speech": "noun",
+    "cefr_level": "B2",
+    "domain": "IT / System Design",
+    "definition_vi": "Điểm nghẽn.",
+    "example_en": "Profiling showed that the database was the main bottleneck.",
+    "example_vi": "Việc phân tích hiệu năng cho thấy cơ sở dữ liệu là điểm nghẽn chính.",
+    "synonyms": [
+      "choke point"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_080",
+    "term": "mentor",
+    "ipa": "/ˈmentɔː(r)/",
+    "part_of_speech": "verb",
+    "cefr_level": "B2",
+    "domain": "General English / Self-Introduction",
+    "definition_vi": "Kèm cặp, hướng dẫn.",
+    "example_en": "I currently mentor two junior developers on my team.",
+    "example_vi": "Hiện tôi đang kèm cặp hai lập trình viên mới trong nhóm.",
+    "synonyms": [
+      "coach",
+      "guide"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_081",
+    "term": "microservice",
+    "ipa": "/ˈmaɪkrəʊˌsɜːvɪs/",
+    "part_of_speech": "noun",
+    "cefr_level": "C1",
+    "domain": "IT / System Architecture",
+    "definition_vi": "Vi dịch vụ: dịch vụ nhỏ, triển khai độc lập, đảm nhiệm một năng lực nghiệp vụ.",
+    "example_en": "Each microservice owns its data and exposes it only through a well-defined API.",
+    "example_vi": "Mỗi vi dịch vụ sở hữu dữ liệu của mình và chỉ cung cấp dữ liệu qua một API được định nghĩa rõ ràng.",
+    "synonyms": [
+      "service"
+    ],
+    "antonyms": [
+      "monolith"
+    ]
+  },
+  {
+    "id": "vocab_082",
+    "term": "monolithic",
+    "ipa": "/ˌmɒnəˈlɪθɪk/",
+    "part_of_speech": "adjective",
+    "cefr_level": "C1",
+    "domain": "IT / System Architecture",
+    "definition_vi": "Nguyên khối: toàn bộ ứng dụng được xây dựng và triển khai như một khối.",
+    "example_en": "The monolithic codebase had become too risky to release more than once a month.",
+    "example_vi": "Mã nguồn nguyên khối đã trở nên quá rủi ro để phát hành nhiều hơn một lần mỗi tháng.",
+    "synonyms": [
+      "single-tier"
+    ],
+    "antonyms": [
+      "modular",
+      "distributed"
+    ]
+  },
+  {
+    "id": "vocab_083",
+    "term": "orchestration",
+    "ipa": "/ˌɔːkɪˈstreɪʃn/",
+    "part_of_speech": "noun",
+    "cefr_level": "C1",
+    "domain": "IT / DevOps",
+    "definition_vi": "Điều phối tự động nhiều thành phần, ví dụ container.",
+    "example_en": "Kubernetes handles container orchestration, including scheduling and self-healing.",
+    "example_vi": "Kubernetes đảm nhận việc điều phối container, bao gồm lập lịch và tự phục hồi.",
+    "synonyms": [
+      "coordination"
+    ],
+    "antonyms": [
+      "choreography"
+    ]
+  },
+  {
+    "id": "vocab_084",
+    "term": "concurrency",
+    "ipa": "/kənˈkʌrənsi/",
+    "part_of_speech": "noun",
+    "cefr_level": "C1",
+    "domain": "IT / Software Engineering",
+    "definition_vi": "Tính đồng thời: xử lý nhiều tác vụ chồng lấn về thời gian.",
+    "example_en": "Go's goroutines make concurrency considerably easier to reason about.",
+    "example_vi": "Goroutine của Go giúp việc suy luận về tính đồng thời dễ hơn đáng kể.",
+    "synonyms": [
+      "simultaneity"
+    ],
+    "antonyms": [
+      "sequential execution"
+    ]
+  },
+  {
+    "id": "vocab_085",
+    "term": "replication",
+    "ipa": "/ˌreplɪˈkeɪʃn/",
+    "part_of_speech": "noun",
+    "cefr_level": "C1",
+    "domain": "IT / Databases",
+    "definition_vi": "Sao chép dữ liệu giữa nhiều nút.",
+    "example_en": "Asynchronous replication can leave read replicas slightly behind the primary.",
+    "example_vi": "Sao chép bất đồng bộ có thể khiến các bản sao đọc chậm hơn một chút so với bản chính.",
+    "synonyms": [
+      "mirroring"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_086",
+    "term": "sharding",
+    "ipa": "/ˈʃɑːdɪŋ/",
+    "part_of_speech": "noun",
+    "cefr_level": "C1",
+    "domain": "IT / Databases",
+    "definition_vi": "Phân mảnh dữ liệu theo chiều ngang sang nhiều nút.",
+    "example_en": "Sharding by customer ID kept each partition small enough to manage.",
+    "example_vi": "Phân mảnh theo mã khách hàng giúp mỗi phân vùng đủ nhỏ để quản lý.",
+    "synonyms": [
+      "horizontal partitioning"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_087",
+    "term": "observability",
+    "ipa": "/əbˌzɜːvəˈbɪləti/",
+    "part_of_speech": "noun",
+    "cefr_level": "C1",
+    "domain": "IT / DevOps",
+    "definition_vi": "Khả năng quan sát: suy ra trạng thái bên trong hệ thống từ log, metric và trace.",
+    "example_en": "Without proper observability, we were effectively debugging production blind.",
+    "example_vi": "Nếu thiếu khả năng quan sát phù hợp, chúng tôi gần như gỡ lỗi production trong mù mờ.",
+    "synonyms": [
+      "monitorability"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_088",
+    "term": "fault tolerance",
+    "ipa": "/ˈfɔːlt ˌtɒlərəns/",
+    "part_of_speech": "noun",
+    "cefr_level": "C1",
+    "domain": "IT / System Design",
+    "definition_vi": "Khả năng chịu lỗi.",
+    "example_en": "Fault tolerance was achieved by running replicas across three availability zones.",
+    "example_vi": "Khả năng chịu lỗi đạt được nhờ chạy các bản sao trên ba vùng khả dụng.",
+    "synonyms": [
+      "resilience"
+    ],
+    "antonyms": [
+      "fragility"
+    ]
+  },
+  {
+    "id": "vocab_089",
+    "term": "failover",
+    "ipa": "/ˈfeɪləʊvə(r)/",
+    "part_of_speech": "noun",
+    "cefr_level": "C1",
+    "domain": "IT / System Design",
+    "definition_vi": "Chuyển đổi dự phòng tự động khi thành phần chính gặp sự cố.",
+    "example_en": "Automatic failover promoted a standby node within thirty seconds.",
+    "example_vi": "Cơ chế chuyển đổi dự phòng tự động đã nâng một nút dự phòng lên trong vòng ba mươi giây.",
+    "synonyms": [
+      "switchover"
+    ],
+    "antonyms": [
+      "failback"
+    ]
+  },
+  {
+    "id": "vocab_090",
+    "term": "decouple",
+    "ipa": "/diːˈkʌpl/",
+    "part_of_speech": "verb",
+    "cefr_level": "C1",
+    "domain": "IT / System Architecture",
+    "definition_vi": "Tách rời, giảm sự phụ thuộc giữa các thành phần.",
+    "example_en": "A message queue decouples the order service from the email service.",
+    "example_vi": "Hàng đợi tin nhắn giúp tách dịch vụ đơn hàng khỏi dịch vụ email.",
+    "synonyms": [
+      "separate",
+      "disentangle"
+    ],
+    "antonyms": [
+      "couple"
+    ]
+  },
+  {
+    "id": "vocab_091",
+    "term": "throughput",
+    "ipa": "/ˈθruːpʊt/",
+    "part_of_speech": "noun",
+    "cefr_level": "C1",
+    "domain": "IT / System Design",
+    "definition_vi": "Thông lượng: lượng công việc xử lý được trong một đơn vị thời gian.",
+    "example_en": "Batching writes increased throughput at the expense of slightly higher latency.",
+    "example_vi": "Gom nhóm các thao tác ghi đã tăng thông lượng, đổi lại độ trễ cao hơn một chút.",
+    "synonyms": [
+      "capacity",
+      "processing rate"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_092",
+    "term": "provision",
+    "ipa": "/prəˈvɪʒn/",
+    "part_of_speech": "verb",
+    "cefr_level": "C1",
+    "domain": "IT / Cloud",
+    "definition_vi": "Cấp phát, chuẩn bị tài nguyên hạ tầng.",
+    "example_en": "Terraform provisions every environment from the same declarative configuration.",
+    "example_vi": "Terraform cấp phát mọi môi trường từ cùng một cấu hình khai báo.",
+    "synonyms": [
+      "allocate",
+      "set up"
+    ],
+    "antonyms": [
+      "deprovision"
+    ]
+  },
+  {
+    "id": "vocab_093",
+    "term": "mitigate",
+    "ipa": "/ˈmɪtɪɡeɪt/",
+    "part_of_speech": "verb",
+    "cefr_level": "C1",
+    "domain": "IT / Risk Management",
+    "definition_vi": "Giảm thiểu (rủi ro, tác động).",
+    "example_en": "We mitigated the incident by rerouting traffic to a healthy region.",
+    "example_vi": "Chúng tôi giảm thiểu sự cố bằng cách định tuyến lại lưu lượng sang một vùng khỏe mạnh.",
+    "synonyms": [
+      "alleviate",
+      "reduce"
+    ],
+    "antonyms": [
+      "aggravate"
+    ]
+  },
+  {
+    "id": "vocab_094",
+    "term": "robust",
+    "ipa": "/rəʊˈbʌst/",
+    "part_of_speech": "adjective",
+    "cefr_level": "C1",
+    "domain": "IT / Software Engineering",
+    "definition_vi": "Vững chắc, xử lý tốt các tình huống bất thường.",
+    "example_en": "The parser has to be robust against malformed input.",
+    "example_vi": "Trình phân tích phải xử lý vững vàng trước dữ liệu đầu vào sai định dạng.",
+    "synonyms": [
+      "sturdy",
+      "resilient"
+    ],
+    "antonyms": [
+      "fragile",
+      "brittle"
+    ]
+  },
+  {
+    "id": "vocab_095",
+    "term": "leverage",
+    "ipa": "/ˈliːvərɪdʒ/",
+    "part_of_speech": "verb",
+    "cefr_level": "C1",
+    "domain": "Business English / IT",
+    "definition_vi": "Tận dụng tối đa (nguồn lực, công nghệ).",
+    "example_en": "We leveraged managed services to keep our operational overhead low.",
+    "example_vi": "Chúng tôi tận dụng các dịch vụ được quản lý để giữ chi phí vận hành ở mức thấp.",
+    "synonyms": [
+      "exploit",
+      "capitalise on"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_096",
+    "term": "granular",
+    "ipa": "/ˈɡrænjələ(r)/",
+    "part_of_speech": "adjective",
+    "cefr_level": "C1",
+    "domain": "IT / Software Engineering",
+    "definition_vi": "Chi tiết ở mức nhỏ, phân tách mịn.",
+    "example_en": "Role-based access gives administrators granular control over permissions.",
+    "example_vi": "Phân quyền theo vai trò giúp quản trị viên kiểm soát quyền hạn một cách chi tiết.",
+    "synonyms": [
+      "fine-grained",
+      "detailed"
+    ],
+    "antonyms": [
+      "coarse-grained"
+    ]
+  },
+  {
+    "id": "vocab_097",
+    "term": "resilient",
+    "ipa": "/rɪˈzɪliənt/",
+    "part_of_speech": "adjective",
+    "cefr_level": "C1",
+    "domain": "IT / System Design",
+    "definition_vi": "Có khả năng phục hồi, chống chịu sự cố.",
+    "example_en": "Circuit breakers make the system more resilient to downstream failures.",
+    "example_vi": "Circuit breaker giúp hệ thống chống chịu tốt hơn trước lỗi từ các dịch vụ phía sau.",
+    "synonyms": [
+      "fault-tolerant",
+      "robust"
+    ],
+    "antonyms": [
+      "fragile"
+    ]
+  },
+  {
+    "id": "vocab_098",
+    "term": "rollback",
+    "ipa": "/ˈrəʊlbæk/",
+    "part_of_speech": "noun",
+    "cefr_level": "C1",
+    "domain": "IT / DevOps",
+    "definition_vi": "Quay lui về phiên bản ổn định trước đó.",
+    "example_en": "The canary metrics degraded, so we initiated an immediate rollback.",
+    "example_vi": "Các chỉ số canary xấu đi nên chúng tôi lập tức tiến hành quay lui.",
+    "synonyms": [
+      "reversion"
+    ],
+    "antonyms": [
+      "rollout"
+    ]
+  },
+  {
+    "id": "vocab_099",
+    "term": "postmortem",
+    "ipa": "/ˌpəʊstˈmɔːtəm/",
+    "part_of_speech": "noun",
+    "cefr_level": "C1",
+    "domain": "IT / DevOps",
+    "definition_vi": "Bản phân tích sau sự cố nhằm tìm nguyên nhân và bài học.",
+    "example_en": "Our blameless postmortem focused on process gaps rather than individuals.",
+    "example_vi": "Buổi phân tích sau sự cố không đổ lỗi của chúng tôi tập trung vào lỗ hổng quy trình thay vì cá nhân.",
+    "synonyms": [
+      "incident review",
+      "retrospective"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_100",
+    "term": "spearhead",
+    "ipa": "/ˈspɪəhed/",
+    "part_of_speech": "verb",
+    "cefr_level": "C1",
+    "domain": "Business English / Self-Introduction",
+    "definition_vi": "Dẫn đầu, khởi xướng (một sáng kiến).",
+    "example_en": "I spearheaded the company's move from on-premises servers to AWS.",
+    "example_vi": "Tôi đã dẫn dắt việc chuyển công ty từ máy chủ tại chỗ lên AWS.",
+    "synonyms": [
+      "lead",
+      "pioneer"
+    ],
+    "antonyms": [
+      "follow"
+    ]
+  },
+  {
+    "id": "vocab_101",
+    "term": "idempotent",
+    "ipa": "/ˌaɪdemˈpəʊtənt/",
+    "part_of_speech": "adjective",
+    "cefr_level": "C2",
+    "domain": "IT / Distributed Systems",
+    "definition_vi": "Lũy đẳng: thực hiện nhiều lần cho kết quả giống như thực hiện một lần.",
+    "example_en": "Payment endpoints must be idempotent so that client retries cannot charge a customer twice.",
+    "example_vi": "Các endpoint thanh toán phải lũy đẳng để việc thử lại từ client không thể trừ tiền khách hàng hai lần.",
+    "synonyms": [
+      "repeat-safe"
+    ],
+    "antonyms": [
+      "non-idempotent"
+    ]
+  },
+  {
+    "id": "vocab_102",
+    "term": "linearizability",
+    "ipa": "/ˌlɪniəraɪzəˈbɪləti/",
+    "part_of_speech": "noun",
+    "cefr_level": "C2",
+    "domain": "IT / Distributed Systems",
+    "definition_vi": "Tính tuyến tính hóa: mọi thao tác trông như xảy ra tức thời theo một thứ tự toàn cục phù hợp với thời gian thực.",
+    "example_en": "Linearizability comes at a cost: every write must be coordinated across a majority of replicas.",
+    "example_vi": "Tính tuyến tính hóa có cái giá của nó: mọi thao tác ghi phải được phối hợp trên đa số bản sao.",
+    "synonyms": [
+      "atomic consistency",
+      "strong consistency"
+    ],
+    "antonyms": [
+      "eventual consistency"
+    ]
+  },
+  {
+    "id": "vocab_103",
+    "term": "quorum",
+    "ipa": "/ˈkwɔːrəm/",
+    "part_of_speech": "noun",
+    "cefr_level": "C2",
+    "domain": "IT / Distributed Systems",
+    "definition_vi": "Số lượng nút tối thiểu phải đồng ý để một thao tác có hiệu lực.",
+    "example_en": "With five nodes, a write requires a quorum of three acknowledgements.",
+    "example_vi": "Với năm nút, một thao tác ghi cần số đại biểu tối thiểu là ba xác nhận.",
+    "synonyms": [
+      "majority"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_104",
+    "term": "eventual consistency",
+    "ipa": "/ɪˌventʃuəl kənˈsɪstənsi/",
+    "part_of_speech": "noun",
+    "cefr_level": "C2",
+    "domain": "IT / Distributed Systems",
+    "definition_vi": "Tính nhất quán cuối cùng: các bản sao sẽ hội tụ về cùng giá trị nếu không có cập nhật mới.",
+    "example_en": "Eventual consistency is perfectly acceptable for a social feed, though hardly for a ledger.",
+    "example_vi": "Tính nhất quán cuối cùng hoàn toàn chấp nhận được với bảng tin mạng xã hội, nhưng khó có thể chấp nhận với sổ cái.",
+    "synonyms": [
+      "weak consistency"
+    ],
+    "antonyms": [
+      "strong consistency",
+      "linearizability"
+    ]
+  },
+  {
+    "id": "vocab_105",
+    "term": "backpressure",
+    "ipa": "/ˈbækˌpreʃə(r)/",
+    "part_of_speech": "noun",
+    "cefr_level": "C2",
+    "domain": "IT / Distributed Systems",
+    "definition_vi": "Áp lực ngược: cơ chế để bên nhận buộc bên gửi giảm tốc độ khi quá tải.",
+    "example_en": "Absent backpressure, a slow consumer will eventually exhaust the broker's memory.",
+    "example_vi": "Nếu không có áp lực ngược, một consumer chậm rốt cuộc sẽ làm cạn bộ nhớ của broker.",
+    "synonyms": [
+      "flow control"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_106",
+    "term": "Byzantine fault",
+    "ipa": "/bɪˈzæntaɪn fɔːlt/",
+    "part_of_speech": "noun",
+    "cefr_level": "C2",
+    "domain": "IT / Distributed Systems",
+    "definition_vi": "Lỗi Byzantine: một nút hoạt động tùy tiện hoặc gửi thông tin mâu thuẫn tới các nút khác.",
+    "example_en": "Most internal systems assume crash failures and do not tolerate a Byzantine fault.",
+    "example_vi": "Phần lớn hệ thống nội bộ chỉ giả định lỗi dừng hẳn và không chịu được lỗi Byzantine.",
+    "synonyms": [
+      "arbitrary failure"
+    ],
+    "antonyms": [
+      "crash fault"
+    ]
+  },
+  {
+    "id": "vocab_107",
+    "term": "tail latency",
+    "ipa": "/ˈteɪl ˌleɪtənsi/",
+    "part_of_speech": "noun",
+    "cefr_level": "C2",
+    "domain": "IT / System Design",
+    "definition_vi": "Độ trễ đuôi: độ trễ ở các phân vị cao như p99, của những yêu cầu chậm nhất.",
+    "example_en": "Averages conceal tail latency, which is precisely what your busiest users experience.",
+    "example_vi": "Giá trị trung bình che giấu độ trễ đuôi, vốn chính là điều những người dùng nhiều nhất của bạn phải trải qua.",
+    "synonyms": [
+      "p99 latency"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_108",
+    "term": "thundering herd",
+    "ipa": "/ˌθʌndərɪŋ ˈhɜːd/",
+    "part_of_speech": "noun",
+    "cefr_level": "C2",
+    "domain": "IT / System Design",
+    "definition_vi": "Hiện tượng rất nhiều tiến trình đồng loạt thức dậy hoặc gửi yêu cầu cùng lúc, gây quá tải.",
+    "example_en": "Adding jitter to retries prevents a thundering herd once the cache entry expires.",
+    "example_vi": "Thêm độ ngẫu nhiên vào việc thử lại giúp ngăn hiện tượng đổ dồn yêu cầu khi mục cache hết hạn.",
+    "synonyms": [
+      "cache stampede"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_109",
+    "term": "split-brain",
+    "ipa": "/ˌsplɪt ˈbreɪn/",
+    "part_of_speech": "noun",
+    "cefr_level": "C2",
+    "domain": "IT / Distributed Systems",
+    "definition_vi": "Tình trạng phân tách khiến hai nhóm nút cùng cho rằng mình là bên chính.",
+    "example_en": "Fencing tokens guard against split-brain during a network partition.",
+    "example_vi": "Fencing token giúp phòng tránh tình trạng hai bên cùng làm chủ khi mạng bị phân tách.",
+    "synonyms": [
+      "dual primary"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_110",
+    "term": "nondeterministic",
+    "ipa": "/ˌnɒndɪˌtɜːmɪˈnɪstɪk/",
+    "part_of_speech": "adjective",
+    "cefr_level": "C2",
+    "domain": "IT / Software Engineering",
+    "definition_vi": "Không tất định: cùng đầu vào có thể cho kết quả khác nhau.",
+    "example_en": "The test was nondeterministic owing to an unsynchronised shared counter.",
+    "example_vi": "Bài kiểm thử không tất định do một bộ đếm dùng chung không được đồng bộ.",
+    "synonyms": [
+      "flaky",
+      "unpredictable"
+    ],
+    "antonyms": [
+      "deterministic"
+    ]
+  },
+  {
+    "id": "vocab_111",
+    "term": "amortize",
+    "ipa": "/əˈmɔːtaɪz/",
+    "part_of_speech": "verb",
+    "cefr_level": "C2",
+    "domain": "IT / Algorithms",
+    "definition_vi": "Khấu hao, phân bổ chi phí của thao tác tốn kém lên nhiều thao tác.",
+    "example_en": "Occasional resizing is amortized across inserts, yielding constant time per operation.",
+    "example_vi": "Việc thay đổi kích thước thỉnh thoảng được phân bổ qua các lần chèn, cho ra thời gian hằng số trên mỗi thao tác.",
+    "synonyms": [
+      "spread out"
+    ],
+    "antonyms": []
+  },
+  {
+    "id": "vocab_112",
+    "term": "polyglot persistence",
+    "ipa": "/ˈpɒliɡlɒt pəˈsɪstəns/",
+    "part_of_speech": "noun",
+    "cefr_level": "C2",
+    "domain": "IT / System Architecture",
+    "definition_vi": "Dùng nhiều công nghệ lưu trữ khác nhau, mỗi loại cho nhu cầu phù hợp.",
+    "example_en": "Polyglot persistence offers the right tool for each workload but multiplies the operational burden.",
+    "example_vi": "Việc dùng nhiều công nghệ lưu trữ mang lại công cụ phù hợp cho từng tải công việc nhưng làm tăng gánh nặng vận hành.",
+    "synonyms": [],
+    "antonyms": [
+      "single datastore"
+    ]
+  },
+  {
+    "id": "vocab_113",
+    "term": "ephemeral",
+    "ipa": "/ɪˈfemərəl/",
+    "part_of_speech": "adjective",
+    "cefr_level": "C2",
+    "domain": "Academic English / IT",
+    "definition_vi": "Tồn tại ngắn ngủi, không lưu giữ lâu dài.",
+    "example_en": "Build agents are ephemeral: each is destroyed as soon as its job completes.",
+    "example_vi": "Các build agent chỉ tồn tại tạm thời: mỗi agent bị hủy ngay khi công việc hoàn tất.",
+    "synonyms": [
+      "transient",
+      "short-lived"
+    ],
+    "antonyms": [
+      "persistent",
+      "permanent"
+    ]
+  },
+  {
+    "id": "vocab_114",
+    "term": "obviate",
+    "ipa": "/ˈɒbvieɪt/",
+    "part_of_speech": "verb",
+    "cefr_level": "C2",
+    "domain": "Academic English / IT",
+    "definition_vi": "Loại bỏ sự cần thiết của điều gì đó.",
+    "example_en": "Serverless functions obviate the need to manage long-running hosts.",
+    "example_vi": "Hàm serverless giúp loại bỏ nhu cầu quản lý các máy chủ chạy dài hạn.",
+    "synonyms": [
+      "preclude",
+      "eliminate"
+    ],
+    "antonyms": [
+      "necessitate"
+    ]
+  },
+  {
+    "id": "vocab_115",
+    "term": "exacerbate",
+    "ipa": "/ɪɡˈzæsəbeɪt/",
+    "part_of_speech": "verb",
+    "cefr_level": "C2",
+    "domain": "Academic English / IT",
+    "definition_vi": "Làm trầm trọng thêm.",
+    "example_en": "Aggressive client retries exacerbated what began as a minor outage.",
+    "example_vi": "Việc client thử lại dồn dập đã làm trầm trọng thêm một sự cố vốn ban đầu rất nhỏ.",
+    "synonyms": [
+      "aggravate",
+      "worsen"
+    ],
+    "antonyms": [
+      "alleviate",
+      "mitigate"
+    ]
+  },
+  {
+    "id": "vocab_116",
+    "term": "ameliorate",
+    "ipa": "/əˈmiːliəreɪt/",
+    "part_of_speech": "verb",
+    "cefr_level": "C2",
+    "domain": "Academic English / IT",
+    "definition_vi": "Làm cho tốt hơn, cải thiện (tình trạng xấu).",
+    "example_en": "Connection pooling ameliorated, but did not eliminate, the exhaustion problem.",
+    "example_vi": "Connection pooling đã cải thiện, nhưng không loại bỏ, vấn đề cạn kiệt tài nguyên.",
+    "synonyms": [
+      "improve",
+      "alleviate"
+    ],
+    "antonyms": [
+      "worsen",
+      "exacerbate"
+    ]
+  },
+  {
+    "id": "vocab_117",
+    "term": "idiosyncratic",
+    "ipa": "/ˌɪdiəsɪŋˈkrætɪk/",
+    "part_of_speech": "adjective",
+    "cefr_level": "C2",
+    "domain": "Academic English / IT",
+    "definition_vi": "Mang tính đặc thù riêng, khác thường.",
+    "example_en": "The codebase was riddled with idiosyncratic conventions known only to its original author.",
+    "example_vi": "Mã nguồn đầy những quy ước đặc thù mà chỉ tác giả ban đầu mới biết.",
+    "synonyms": [
+      "peculiar",
+      "quirky"
+    ],
+    "antonyms": [
+      "conventional"
+    ]
+  },
+  {
+    "id": "vocab_118",
+    "term": "commensurate",
+    "ipa": "/kəˈmenʃərət/",
+    "part_of_speech": "adjective",
+    "cefr_level": "C2",
+    "domain": "Business English / Interview",
+    "definition_vi": "Tương xứng với.",
+    "example_en": "I would expect compensation commensurate with the scope of a staff-level role.",
+    "example_vi": "Tôi kỳ vọng mức đãi ngộ tương xứng với phạm vi của vị trí cấp staff.",
+    "synonyms": [
+      "proportionate"
+    ],
+    "antonyms": [
+      "disproportionate"
+    ]
+  },
+  {
+    "id": "vocab_119",
+    "term": "untenable",
+    "ipa": "/ʌnˈtenəbl/",
+    "part_of_speech": "adjective",
+    "cefr_level": "C2",
+    "domain": "Academic English / IT",
+    "definition_vi": "Không thể duy trì hoặc bảo vệ được.",
+    "example_en": "At that growth rate, a single-writer architecture soon became untenable.",
+    "example_vi": "Với tốc độ tăng trưởng đó, kiến trúc một nút ghi nhanh chóng trở nên không thể duy trì.",
+    "synonyms": [
+      "unsustainable",
+      "indefensible"
+    ],
+    "antonyms": [
+      "tenable",
+      "sustainable"
+    ]
+  },
+  {
+    "id": "vocab_120",
+    "term": "heuristic",
+    "ipa": "/hjuˈrɪstɪk/",
+    "part_of_speech": "noun",
+    "cefr_level": "C2",
+    "domain": "IT / Algorithms",
+    "definition_vi": "Phương pháp kinh nghiệm: cho lời giải đủ tốt nhưng không đảm bảo tối ưu.",
+    "example_en": "The query planner relies on a cost-based heuristic that occasionally misjudges cardinality.",
+    "example_vi": "Bộ lập kế hoạch truy vấn dựa vào một phương pháp kinh nghiệm theo chi phí, đôi khi ước lượng sai số lượng bản ghi.",
+    "synonyms": [
+      "rule of thumb"
+    ],
+    "antonyms": [
+      "exact algorithm"
+    ]
+  }
+]

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="node_size">84dp</dimen>
+    <dimen name="node_icon_size">38dp</dimen>
+    <dimen name="corner_card">16dp</dimen>
+    <dimen name="spacing_m">16dp</dimen>
+    <dimen name="spacing_s">8dp</dimen>
+    <dimen name="path_stroke">10dp</dimen>
+    <dimen name="mascot_size">120dp</dimen>
+</resources>

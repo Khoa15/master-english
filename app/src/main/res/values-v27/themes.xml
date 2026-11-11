@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Light navigation bar icons need API 27+; minSdk is 26, so this lives in its own folder. -->
+    <style name="Theme.MasterEnglish" parent="Theme.Material3.Light.NoActionBar">
+        <item name="android:windowLightNavigationBar">true</item>
+    </style>
+</resources>
