@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.Toast;
 
@@ -33,7 +31,6 @@ import com.masterenglish.app.ui.common.PullToRefresh;
 
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import java.util.Arrays;
 import java.util.Locale;
 
 import javax.inject.Inject;
@@ -44,7 +41,6 @@ import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
 public class SettingsFragment extends Fragment {
 
-    private static final String[] DIFFICULTIES = {"EASY", "MEDIUM", "HARD", "ADAPTIVE"};
     private static final int[] TARGET_MINUTES = {5, 10, 15};
 
     @Inject
@@ -89,22 +85,6 @@ public class SettingsFragment extends Fragment {
 
         binding.backButton.setOnClickListener(v -> NavHostFragment.findNavController(this).navigateUp());
 
-        binding.difficultySpinner.setAdapter(new ArrayAdapter<>(requireContext(),
-                android.R.layout.simple_spinner_dropdown_item, Arrays.asList(DIFFICULTIES)));
-        binding.difficultySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (!bindingSettings && currentSettings != null) {
-                    currentSettings.aiChallengeDifficulty = DIFFICULTIES[position];
-                    save();
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-
         binding.soundSwitch.setOnCheckedChangeListener(this::onSoundToggled);
         binding.notifSwitch.setOnCheckedChangeListener(this::onNotificationsToggled);
         binding.reminderTimeButton.setOnClickListener(v -> pickReminderTime());
@@ -137,7 +117,6 @@ public class SettingsFragment extends Fragment {
         bindingSettings = true;
         binding.soundSwitch.setChecked(settings.soundFxEnabled);
         binding.notifSwitch.setChecked(settings.notificationsEnabled);
-        binding.difficultySpinner.setSelection(Arrays.asList(DIFFICULTIES).indexOf(settings.aiChallengeDifficulty));
         binding.minutesGroup.check(checkedIdFor(settings.targetLearningMinutes));
         binding.reminderTimeButton.setText(getString(R.string.profile_reminder_time,
                 settings.dailyReminderTime.substring(0, 5)));

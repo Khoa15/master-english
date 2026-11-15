@@ -1,15 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.MasterEnglish" parent="Theme.Material3.Light.NoActionBar">
+    <style name="Theme.MasterEnglish" parent="Base.Theme.MasterEnglish" />
+
+    <style name="Base.Theme.MasterEnglish" parent="Theme.Material3.Light.NoActionBar">
         <item name="colorPrimary">@color/brand_green</item>
         <item name="colorPrimaryVariant">@color/brand_green_dark</item>
         <item name="colorOnPrimary">@color/white</item>
-        <item name="colorSecondary">@color/accent_blue</item>
-        <item name="colorSecondaryVariant">@color/accent_blue_dark</item>
+        <item name="colorSecondary">@color/brand_green</item>
+        <item name="colorSecondaryVariant">@color/brand_green_dark</item>
         <item name="colorOnSecondary">@color/white</item>
         <item name="colorTertiary">@color/accent_gold</item>
         <item name="colorError">@color/danger_red</item>
         <item name="android:colorBackground">@color/neutral_bg</item>
+        <item name="android:windowBackground">@color/neutral_bg</item>
+        <item name="android:colorAccent">@color/brand_green</item>
+        <item name="android:colorControlActivated">@color/brand_green</item>
+        <item name="colorPrimaryContainer">@color/brand_green_light</item>
+        <item name="colorOnPrimaryContainer">@color/brand_green_dark</item>
+        <item name="colorSecondaryContainer">@color/brand_green_light</item>
+        <item name="colorOnSecondaryContainer">@color/brand_green_dark</item>
+        <item name="colorTertiaryContainer">@color/ds_amber_tint</item>
+        <item name="colorSurfaceVariant">#F3F1EB</item>
+        <item name="colorOnSurfaceVariant">#5B665F</item>
+        <item name="colorOutline">#CFC9BC</item>
         <item name="colorSurface">@color/white</item>
         <item name="android:statusBarColor">@color/white</item>
         <item name="android:windowLightStatusBar">true</item>
@@ -73,9 +86,14 @@
     <!-- Floating nav: the selected tab is a dark ink disc (design: Roadmap artboard, nav). -->
     <style name="Widget.MasterEnglish.NavIndicator" parent="">
         <item name="android:width">44dp</item>
-        <item name="android:height">44dp</item>
-        <item name="shapeAppearance">@style/ShapeAppearance.MasterEnglish.Circle</item>
+        <item name="android:height">40dp</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.MasterEnglish.Pill</item>
         <item name="android:color">@android:color/transparent</item>
+    </style>
+
+    <style name="ShapeAppearance.MasterEnglish.Pill" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">20dp</item>
     </style>
 
     <style name="ShapeAppearance.MasterEnglish.Circle" parent="">
@@ -84,7 +102,7 @@
     </style>
 
     <style name="ThemeOverlay.MasterEnglish.GlassNav" parent="ThemeOverlay.Material3.Light">
-        <item name="colorSecondaryContainer">@color/ds_ink</item>
+        <item name="colorSecondaryContainer">@color/brand_green_light</item>
     </style>
 
     <style name="TextAppearance.Onboarding.Title" parent="android:TextAppearance">

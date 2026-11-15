@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Icon colour in the floating nav over a dark backdrop: ink on the white disc, near-white otherwise. -->
+<!-- Icon colour in the floating nav: brand green when selected, muted grey otherwise. -->
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_checked="true" android:color="#1B1A17" />
-    <item android:color="#F4F2EC" />
+    <item android:state_checked="true" android:color="#2E7D5B" />
+    <item android:color="#5B665F" />
 </selector>

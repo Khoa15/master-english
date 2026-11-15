@@ -130,37 +130,6 @@
                     </com.google.android.material.button.MaterialButtonToggleGroup>
                 </LinearLayout>
 
-                <!-- AI Mascot: difficulty only; the gateway is configured by developers at build time -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/ds_muted"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:text="@string/settings_section_ai" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/bg_card"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/profile_ai_difficulty"
-                        android:textColor="@color/ds_ink"
-                        android:textStyle="bold" />
-
-                    <Spinner
-                        android:id="@+id/difficultySpinner"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-
                 <!-- Account -->
                 <TextView
                     android:layout_width="wrap_content"

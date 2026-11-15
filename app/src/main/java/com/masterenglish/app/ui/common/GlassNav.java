@@ -42,10 +42,10 @@ public final class GlassNav {
             }
         });
         pill.setClipToOutline(false);
-        pill.setElevation(14f * d);
+        pill.setElevation(12f * d);
         if (android.os.Build.VERSION.SDK_INT >= 28) {
-            pill.setOutlineSpotShadowColor(0x7A121621);
-            pill.setOutlineAmbientShadowColor(0x2E121621);
+            pill.setOutlineSpotShadowColor(0x3D1E2A24);
+            pill.setOutlineAmbientShadowColor(0x141E2A24);
         }
         if (pill.getParent() instanceof android.view.ViewGroup) {
             ((android.view.ViewGroup) pill.getParent()).setClipChildren(false);
@@ -151,14 +151,15 @@ public final class GlassNav {
             // CSS: border 1px rgba(255,255,255,0.65).
             hairPaint.setStyle(Paint.Style.STROKE);
             hairPaint.setStrokeWidth(density);
-            hairPaint.setColor(0xA6FFFFFF);
+            hairPaint.setColor(0xCCFFFFFF);
+            tintPaint.setColor(0xB8FFFFFF);
             // CSS inset rim: inset 0 1px 1.5px .5px white .9 (top) and inset 0 -2px 4px white .25 (bottom).
             edgePaint.setStyle(Paint.Style.STROKE);
             edgePaint.setStrokeWidth(1.5f * density);
             glowPaint.setStyle(Paint.Style.STROKE);
             // Design: backdrop-filter saturate(1.8) on the blurred backdrop.
             android.graphics.ColorMatrix saturate = new android.graphics.ColorMatrix();
-            saturate.setSaturation(1.9f);
+            saturate.setSaturation(1f);
             bitmapPaint.setColorFilter(new android.graphics.ColorMatrixColorFilter(saturate));
 
         }
@@ -226,23 +227,10 @@ public final class GlassNav {
                 canvas.drawBitmap(bitmap, null, rect, bitmapPaint);
             }
             canvas.drawRect(rect, basePaint);
-            canvas.drawRect(rect, sheenPaint);
-            // CSS inset 0 0 20px 2px white .35: a soft glow hugging the inside edge, drawn as fading rings.
-            int steps = 10;
-            for (int i = 0; i < steps; i++) {
-                float t = i / (float) steps;
-                glowPaint.setStrokeWidth(2f * density);
-                glowPaint.setColor(((int) (0x59 * (1f - t) * (1f - t))) << 24 | 0xFFFFFF);
-                float in = density * (1.5f + i * 1.6f);
-                glowRect.set(rect.left + in, rect.top + in, rect.right - in, rect.bottom - in);
-                float gr = Math.min(glowRect.width(), glowRect.height()) / 2f;
-                canvas.drawRoundRect(glowRect, gr, gr, glowPaint);
-            }
+            canvas.drawRect(rect, tintPaint);
             canvas.restore();
             float hr = Math.min(hair.width(), hair.height()) / 2f;
             canvas.drawRoundRect(hair, hr, hr, hairPaint);
-            float radius = Math.min(edge.width(), edge.height()) / 2f;
-            canvas.drawRoundRect(edge, radius, radius, edgePaint);
         }
 
         @Override
