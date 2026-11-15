@@ -95,13 +95,45 @@ public abstract class DatabaseModule {
         }
     };
 
+    /**
+     * Adds the per-language tables: sense translations, any number of examples per sense with their
+     * translations, and pack titles. The Vietnamese meanings already in word_senses are copied over;
+     * nothing is dropped (word_senses keeps definition_vi and example_en, which the seeder still fills).
+     */
+    static final Migration MIGRATION_4_5 = new Migration(4, 5) {
+        @Override
+        public void migrate(SupportSQLiteDatabase db) {
+            db.execSQL("CREATE TABLE IF NOT EXISTS `sense_translations` (`word_id` TEXT NOT NULL, "
+                    + "`sense_position` INTEGER NOT NULL, `lang` TEXT NOT NULL, `text` TEXT NOT NULL, "
+                    + "PRIMARY KEY(`word_id`, `sense_position`, `lang`), "
+                    + "FOREIGN KEY(`word_id`) REFERENCES `words`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )");
+            db.execSQL("CREATE TABLE IF NOT EXISTS `sense_examples` (`word_id` TEXT NOT NULL, "
+                    + "`sense_position` INTEGER NOT NULL, `position` INTEGER NOT NULL, `text` TEXT NOT NULL, "
+                    + "PRIMARY KEY(`word_id`, `sense_position`, `position`), "
+                    + "FOREIGN KEY(`word_id`) REFERENCES `words`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )");
+            db.execSQL("CREATE TABLE IF NOT EXISTS `example_translations` (`word_id` TEXT NOT NULL, "
+                    + "`sense_position` INTEGER NOT NULL, `example_position` INTEGER NOT NULL, `lang` TEXT NOT NULL, "
+                    + "`text` TEXT NOT NULL, PRIMARY KEY(`word_id`, `sense_position`, `example_position`, `lang`), "
+                    + "FOREIGN KEY(`word_id`) REFERENCES `words`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )");
+            db.execSQL("CREATE TABLE IF NOT EXISTS `pack_titles` (`pack_id` TEXT NOT NULL, `lang` TEXT NOT NULL, "
+                    + "`text` TEXT NOT NULL, PRIMARY KEY(`pack_id`, `lang`), "
+                    + "FOREIGN KEY(`pack_id`) REFERENCES `packs`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )");
+            db.execSQL("INSERT OR IGNORE INTO `sense_translations` (`word_id`, `sense_position`, `lang`, `text`) "
+                    + "SELECT `word_id`, `position`, 'vi', `definition_vi` FROM `word_senses` "
+                    + "WHERE `definition_vi` IS NOT NULL AND `definition_vi` != ''");
+            db.execSQL("INSERT OR IGNORE INTO `sense_examples` (`word_id`, `sense_position`, `position`, `text`) "
+                    + "SELECT `word_id`, `position`, 0, `example_en` FROM `word_senses` "
+                    + "WHERE `example_en` IS NOT NULL AND `example_en` != ''");
+        }
+    };
+
     @Provides
     @Singleton
     static AppDatabase provideDatabase(@ApplicationContext Context context) {
         return Room.databaseBuilder(context, AppDatabase.class, AppDatabase.NAME)
                 // No destructive fallback: a version bump without a migration must fail loudly in development
                 // instead of silently wiping the learner's progress. Add a Migration for every new version.
-                .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4)
+                .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5)
                 .build();
     }
 

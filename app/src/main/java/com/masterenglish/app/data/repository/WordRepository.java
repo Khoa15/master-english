@@ -30,6 +30,9 @@ public class WordRepository {
         }
     }
 
+    /** The language the translations are shown in until the learner can choose one. */
+    public static final String DEFAULT_LANGUAGE = "vi";
+
     private final WordDao wordDao;
     private final AppExecutors executors;
 
@@ -41,7 +44,7 @@ public class WordRepository {
 
     public void loadContent(Callback<Content> callback) {
         executors.diskIO().execute(() -> {
-            Content content = new Content(wordDao.getWordRows(), wordDao.getPacks(), wordDao.getPackWords());
+            Content content = new Content(wordDao.getWordRows(DEFAULT_LANGUAGE), wordDao.getPacks(), wordDao.getPackWords());
             executors.mainThread().execute(() -> callback.onResult(content));
         });
     }

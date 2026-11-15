@@ -12,4 +12,8 @@ public class WordRow {
     @Nullable public String pos;
     @Nullable public String definition;
     @Nullable public String example;
+    /** Short meaning of the first sense in the requested language, or null when there is none. */
+    @Nullable public String translation;
+    /** The first example's translation in the requested language, or null. */
+    @Nullable public String exampleTranslation;
 }

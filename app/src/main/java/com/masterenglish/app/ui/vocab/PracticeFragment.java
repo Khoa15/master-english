@@ -374,10 +374,20 @@ public class PracticeFragment extends DsFragment {
         TextView meaning = Ui.text(c, w.meaning, 24, 700, Ui.GREEN_INK);
         meaning.setGravity(Gravity.CENTER);
         Ui.add(back, meaning, 20);
+        if (w.translation != null) {
+            TextView tr = Ui.text(c, w.translation, 18, 600, Ui.INK);
+            tr.setGravity(Gravity.CENTER);
+            Ui.add(back, tr, 8);
+        }
         if (w.example != null) {
             TextView ex = Ui.text(c, "“" + w.example + "”", 15, 400, Ui.MUTED);
             ex.setGravity(Gravity.CENTER);
             Ui.add(back, ex, 12);
+            if (w.exampleTranslation != null) {
+                TextView ext = Ui.text(c, w.exampleTranslation, 14, 400, Ui.MUTED);
+                ext.setGravity(Gravity.CENTER);
+                Ui.add(back, ext, 6);
+            }
         }
         Ui.add(card, back, 24);
         TextView hint = Ui.text(c, "Tap the card to see the meaning", 13, 400, Ui.MUTED);

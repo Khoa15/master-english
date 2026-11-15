@@ -1,6 +1,7 @@
 package com.masterenglish.app.data.local.seed;
 
 import java.util.List;
+import java.util.Map;
 
 /** Gson DTOs that mirror assets/data/vocabulary.json (built by tools/build_vocabulary.py). */
 public final class SeedModels {
@@ -18,6 +19,8 @@ public final class SeedModels {
         public String title;
         public String cefr_level;
         public int position;
+        /** Title per language code; {@link #title} is the English one. May be missing in older assets. */
+        public Map<String, String> titles;
         /** Ids of the words in this pack, in the order they are listed. */
         public List<String> words;
     }
@@ -34,5 +37,18 @@ public final class SeedModels {
     public static class SenseSeed {
         public String pos;
         public String definition;
+        public String definition_vi;
+        public String example;
+        public String example_vi;
+        /** Short meaning per language code (BCP-47). Older assets only have {@link #definition_vi}. */
+        public Map<String, String> translations;
+        /** Any number of examples. Older assets only have {@link #example} / {@link #example_vi}. */
+        public List<ExampleSeed> examples;
+    }
+
+    public static class ExampleSeed {
+        public String text;
+        /** Translation per language code. */
+        public Map<String, String> translations;
     }
 }

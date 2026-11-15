@@ -10,8 +10,12 @@ import com.masterenglish.app.data.local.dao.UserDao;
 import com.masterenglish.app.data.local.dao.WordDao;
 import com.masterenglish.app.data.local.entity.BadgeEntity;
 import com.masterenglish.app.data.local.entity.DailyStudyLogEntity;
+import com.masterenglish.app.data.local.entity.ExampleTranslationEntity;
 import com.masterenglish.app.data.local.entity.PackEntity;
+import com.masterenglish.app.data.local.entity.PackTitleEntity;
 import com.masterenglish.app.data.local.entity.PackWordEntity;
+import com.masterenglish.app.data.local.entity.SenseExampleEntity;
+import com.masterenglish.app.data.local.entity.SenseTranslationEntity;
 import com.masterenglish.app.data.local.entity.UserBadgeEntity;
 import com.masterenglish.app.data.local.entity.UserEntity;
 import com.masterenglish.app.data.local.entity.UserSettingsEntity;
@@ -29,6 +33,10 @@ import com.masterenglish.app.data.local.entity.WordSenseEntity;
                 UserSettingsEntity.class,
                 WordEntity.class,
                 WordSenseEntity.class,
+                SenseTranslationEntity.class,
+                SenseExampleEntity.class,
+                ExampleTranslationEntity.class,
+                PackTitleEntity.class,
                 PackEntity.class,
                 PackWordEntity.class,
                 WordProgressEntity.class,
@@ -36,7 +44,7 @@ import com.masterenglish.app.data.local.entity.WordSenseEntity;
                 UserBadgeEntity.class,
                 DailyStudyLogEntity.class
         },
-        version = 4,
+        version = 5,
         exportSchema = true)
 @TypeConverters(Converters.class)
 public abstract class AppDatabase extends RoomDatabase {

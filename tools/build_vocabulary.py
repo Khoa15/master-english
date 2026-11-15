@@ -1,15 +1,14 @@
 #!/usr/bin/env python3
-"""Builds app/src/main/assets/data/vocabulary.json from the Oxford source dictionaries in data/source/.
+"""Builds app/src/main/assets/data/vocabulary.json from the pack/2 files in data/source/ (see its README.md).
 
-Output shape (the app seeds its words, word_senses, packs and pack_words tables from it):
-  {"packs": [{id, title, cefr_level, position, words: [word ids in pack order]}],
-   "words": [{id, term, ipa, cefr_level, rank, senses: [{pos, definition}]}]}
+Output shape (the app seeds its words, word_senses, translations, examples, packs and pack_words tables from it):
+  {"packs": [{id, title, titles, cefr_level, position, words: [word ids in pack order]}],
+   "words": [{id, term, ipa, cefr_level, rank, senses: [{pos, definition, definition_vi?, example?, example_vi?,
+                                                         translations?, examples?}]}]}
 
-One word row per headword. A headword the source tags "B2/C1" is one word that belongs to both the B2 and
-the C1 pack. The 1000 most common words (all1000.json) are their own pack, "COMMON", in frequency order. They are never
-used to build the CEFR packs. A common word that is also an Oxford headword is linked to that word (one card, one
-set of definitions); the others become words of their own with level "COMMON".
-definition_overrides.json fills the headwords the dictionaries had no entry for.
+One word row per entry id. A word can be in several packs: an Oxford headword tagged "B2/C1" is in both packs, and a
+common word that is also an Oxford headword is only linked into the COMMON pack (one card, one set of definitions).
+Pack order is the order of PACK_FILES. tools/convert_oxford_v2.py makes oxford.json from the dumps in data/source/raw/.
 """
 import json
 import re
@@ -18,14 +17,12 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "data" / "source"
 OUT = ROOT / "app" / "src" / "main" / "assets" / "data" / "vocabulary.json"
-LEVELS = ["A1", "A2", "B1", "B2", "C1"]
-COMMON = "COMMON"
-LEVEL_NAMES = {"A1": "Breakthrough", "A2": "Waystage", "B1": "Threshold", "B2": "Vantage", "C1": "Effective proficiency"}
 MAX_SENSES = 6
-
-
-def slug(term):
-    return re.sub(r"[^a-z0-9]+", "_", term.lower()).strip("_")
+# pack/2 files in pack order: (file, max definitions per part of speech, max senses per word).
+# The two crawler-based files keep at most MAX_SENSES senses per word; all1000.json also has 3 definitions per part of
+# speech, of which the app keeps 2.
+PACK_FILES = [("oxford.json", None, MAX_SENSES), ("all1000.json", 2, MAX_SENSES),
+              ("christmas.json", None, None), ("tet.json", None, None)]
 
 
 def short_pos(pos):
@@ -33,90 +30,65 @@ def short_pos(pos):
     return base or pos.strip().lower()
 
 
-LABEL = re.compile(r"^[A-Z][A-Za-z]*(?:[ ,/&]+[A-Za-z]+){0,3}\.$")
-
-
-def senses_of(entry, dictionary_com=False):
-    """Up to two definitions per part of speech. dictionary.com sometimes gives a bare field label ("Chemistry.")
-    as the first definition; it is folded into the next one ("Chemistry: a substance with a sour taste.")."""
-    out = []
-    for p in entry.get("pos", []):
-        defs = [d.strip() for d in p["def_en"] if d and d.strip()]
-        if dictionary_com and len(defs) >= 2 and len(defs[0].split()) <= 3 and LABEL.match(defs[0]):
-            defs = [defs[0][:-1] + ": " + defs[1]] + defs[2:]
-        for d in defs[:2]:
-            out.append({"pos": short_pos(p["pos"]), "definition": d})
-    return out[:MAX_SENSES]
+def add_pack(words, packs, used, filename, max_defs=None, max_senses=None):
+    """A pack/2 file: one pack ("pack") or several ("packs", each entry then lists its pack ids in "packs").
+    Entries carry their own ids, so progress survives renames. An entry whose id is already a word (a common word
+    that is also an Oxford headword) is only linked into its packs: the word keeps the content it already has.
+    Senses keep the legacy keys (definition, definition_vi, example, example_vi, taken from the vi translation) and
+    also carry the full translations / examples."""
+    doc = json.loads((SRC / filename).read_text())
+    assert doc.get("format") == "masterenglish.pack/2", filename
+    metas = doc.get("packs") or [doc["pack"]]
+    members = {m["id"]: [] for m in metas}
+    level = {m["id"]: m["cefr_level"] for m in metas}
+    by_id = {w["id"]: w for w in words}
+    added = 0
+    for e in doc["entries"]:
+        pack_ids = e.get("packs") or [metas[0]["id"]]
+        for pid in pack_ids:
+            members[pid].append(e["id"])
+        if e["id"] in by_id:
+            continue
+        used.add(e["id"])
+        senses, per_pos = [], {}
+        for s in e["senses"]:
+            definition = s["definition"]["en"].strip()
+            pos = short_pos(s["pos"])
+            if not definition or (max_defs and per_pos.get(s["pos"], 0) >= max_defs):
+                continue
+            per_pos[s["pos"]] = per_pos.get(s["pos"], 0) + 1
+            tr, exs = s.get("translations", {}), s.get("examples", [])
+            assert all(x["text"] for x in exs), e["id"]
+            sense = {"pos": pos, "definition": definition}
+            if tr.get("vi"):
+                sense["definition_vi"] = tr["vi"]
+            if exs:
+                sense["example"] = exs[0]["text"]
+                if exs[0].get("translations", {}).get("vi"):
+                    sense["example_vi"] = exs[0]["translations"]["vi"]
+            if tr:
+                sense["translations"] = tr
+            if exs:
+                sense["examples"] = exs
+            senses.append(sense)
+        word = {"id": e["id"], "term": e["term"], "ipa": (e.get("pronunciation", {}).get("us") or "").strip() or None,
+                "cefr_level": level[pack_ids[0]], "rank": e["rank"], "senses": senses[:max_senses]}
+        words.append(word)
+        by_id[e["id"]] = word
+        added += 1
+    for m in metas:
+        packs.append({"id": m["id"], "title": m["title"]["en"], "titles": m["title"], "cefr_level": m["cefr_level"],
+                      "position": len(packs), "words": members[m["id"]]})
+        print(m["id"], len(members[m["id"]]))
+    print(filename, "words added", added)
 
 
 def main():
-    a = json.loads((SRC / "oxford3000_dictionary.json").read_text())["entries"]
-    b = json.loads((SRC / "oxford_b2_c1_dictionary.json").read_text())["entries"]
-    fixes = json.loads((SRC / "definition_overrides.json").read_text())
-
-    raw = []  # (levels, term, entry, order)
-    for term, e in a.items():
-        # "per cent" has no level in the source; its neighbours in the list are all A2.
-        raw.append(([e["cefr"] or "A2"], term, e, e["list_index"], False))
-    for term, e in b.items():
-        raw.append((["B2", "C1"] if e["cefr"] == "B2/C1" else [e["cefr"]], term, e, 10000 + e["rank"], True))
-
-    words, used = [], set()
-    for levels, term, e, order, from_dc in sorted(raw, key=lambda x: (LEVELS.index(x[0][0]), x[3], x[1])):
-        wid = slug(term) or "word"
-        base, n = wid, 2
-        while wid in used:
-            wid, n = f"{base}_{n}", n + 1
-        used.add(wid)
-        senses, ipa = senses_of(e, from_dc), (e.get("ipa_us") or "").strip() or None
-        if term in fixes:
-            f = fixes[term]
-            senses = [{"pos": f["pos"], "definition": f["definition"]}] + [s for s in senses if s["definition"] != f["definition"]]
-            ipa = ipa or f.get("ipa_us")
-        words.append({"id": wid, "term": term, "ipa": ipa, "cefr_level": levels[0], "packs": levels, "senses": senses})
-    for level in LEVELS:
-        for i, w in enumerate((w for w in words if w["cefr_level"] == level), 1):
-            w["rank"] = i
-    packs = [{"id": l, "title": f"{l}: {LEVEL_NAMES[l]}", "cefr_level": l, "position": i, "words": []}
-             for i, l in enumerate(LEVELS)]
-    by_id = {p["id"]: p for p in packs}
-    for w in words:
-        for level in w.pop("packs"):
-            by_id[level]["words"].append(w["id"])
-
-    # The 1000 most common words.
-    by_term = {}
-    for w in words:
-        by_term.setdefault(w["term"].lower(), []).append(w)
-    common = json.loads((SRC / "all1000.json").read_text())["entries"]
-    common_ids, added = [], 0
-    for e in sorted(common, key=lambda x: x["rank"]):
-        term = e["word"].strip()
-        hits = by_term.get(term.lower())
-        if hits:
-            hit = next((h for h in hits if h["term"] == term), hits[0])
-            common_ids.append(hit["id"])
-            continue
-        wid = slug(term) or "word"
-        base, n = wid, 2
-        while wid in used:
-            wid, n = f"{base}_{n}", n + 1
-        used.add(wid)
-        senses = []
-        for p in e.get("parts_of_speech", []):
-            for d in [d.strip() for d in p["definitions"] if d.strip()][:2]:
-                senses.append({"pos": short_pos(p["pos"]), "definition": d})
-        added += 1
-        words.append({"id": wid, "term": term, "ipa": (e.get("pronunciation_us") or "").strip() or None,
-                      "cefr_level": COMMON, "rank": e["rank"], "senses": senses[:MAX_SENSES]})
-        common_ids.append(wid)
-    packs.append({"id": COMMON, "title": "1000 Common Words", "cefr_level": COMMON, "position": len(packs),
-                  "words": common_ids})
+    words, packs, used = [], [], set()
+    for filename, max_defs, max_senses in PACK_FILES:
+        add_pack(words, packs, used, filename, max_defs, max_senses)
 
     OUT.write_text(json.dumps({"packs": packs, "words": words}, ensure_ascii=False, separators=(",", ":")))
-    for p in packs:
-        print(p["id"], len(p["words"]))
-    print("common-only words", added)
     print("words", len(words), "senses", sum(len(w["senses"]) for w in words),
           "without definition", sum(1 for w in words if not w["senses"]))
 

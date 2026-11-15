@@ -41,6 +41,8 @@ public class VocabViewModel extends ViewModel {
         public final String meaning;
         @Nullable public final String example;
         @Nullable public final String exampleTranslation;
+        /** The meaning in the learner's language, or null when the word has none in it. */
+        @Nullable public final String translation;
         public final String cefrLevel;
         public final Status status;
         /** Learned and due for a review now. */
@@ -56,7 +58,8 @@ public class VocabViewModel extends ViewModel {
             this.partOfSpeech = e.pos;
             this.meaning = e.definition == null || e.definition.isEmpty() ? "No definition available" : e.definition;
             this.example = e.example;
-            this.exampleTranslation = null;
+            this.exampleTranslation = e.exampleTranslation;
+            this.translation = e.translation;
             this.cefrLevel = e.cefrLevel;
             this.status = status;
             this.due = due;

@@ -1,0 +1,324 @@
+{
+ "format": "masterenglish.pack/2",
+ "pack": {
+  "id": "XMAS",
+  "title": {
+   "en": "Christmas",
+   "vi": "Giáng Sinh"
+  },
+  "cefr_level": "XMAS",
+  "source": {
+   "name": "Christmas vocabulary",
+   "url": null,
+   "dictionary": "https://api.dictionaryapi.dev/api/v2/entries/en/<word>",
+   "note": "Curated by the app owner: term, pronunciation, Vietnamese meaning and example. Definitions come from tools/crawl_christmas.py (dictionaryapi.dev), up to 2 per sense."
+  }
+ },
+ "entries": [
+  {
+   "id": "xmas_father_christmas",
+   "term": "Father Christmas",
+   "lang": "en",
+   "rank": 1,
+   "pronunciation": {
+    "us": "/ˈfɑːðə ˈkrɪsməs (ˈsæntə klɔːz)/"
+   },
+   "senses": [
+    {
+     "pos": "noun",
+     "definition": {
+      "en": "The legendary old man in a red suit who brings presents to children at Christmas."
+     },
+     "translations": {
+      "vi": "ông già Noel"
+     },
+     "examples": [
+      {
+       "text": "Children believe that if they are naughty, Santa Claus will give them coals.",
+       "translations": {
+        "vi": "Trẻ em tin rằng nếu nghịch ngợm thì ông già Noel sẽ đưa than cho chúng."
+       }
+      }
+     ]
+    }
+   ],
+   "also_called": [
+    "Santa Claus"
+   ],
+   "source_url": "https://api.dictionaryapi.dev/api/v2/entries/en/santa%20claus"
+  },
+  {
+   "id": "xmas_chimney",
+   "term": "chimney",
+   "lang": "en",
+   "rank": 2,
+   "pronunciation": {
+    "us": "/ˈʧɪmni/"
+   },
+   "senses": [
+    {
+     "pos": "noun",
+     "definition": {
+      "en": "A vertical tube or hollow column used to emit environmentally polluting gaseous and solid matter (including but not limited to by-products of burning carbon or hydrocarbon based fuels); a flue."
+     },
+     "translations": {
+      "vi": "ống khói"
+     },
+     "examples": [
+      {
+       "text": "It is believed that Santa Claus enters one's house through their chimney.",
+       "translations": {
+        "vi": "Người ta tin rằng ông già Noel vào nhà qua ống khói."
+       }
+      }
+     ]
+    }
+   ],
+   "source_url": "https://api.dictionaryapi.dev/api/v2/entries/en/chimney"
+  },
+  {
+   "id": "xmas_reindeer",
+   "term": "reindeer",
+   "lang": "en",
+   "rank": 3,
+   "pronunciation": {
+    "us": "/ˈreɪndɪə/"
+   },
+   "senses": [
+    {
+     "pos": "noun",
+     "definition": {
+      "en": "(plural: reindeer) Any Arctic and subarctic-dwelling deer of the species Rangifer tarandus, with a number of subspecies."
+     },
+     "translations": {
+      "vi": "tuần lộc"
+     },
+     "examples": [
+      {
+       "text": "According to the myth, Santa Claus travels on a sled pulled by reindeer.",
+       "translations": {
+        "vi": "Theo truyền thuyết, ông già Noel đi trên chiếc xe trượt do tuần lộc kéo."
+       }
+      }
+     ]
+    }
+   ],
+   "source_url": "https://api.dictionaryapi.dev/api/v2/entries/en/reindeer"
+  },
+  {
+   "id": "xmas_ornament",
+   "term": "ornament",
+   "lang": "en",
+   "rank": 4,
+   "pronunciation": {
+    "us": "/ˈɔːnəmənt/"
+   },
+   "senses": [
+    {
+     "pos": "noun",
+     "definition": {
+      "en": "A Christmas tree decoration."
+     },
+     "translations": {
+      "vi": "vật trang trí"
+     },
+     "examples": [
+      {
+       "text": "During the festive season, it is common to see families decorate their homes with ornaments.",
+       "translations": {
+        "vi": "Vào dịp lễ hội, người ta thường thấy các gia đình trang trí nhà cửa bằng đồ trang trí."
+       }
+      }
+     ]
+    },
+    {
+     "pos": "noun",
+     "definition": {
+      "en": "An element of decoration; that which embellishes or adorns."
+     }
+    }
+   ],
+   "also_called": [
+    "tree ornament"
+   ],
+   "source_url": "https://api.dictionaryapi.dev/api/v2/entries/en/ornament"
+  },
+  {
+   "id": "xmas_fireplace",
+   "term": "fireplace",
+   "lang": "en",
+   "rank": 5,
+   "pronunciation": {
+    "us": "/ˈfaɪəpleɪs/"
+   },
+   "senses": [
+    {
+     "pos": "noun",
+     "definition": {
+      "en": "An open hearth for holding a fire at the base of a chimney."
+     },
+     "translations": {
+      "vi": "lò sưởi"
+     },
+     "examples": [
+      {
+       "text": "A fireplace is placed in a home to avoid the cold.",
+       "translations": {
+        "vi": "Lò sưởi được đặt trong nhà để tránh cái lạnh."
+       }
+      }
+     ]
+    }
+   ],
+   "source_url": "https://api.dictionaryapi.dev/api/v2/entries/en/fireplace"
+  },
+  {
+   "id": "xmas_christmas_stocking",
+   "term": "Christmas stocking",
+   "lang": "en",
+   "rank": 6,
+   "pronunciation": {
+    "us": "/ˈkrɪsməs ˈstɒkɪŋ/"
+   },
+   "senses": [
+    {
+     "pos": "noun",
+     "definition": {
+      "en": "A large sock hung up at Christmas to be filled with small presents."
+     },
+     "translations": {
+      "vi": "vớ đựng quà"
+     },
+     "examples": [
+      {
+       "text": "Unlike regular socks, Christmas stockings tend to be huge.",
+       "translations": {
+        "vi": "Không giống như những chiếc tất thông thường, vớ đựng quà có xu hướng rất lớn."
+       }
+      }
+     ]
+    }
+   ],
+   "source_url": "https://api.dictionaryapi.dev/api/v2/entries/en/stocking"
+  },
+  {
+   "id": "xmas_mistletoe",
+   "term": "mistletoe",
+   "lang": "en",
+   "rank": 7,
+   "pronunciation": {
+    "us": "/ˈmɪsltəʊ/"
+   },
+   "senses": [
+    {
+     "pos": "noun",
+     "definition": {
+      "en": "Any of several hemiparasitic evergreen plants of the order Santalales with white berries that grow in the crowns of apple trees, oaks, and other trees, such as the European mistletoe (Viscum album) and American mistletoe or eastern mistletoe (Phoradendron leucarpum)."
+     },
+     "translations": {
+      "vi": "cây tầm gửi"
+     },
+     "examples": [
+      {
+       "text": "There is a custom of kissing a loved one under the mistletoe.",
+       "translations": {
+        "vi": "Có phong tục hôn người yêu dưới cây tầm gửi."
+       }
+      }
+     ]
+    }
+   ],
+   "source_url": "https://api.dictionaryapi.dev/api/v2/entries/en/mistletoe"
+  },
+  {
+   "id": "xmas_christmas_eve",
+   "term": "Christmas Eve",
+   "lang": "en",
+   "rank": 8,
+   "pronunciation": {
+    "us": "/ˈkrɪsməs iːv/"
+   },
+   "senses": [
+    {
+     "pos": "noun",
+     "definition": {
+      "en": "The evening or day before Christmas Day, 24 December."
+     },
+     "translations": {
+      "vi": "đêm Giáng Sinh"
+     },
+     "examples": [
+      {
+       "text": "People often have a party on Christmas Eve with their relatives.",
+       "translations": {
+        "vi": "Mọi người thường tổ chức tiệc vào đêm Giáng sinh với người thân."
+       }
+      }
+     ]
+    }
+   ],
+   "source_url": "https://api.dictionaryapi.dev/api/v2/entries/en/christmas%20eve"
+  },
+  {
+   "id": "xmas_christmas_carol",
+   "term": "Christmas carol",
+   "lang": "en",
+   "rank": 9,
+   "pronunciation": {
+    "us": "/ˈkrɪsməs ˈkærᵊl (ˈʤɪŋɡᵊl bɛl)/"
+   },
+   "senses": [
+    {
+     "pos": "noun",
+     "definition": {
+      "en": "A traditional song sung at Christmas."
+     },
+     "translations": {
+      "vi": "bài ca giáng sinh"
+     },
+     "examples": [
+      {
+       "text": "A Christmas carol is one of the most iconic festival songs of all time.",
+       "translations": {
+        "vi": "Bài hát mừng Giáng sinh là một trong những bài hát lễ hội mang tính biểu tượng nhất mọi thời đại."
+       }
+      }
+     ]
+    }
+   ],
+   "also_called": [
+    "jingle bell"
+   ],
+   "source_url": "https://api.dictionaryapi.dev/api/v2/entries/en/carol"
+  },
+  {
+   "id": "xmas_snowman",
+   "term": "snowman",
+   "lang": "en",
+   "rank": 10,
+   "pronunciation": {
+    "us": "/ˈsnəʊmən/"
+   },
+   "senses": [
+    {
+     "pos": "noun",
+     "definition": {
+      "en": "A humanoid figure made with large snowballs stacked on each other. Human traits like a face and arms may be fashioned with sticks (arms), a carrot (nose), and stones or coal (eyes, mouth)."
+     },
+     "translations": {
+      "vi": "người tuyết"
+     },
+     "examples": [
+      {
+       "text": "A snowman requires a great effort to build but it is easy to melt.",
+       "translations": {
+        "vi": "Người tuyết cần rất nhiều công sức để xây dựng nhưng lại rất dễ tan chảy."
+       }
+      }
+     ]
+    }
+   ],
+   "source_url": "https://api.dictionaryapi.dev/api/v2/entries/en/snowman"
+  }
+ ]
+}

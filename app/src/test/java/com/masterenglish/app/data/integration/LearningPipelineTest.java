@@ -101,19 +101,66 @@ public class LearningPipelineTest {
 
     @Test
     public void seedingLoadsWordsSensesAndPacks() {
-        // 4,883 Oxford words plus 99 common words that are not on the Oxford lists.
-        assertEquals(4982, db.wordDao().countWords());
-        assertEquals(6, db.wordDao().countPacks());
+        // 4,883 Oxford words, 99 common words that are not on the Oxford lists, 10 Christmas and 26 Tet words.
+        assertEquals(5018, db.wordDao().countWords());
+        assertEquals(8, db.wordDao().countPacks());
         // 4,899 Oxford pack entries (16 words are in two packs) plus the 1,000 common words.
-        assertEquals(5899, db.wordDao().countPackWords());
-        assertTrue(db.wordDao().countSenses() > 4982);
+        assertEquals(5935, db.wordDao().countPackWords());
+        assertTrue(db.wordDao().countSenses() > 5018);
         assertEquals(2, db.badgeDao().getBadges().size());
     }
 
     @Test
+    public void translationsAndExamplesAreSeededPerLanguage() {
+        // tet.json: a Vietnamese meaning, and an example with its translation.
+        WordRow chung = null;
+        WordRow plain = null;
+        for (WordRow row : db.wordDao().getWordRows("vi")) {
+            if (row.id.equals("tet_chung_cake")) {
+                chung = row;
+            } else if (row.id.equals("look")) {
+                plain = row;
+            }
+        }
+        assertNotNull(chung);
+        assertEquals("bánh Chưng", chung.translation);
+        assertTrue(chung.example.contains("Chung cake"));
+        assertTrue(chung.exampleTranslation.contains("bánh Chưng"));
+        // An Oxford word has no translation: the English text stays, the translation is simply missing.
+        assertNotNull(plain);
+        assertNull(plain.translation);
+        // A language nobody has translated yet is empty too, never an error.
+        for (WordRow row : db.wordDao().getWordRows("ja")) {
+            assertNull(row.translation);
+            assertNull(row.exampleTranslation);
+        }
+        assertEquals("bánh Chưng", db.wordDao().getSenseTranslations("tet_chung_cake").get(0).text);
+        assertEquals(1, db.wordDao().getSenseExamples("tet_chung_cake").size());
+        Set<String> titles = new HashSet<>();
+        for (com.masterenglish.app.data.local.entity.PackTitleEntity t : db.wordDao().getPackTitles("TET")) {
+            titles.add(t.lang + ":" + t.text);
+        }
+        assertTrue(titles.contains("vi:Tết") && titles.contains("en:Tet Holiday"));
+    }
+
+    @Test
+    public void everyTetAndChristmasWordHasAnExampleAndATranslation() {
+        int checked = 0;
+        for (WordRow row : db.wordDao().getWordRows("vi")) {
+            if (row.id.startsWith("tet_") || row.id.startsWith("xmas_")) {
+                assertNotNull("no translation for " + row.term, row.translation);
+                assertNotNull("no example for " + row.term, row.example);
+                assertNotNull("no example translation for " + row.term, row.exampleTranslation);
+                checked++;
+            }
+        }
+        assertEquals(36, checked);
+    }
+
+    @Test
     public void everyWordHasAtLeastOneDefinition() {
-        List<WordRow> rows = db.wordDao().getWordRows();
-        assertEquals(4982, rows.size());
+        List<WordRow> rows = db.wordDao().getWordRows("vi");
+        assertEquals(5018, rows.size());
         for (WordRow row : rows) {
             assertNotNull("no definition for " + row.term, row.definition);
             assertFalse("empty definition for " + row.term, row.definition.isEmpty());
@@ -132,6 +179,8 @@ public class LearningPipelineTest {
         assertEquals(Integer.valueOf(1284), size.get("B2"));
         assertEquals(Integer.valueOf(1311), size.get("C1"));
         assertEquals(Integer.valueOf(1000), size.get("COMMON"));
+        assertEquals(Integer.valueOf(10), size.get("XMAS"));
+        assertEquals(Integer.valueOf(26), size.get("TET"));
     }
 
     @Test
@@ -213,8 +262,8 @@ public class LearningPipelineTest {
         context.getSharedPreferences("content_seed", Context.MODE_PRIVATE).edit().putInt("version", 0).commit();
         new LocalDataSeeder(context, db).seedIfEmpty();
         assertNotNull(db.progressDao().get(USER, "look"));
-        assertEquals(4982, db.wordDao().countWords());
-        assertEquals(5899, db.wordDao().countPackWords());
+        assertEquals(5018, db.wordDao().countWords());
+        assertEquals(5935, db.wordDao().countPackWords());
     }
 
     @Test

@@ -1,0 +1,747 @@
+{
+ "format": "masterenglish.pack/2",
+ "pack": {
+  "id": "TET",
+  "title": {
+   "en": "Tet Holiday",
+   "vi": "Tết"
+  },
+  "cefr_level": "TET",
+  "source": {
+   "name": "Tet Holiday vocabulary",
+   "url": null,
+   "dictionary": null,
+   "note": "Curated by the app owner: terms, Vietnamese meanings and definitions come from the owner's Tet Holiday list. Examples are the list's sentences for 5 words and written for the other 21. IPA is the list's for 3 words and hand-written for the rest."
+  }
+ },
+ "entries": [
+  {
+   "id": "tet_lunar_new_year",
+   "term": "Lunar New Year",
+   "lang": "en",
+   "rank": 1,
+   "pronunciation": {
+    "us": "/ˌluːnə njuː ˈjɪə(r)/"
+   },
+   "senses": [
+    {
+     "pos": "noun",
+     "definition": {
+      "en": "The beginning of the year according to the calendar in some countries in Asia, including China, Malaysia, and North and South Korea."
+     },
+     "translations": {
+      "vi": "năm mới"
+     },
+     "examples": [
+      {
+       "text": "The Lunar New Year usually falls between late January and mid-February.",
+       "translations": {
+        "vi": "Năm mới Âm lịch thường rơi vào khoảng cuối tháng Một đến giữa tháng Hai."
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tet_tet",
+   "term": "Tet",
+   "lang": "en",
+   "rank": 2,
+   "pronunciation": {
+    "us": "/tɛt/"
+   },
+   "senses": [
+    {
+     "pos": "noun",
+     "definition": {
+      "en": "The Vietnamese name for the Lunar New Year."
+     },
+     "translations": {
+      "vi": "Tết Nguyên Đán"
+     },
+     "examples": [
+      {
+       "text": "Tet is one of the most important festivals in Vietnam, so we often get five or even ten days off to celebrate this festival.",
+       "translations": {
+        "vi": "Tết là một trong những lễ hội quan trọng nhất ở Việt Nam, vì vậy chúng ta thường được nghỉ năm hoặc thậm chí mười ngày để ăn mừng lễ hội này."
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tet_festivity",
+   "term": "festivity",
+   "lang": "en",
+   "rank": 3,
+   "pronunciation": {
+    "us": "/feˈstɪvəti/"
+   },
+   "senses": [
+    {
+     "pos": "noun",
+     "definition": {
+      "en": "The activities that are organized to celebrate a special event."
+     },
+     "translations": {
+      "vi": "lễ hội"
+     },
+     "examples": [
+      {
+       "text": "The streets were full of festivity as people got ready for Tet.",
+       "translations": {
+        "vi": "Đường phố tràn ngập không khí lễ hội khi mọi người chuẩn bị đón Tết."
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tet_public_holiday",
+   "term": "public holiday",
+   "lang": "en",
+   "rank": 4,
+   "pronunciation": {
+    "us": "/ˌpʌblɪk ˈhɒlədeɪ/"
+   },
+   "senses": [
+    {
+     "pos": "noun",
+     "definition": {
+      "en": "A day when most people do not go to work or school, especially because of a religious or national celebration."
+     },
+     "translations": {
+      "vi": "ngày nghỉ lễ"
+     },
+     "examples": [
+      {
+       "text": "Tet is the longest public holiday of the year in Vietnam.",
+       "translations": {
+        "vi": "Tết là kỳ nghỉ lễ dài nhất trong năm ở Việt Nam."
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tet_reunion",
+   "term": "reunion",
+   "lang": "en",
+   "rank": 5,
+   "pronunciation": {
+    "us": "/ˌriːˈjuːniən/"
+   },
+   "senses": [
+    {
+     "pos": "noun",
+     "definition": {
+      "en": "The act of people coming together after they have been apart for some time."
+     },
+     "translations": {
+      "vi": "sum vầy"
+     },
+     "examples": [
+      {
+       "text": "Tet is a time for a family reunion after a long year of working far from home.",
+       "translations": {
+        "vi": "Tết là dịp sum vầy của gia đình sau một năm dài làm việc xa nhà."
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tet_traditional_customs",
+   "term": "traditional customs",
+   "lang": "en",
+   "rank": 6,
+   "pronunciation": {
+    "us": "/trəˈdɪʃənl ˈkʌstəmz/"
+   },
+   "senses": [
+    {
+     "pos": "noun",
+     "definition": {
+      "en": "Long-established practices passed down through generations."
+     },
+     "translations": {
+      "vi": "phong tục truyền thống"
+     },
+     "examples": [
+      {
+       "text": "Many traditional customs, such as giving lucky money, are still followed today.",
+       "translations": {
+        "vi": "Nhiều phong tục truyền thống, như lì xì, vẫn được giữ gìn đến ngày nay."
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tet_cultural_significance",
+   "term": "cultural significance",
+   "lang": "en",
+   "rank": 7,
+   "pronunciation": {
+    "us": "/ˈkʌltʃərəl sɪɡˈnɪfɪkəns/"
+   },
+   "senses": [
+    {
+     "pos": "noun",
+     "definition": {
+      "en": "The meaning or importance of an event or tradition within a culture."
+     },
+     "translations": {
+      "vi": "ý nghĩa văn hóa"
+     },
+     "examples": [
+      {
+       "text": "The cultural significance of Tet is always preserved and celebrated through traditional customs, such as conducting worship rituals, showing respect, love, and care for each family member, and the tradition of giving lucky money as a well-wishing gesture.",
+       "translations": {
+        "vi": "Ý nghĩa văn hóa của Tết luôn được gìn giữ và tôn vinh thông qua các phong tục truyền thống, như việc thực hiện các nghi lễ thờ cúng, thể hiện sự kính trọng, yêu thương và chăm sóc đối với mỗi thành viên trong gia đình, và truyền thống lì xì như một cử chỉ chúc phúc tốt lành."
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tet_house_cleaning",
+   "term": "house cleaning",
+   "lang": "en",
+   "rank": 8,
+   "pronunciation": {
+    "us": "/haʊs ˈkliːnɪŋ/"
+   },
+   "senses": [
+    {
+     "pos": "noun",
+     "definition": {
+      "en": "The practice of cleaning the house before Tet to remove bad luck and make space for good fortune."
+     },
+     "translations": {
+      "vi": "dọn dẹp nhà cửa"
+     },
+     "examples": [
+      {
+       "text": "House cleaning is done before Tet, because people believe sweeping during the holiday sweeps away good luck.",
+       "translations": {
+        "vi": "Dọn dẹp nhà cửa được làm trước Tết, vì người ta tin rằng quét nhà trong dịp lễ sẽ quét đi may mắn."
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tet_decorations",
+   "term": "decorations",
+   "lang": "en",
+   "rank": 9,
+   "pronunciation": {
+    "us": "/ˌdɛkəˈreɪʃənz/"
+   },
+   "senses": [
+    {
+     "pos": "noun",
+     "definition": {
+      "en": "Items like flowers, lanterns, or symbols used to decorate the home."
+     },
+     "translations": {
+      "vi": "trang trí"
+     },
+     "examples": [
+      {
+       "text": "We put up red and gold decorations in the living room a week before Tet.",
+       "translations": {
+        "vi": "Chúng tôi treo đồ trang trí màu đỏ và vàng trong phòng khách một tuần trước Tết."
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tet_peach_blossoms",
+   "term": "peach blossoms",
+   "lang": "en",
+   "rank": 10,
+   "pronunciation": {
+    "us": "/piːtʃ ˈblɒsəmz/"
+   },
+   "senses": [
+    {
+     "pos": "noun",
+     "definition": {
+      "en": "A common flower used for decoration during Tet, symbolizing prosperity."
+     },
+     "translations": {
+      "vi": "hoa đào"
+     },
+     "examples": [
+      {
+       "text": "In northern Vietnam, peach blossoms are a symbol of spring and the new year.",
+       "translations": {
+        "vi": "Ở miền Bắc Việt Nam, hoa đào là biểu tượng của mùa xuân và năm mới."
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tet_kumquat_tree",
+   "term": "kumquat tree",
+   "lang": "en",
+   "rank": 11,
+   "pronunciation": {
+    "us": "/ˈkʌmkwɒt triː/"
+   },
+   "senses": [
+    {
+     "pos": "noun",
+     "definition": {
+      "en": "A small fruit tree commonly displayed during Tet for good luck and wealth."
+     },
+     "translations": {
+      "vi": "cây quất"
+     },
+     "examples": [
+      {
+       "text": "My father bought a kumquat tree full of golden fruit to put by the front door.",
+       "translations": {
+        "vi": "Bố tôi mua một cây quất sai trĩu quả vàng để đặt cạnh cửa chính."
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tet_chung_cake",
+   "term": "Chung cake",
+   "lang": "en",
+   "rank": 12,
+   "pronunciation": {
+    "us": "/tʃʊŋ keɪk/"
+   },
+   "senses": [
+    {
+     "pos": "noun",
+     "definition": {
+      "en": "Square sticky rice cake filled with mung beans and pork, a traditional Tet food."
+     },
+     "translations": {
+      "vi": "bánh Chưng"
+     },
+     "examples": [
+      {
+       "text": "Every year, my grandmother and I wrap Chung cake together and cook it overnight.",
+       "translations": {
+        "vi": "Hằng năm, tôi và bà cùng gói bánh Chưng rồi nấu suốt đêm."
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tet_tet_cake",
+   "term": "Tet cake",
+   "lang": "en",
+   "rank": 13,
+   "pronunciation": {
+    "us": "/tɛt keɪk/"
+   },
+   "senses": [
+    {
+     "pos": "noun",
+     "definition": {
+      "en": "Similar to Bánh Chưng, but cylindrical and typical in southern Vietnam."
+     },
+     "translations": {
+      "vi": "bánh Tét"
+     },
+     "examples": [
+      {
+       "text": "In the south, families usually make Tet cake instead of Chung cake.",
+       "translations": {
+        "vi": "Ở miền Nam, các gia đình thường làm bánh Tét thay vì bánh Chưng."
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tet_red_envelopes",
+   "term": "red envelopes",
+   "lang": "en",
+   "rank": 14,
+   "pronunciation": {
+    "us": "/rɛd ˈɛnvələʊps/"
+   },
+   "senses": [
+    {
+     "pos": "noun",
+     "definition": {
+      "en": "Small red packets filled with money, given as gifts, especially to children, for good luck."
+     },
+     "translations": {
+      "vi": "bao lì xì"
+     },
+     "examples": [
+      {
+       "text": "Children are excited to receive red envelopes from their grandparents.",
+       "translations": {
+        "vi": "Trẻ em rất háo hức khi nhận được bao lì xì từ ông bà."
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tet_new_clothes",
+   "term": "new clothes",
+   "lang": "en",
+   "rank": 15,
+   "pronunciation": {
+    "us": "/njuː kləʊðz/"
+   },
+   "senses": [
+    {
+     "pos": "noun",
+     "definition": {
+      "en": "Clothes worn during Tet to symbolize a fresh start in the new year."
+     },
+     "translations": {
+      "vi": "quần áo mới"
+     },
+     "examples": [
+      {
+       "text": "She wore new clothes on the first day of Tet to start the year with good luck.",
+       "translations": {
+        "vi": "Cô ấy mặc quần áo mới vào mùng một Tết để bắt đầu năm mới với nhiều may mắn."
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tet_temple_visits",
+   "term": "temple visits",
+   "lang": "en",
+   "rank": 16,
+   "pronunciation": {
+    "us": "/ˈtɛmpl ˈvɪzɪts/"
+   },
+   "senses": [
+    {
+     "pos": "noun",
+     "definition": {
+      "en": "A common activity during Tet when people go to pray for health, wealth, and happiness."
+     },
+     "translations": {
+      "vi": "đi chùa"
+     },
+     "examples": [
+      {
+       "text": "Temple visits are popular in the first days of the year, when people pray for a peaceful year.",
+       "translations": {
+        "vi": "Việc đi chùa rất phổ biến trong những ngày đầu năm, khi mọi người cầu mong một năm bình an."
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tet_ancestor_worship",
+   "term": "ancestor worship",
+   "lang": "en",
+   "rank": 17,
+   "pronunciation": {
+    "us": "/ˈænsɛstə ˈwɜːʃɪp/"
+   },
+   "senses": [
+    {
+     "pos": "noun",
+     "definition": {
+      "en": "The act of honoring and remembering one's ancestors through offerings, prayers, and ceremonies."
+     },
+     "translations": {
+      "vi": "việc thờ cúng tổ tiên"
+     },
+     "examples": [
+      {
+       "text": "Ancestor worship is an important part of Tet, and families prepare an altar with fruit and incense.",
+       "translations": {
+        "vi": "Việc thờ cúng tổ tiên là một phần quan trọng của Tết, và các gia đình bày bàn thờ với trái cây và hương."
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tet_fortune_telling",
+   "term": "fortune telling",
+   "lang": "en",
+   "rank": 18,
+   "pronunciation": {
+    "us": "/ˈfɔːtʃuːn ˈtɛlɪŋ/"
+   },
+   "senses": [
+    {
+     "pos": "noun",
+     "definition": {
+      "en": "A popular Tet activity, where people consult fortune-tellers or read signs to predict the year ahead."
+     },
+     "translations": {
+      "vi": "bói toán"
+     },
+     "examples": [
+      {
+       "text": "Some people go to a fortune telling session to find out what the new year will bring.",
+       "translations": {
+        "vi": "Một số người đến xem bói để biết năm mới sẽ mang lại điều gì."
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tet_lucky_money",
+   "term": "lucky money",
+   "lang": "en",
+   "rank": 19,
+   "pronunciation": {
+    "us": "/ˈlʌki ˈmʌni/"
+   },
+   "senses": [
+    {
+     "pos": "noun",
+     "definition": {
+      "en": "The money given in red envelopes during Tet, symbolizing wishes for prosperity."
+     },
+     "translations": {
+      "vi": "tiền lì xì"
+     },
+     "examples": [
+      {
+       "text": "He saved all his lucky money to buy a new bicycle.",
+       "translations": {
+        "vi": "Cậu ấy để dành toàn bộ tiền lì xì để mua một chiếc xe đạp mới."
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tet_tet_meal",
+   "term": "Tet meal",
+   "lang": "en",
+   "rank": 20,
+   "pronunciation": {
+    "us": "/tɛt miːl/"
+   },
+   "senses": [
+    {
+     "pos": "noun",
+     "definition": {
+      "en": "Special dishes prepared for the holiday, including Bánh Chưng, pickled onions, and boiled chicken."
+     },
+     "translations": {
+      "vi": "bữa ăn Tết"
+     },
+     "examples": [
+      {
+       "text": "A traditional Tet meal includes Chung cake, boiled chicken and pickled onions.",
+       "translations": {
+        "vi": "Một bữa ăn Tết truyền thống gồm bánh Chưng, gà luộc và dưa hành."
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tet_fireworks_display",
+   "term": "fireworks display",
+   "lang": "en",
+   "rank": 21,
+   "pronunciation": {
+    "us": "/ˈfaɪəwɜːks dɪˈspleɪ/"
+   },
+   "senses": [
+    {
+     "pos": "noun",
+     "definition": {
+      "en": "A festive activity often seen on New Year's Eve, symbolizing the drive away of evil spirits."
+     },
+     "translations": {
+      "vi": "bắn pháo hoa"
+     },
+     "examples": [
+      {
+       "text": "Thousands of people gathered by the river to watch the fireworks display at midnight.",
+       "translations": {
+        "vi": "Hàng nghìn người tụ tập bên bờ sông để xem bắn pháo hoa lúc nửa đêm."
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tet_tet_parade",
+   "term": "Tet parade",
+   "lang": "en",
+   "rank": 22,
+   "pronunciation": {
+    "us": "/tɛt pəˈreɪd/"
+   },
+   "senses": [
+    {
+     "pos": "noun",
+     "definition": {
+      "en": "A public event with dragon dances, music, and costumes, celebrating the arrival of the new year."
+     },
+     "translations": {
+      "vi": "diễu hành Tết"
+     },
+     "examples": [
+      {
+       "text": "In Ho Chi Minh City, the Tet parade typically takes place in the city center, where streets are lined with crowds of people eagerly waiting to witness the festivities.",
+       "translations": {
+        "vi": "Tại Thành phố Hồ Chí Minh, lễ hội Tết thường diễn ra ở trung tâm thành phố, nơi các con phố chật kín người dân háo hức chờ đón những hoạt động lễ hội."
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tet_reunion_dinner",
+   "term": "reunion dinner",
+   "lang": "en",
+   "rank": 23,
+   "pronunciation": {
+    "us": "/ˌriːˈjuːniən ˈdɪnə/"
+   },
+   "senses": [
+    {
+     "pos": "noun",
+     "definition": {
+      "en": "A large meal shared with family members, usually on the eve of Tet."
+     },
+     "translations": {
+      "vi": "bữa tối đoàn tụ"
+     },
+     "examples": [
+      {
+       "text": "During Tet, it is common for families to gather for a reunion dinner, and after the meal, the elders, such as parents and grandparents, will hand out red envelopes to the younger members of the family.",
+       "translations": {
+        "vi": "Trong dịp Tết, các gia đình thường quây quần bên nhau ăn bữa cơm tất niên, và sau bữa ăn, những người lớn tuổi như cha mẹ và ông bà sẽ lì xì cho các thành viên nhỏ tuổi hơn trong gia đình."
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tet_visit_relatives",
+   "term": "visit relatives",
+   "lang": "en",
+   "rank": 24,
+   "pronunciation": {
+    "us": "/ˈvɪzɪt ˈrɛlətɪvz/"
+   },
+   "senses": [
+    {
+     "pos": "noun",
+     "definition": {
+      "en": "A common custom where people visit family members and close friends to exchange greetings."
+     },
+     "translations": {
+      "vi": "thăm người thân/họ hàng"
+     },
+     "examples": [
+      {
+       "text": "We always visit relatives on the second day of Tet to wish them a happy new year.",
+       "translations": {
+        "vi": "Chúng tôi luôn thăm họ hàng vào mùng hai Tết để chúc họ năm mới vui vẻ."
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tet_good_luck_charms",
+   "term": "good luck charms",
+   "lang": "en",
+   "rank": 25,
+   "pronunciation": {
+    "us": "/ɡʊd lʌk tʃɑːmz/"
+   },
+   "senses": [
+    {
+     "pos": "noun",
+     "definition": {
+      "en": "Small tokens or symbols believed to bring good fortune during the new year."
+     },
+     "translations": {
+      "vi": "bùa may mắn"
+     },
+     "examples": [
+      {
+       "text": "During the Tet (Lunar New Year) holiday, one of the common traditions is the use of good luck charms to bring fortune, prosperity, and happiness for the new year.",
+       "translations": {
+        "vi": "Trong dịp Tết (Âm lịch), một trong những truyền thống phổ biến là sử dụng các vật phẩm mang lại may mắn để cầu mong tài lộc, thịnh vượng và hạnh phúc cho năm mới."
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tet_exchange_wishes",
+   "term": "exchange wishes",
+   "lang": "en",
+   "rank": 26,
+   "pronunciation": {
+    "us": "/ɪksˈtʃeɪndʒ ˈwɪʃɪz/"
+   },
+   "senses": [
+    {
+     "pos": "noun",
+     "definition": {
+      "en": "The practice of saying things like \"Chúc Mừng Năm Mới\" (Happy New Year) or other well-wishes for health and prosperity."
+     },
+     "translations": {
+      "vi": "trao đổi lời chúc"
+     },
+     "examples": [
+      {
+       "text": "Neighbors exchange wishes for health and prosperity when they meet in the new year.",
+       "translations": {
+        "vi": "Hàng xóm trao nhau lời chúc sức khỏe và thịnh vượng khi gặp nhau trong năm mới."
+       }
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
