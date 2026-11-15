@@ -463,12 +463,15 @@ public class PracticeFragment extends DsFragment {
     }
 
     private void reading(Context c, LinearLayout body, VocabViewModel.Word w) {
-        heading(c, body, "Read and answer", "Read the short text, then answer the question");
+        boolean hasExample = w.example != null;
+        heading(c, body, "Read and answer", hasExample ? "Read the short text, then answer the question"
+                : "Read the meaning, then pick the word");
         TextView passage = Ui.text(c, "", 17, 400, Ui.INK);
         passage.setLineSpacing(Ui.dp(c, 6), 1f);
-        String text = w.example == null ? w.term : w.example;
+        // The Oxford lists have no example sentences: the passage is then the definition and the answers are words.
+        String text = hasExample ? w.example : w.meaning;
         SpannableString span = new SpannableString(text);
-        int at = text.toLowerCase().indexOf(w.term.toLowerCase());
+        int at = hasExample ? text.toLowerCase().indexOf(w.term.toLowerCase()) : -1;
         if (at >= 0) {
             span.setSpan(new ForegroundColorSpan(Ui.GREEN), at, at + w.term.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             span.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), at, at + w.term.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -477,10 +480,15 @@ public class PracticeFragment extends DsFragment {
         passage.setBackground(Ui.shape(c, Ui.CARD, 18, Ui.LINE, 1));
         passage.setPadding(Ui.dp(c, 18), Ui.dp(c, 18), Ui.dp(c, 18), Ui.dp(c, 18));
         Ui.add(body, passage, 20);
-        Ui.add(body, Ui.text(c, "What does “" + w.term + "” mean in the text?", 16, 700, Ui.INK), 20);
+        Ui.add(body, Ui.text(c, hasExample ? "What does \u201c" + w.term + "\u201d mean in the text?"
+                : "Which word matches this meaning?", 16, 700, Ui.INK), 20);
         optionBox = Ui.column(c);
         Ui.add(body, optionBox, 12);
-        options(c, w, 2, Stage.READING);
+        if (hasExample) {
+            options(c, viewModel.meanings(w, 2), w.meaning, w, Stage.READING);
+        } else {
+            options(c, viewModel.terms(w, 2), w.term, w, Stage.READING);
+        }
         feedbackView(c, body);
     }
 
@@ -507,13 +515,12 @@ public class PracticeFragment extends DsFragment {
         heading(c, body, "What does “" + w.term + "” mean?", "Choose one answer");
         optionBox = Ui.column(c);
         Ui.add(body, optionBox, 20);
-        options(c, w, 4, Stage.CHOICE);
+        options(c, viewModel.meanings(w, 4), w.meaning, w, Stage.CHOICE);
         feedbackView(c, body);
     }
 
     /** Tappable answer rows; the answer is revealed as soon as one is picked. */
-    private void options(Context c, VocabViewModel.Word w, int count, Stage s) {
-        List<String> list = viewModel.meanings(w, count);
+    private void options(Context c, List<String> list, String correct, VocabViewModel.Word w, Stage s) {
         for (int i = 0; i < list.size(); i++) {
             final int pos = i;
             LinearLayout row = Ui.row(c);
@@ -528,10 +535,10 @@ public class PracticeFragment extends DsFragment {
                     return;
                 }
                 chosen = pos;
-                boolean ok = list.get(pos).equals(w.meaning);
+                boolean ok = list.get(pos).equals(correct);
                 for (int k = 0; k < optionBox.getChildCount(); k++) {
                     View r = optionBox.getChildAt(k);
-                    boolean isRight = w.meaning.equals(r.getTag());
+                    boolean isRight = correct.equals(r.getTag());
                     boolean isPicked = k == pos;
                     if (isRight) {
                         r.setBackground(Ui.shape(c, Ui.GREEN_TINT, 14, Ui.GREEN, 1.5f));
@@ -539,7 +546,7 @@ public class PracticeFragment extends DsFragment {
                         r.setBackground(Ui.shape(c, Ui.RED_TINT, 14, Ui.RED, 1.5f));
                     }
                 }
-                markAnswered(s, w, ok, ok ? "Correct!" : "Not quite. It means “" + w.meaning + "”");
+                markAnswered(s, w, ok, ok ? "Correct!" : "Not quite. The answer is “" + correct + "”");
             });
             Ui.add(optionBox, row, i == 0 ? 0 : 10);
         }

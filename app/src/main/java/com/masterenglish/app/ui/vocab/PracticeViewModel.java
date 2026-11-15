@@ -234,6 +234,25 @@ public class PracticeViewModel extends ViewModel {
                 w.example.substring(i + w.term.length())};
     }
 
+    /** {@code count} words: this one plus distractors of the same level, in a stable shuffled order. */
+    public List<String> terms(VocabViewModel.Word word, int count) {
+        List<String> options = new ArrayList<>();
+        options.add(word.term);
+        List<VocabViewModel.Word> others = new ArrayList<>(pool);
+        Collections.shuffle(others, new Random(word.id.hashCode() + 7L));
+        others.sort((a, b) -> Boolean.compare(!b.cefrLevel.equals(word.cefrLevel), !a.cefrLevel.equals(word.cefrLevel)));
+        for (VocabViewModel.Word o : others) {
+            if (options.size() >= count) {
+                break;
+            }
+            if (!o.id.equals(word.id) && !options.contains(o.term)) {
+                options.add(o.term);
+            }
+        }
+        Collections.shuffle(options, new Random(word.id.hashCode() * 17L + count));
+        return options;
+    }
+
     /** {@code count} meanings: the right one plus distractors from other words, in a stable shuffled order. */
     public List<String> meanings(VocabViewModel.Word word, int count) {
         List<String> options = new ArrayList<>();
