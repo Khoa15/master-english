@@ -198,10 +198,21 @@ public class LearningPipelineTest {
     public void reloadingContentRemovesProgressOfDeletedWords() throws Exception {
         await((Start<Void>) cb -> progress.reviewCard(USER, "look", SrsAlgorithm.Button.GOOD, cb));
         assertNotNull(db.progressDao().get(USER, "look"));
-        db.wordDao().deleteWords();
+        db.wordDao().deleteAllWords();
         assertNull(db.progressDao().get(USER, "look"));
         assertEquals(0, db.wordDao().countSenses());
         assertEquals(0, db.wordDao().countPackWords());
+    }
+
+    @Test
+    public void aContentUpdateKeepsProgressOfWordsThatAreStillThere() throws Exception {
+        await((Start<Void>) cb -> progress.reviewCard(USER, "look", SrsAlgorithm.Button.GOOD, cb));
+        Context context = ApplicationProvider.getApplicationContext();
+        context.getSharedPreferences("content_seed", Context.MODE_PRIVATE).edit().putInt("version", 0).commit();
+        new LocalDataSeeder(context, db).seedIfEmpty();
+        assertNotNull(db.progressDao().get(USER, "look"));
+        assertEquals(4883, db.wordDao().countWords());
+        assertEquals(4899, db.wordDao().countPackWords());
     }
 
     @Test

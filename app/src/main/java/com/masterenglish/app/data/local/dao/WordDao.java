@@ -4,6 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Upsert;
 
 import com.masterenglish.app.data.local.entity.PackEntity;
 import com.masterenglish.app.data.local.entity.PackWordEntity;
@@ -17,24 +18,41 @@ import java.util.List;
 @Dao
 public interface WordDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertWords(List<WordEntity> words);
+    /** Upsert (not REPLACE): replacing a word would cascade-delete the learners' progress for it. */
+    @Upsert
+    void upsertWords(List<WordEntity> words);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertSenses(List<WordSenseEntity> senses);
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertPacks(List<PackEntity> packs);
+    @Upsert
+    void upsertPacks(List<PackEntity> packs);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertPackWords(List<PackWordEntity> links);
 
-    /** Deleting words and packs cascades to senses, pack_words and every learner's word_progress. */
-    @Query("DELETE FROM words")
-    void deleteWords();
+    /** Senses and pack membership are rebuilt on every content load. */
+    @Query("DELETE FROM word_senses")
+    void deleteSenses();
 
-    @Query("DELETE FROM packs")
-    void deletePacks();
+    @Query("DELETE FROM pack_words")
+    void deletePackWords();
+
+    /** Deleting words and packs cascades to senses, pack_words and every learner's word_progress. */
+    @Query("DELETE FROM words WHERE id IN (:ids)")
+    void deleteWords(List<String> ids);
+
+    @Query("DELETE FROM words")
+    void deleteAllWords();
+
+    @Query("DELETE FROM packs WHERE id IN (:ids)")
+    void deletePacks(List<String> ids);
+
+    @Query("SELECT id FROM words")
+    List<String> getWordIds();
+
+    @Query("SELECT id FROM packs")
+    List<String> getPackIds();
 
     @Query("SELECT COUNT(*) FROM words")
     int countWords();

@@ -33,7 +33,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext;
 public class LocalDataSeeder {
 
     /** Raise this when assets/data/vocabulary.json changes. */
-    public static final int CONTENT_VERSION = 3;
+    public static final int CONTENT_VERSION = 4;
 
     /** The old content and progress tables were replaced in schema version 4; the first load starts from scratch. */
     private static final String TAG = "LocalDataSeeder";
@@ -65,19 +65,44 @@ public class LocalDataSeeder {
             List<WordSenseEntity> senses = new ArrayList<>();
             List<PackWordEntity> links = new ArrayList<>();
             build(file, packs, words, senses, links);
-            database.runInTransaction(() -> {
-                dao.deleteWords();
-                dao.deletePacks();
-                dao.insertPacks(packs);
-                dao.insertWords(words);
-                dao.insertSenses(senses);
-                dao.insertPackWords(links);
-            });
+            database.runInTransaction(() -> replaceContent(dao, packs, words, senses, links));
             prefs.edit().putInt(KEY_VERSION, CONTENT_VERSION).apply();
             Log.i(TAG, "Seeded " + words.size() + " words in " + packs.size() + " packs");
         } catch (IOException e) {
             Log.e(TAG, "Could not read bundled vocabulary", e);
         }
+    }
+
+    /**
+     * Words and packs are upserted and only the ones missing from the new file are deleted, so a content update
+     * keeps the progress of every word that is still there. Senses and pack membership are rebuilt.
+     */
+    static void replaceContent(WordDao dao, List<PackEntity> packs, List<WordEntity> words,
+                               List<WordSenseEntity> senses, List<PackWordEntity> links) {
+        java.util.Set<String> keepWords = new java.util.HashSet<>();
+        for (WordEntity w : words) {
+            keepWords.add(w.id);
+        }
+        java.util.Set<String> keepPacks = new java.util.HashSet<>();
+        for (PackEntity p : packs) {
+            keepPacks.add(p.id);
+        }
+        List<String> goneWords = new ArrayList<>(dao.getWordIds());
+        goneWords.removeAll(keepWords);
+        for (int i = 0; i < goneWords.size(); i += 500) {
+            dao.deleteWords(goneWords.subList(i, Math.min(goneWords.size(), i + 500)));
+        }
+        List<String> gonePacks = new ArrayList<>(dao.getPackIds());
+        gonePacks.removeAll(keepPacks);
+        if (!gonePacks.isEmpty()) {
+            dao.deletePacks(gonePacks);
+        }
+        dao.deleteSenses();
+        dao.deletePackWords();
+        dao.upsertPacks(packs);
+        dao.upsertWords(words);
+        dao.insertSenses(senses);
+        dao.insertPackWords(links);
     }
 
     private SeedModels.VocabularyFile read() throws IOException {

@@ -30,13 +30,19 @@ def short_pos(pos):
     return base or pos.strip().lower()
 
 
-def senses_of(entry):
+LABEL = re.compile(r"^[A-Z][A-Za-z]*(?:[ ,/&]+[A-Za-z]+){0,3}\.$")
+
+
+def senses_of(entry, dictionary_com=False):
+    """Up to two definitions per part of speech. dictionary.com sometimes gives a bare field label ("Chemistry.")
+    as the first definition; it is folded into the next one ("Chemistry: a substance with a sour taste.")."""
     out = []
     for p in entry.get("pos", []):
-        for d in p["def_en"][:2]:
-            d = d.strip()
-            if d:
-                out.append({"pos": short_pos(p["pos"]), "definition": d})
+        defs = [d.strip() for d in p["def_en"] if d and d.strip()]
+        if dictionary_com and len(defs) >= 2 and len(defs[0].split()) <= 3 and LABEL.match(defs[0]):
+            defs = [defs[0][:-1] + ": " + defs[1]] + defs[2:]
+        for d in defs[:2]:
+            out.append({"pos": short_pos(p["pos"]), "definition": d})
     return out[:MAX_SENSES]
 
 
@@ -48,18 +54,18 @@ def main():
     raw = []  # (levels, term, entry, order)
     for term, e in a.items():
         # "per cent" has no level in the source; its neighbours in the list are all A2.
-        raw.append(([e["cefr"] or "A2"], term, e, e["list_index"]))
+        raw.append(([e["cefr"] or "A2"], term, e, e["list_index"], False))
     for term, e in b.items():
-        raw.append((["B2", "C1"] if e["cefr"] == "B2/C1" else [e["cefr"]], term, e, 10000 + e["rank"]))
+        raw.append((["B2", "C1"] if e["cefr"] == "B2/C1" else [e["cefr"]], term, e, 10000 + e["rank"], True))
 
     words, used = [], set()
-    for levels, term, e, order in sorted(raw, key=lambda x: (LEVELS.index(x[0][0]), x[3], x[1])):
+    for levels, term, e, order, from_dc in sorted(raw, key=lambda x: (LEVELS.index(x[0][0]), x[3], x[1])):
         wid = slug(term) or "word"
         base, n = wid, 2
         while wid in used:
             wid, n = f"{base}_{n}", n + 1
         used.add(wid)
-        senses, ipa = senses_of(e), (e.get("ipa_us") or "").strip() or None
+        senses, ipa = senses_of(e, from_dc), (e.get("ipa_us") or "").strip() or None
         if term in fixes:
             f = fixes[term]
             senses = [{"pos": f["pos"], "definition": f["definition"]}] + [s for s in senses if s["definition"] != f["definition"]]
