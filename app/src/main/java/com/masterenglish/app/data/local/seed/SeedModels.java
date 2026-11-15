@@ -13,6 +13,17 @@ public final class SeedModels {
     private SeedModels() {
     }
 
+    /** One row of the Oxford vocabulary file: a word at one CEFR level. */
+    public static class WordSeed {
+        public String id;
+        public String term;
+        public String ipa;
+        public String part_of_speech;
+        public String cefr_level;
+        public String definition;
+        public int order;
+    }
+
     public static class VocabularySeed {
         public String id;
         public String term;

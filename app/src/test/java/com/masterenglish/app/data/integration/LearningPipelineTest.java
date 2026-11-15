@@ -109,164 +109,41 @@ public class LearningPipelineTest {
         return result.get();
     }
 
-    private RoadmapNodeEntity firstNodeOfType(NodeType type) {
-        for (RoadmapNodeEntity node : db.contentDao().getAllNodes()) {
-            if (node.nodeType == type) {
-                return node;
-            }
-        }
-        throw new AssertionError("no node of type " + type);
-    }
-
     @Test
-    public void seedingPopulatesEveryContentTable() {
-        assertEquals(120, db.contentDao().countVocabulary());
-        assertEquals(36, db.contentDao().countGrammar());
-        assertEquals(18, db.contentDao().countReading());
-        assertEquals(18, db.contentDao().countListening());
-        assertEquals(6, db.contentDao().getAllStages().size());
-        assertTrue(db.contentDao().countQuestions() > 300);
+    public void seedingLoadsTheOxfordWordsByCefrLevel() {
+        assertEquals(4899, db.contentDao().countVocabulary());
+        java.util.Map<String, Integer> byLevel = new java.util.HashMap<>();
+        for (VocabularyEntity w : db.contentDao().getAllVocabulary()) {
+            byLevel.merge(w.cefrLevel, 1, Integer::sum);
+        }
+        assertEquals(Integer.valueOf(874), byLevel.get("A1"));
+        assertEquals(Integer.valueOf(765), byLevel.get("A2"));
+        assertEquals(Integer.valueOf(665), byLevel.get("B1"));
+        assertEquals(Integer.valueOf(1284), byLevel.get("B2"));
+        assertEquals(Integer.valueOf(1311), byLevel.get("C1"));
         assertEquals(4, db.badgeDao().getBadges().size());
     }
 
     @Test
-    public void seedingIsIdempotent() {
-        int nodes = db.contentDao().countNodes();
-        new LocalDataSeeder(ApplicationProvider.getApplicationContext(), db).seedIfEmpty();
-        assertEquals(nodes, db.contentDao().countNodes());
-    }
-
-    @Test
-    public void vocabularyLessonLoadsCompletesAndSchedulesCards() throws Exception {
-        RoadmapNodeEntity node = firstNodeOfType(NodeType.VOCABULARY);
-        List<LessonQuestionEntity> questions = await(cb -> content.loadLessonQuestions(node, cb));
-        assertFalse(questions.isEmpty());
-        assertTrue(questions.size() <= 12);
-
-        LessonReward reward = await(cb ->
-                progress.completeLesson(USER, node, 4, 4, 3, cb));
-        assertEquals(3, reward.stars);
-        assertTrue(reward.firstCompletion);
-        assertEquals(4 * 10 + 30, reward.experience);
-        assertEquals(5 + 5, reward.gems);
-        assertEquals(1, reward.streak);
-
-        UserNodeProgressEntity saved = db.progressDao().getNodeProgressFor(USER, node.id);
-        assertEquals(NodeStatus.MASTERED, saved.status);
-
-        for (VocabularyEntity word : db.contentDao().getVocabularyByNode(node.id)) {
-            UserItemRetentionEntity card = db.progressDao().getRetention(USER, ItemType.VOCABULARY, word.id);
-            assertNotNull("no SM-2 card for " + word.id, card);
-            assertEquals(1, card.intervalDays);
+    public void aWordTaggedB2AndC1LivesInBothPacks() {
+        VocabularyEntity b2 = null;
+        VocabularyEntity c1 = null;
+        for (VocabularyEntity w : db.contentDao().getAllVocabulary()) {
+            if (w.word.equals("trigger")) {
+                if (w.cefrLevel.equals("B2")) {
+                    b2 = w;
+                } else if (w.cefrLevel.equals("C1")) {
+                    c1 = w;
+                }
+            }
         }
-    }
-
-    @Test
-    public void roadmapUnlocksTheNextNodeAfterCompletion() throws Exception {
-        List<RoadmapNodeEntity> nodes = db.contentDao().getAllNodes();
-        RoadmapNodeEntity first = nodes.get(0);
-        await((Start<LessonReward>) cb -> progress.completeLesson(USER, first, 2, 4, 2, cb));
-
-        List<RoadmapItem> items = ProgressRepository.buildRoadmap(nodes, db.progressDao().getNodeProgress(USER));
-        assertEquals(NodeStatus.COMPLETED, items.get(0).status);
-        assertEquals(NodeStatus.AVAILABLE, items.get(1).status);
-        assertEquals(NodeStatus.LOCKED, items.get(2).status);
-    }
-
-    @Test
-    public void wrongAnswersCreateWeaknessesThatRecover() throws Exception {
-        RoadmapNodeEntity node = firstNodeOfType(NodeType.GRAMMAR);
-        List<LessonQuestionEntity> questions = await(cb -> content.loadLessonQuestions(node, cb));
-        LessonQuestionEntity question = questions.get(0);
-
-        progress.recordAnswer(USER, question, false);
-        Thread.sleep(200);
-        UserWeaknessEntity weak = waitForWeakness(question.skillTag);
-        assertEquals(0f, weak.masteryScore, 1e-6);
-        assertEquals(1, weak.errorCount);
-
-        progress.recordAnswer(USER, question, true);
-        Thread.sleep(200);
-        UserWeaknessEntity recovering = db.progressDao().getWeakness(USER, question.skillTag);
-        assertTrue(recovering.masteryScore > 0f);
-    }
-
-    private UserItemRetentionEntity waitForCard(String itemId, int repetitions) throws InterruptedException {
-        long deadline = System.currentTimeMillis() + 5_000;
-        UserItemRetentionEntity row = db.progressDao().getRetention(USER, ItemType.VOCABULARY, itemId);
-        while ((row == null || row.repetitionNumber != repetitions) && System.currentTimeMillis() < deadline) {
-            Thread.sleep(20);
-            row = db.progressDao().getRetention(USER, ItemType.VOCABULARY, itemId);
-        }
-        assertNotNull("no SM-2 card for " + itemId, row);
-        assertEquals(repetitions, row.repetitionNumber);
-        return row;
-    }
-
-    private LessonQuestionEntity firstWordQuestion() {
-        VocabularyEntity word = db.contentDao().getVocabularyByNode(firstNodeOfType(NodeType.VOCABULARY).id).get(0);
-        return db.contentDao().getQuestions(ParentType.VOCABULARY, word.id).get(0);
-    }
-
-    @Test
-    public void correctAnswerSchedulesTheCardWithoutAnyWeakness() throws Exception {
-        LessonQuestionEntity question = firstWordQuestion();
-
-        progress.recordAnswer(USER, question, true);
-
-        waitForCard(question.parentId, 1);
-        assertEquals(null, db.progressDao().getWeakness(USER, question.skillTag));
-    }
-
-    @Test
-    public void repeatedCorrectAnswersInOneLessonCountAsOneReview() throws Exception {
-        LessonQuestionEntity question = firstWordQuestion();
-
-        progress.recordAnswer(USER, question, true);
-        waitForCard(question.parentId, 1);
-        progress.recordAnswer(USER, question, true);
-        progress.recordAnswer(USER, question, true);
-        Thread.sleep(300);
-
-        waitForCard(question.parentId, 1);
-    }
-
-    @Test
-    public void concurrentWrongAnswersAreAllCounted() throws Exception {
-        LessonQuestionEntity question = firstWordQuestion();
-        int answers = 12;
-
-        for (int i = 0; i < answers; i++) {
-            progress.recordAnswer(USER, question, false);
-        }
-
-        long deadline = System.currentTimeMillis() + 5_000;
-        UserWeaknessEntity weak = db.progressDao().getWeakness(USER, question.skillTag);
-        while ((weak == null || weak.errorCount < answers) && System.currentTimeMillis() < deadline) {
-            Thread.sleep(20);
-            weak = db.progressDao().getWeakness(USER, question.skillTag);
-        }
-        assertNotNull(weak);
-        assertEquals(answers, weak.errorCount);
-    }
-
-    private UserWeaknessEntity waitForWeakness(String tag) throws InterruptedException {
-        long deadline = System.currentTimeMillis() + 5_000;
-        UserWeaknessEntity row = db.progressDao().getWeakness(USER, tag);
-        while (row == null && System.currentTimeMillis() < deadline) {
-            Thread.sleep(20);
-            row = db.progressDao().getWeakness(USER, tag);
-        }
-        assertNotNull("weakness " + tag + " was not recorded", row);
-        return row;
+        assertNotNull(b2);
+        assertNotNull(c1);
     }
 
     @Test
     public void flashcardGradingUpdatesTheSchedule() throws Exception {
-        RoadmapNodeEntity node = firstNodeOfType(NodeType.VOCABULARY);
-        await((Start<LessonReward>) cb -> progress.completeLesson(USER, node, 4, 4, 1, cb));
-        VocabularyEntity word = db.contentDao().getVocabularyByNode(node.id).get(0);
-
+        VocabularyEntity word = db.contentDao().getAllVocabulary().get(0);
         await((Start<Void>) cb -> progress.reviewCard(USER, ItemType.VOCABULARY, word.id, SrsAlgorithm.Button.GOOD, cb));
         UserItemRetentionEntity card = db.progressDao().getRetention(USER, ItemType.VOCABULARY, word.id);
         assertEquals(1, card.repetitionNumber);
@@ -281,6 +158,13 @@ public class LearningPipelineTest {
         card = db.progressDao().getRetention(USER, ItemType.VOCABULARY, word.id);
         assertEquals(0, card.repetitionNumber);
         assertEquals(1, card.intervalDays);
+    }
+
+    @Test
+    public void seedingIsIdempotent() {
+        int words = db.contentDao().countVocabulary();
+        new LocalDataSeeder(ApplicationProvider.getApplicationContext(), db).seedIfEmpty();
+        assertEquals(words, db.contentDao().countVocabulary());
     }
 
     @Test
@@ -308,19 +192,4 @@ public class LearningPipelineTest {
         assertTrue(second.isEmpty());
     }
 
-    @Test
-    public void lessonQuestionsKeepTheirParentLinkage() {
-        List<LessonQuestionEntity> listening = db.contentDao().getQuestions(ParentType.LISTENING,
-                db.contentDao().getListeningByNode(firstNodeOfType(NodeType.LISTENING).id).id);
-        assertEquals(2, listening.size());
-        assertEquals("raw/listen_001", listening.get(0).mediaUrl);
-    }
-
-    @Test
-    public void listeningRowsReferenceTheirTranscriptAndAudio() {
-        com.masterenglish.app.data.local.entity.ListeningEntity one = db.contentDao().getListening("list_001");
-        assertNotNull(one);
-        assertEquals("raw/listen_001", one.audioUrl);
-        assertTrue(one.transcript.isJsonArray());
-    }
 }

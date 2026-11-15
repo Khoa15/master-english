@@ -1,28 +1,21 @@
 package com.masterenglish.app.data.local.seed;
 
 import android.content.Context;
-import android.media.MediaMetadataRetriever;
-import android.net.Uri;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.masterenglish.app.data.local.AppDatabase;
 import com.masterenglish.app.data.local.dao.ContentDao;
-import com.masterenglish.app.data.local.seed.SeedModels.GrammarSeed;
-import com.masterenglish.app.data.local.seed.SeedModels.ListeningSeed;
-import com.masterenglish.app.data.local.seed.SeedModels.ReadingSeed;
-import com.masterenglish.app.data.local.seed.SeedModels.VocabularySeed;
-import com.masterenglish.app.utils.AudioResources;
+import com.masterenglish.app.data.local.entity.VocabularyEntity;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -30,15 +23,19 @@ import javax.inject.Singleton;
 import dagger.hilt.android.qualifiers.ApplicationContext;
 
 /**
- * Fills the local database from the four bundled JSON files the first time the app
- * runs (or whenever the vocabulary table is empty). Runs in one transaction, so a
- * crash mid-way leaves the database empty and the next launch simply retries.
+ * Fills the local database from assets/data/vocabulary.json (the Oxford word lists by CEFR level).
+ * The content is versioned: when {@link #CONTENT_VERSION} changes, the old content and the progress
+ * that referred to it are removed and the words are loaded again, all in one transaction.
  */
 @Singleton
 public class LocalDataSeeder {
 
+    /** Raise this when assets/data/vocabulary.json changes. */
+    public static final int CONTENT_VERSION = 2;
+
     private static final String TAG = "LocalDataSeeder";
-    private static final String ASSET_DIR = "data/";
+    private static final String PREFS = "content_seed";
+    private static final String KEY_VERSION = "version";
 
     private final Context context;
     private final AppDatabase database;
@@ -53,69 +50,58 @@ public class LocalDataSeeder {
     public synchronized void seedIfEmpty() {
         // Badges are idempotent (IGNORE on conflict) and must exist even when content was seeded by an older build.
         database.badgeDao().insertBadges(ContentBuilder.badgeCatalogue());
+        SharedPreferences prefs = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE);
         ContentDao content = database.contentDao();
-        if (content.countVocabulary() > 0) {
+        if (prefs.getInt(KEY_VERSION, 0) == CONTENT_VERSION && content.countVocabulary() > 0) {
             return;
         }
         try {
-            List<VocabularySeed> vocabulary = read("vocabulary.json", new TypeToken<List<VocabularySeed>>() { });
-            List<GrammarSeed> grammar = read("grammar.json", new TypeToken<List<GrammarSeed>>() { });
-            List<ReadingSeed> reading = read("reading.json", new TypeToken<List<ReadingSeed>>() { });
-            List<ListeningSeed> listening = read("listening.json", new TypeToken<List<ListeningSeed>>() { });
-
-            ContentBuilder.Bundle bundle = ContentBuilder.build(vocabulary, grammar, reading, listening,
-                    measureListeningDurations(listening));
-            database.runInTransaction(() -> persist(bundle));
-            Log.i(TAG, "Seeded " + bundle.nodes.size() + " nodes and " + bundle.questions.size() + " questions");
+            List<VocabularyEntity> words = toEntities(read());
+            database.runInTransaction(() -> {
+                content.deleteQuestions();
+                content.deleteNodeProgress();
+                content.deleteWeaknesses();
+                content.deleteRetention();
+                content.deleteVocabulary();
+                content.deleteGrammar();
+                content.deleteReading();
+                content.deleteListening();
+                content.deleteNodes();
+                content.deleteStages();
+                content.insertVocabulary(words);
+            });
+            prefs.edit().putInt(KEY_VERSION, CONTENT_VERSION).apply();
+            Log.i(TAG, "Seeded " + words.size() + " words");
         } catch (IOException e) {
-            Log.e(TAG, "Could not read bundled content", e);
+            Log.e(TAG, "Could not read bundled vocabulary", e);
         }
     }
 
-    private void persist(ContentBuilder.Bundle bundle) {
-        ContentDao content = database.contentDao();
-        content.insertStages(bundle.stages);
-        content.insertNodes(bundle.nodes);
-        content.insertVocabulary(bundle.vocabulary);
-        content.insertGrammar(bundle.grammar);
-        content.insertReading(bundle.reading);
-        content.insertListening(bundle.listening);
-        content.insertQuestions(bundle.questions);
-    }
-
-    private <T> T read(String fileName, TypeToken<T> type) throws IOException {
-        try (InputStream stream = context.getAssets().open(ASSET_DIR + fileName);
+    private List<SeedModels.WordSeed> read() throws IOException {
+        try (InputStream stream = context.getAssets().open("data/vocabulary.json");
              InputStreamReader reader = new InputStreamReader(stream, StandardCharsets.UTF_8)) {
-            return gson.fromJson(reader, type.getType());
+            List<SeedModels.WordSeed> list = gson.fromJson(reader, new TypeToken<List<SeedModels.WordSeed>>() { }.getType());
+            return list == null ? new ArrayList<>() : list;
         }
     }
 
-    private Map<String, Integer> measureListeningDurations(List<ListeningSeed> listening) {
-        Map<String, Integer> durations = new HashMap<>();
-        MediaMetadataRetriever retriever = new MediaMetadataRetriever();
-        try {
-            for (ListeningSeed item : listening) {
-                Uri uri = AudioResources.resolve(context, ContentBuilder.audioPathFor(item.id));
-                if (uri == null) {
-                    continue;
-                }
-                try {
-                    retriever.setDataSource(context, uri);
-                    String millis = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
-                    if (millis != null) {
-                        durations.put(item.id, (int) Math.round(Long.parseLong(millis) / 1000.0));
-                    }
-                } catch (RuntimeException e) {
-                    Log.w(TAG, "No duration for " + item.id, e);
-                }
-            }
-        } finally {
-            try {
-                retriever.release();
-            } catch (IOException e) {
-                Log.w(TAG, "Could not release metadata retriever", e);
-            }
+    static List<VocabularyEntity> toEntities(List<SeedModels.WordSeed> seeds) {
+        List<VocabularyEntity> out = new ArrayList<>(seeds.size());
+        for (SeedModels.WordSeed w : seeds) {
+            VocabularyEntity e = new VocabularyEntity();
+            e.id = w.id;
+            e.word = w.term;
+            e.phonetic = w.ipa;
+            e.partOfSpeech = w.part_of_speech;
+            e.cefrLevel = w.cefr_level;
+            // The Oxford lists only have English definitions; they go in the meaning column the UI shows.
+            e.meaningVi = w.definition == null ? "" : w.definition;
+            e.definitionEn = w.definition;
+            e.domain = w.cefr_level;
+            e.synonyms = new ArrayList<>();
+            e.antonyms = new ArrayList<>();
+            out.add(e);
         }
-        return durations;
+        return out;
     }
 }

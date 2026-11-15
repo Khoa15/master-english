@@ -19,7 +19,6 @@ import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeSet;
 
 import javax.inject.Inject;
 
@@ -53,7 +52,7 @@ public class VocabViewModel extends ViewModel {
             this.term = e.word;
             this.phonetic = e.phonetic;
             this.partOfSpeech = e.partOfSpeech;
-            this.meaning = e.meaningVi;
+            this.meaning = e.meaningVi == null || e.meaningVi.isEmpty() ? "No definition available" : e.meaningVi;
             this.example = e.exampleSentence;
             this.exampleTranslation = e.exampleTranslation;
             this.packId = packId;
@@ -89,22 +88,31 @@ public class VocabViewModel extends ViewModel {
         }
     }
 
-    /** A pack: the words that share a domain. */
+    /** Names of the CEFR levels, used in pack titles ("A1: Breakthrough"). */
+    static String levelName(String level) {
+        switch (level) {
+            case "A1": return "Breakthrough";
+            case "A2": return "Waystage";
+            case "B1": return "Threshold";
+            case "B2": return "Vantage";
+            case "C1": return "Effective proficiency";
+            case "C2": return "Mastery";
+            default: return level;
+        }
+    }
+
+    /** A pack: every word of one CEFR level. */
     public static final class Pack {
         public final String id;
         public final String title;
-        public final String category;
         public final int tone;
         public final List<Word> words;
         public final int learned;
 
-        Pack(String id, List<Word> words) {
-            this.id = id;
-            int slash = id.indexOf(" / ");
-            String sub = slash > 0 ? id.substring(slash + 3) : id;
-            this.title = sub.equals("Other") ? "More " + id.substring(0, slash) : sub;
-            this.category = slash > 0 ? id.substring(0, slash) : "General";
-            this.tone = Math.abs(id.hashCode()) % 3;
+        Pack(String level, List<Word> words) {
+            this.id = level;
+            this.title = level + ": " + levelName(level);
+            this.tone = Math.max(0, "A1 A2 B1 B2 C1 C2".indexOf(level) / 3) % 3;
             this.words = words;
             int n = 0;
             for (Word w : words) {
@@ -128,7 +136,6 @@ public class VocabViewModel extends ViewModel {
     public static final class Library {
         public final List<Word> words;
         public final List<Pack> packs;
-        public final List<String> categories;
         public final int dueCount;
         public final int learnedCount;
         public final int wordsToday;
@@ -145,11 +152,6 @@ public class VocabViewModel extends ViewModel {
                 }
             }
             this.learnedCount = learned;
-            TreeSet<String> cats = new TreeSet<>();
-            for (Pack p : packs) {
-                cats.add(p.category);
-            }
-            this.categories = new ArrayList<>(cats);
         }
 
         @Nullable
@@ -192,15 +194,8 @@ public class VocabViewModel extends ViewModel {
                 progressRepository.loadVocabularyRetention(userId, rows -> library.setValue(build(entities, rows))));
     }
 
-    private static final int MIN_PACK_WORDS = 6;
-
-    static String categoryOf(String domain) {
-        int slash = domain.indexOf(" / ");
-        return slash > 0 ? domain.substring(0, slash) : domain;
-    }
-
     static String packIdOf(VocabularyEntity e) {
-        return e.domain == null || e.domain.isEmpty() ? "General English" : e.domain;
+        return e.cefrLevel == null || e.cefrLevel.isEmpty() ? "A1" : e.cefrLevel;
     }
 
     static Library build(List<VocabularyEntity> entities, Map<String, UserItemRetentionEntity> rows) {
@@ -212,11 +207,6 @@ public class VocabViewModel extends ViewModel {
         cal.set(Calendar.MILLISECOND, 0);
         long startOfDay = cal.getTimeInMillis();
 
-        // Domains with only a few words are folded into "<category> / Other" so packs stay worth opening.
-        Map<String, Integer> domainSize = new java.util.HashMap<>();
-        for (VocabularyEntity e : entities) {
-            domainSize.merge(packIdOf(e), 1, Integer::sum);
-        }
         List<Word> words = new ArrayList<>();
         Map<String, List<Word>> byPack = new LinkedHashMap<>();
         int due = 0;
@@ -231,8 +221,7 @@ public class VocabViewModel extends ViewModel {
             if (status == Status.MASTERED) {
                 mastery = 100;
             }
-            String domain = packIdOf(e);
-            String packId = domainSize.get(domain) >= MIN_PACK_WORDS ? domain : categoryOf(domain) + " / Other";
+            String packId = packIdOf(e);
             Word w = new Word(e, packId, status, isDue, mastery, row == null ? 0 : row.lastReviewedAt);
             words.add(w);
             byPack.computeIfAbsent(w.packId, k -> new ArrayList<>()).add(w);
@@ -243,14 +232,12 @@ public class VocabViewModel extends ViewModel {
                 today++;
             }
         }
-        words.sort(Comparator.comparing((Word w) -> w.term.toLowerCase()));
         List<Pack> packs = new ArrayList<>();
         for (Map.Entry<String, List<Word>> entry : byPack.entrySet()) {
             List<Word> list = entry.getValue();
-            list.sort(Comparator.comparing((Word w) -> w.term.toLowerCase()));
             packs.add(new Pack(entry.getKey(), list));
         }
-        packs.sort(Comparator.comparing((Pack p) -> p.title.toLowerCase()));
+        packs.sort(Comparator.comparing((Pack p) -> p.id));
         return new Library(words, packs, due, today);
     }
 }

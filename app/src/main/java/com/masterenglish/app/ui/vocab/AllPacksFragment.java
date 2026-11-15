@@ -23,20 +23,18 @@ import java.util.List;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
-/** All word packs: sort and category filters over a two-column grid. */
+/** All word packs: sort over a two-column grid. */
 @AndroidEntryPoint
 public class AllPacksFragment extends DsFragment {
 
-    private static final String[] SORTS = {"A-Z", "Nhiều từ nhất", "Tiến độ cao nhất", "Chưa học"};
+    private static final String[] SORTS = {"A1 → C1", "C1 → A1", "Nhiều từ nhất", "Tiến độ cao nhất"};
 
     private Ui.Screen screen;
     private TextView count;
     private TextView sortView;
-    private TextView categoryView;
     private LinearLayout grid;
     private VocabViewModel.Library library;
     private int sort;
-    private int category;
 
     @Nullable
     @Override
@@ -50,11 +48,7 @@ public class AllPacksFragment extends DsFragment {
 
         LinearLayout filters = Ui.row(c);
         sortView = dropdown(c);
-        categoryView = dropdown(c);
         filters.addView(sortView, new LinearLayout.LayoutParams(0, Ui.dp(c, 44), 1f));
-        LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(0, Ui.dp(c, 44), 1f);
-        p.leftMargin = Ui.dp(c, 10);
-        filters.addView(categoryView, p);
         Ui.add(screen.top, filters, 14);
         screen.top.setPadding(Ui.dp(c, 20), Ui.dp(c, 24), Ui.dp(c, 20), Ui.dp(c, 4));
 
@@ -84,22 +78,6 @@ public class AllPacksFragment extends DsFragment {
             });
             menu.show();
         });
-        categoryView.setOnClickListener(v -> {
-            if (library == null) {
-                return;
-            }
-            PopupMenu menu = new PopupMenu(requireContext(), v);
-            menu.getMenu().add(0, 0, 0, "Danh mục: Tất cả");
-            for (int i = 0; i < library.categories.size(); i++) {
-                menu.getMenu().add(0, i + 1, i + 1, "Danh mục: " + library.categories.get(i));
-            }
-            menu.setOnMenuItemClickListener(item -> {
-                category = item.getItemId();
-                render();
-                return true;
-            });
-            menu.show();
-        });
     }
 
     private TextView dropdown(Context c) {
@@ -119,26 +97,19 @@ public class AllPacksFragment extends DsFragment {
             return;
         }
         sortView.setText("Sắp xếp: " + SORTS[sort]);
-        categoryView.setText("Danh mục: " + (category == 0 || category > library.categories.size()
-                ? "Tất cả" : library.categories.get(category - 1)));
-        List<VocabViewModel.Pack> packs = new ArrayList<>();
-        for (VocabViewModel.Pack p : library.packs) {
-            if (category == 0 || p.category.equals(library.categories.get(category - 1))) {
-                packs.add(p);
-            }
-        }
+        List<VocabViewModel.Pack> packs = new ArrayList<>(library.packs);
         switch (sort) {
             case 1:
-                packs.sort((a, b) -> b.total() - a.total());
+                packs.sort((a, b) -> b.id.compareTo(a.id));
                 break;
             case 2:
-                packs.sort((a, b) -> b.percent() - a.percent());
+                packs.sort((a, b) -> b.total() - a.total());
                 break;
             case 3:
-                packs.sort((a, b) -> (b.total() - b.learned) - (a.total() - a.learned));
+                packs.sort((a, b) -> b.percent() - a.percent());
                 break;
             default:
-                packs.sort((a, b) -> a.title.compareToIgnoreCase(b.title));
+                packs.sort((a, b) -> a.id.compareTo(b.id));
         }
         count.setText(packs.size() + (packs.size() == 1 ? " pack" : " packs"));
         grid.removeAllViews();
@@ -172,7 +143,7 @@ public class AllPacksFragment extends DsFragment {
         card.addView(name, Ui.matchWidth());
         Ui.add(card, Ui.text(c, pack.total() + (pack.total() == 1 ? " word" : " words") + " · " + pack.learned + " learned", 11, 400, Ui.MUTED), 8);
         Ui.add(card, Ui.progress(c, pack.percent(), tone[0]), 8);
-        TextView cat = Ui.pill(c, pack.category, tone[1], tone[2], 11);
+        TextView cat = Ui.pill(c, pack.percent() + "% learned", tone[1], tone[2], 11);
         LinearLayout.LayoutParams p = Ui.wrap();
         p.topMargin = Ui.dp(c, 8);
         card.addView(cat, p);

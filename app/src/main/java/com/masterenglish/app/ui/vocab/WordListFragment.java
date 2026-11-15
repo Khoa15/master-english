@@ -41,6 +41,8 @@ public class WordListFragment extends DsFragment {
     private VocabViewModel.Library library;
     private String query = "";
     private int status;
+    private static final int PAGE = 120;
+    private int shown = PAGE;
 
     @Nullable
     @Override
@@ -71,6 +73,7 @@ public class WordListFragment extends DsFragment {
             @Override public void onTextChanged(CharSequence s, int a, int b, int d) { }
             @Override public void afterTextChanged(Editable s) {
                 query = s.toString().trim().toLowerCase(Locale.ROOT);
+                shown = PAGE;
                 render();
             }
         });
@@ -102,6 +105,7 @@ public class WordListFragment extends DsFragment {
             }
             menu.setOnMenuItemClickListener(item -> {
                 status = item.getItemId();
+                shown = PAGE;
                 render();
                 return true;
             });
@@ -135,7 +139,8 @@ public class WordListFragment extends DsFragment {
         }
         count.setText(String.format(Locale.US, "%,d words", list.size()));
         grid.removeAllViews();
-        for (int i = 0; i < list.size(); i += 2) {
+        int end = Math.min(shown, list.size());
+        for (int i = 0; i < end; i += 2) {
             LinearLayout line = Ui.row(c);
             line.setBaselineAligned(false);
             line.setWeightSum(2f);
@@ -144,12 +149,21 @@ public class WordListFragment extends DsFragment {
                 if (j == 1) {
                     p.leftMargin = Ui.dp(c, 12);
                 }
-                line.addView(i + j < list.size() ? card(c, list.get(i + j)) : new View(c), p);
+                line.addView(i + j < end ? card(c, list.get(i + j)) : new View(c), p);
             }
             Ui.add(grid, line, i == 0 ? 0 : 12);
         }
         if (list.isEmpty()) {
             Ui.add(grid, Ui.text(c, "No words match.", 14, 400, Ui.MUTED), 16);
+        } else if (end < list.size()) {
+            TextView more = Ui.text(c, "Show more (" + (list.size() - end) + " left)", 14, 700, Ui.GREEN);
+            more.setGravity(Gravity.CENTER);
+            more.setMinHeight(Ui.dp(c, 52));
+            more.setOnClickListener(v -> {
+                shown += PAGE;
+                render();
+            });
+            Ui.add(grid, more, 8);
         }
     }
 

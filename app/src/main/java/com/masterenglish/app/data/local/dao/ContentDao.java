@@ -50,6 +50,38 @@ public interface ContentDao {
     @Query("SELECT * FROM roadmap_stages ORDER BY stage_number ASC")
     LiveData<List<RoadmapStageEntity>> observeStages();
 
+    // ----- Reseeding -----------------------------------------------------
+
+    @Query("DELETE FROM lesson_questions")
+    void deleteQuestions();
+
+    @Query("DELETE FROM user_node_progress")
+    void deleteNodeProgress();
+
+    @Query("DELETE FROM user_weaknesses")
+    void deleteWeaknesses();
+
+    @Query("DELETE FROM user_item_retention")
+    void deleteRetention();
+
+    @Query("DELETE FROM vocabulary_lessons")
+    void deleteVocabulary();
+
+    @Query("DELETE FROM grammar_lessons")
+    void deleteGrammar();
+
+    @Query("DELETE FROM reading_lessons")
+    void deleteReading();
+
+    @Query("DELETE FROM listening_lessons")
+    void deleteListening();
+
+    @Query("DELETE FROM roadmap_nodes")
+    void deleteNodes();
+
+    @Query("DELETE FROM roadmap_stages")
+    void deleteStages();
+
     // ----- Vocabulary ----------------------------------------------------
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
