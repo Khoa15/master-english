@@ -39,7 +39,7 @@ public class BadgeSeedTest {
 
     @Test
     public void fullSeedInsertsEveryBadge() {
-        assertEquals(ContentBuilder.badgeCatalogue().size(), db.badgeDao().getBadges().size());
+        assertEquals(BadgeCatalogue.all().size(), db.badgeDao().getBadges().size());
         assertFalse(db.badgeDao().getBadges().isEmpty());
     }
 
@@ -51,6 +51,6 @@ public class BadgeSeedTest {
         // Content is already present, so only the badge catalogue should be written.
         new LocalDataSeeder(ApplicationProvider.getApplicationContext(), db).seedIfEmpty();
 
-        assertEquals(ContentBuilder.badgeCatalogue().size(), db.badgeDao().getBadges().size());
+        assertEquals(BadgeCatalogue.all().size(), db.badgeDao().getBadges().size());
     }
 }

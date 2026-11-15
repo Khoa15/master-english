@@ -35,8 +35,7 @@ public class AuthRepositoryTest {
         db = Room.inMemoryDatabaseBuilder(context, AppDatabase.class).allowMainThreadQueries().build();
         AppExecutors executors = new AppExecutors();
         auth = new AuthRepository(context, new AppPreferences(context),
-                new UserRepository(db.userDao(), db.badgeDao(), executors),
-                new AiRepository(db.aiDao(), executors));
+                new UserRepository(db.userDao(), db.badgeDao(), executors));
     }
 
     @After

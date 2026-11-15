@@ -40,15 +40,13 @@ public class AuthRepository {
     private final Context context;
     private final AppPreferences preferences;
     private final UserRepository userRepository;
-    private final AiRepository aiRepository;
 
     @Inject
     public AuthRepository(@ApplicationContext Context context, AppPreferences preferences,
-                          UserRepository userRepository, AiRepository aiRepository) {
+                          UserRepository userRepository) {
         this.context = context;
         this.preferences = preferences;
         this.userRepository = userRepository;
-        this.aiRepository = aiRepository;
     }
 
     public boolean isFirebaseConfigured() {
@@ -139,10 +137,5 @@ public class AuthRepository {
             return;
         }
         userRepository.saveTargetMinutes(userId, answers.dailyMinutes);
-        aiRepository.remember(userId, "learning_goal", answers.goal, 1f);
-        aiRepository.remember(userId, "job", answers.job, 1f);
-        aiRepository.remember(userId, "role", answers.role, 1f);
-        aiRepository.remember(userId, "age_range", answers.ageRange, 1f);
-        aiRepository.remember(userId, "focus_skills", String.join(", ", answers.skills), 1f);
     }
 }

@@ -1,0 +1,212 @@
+{
+ "April": {
+  "pos": "noun",
+  "definition": "The fourth month of the year, after March and before May.",
+  "ipa_us": null,
+  "source": "dictionary (manual)"
+ },
+ "August": {
+  "pos": "noun",
+  "definition": "The eighth month of the year, after July and before September.",
+  "ipa_us": null,
+  "source": "dictionary (manual)"
+ },
+ "be": {
+  "pos": "verb",
+  "definition": "To exist or to have a quality or state; also used with another verb to form continuous and passive tenses.",
+  "ipa_us": null,
+  "source": "dictionary (manual)"
+ },
+ "December": {
+  "pos": "noun",
+  "definition": "The twelfth and last month of the year, after November.",
+  "ipa_us": null,
+  "source": "dictionary (manual)"
+ },
+ "every": {
+  "pos": "determiner",
+  "definition": "Each one of a group, without any exception; used to show how often something happens.",
+  "ipa_us": null,
+  "source": "dictionary (manual)"
+ },
+ "February": {
+  "pos": "noun",
+  "definition": "The second month of the year, after January and before March.",
+  "ipa_us": null,
+  "source": "dictionary (manual)"
+ },
+ "for": {
+  "pos": "preposition",
+  "definition": "Used to show the purpose of something, who receives it, or how long something lasts.",
+  "ipa_us": null,
+  "source": "dictionary (manual)"
+ },
+ "Friday": {
+  "pos": "noun",
+  "definition": "The day of the week after Thursday and before Saturday.",
+  "ipa_us": null,
+  "source": "dictionary (manual)"
+ },
+ "have to": {
+  "pos": "verb",
+  "definition": "To be obliged to do something; must.",
+  "ipa_us": null,
+  "source": "dictionary (manual)"
+ },
+ "January": {
+  "pos": "noun",
+  "definition": "The first month of the year, after December and before February.",
+  "ipa_us": null,
+  "source": "dictionary (manual)"
+ },
+ "July": {
+  "pos": "noun",
+  "definition": "The seventh month of the year, after June and before August.",
+  "ipa_us": null,
+  "source": "dictionary (manual)"
+ },
+ "June": {
+  "pos": "noun",
+  "definition": "The sixth month of the year, after May and before July.",
+  "ipa_us": null,
+  "source": "dictionary (manual)"
+ },
+ "look": {
+  "pos": "verb",
+  "definition": "To direct your eyes towards someone or something in order to see them; to seem or appear.",
+  "ipa_us": null,
+  "source": "dictionary (manual)"
+ },
+ "May": {
+  "pos": "noun",
+  "definition": "The fifth month of the year, after April and before June.",
+  "ipa_us": null,
+  "source": "dictionary (manual)"
+ },
+ "Monday": {
+  "pos": "noun",
+  "definition": "The day of the week after Sunday and before Tuesday.",
+  "ipa_us": null,
+  "source": "dictionary (manual)"
+ },
+ "October": {
+  "pos": "noun",
+  "definition": "The tenth month of the year, after September and before November.",
+  "ipa_us": null,
+  "source": "dictionary (manual)"
+ },
+ "our": {
+  "pos": "determiner",
+  "definition": "Belonging to or connected with us, the speaker and one or more other people.",
+  "ipa_us": null,
+  "source": "dictionary (manual)"
+ },
+ "Saturday": {
+  "pos": "noun",
+  "definition": "The day of the week after Friday and before Sunday.",
+  "ipa_us": null,
+  "source": "dictionary (manual)"
+ },
+ "September": {
+  "pos": "noun",
+  "definition": "The ninth month of the year, after August and before October.",
+  "ipa_us": null,
+  "source": "dictionary (manual)"
+ },
+ "Sunday": {
+  "pos": "noun",
+  "definition": "The day of the week after Saturday and before Monday.",
+  "ipa_us": null,
+  "source": "dictionary (manual)"
+ },
+ "their": {
+  "pos": "determiner",
+  "definition": "Belonging to or connected with them, or with a person whose gender is not stated.",
+  "ipa_us": null,
+  "source": "dictionary (manual)"
+ },
+ "Thursday": {
+  "pos": "noun",
+  "definition": "The day of the week after Wednesday and before Friday.",
+  "ipa_us": null,
+  "source": "dictionary (manual)"
+ },
+ "Tuesday": {
+  "pos": "noun",
+  "definition": "The day of the week after Monday and before Wednesday.",
+  "ipa_us": null,
+  "source": "dictionary (manual)"
+ },
+ "Wednesday": {
+  "pos": "noun",
+  "definition": "The day of the week after Tuesday and before Thursday.",
+  "ipa_us": null,
+  "source": "dictionary (manual)"
+ },
+ "your": {
+  "pos": "determiner",
+  "definition": "Belonging to or connected with the person or people you are talking to.",
+  "ipa_us": null,
+  "source": "dictionary (manual)"
+ },
+ "according to": {
+  "pos": "preposition",
+  "definition": "As stated by someone or shown by something; in agreement with.",
+  "ipa_us": null,
+  "source": "dictionary (manual)"
+ },
+ "instead of": {
+  "pos": "preposition",
+  "definition": "In place of someone or something else.",
+  "ipa_us": null,
+  "source": "dictionary (manual)"
+ },
+ "touch": {
+  "pos": "verb",
+  "definition": "To put your hand or another part of your body on something; to affect someone's feelings.",
+  "ipa_us": null,
+  "source": "dictionary (manual)"
+ },
+ "used to": {
+  "pos": "verb",
+  "definition": "Describes something that happened regularly or was true in the past but no longer is.",
+  "ipa_us": null,
+  "source": "dictionary (manual)"
+ },
+ "tight": {
+  "pos": "adjective",
+  "definition": "Fixed or fastened firmly; fitting closely, with little or no room to spare.",
+  "ipa_us": null,
+  "source": "dictionary (manual)"
+ },
+ "hell": {
+  "pos": "noun",
+  "definition": "In some religions, the place where bad people are punished after death; a very unpleasant experience.",
+  "ipa_us": null,
+  "source": "dictionary (manual)"
+ },
+ "phase": {
+  "pos": "noun",
+  "definition": "A stage in a process of change or development.",
+  "ipa_us": null,
+  "source": "dictionary (manual)"
+ },
+ "net": {
+  "pos": "noun",
+  "definition": "Material made of threads or ropes tied together with spaces between them, used for catching or covering; short for the Internet.",
+  "ipa_us": null,
+  "source": "dictionary (manual)"
+ },
+ "o’clock": {
+  "pos": "adverb",
+  "definition": "Used after a number from one to twelve to show the exact hour on a clock.",
+  "ipa_us": "/əʊˈklɒk/",
+  "source": "dictionaryapi.dev (pronunciation); definition rewritten"
+ },
+ "Wi-Fi™": {
+  "pos": "noun",
+  "definition": "Any of several standards for short-range wireless data transmission (IEEE 802.11).",
+  "ipa_us": null,
+  "source": "dictionaryapi.dev"
+ }
+}

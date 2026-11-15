@@ -1,0 +1,172 @@
+{
+ "August": {
+  "query": "august",
+  "ipa_us": "/ɔːˈɡʌst/",
+  "pos": [
+   {
+    "pos": "adjective",
+    "def_en": [
+     "Awe-inspiring, majestic, noble, venerable.",
+     "Of noble birth."
+    ]
+   },
+   {
+    "pos": "verb",
+    "def_en": [
+     "To make ripe; ripen.",
+     "To bring to realization."
+    ]
+   },
+   {
+    "pos": "noun",
+    "def_en": [
+     "A kind of clown, usually serving as an anarchic foil to the whiteface."
+    ]
+   }
+  ],
+  "source": "dictionaryapi.dev"
+ },
+ "have to": {
+  "query": "have",
+  "ipa_us": null,
+  "pos": [
+   {
+    "pos": "noun",
+    "def_en": [
+     "A wealthy or privileged person.",
+     "One who has some (contextually specified) thing."
+    ]
+   },
+   {
+    "pos": "verb",
+    "def_en": [
+     "To possess, own.",
+     "To hold, as something at someone's disposal."
+    ]
+   },
+   {
+    "pos": "noun",
+    "def_en": [
+     "A fraud or deception; something misleading."
+    ]
+   }
+  ],
+  "source": "dictionaryapi.dev"
+ },
+ "May": {
+  "query": "may",
+  "ipa_us": "/meɪ/",
+  "pos": [
+   {
+    "pos": "verb",
+    "def_en": [
+     "To be strong; to have power (over).",
+     "(auxiliary) To be able; can."
+    ]
+   },
+   {
+    "pos": "noun",
+    "def_en": [
+     "The hawthorn bush or its blossoms."
+    ]
+   },
+   {
+    "pos": "verb",
+    "def_en": [
+     "To gather may, or flowers in general.",
+     "To celebrate May Day."
+    ]
+   },
+   {
+    "pos": "noun",
+    "def_en": [
+     "A maiden."
+    ]
+   }
+  ],
+  "source": "dictionaryapi.dev"
+ },
+ "o’clock": {
+  "query": "o'clock",
+  "ipa_us": "/əʊˈklɒk/",
+  "pos": [
+   {
+    "pos": "adverb",
+    "def_en": [
+     "(modifying a numeral, one to twelve) In conjunction with a numeral, indicates the time within a twelve-hour period (midnight to noon or noon to midnight), specifically the time when the hour hand of a clock points precisely to the symbol or marking corresponding to the designated numeral.",
+     "In conjunction with a term representing an action or event that occurs daily, indicates the time that said action or event occurs, or first occurs."
+    ]
+   }
+  ],
+  "source": "dictionaryapi.dev"
+ },
+ "according to": {
+  "query": "accord",
+  "ipa_us": "/əˈkɔːd/",
+  "pos": [
+   {
+    "pos": "noun",
+    "def_en": [
+     "Agreement or concurrence of opinion, will, or action.",
+     "A harmony in sound, pitch and tone; concord."
+    ]
+   },
+   {
+    "pos": "verb",
+    "def_en": [
+     "To make to agree or correspond; to suit one thing to another; to adjust.",
+     "To bring (people) to an agreement; to reconcile, settle, adjust or harmonize."
+    ]
+   }
+  ],
+  "source": "dictionaryapi.dev"
+ },
+ "instead of": {
+  "query": "instead",
+  "ipa_us": "/ɪnˈstɛd/",
+  "pos": [
+   {
+    "pos": "adverb",
+    "def_en": [
+     "In the place of something (usually mentioned earlier); as a substitute or alternative."
+    ]
+   }
+  ],
+  "source": "dictionaryapi.dev"
+ },
+ "used to": {
+  "query": "used",
+  "ipa_us": "/juːzd/",
+  "pos": [
+   {
+    "pos": "verb",
+    "def_en": [
+     "To utilize or employ.",
+     "To accustom; to habituate. (Now common only in participial form. Uses the same pronunciation as the noun; see usage notes.)"
+    ]
+   },
+   {
+    "pos": "adjective",
+    "def_en": [
+     "That is or has or have been used.",
+     "That has or have previously been owned by someone else."
+    ]
+   }
+  ],
+  "source": "dictionaryapi.dev"
+ },
+ "Wi-Fi™": {
+  "query": "wi-fi",
+  "ipa_us": null,
+  "pos": [
+   {
+    "pos": "noun",
+    "def_en": [
+     "Any of several standards for short-range wireless data transmission (IEEE 802.11).",
+     "Wireless networking using one of these standards."
+    ]
+   }
+  ],
+  "source": "dictionaryapi.dev"
+ }
+}

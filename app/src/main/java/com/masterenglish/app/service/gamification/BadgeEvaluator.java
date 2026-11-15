@@ -1,7 +1,6 @@
 package com.masterenglish.app.service.gamification;
 
 import com.google.gson.JsonObject;
-import com.masterenglish.app.data.local.Enums.ItemType;
 import com.masterenglish.app.data.local.dao.BadgeDao;
 import com.masterenglish.app.data.local.dao.ProgressDao;
 import com.masterenglish.app.data.local.dao.UserDao;
@@ -26,7 +25,6 @@ import javax.inject.Singleton;
 public class BadgeEvaluator {
 
     private static final int MASTERED_REPETITIONS = 3;
-    private static final float FIXED_MASTERY = 0.6f;
 
     private final BadgeDao badgeDao;
     private final UserDao userDao;
@@ -48,9 +46,7 @@ public class BadgeEvaluator {
         }
         Map<String, Integer> metrics = new HashMap<>();
         metrics.put("STREAK", user.streakCount);
-        metrics.put("VOCAB_MASTERED", progressDao.countMastered(userId, ItemType.VOCABULARY, MASTERED_REPETITIONS));
-        metrics.put("CORRECTED_MISTAKES", progressDao.countFixedWeaknesses(userId, FIXED_MASTERY));
-        metrics.put("GRAMMAR_LESSONS", progressDao.countCompletedGrammarNodes(userId));
+        metrics.put("VOCAB_MASTERED", progressDao.countMastered(userId, MASTERED_REPETITIONS));
 
         for (BadgeEntity badge : badgeDao.getBadges()) {
             if (!meets(badge.criteria.getAsJsonObject(), metrics)) {

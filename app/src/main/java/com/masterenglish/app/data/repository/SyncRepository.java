@@ -1,12 +1,10 @@
 package com.masterenglish.app.data.repository;
 
-import com.masterenglish.app.data.local.entity.UserNodeProgressEntity;
-import com.masterenglish.app.data.local.entity.UserWeaknessEntity;
 import com.masterenglish.app.data.local.prefs.AppPreferences;
+import com.masterenglish.app.data.local.entity.WordProgressEntity;
 import com.masterenglish.app.data.remote.ApiService;
 import com.masterenglish.app.data.remote.dto.SyncAck;
 import com.masterenglish.app.data.remote.dto.SyncPayload;
-import com.masterenglish.app.data.local.entity.UserItemRetentionEntity;
 import com.masterenglish.app.utils.AppExecutors;
 import com.masterenglish.app.utils.Callback;
 
@@ -27,16 +25,14 @@ public class SyncRepository {
 
     private final ApiService api;
     private final ProgressRepository progressRepository;
-    private final AiRepository aiRepository;
     private final AppPreferences preferences;
     private final AppExecutors executors;
 
     @Inject
-    public SyncRepository(ApiService api, ProgressRepository progressRepository, AiRepository aiRepository,
+    public SyncRepository(ApiService api, ProgressRepository progressRepository,
                           AppPreferences preferences, AppExecutors executors) {
         this.api = api;
         this.progressRepository = progressRepository;
-        this.aiRepository = aiRepository;
         this.preferences = preferences;
         this.executors = executors;
     }
@@ -67,10 +63,7 @@ public class SyncRepository {
         SyncPayload outgoing = new SyncPayload();
         outgoing.userId = userId;
         outgoing.sentAt = System.currentTimeMillis();
-        outgoing.nodeProgress = progressRepository.getNodeProgressNow(userId);
-        outgoing.retention = progressRepository.getRetentionForSyncNow(userId);
-        outgoing.weaknesses = progressRepository.getWeaknessesForSyncNow(userId);
-        outgoing.memories = aiRepository.getMemoriesNow(userId);
+        outgoing.wordProgress = progressRepository.getProgressForSyncNow(userId);
 
         Response<SyncAck> pushed = api.pushProgress(outgoing).execute();
         if (!pushed.isSuccessful()) {
@@ -85,25 +78,11 @@ public class SyncRepository {
     }
 
     private void mergeRemote(String userId, SyncPayload remote) {
-        for (UserNodeProgressEntity row : remote.nodeProgress) {
-            UserNodeProgressEntity local = progressRepository.getNodeProgressForNow(userId, row.nodeId);
+        for (WordProgressEntity row : remote.wordProgress) {
+            WordProgressEntity local = progressRepository.getProgressNow(userId, row.wordId);
             if (local == null || row.updatedAt > local.updatedAt) {
                 row.userId = userId;
-                progressRepository.saveRemoteNodeProgress(java.util.Collections.singletonList(row));
-            }
-        }
-        for (UserWeaknessEntity row : remote.weaknesses) {
-            UserWeaknessEntity local = progressRepository.getWeaknessNow(userId, row.errorTag);
-            if (local == null || row.updatedAt > local.updatedAt) {
-                row.userId = userId;
-                progressRepository.saveRemoteWeakness(row);
-            }
-        }
-        for (UserItemRetentionEntity row : remote.retention) {
-            UserItemRetentionEntity local = progressRepository.getRetentionNow(userId, row.itemType, row.itemId);
-            if (local == null || row.updatedAt > local.updatedAt) {
-                row.userId = userId;
-                progressRepository.saveRemoteRetention(row);
+                progressRepository.saveRemoteProgress(row);
             }
         }
     }

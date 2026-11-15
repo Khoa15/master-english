@@ -8,10 +8,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.masterenglish.app.data.local.Enums.ItemType;
-import com.masterenglish.app.data.local.entity.UserItemRetentionEntity;
 import com.masterenglish.app.data.local.prefs.AppPreferences;
-import com.masterenglish.app.data.repository.ContentRepository;
+import com.masterenglish.app.data.repository.WordRepository;
 import com.masterenglish.app.data.repository.ProgressRepository;
 import com.masterenglish.app.data.repository.UserRepository;
 import com.masterenglish.app.utils.AppExecutors;
@@ -77,7 +75,7 @@ public class PracticeViewModel extends ViewModel {
 
     private final String userId;
     private final Context context;
-    private final ContentRepository contentRepository;
+    private final WordRepository wordRepository;
     private final ProgressRepository progressRepository;
     private final UserRepository userRepository;
     private final AppExecutors executors;
@@ -92,11 +90,11 @@ public class PracticeViewModel extends ViewModel {
 
     @Inject
     public PracticeViewModel(@ApplicationContext Context context, AppPreferences preferences,
-                             ContentRepository contentRepository, ProgressRepository progressRepository,
+                             WordRepository wordRepository, ProgressRepository progressRepository,
                              UserRepository userRepository, AppExecutors executors) {
         this.context = context;
         this.userId = preferences.getCurrentUserId() == null ? "" : preferences.getCurrentUserId();
-        this.contentRepository = contentRepository;
+        this.wordRepository = wordRepository;
         this.progressRepository = progressRepository;
         this.userRepository = userRepository;
         this.executors = executors;
@@ -128,9 +126,9 @@ public class PracticeViewModel extends ViewModel {
         result.setValue(null);
         words.setValue(null);
         startedAt = System.currentTimeMillis();
-        contentRepository.getAllVocabulary(entities ->
-                progressRepository.loadVocabularyRetention(userId, rows -> {
-                    VocabViewModel.Library library = VocabViewModel.build(entities, rows);
+        wordRepository.loadContent(content ->
+                progressRepository.loadProgress(userId, rows -> {
+                    VocabViewModel.Library library = VocabViewModel.build(content, rows);
                     pool = library.words;
                     List<VocabViewModel.Word> picked = new ArrayList<>();
                     if (packId == null) {
@@ -202,7 +200,7 @@ public class PracticeViewModel extends ViewModel {
         }
         int minutes = Math.max(1, Math.round((System.currentTimeMillis() - startedAt) / 60000f));
         for (VocabViewModel.Word w : round) {
-            progressRepository.reviewCard(userId, ItemType.VOCABULARY, w.id,
+            progressRepository.reviewCard(userId, w.id,
                     wrongIds.contains(w.id) ? SrsAlgorithm.Button.AGAIN : SrsAlgorithm.Button.GOOD, null);
         }
         int xp = right.size() * 10 + 5 * round.size();
@@ -242,8 +240,8 @@ public class PracticeViewModel extends ViewModel {
         options.add(word.meaning);
         List<VocabViewModel.Word> others = new ArrayList<>(pool);
         Collections.shuffle(others, new Random(word.id.hashCode()));
-        // Prefer words from the same pack so the distractors are plausible.
-        others.sort((a, b) -> Boolean.compare(!b.packId.equals(word.packId), !a.packId.equals(word.packId)));
+        // Prefer words of the same level so the distractors are plausible.
+        others.sort((a, b) -> Boolean.compare(!b.cefrLevel.equals(word.cefrLevel), !a.cefrLevel.equals(word.cefrLevel)));
         for (VocabViewModel.Word o : others) {
             if (options.size() >= count) {
                 break;

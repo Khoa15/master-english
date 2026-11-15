@@ -6,16 +6,18 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.masterenglish.app.data.local.entity.UserEntity;
-import com.masterenglish.app.data.local.entity.UserItemRetentionEntity;
-import com.masterenglish.app.data.local.entity.VocabularyEntity;
+import com.masterenglish.app.data.local.entity.PackEntity;
+import com.masterenglish.app.data.local.entity.PackWordEntity;
+import com.masterenglish.app.data.local.entity.WordProgressEntity;
+import com.masterenglish.app.data.local.entity.WordRow;
 import com.masterenglish.app.data.local.prefs.AppPreferences;
-import com.masterenglish.app.data.repository.ContentRepository;
+import com.masterenglish.app.data.repository.WordRepository;
 import com.masterenglish.app.data.repository.ProgressRepository;
 import com.masterenglish.app.data.repository.UserRepository;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Comparator;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,7 +41,7 @@ public class VocabViewModel extends ViewModel {
         public final String meaning;
         @Nullable public final String example;
         @Nullable public final String exampleTranslation;
-        public final String packId;
+        public final String cefrLevel;
         public final Status status;
         /** Learned and due for a review now. */
         public final boolean due;
@@ -47,15 +49,15 @@ public class VocabViewModel extends ViewModel {
         public final int mastery;
         public final long lastReviewedAt;
 
-        Word(VocabularyEntity e, String packId, Status status, boolean due, int mastery, long lastReviewedAt) {
+        Word(WordRow e, Status status, boolean due, int mastery, long lastReviewedAt) {
             this.id = e.id;
-            this.term = e.word;
-            this.phonetic = e.phonetic;
-            this.partOfSpeech = e.partOfSpeech;
-            this.meaning = e.meaningVi == null || e.meaningVi.isEmpty() ? "No definition available" : e.meaningVi;
-            this.example = e.exampleSentence;
-            this.exampleTranslation = e.exampleTranslation;
-            this.packId = packId;
+            this.term = e.term;
+            this.phonetic = e.ipa;
+            this.partOfSpeech = e.pos;
+            this.meaning = e.definition == null || e.definition.isEmpty() ? "No definition available" : e.definition;
+            this.example = e.example;
+            this.exampleTranslation = null;
+            this.cefrLevel = e.cefrLevel;
             this.status = status;
             this.due = due;
             this.mastery = mastery;
@@ -88,20 +90,7 @@ public class VocabViewModel extends ViewModel {
         }
     }
 
-    /** Names of the CEFR levels, used in pack titles ("A1: Breakthrough"). */
-    static String levelName(String level) {
-        switch (level) {
-            case "A1": return "Breakthrough";
-            case "A2": return "Waystage";
-            case "B1": return "Threshold";
-            case "B2": return "Vantage";
-            case "C1": return "Effective proficiency";
-            case "C2": return "Mastery";
-            default: return level;
-        }
-    }
-
-    /** A pack: every word of one CEFR level. */
+    /** A pack: a named set of words (today, every word of one CEFR level). */
     public static final class Pack {
         public final String id;
         public final String title;
@@ -109,10 +98,10 @@ public class VocabViewModel extends ViewModel {
         public final List<Word> words;
         public final int learned;
 
-        Pack(String level, List<Word> words) {
-            this.id = level;
-            this.title = level + ": " + levelName(level);
-            this.tone = Math.max(0, "A1 A2 B1 B2 C1 C2".indexOf(level) / 3) % 3;
+        Pack(PackEntity entity, List<Word> words) {
+            this.id = entity.id;
+            this.title = entity.title;
+            this.tone = entity.position % 3;
             this.words = words;
             int n = 0;
             for (Word w : words) {
@@ -166,16 +155,16 @@ public class VocabViewModel extends ViewModel {
     }
 
     private final String userId;
-    private final ContentRepository contentRepository;
+    private final WordRepository wordRepository;
     private final ProgressRepository progressRepository;
     private final UserRepository userRepository;
     private final MutableLiveData<Library> library = new MutableLiveData<>();
 
     @Inject
-    public VocabViewModel(AppPreferences preferences, ContentRepository contentRepository,
+    public VocabViewModel(AppPreferences preferences, WordRepository wordRepository,
                           ProgressRepository progressRepository, UserRepository userRepository) {
         this.userId = preferences.getCurrentUserId() == null ? "" : preferences.getCurrentUserId();
-        this.contentRepository = contentRepository;
+        this.wordRepository = wordRepository;
         this.progressRepository = progressRepository;
         this.userRepository = userRepository;
     }
@@ -188,17 +177,13 @@ public class VocabViewModel extends ViewModel {
         return userRepository.observeUser(userId);
     }
 
-    /** Reloads words and SM-2 rows. */
+    /** Reloads words, packs and SM-2 cards. */
     public void load() {
-        contentRepository.getAllVocabulary(entities ->
-                progressRepository.loadVocabularyRetention(userId, rows -> library.setValue(build(entities, rows))));
+        wordRepository.loadContent(content ->
+                progressRepository.loadProgress(userId, rows -> library.setValue(build(content, rows))));
     }
 
-    static String packIdOf(VocabularyEntity e) {
-        return e.cefrLevel == null || e.cefrLevel.isEmpty() ? "A1" : e.cefrLevel;
-    }
-
-    static Library build(List<VocabularyEntity> entities, Map<String, UserItemRetentionEntity> rows) {
+    static Library build(WordRepository.Content content, Map<String, WordProgressEntity> rows) {
         long now = System.currentTimeMillis();
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.HOUR_OF_DAY, 0);
@@ -207,24 +192,23 @@ public class VocabViewModel extends ViewModel {
         cal.set(Calendar.MILLISECOND, 0);
         long startOfDay = cal.getTimeInMillis();
 
-        List<Word> words = new ArrayList<>();
-        Map<String, List<Word>> byPack = new LinkedHashMap<>();
+        List<Word> words = new ArrayList<>(content.words.size());
+        Map<String, Word> byId = new HashMap<>();
         int due = 0;
         int today = 0;
-        for (VocabularyEntity e : entities) {
-            UserItemRetentionEntity row = rows.get(e.id);
+        for (WordRow e : content.words) {
+            WordProgressEntity row = rows.get(e.id);
             Status status = row == null ? Status.NEW
-                    : row.repetitionNumber >= ProgressRepository.MASTERED_REPETITIONS ? Status.MASTERED : Status.LEARNING;
+                    : row.repetitions >= ProgressRepository.MASTERED_REPETITIONS ? Status.MASTERED : Status.LEARNING;
             boolean isDue = row != null && status != Status.MASTERED && row.nextReviewAt <= now;
             int mastery = row == null ? 0
-                    : Math.min(100, 20 + row.repetitionNumber * 80 / ProgressRepository.MASTERED_REPETITIONS);
+                    : Math.min(100, 20 + row.repetitions * 80 / ProgressRepository.MASTERED_REPETITIONS);
             if (status == Status.MASTERED) {
                 mastery = 100;
             }
-            String packId = packIdOf(e);
-            Word w = new Word(e, packId, status, isDue, mastery, row == null ? 0 : row.lastReviewedAt);
+            Word w = new Word(e, status, isDue, mastery, row == null ? 0 : row.lastReviewedAt);
             words.add(w);
-            byPack.computeIfAbsent(w.packId, k -> new ArrayList<>()).add(w);
+            byId.put(w.id, w);
             if (isDue) {
                 due++;
             }
@@ -232,12 +216,21 @@ public class VocabViewModel extends ViewModel {
                 today++;
             }
         }
-        List<Pack> packs = new ArrayList<>();
-        for (Map.Entry<String, List<Word>> entry : byPack.entrySet()) {
-            List<Word> list = entry.getValue();
-            packs.add(new Pack(entry.getKey(), list));
+        Map<String, List<Word>> byPack = new LinkedHashMap<>();
+        for (PackEntity p : content.packs) {
+            byPack.put(p.id, new ArrayList<>());
         }
-        packs.sort(Comparator.comparing((Pack p) -> p.id));
+        for (PackWordEntity link : content.links) {
+            Word w = byId.get(link.wordId);
+            List<Word> list = byPack.get(link.packId);
+            if (w != null && list != null) {
+                list.add(w);
+            }
+        }
+        List<Pack> packs = new ArrayList<>();
+        for (PackEntity p : content.packs) {
+            packs.add(new Pack(p, byPack.get(p.id)));
+        }
         return new Library(words, packs, due, today);
     }
 }

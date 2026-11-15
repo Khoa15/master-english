@@ -3,6 +3,7 @@ package com.masterenglish.app.data.integration;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import android.content.Context;
@@ -13,27 +14,18 @@ import androidx.room.Room;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.masterenglish.app.data.local.AppDatabase;
-import com.masterenglish.app.data.local.Enums.ItemType;
-import com.masterenglish.app.data.local.Enums.NodeStatus;
-import com.masterenglish.app.data.local.Enums.NodeType;
-import com.masterenglish.app.data.local.Enums.ParentType;
-import com.masterenglish.app.data.local.entity.LessonQuestionEntity;
-import com.masterenglish.app.data.local.entity.RoadmapNodeEntity;
-import com.masterenglish.app.data.local.entity.UserItemRetentionEntity;
-import com.masterenglish.app.data.local.entity.UserNodeProgressEntity;
-import com.masterenglish.app.data.local.entity.UserWeaknessEntity;
-import com.masterenglish.app.data.local.entity.VocabularyEntity;
-import com.masterenglish.app.data.local.prefs.AppPreferences;
+import com.masterenglish.app.data.local.entity.PackWordEntity;
+import com.masterenglish.app.data.local.entity.WordEntity;
+import com.masterenglish.app.data.local.entity.WordProgressEntity;
+import com.masterenglish.app.data.local.entity.WordRow;
+import com.masterenglish.app.data.local.entity.WordSenseEntity;
 import com.masterenglish.app.data.local.seed.LocalDataSeeder;
-import com.masterenglish.app.data.repository.ContentRepository;
-import com.masterenglish.app.data.repository.LessonReward;
 import com.masterenglish.app.data.repository.ProgressRepository;
-import com.masterenglish.app.data.repository.RoadmapItem;
 import com.masterenglish.app.data.repository.UserRepository;
-import com.masterenglish.app.service.ai.WeaknessDetector;
 import com.masterenglish.app.service.gamification.BadgeEvaluator;
 import com.masterenglish.app.utils.AppExecutors;
 import com.masterenglish.app.utils.Callback;
+import com.masterenglish.app.utils.DateUtils;
 import com.masterenglish.app.utils.SrsAlgorithm;
 
 import org.junit.After;
@@ -44,15 +36,15 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
-/**
- * End-to-end check of the offline pipeline against a real Room database:
- * seeding from the bundled JSON, lesson questions, rewards, SM-2 cards, weaknesses and badges.
- */
+/** The word database end to end, against a real in-memory Room database: seeding, packs, SM-2 cards, badges. */
 @RunWith(RobolectricTestRunner.class)
 @Config(sdk = 34)
 public class LearningPipelineTest {
@@ -60,25 +52,18 @@ public class LearningPipelineTest {
     private static final String USER = "guest-test-user";
 
     private AppDatabase db;
-    private AppExecutors executors;
-    private ContentRepository content;
     private ProgressRepository progress;
     private UserRepository users;
-    private AppPreferences preferences;
 
     @Before
     public void setUp() {
         Context context = ApplicationProvider.getApplicationContext();
         db = Room.inMemoryDatabaseBuilder(context, AppDatabase.class).allowMainThreadQueries().build();
-        executors = new AppExecutors();
+        AppExecutors executors = new AppExecutors();
         new LocalDataSeeder(context, db).seedIfEmpty();
-
-        content = new ContentRepository(db.contentDao(), executors);
         users = new UserRepository(db.userDao(), db.badgeDao(), executors);
-        progress = new ProgressRepository(db, db.progressDao(), db.contentDao(), db.userDao(), users,
-                new WeaknessDetector(), new BadgeEvaluator(db.badgeDao(), db.userDao(), db.progressDao()), executors);
-        preferences = new AppPreferences(context);
-        preferences.setCurrentUserId(USER);
+        progress = new ProgressRepository(db, db.progressDao(),
+                new BadgeEvaluator(db.badgeDao(), db.userDao(), db.progressDao()), executors);
         users.ensureUserNow(USER, null, "Tester", null);
     }
 
@@ -87,7 +72,6 @@ public class LearningPipelineTest {
         db.close();
     }
 
-    /** A repository call that reports its result through a Callback. */
     private interface Start<T> {
         void run(Callback<T> callback);
     }
@@ -109,67 +93,128 @@ public class LearningPipelineTest {
         return result.get();
     }
 
+    private WordEntity word(String id) {
+        return db.wordDao().getWord(id);
+    }
+
+    // ----- Content ---------------------------------------------------------
+
     @Test
-    public void seedingLoadsTheOxfordWordsByCefrLevel() {
-        assertEquals(4899, db.contentDao().countVocabulary());
-        java.util.Map<String, Integer> byLevel = new java.util.HashMap<>();
-        for (VocabularyEntity w : db.contentDao().getAllVocabulary()) {
-            byLevel.merge(w.cefrLevel, 1, Integer::sum);
-        }
-        assertEquals(Integer.valueOf(874), byLevel.get("A1"));
-        assertEquals(Integer.valueOf(765), byLevel.get("A2"));
-        assertEquals(Integer.valueOf(665), byLevel.get("B1"));
-        assertEquals(Integer.valueOf(1284), byLevel.get("B2"));
-        assertEquals(Integer.valueOf(1311), byLevel.get("C1"));
-        assertEquals(4, db.badgeDao().getBadges().size());
+    public void seedingLoadsWordsSensesAndPacks() {
+        assertEquals(4883, db.wordDao().countWords());
+        assertEquals(5, db.wordDao().countPacks());
+        // 4,883 words, 16 of them in two packs.
+        assertEquals(4899, db.wordDao().countPackWords());
+        assertTrue(db.wordDao().countSenses() > 4883);
+        assertEquals(2, db.badgeDao().getBadges().size());
     }
 
     @Test
-    public void aWordTaggedB2AndC1LivesInBothPacks() {
-        VocabularyEntity b2 = null;
-        VocabularyEntity c1 = null;
-        for (VocabularyEntity w : db.contentDao().getAllVocabulary()) {
-            if (w.word.equals("trigger")) {
-                if (w.cefrLevel.equals("B2")) {
-                    b2 = w;
-                } else if (w.cefrLevel.equals("C1")) {
-                    c1 = w;
-                }
+    public void everyWordHasAtLeastOneDefinition() {
+        List<WordRow> rows = db.wordDao().getWordRows();
+        assertEquals(4883, rows.size());
+        for (WordRow row : rows) {
+            assertNotNull("no definition for " + row.term, row.definition);
+            assertFalse("empty definition for " + row.term, row.definition.isEmpty());
+        }
+    }
+
+    @Test
+    public void packsHoldEveryWordOfTheirLevel() {
+        Map<String, Integer> size = new HashMap<>();
+        for (PackWordEntity link : db.wordDao().getPackWords()) {
+            size.merge(link.packId, 1, Integer::sum);
+        }
+        assertEquals(Integer.valueOf(874), size.get("A1"));
+        assertEquals(Integer.valueOf(765), size.get("A2"));
+        assertEquals(Integer.valueOf(665), size.get("B1"));
+        assertEquals(Integer.valueOf(1284), size.get("B2"));
+        assertEquals(Integer.valueOf(1311), size.get("C1"));
+    }
+
+    @Test
+    public void aWordTaggedB2AndC1IsOneWordInBothPacks() {
+        Set<String> packs = new HashSet<>();
+        for (PackWordEntity link : db.wordDao().getPackWords()) {
+            if (link.wordId.equals("trigger")) {
+                packs.add(link.packId);
             }
         }
-        assertNotNull(b2);
-        assertNotNull(c1);
+        assertEquals(new HashSet<>(java.util.Arrays.asList("B2", "C1")), packs);
+        assertEquals("B2", word("trigger").cefrLevel);
     }
 
     @Test
-    public void flashcardGradingUpdatesTheSchedule() throws Exception {
-        VocabularyEntity word = db.contentDao().getAllVocabulary().get(0);
-        await((Start<Void>) cb -> progress.reviewCard(USER, ItemType.VOCABULARY, word.id, SrsAlgorithm.Button.GOOD, cb));
-        UserItemRetentionEntity card = db.progressDao().getRetention(USER, ItemType.VOCABULARY, word.id);
-        assertEquals(1, card.repetitionNumber);
-        assertEquals(1, card.intervalDays);
-
-        await((Start<Void>) cb -> progress.reviewCard(USER, ItemType.VOCABULARY, word.id, SrsAlgorithm.Button.GOOD, cb));
-        card = db.progressDao().getRetention(USER, ItemType.VOCABULARY, word.id);
-        assertEquals(2, card.repetitionNumber);
-        assertEquals(6, card.intervalDays);
-
-        await((Start<Void>) cb -> progress.reviewCard(USER, ItemType.VOCABULARY, word.id, SrsAlgorithm.Button.AGAIN, cb));
-        card = db.progressDao().getRetention(USER, ItemType.VOCABULARY, word.id);
-        assertEquals(0, card.repetitionNumber);
-        assertEquals(1, card.intervalDays);
+    public void headwordsThatHadNoDictionaryEntryAreFilledIn() {
+        for (String id : new String[]{"look", "be", "monday", "january", "o_clock", "wi_fi", "net"}) {
+            List<WordSenseEntity> senses = db.wordDao().getSenses(id);
+            assertFalse("no sense for " + id, senses.isEmpty());
+        }
+        assertEquals("verb", db.wordDao().getSenses("look").get(0).pos);
     }
 
     @Test
     public void seedingIsIdempotent() {
-        int words = db.contentDao().countVocabulary();
+        int words = db.wordDao().countWords();
+        int senses = db.wordDao().countSenses();
         new LocalDataSeeder(ApplicationProvider.getApplicationContext(), db).seedIfEmpty();
-        assertEquals(words, db.contentDao().countVocabulary());
+        assertEquals(words, db.wordDao().countWords());
+        assertEquals(senses, db.wordDao().countSenses());
+    }
+
+    // ----- Progress --------------------------------------------------------
+
+    @Test
+    public void flashcardGradingUpdatesTheSchedule() throws Exception {
+        String id = "look";
+        await((Start<Void>) cb -> progress.reviewCard(USER, id, SrsAlgorithm.Button.GOOD, cb));
+        WordProgressEntity card = db.progressDao().get(USER, id);
+        assertEquals(1, card.repetitions);
+        assertEquals(1, card.intervalDays);
+        assertEquals(1, card.timesCorrect);
+
+        await((Start<Void>) cb -> progress.reviewCard(USER, id, SrsAlgorithm.Button.GOOD, cb));
+        card = db.progressDao().get(USER, id);
+        assertEquals(2, card.repetitions);
+        assertEquals(6, card.intervalDays);
+
+        await((Start<Void>) cb -> progress.reviewCard(USER, id, SrsAlgorithm.Button.AGAIN, cb));
+        card = db.progressDao().get(USER, id);
+        assertEquals(0, card.repetitions);
+        assertEquals(1, card.intervalDays);
+        assertEquals(2, card.timesCorrect);
+        assertEquals(1, card.timesWrong);
+    }
+
+    @Test
+    public void aSharedWordKeepsOneCardForBothPacks() throws Exception {
+        await((Start<Void>) cb -> progress.reviewCard(USER, "trigger", SrsAlgorithm.Button.GOOD, cb));
+        Map<String, WordProgressEntity> cards = await(cb -> progress.loadProgress(USER, cb));
+        assertEquals(1, cards.size());
+        assertNotNull(cards.get("trigger"));
+    }
+
+    @Test
+    public void reloadingContentRemovesProgressOfDeletedWords() throws Exception {
+        await((Start<Void>) cb -> progress.reviewCard(USER, "look", SrsAlgorithm.Button.GOOD, cb));
+        assertNotNull(db.progressDao().get(USER, "look"));
+        db.wordDao().deleteWords();
+        assertNull(db.progressDao().get(USER, "look"));
+        assertEquals(0, db.wordDao().countSenses());
+        assertEquals(0, db.wordDao().countPackWords());
+    }
+
+    @Test
+    public void masteredWordsAreCountedAfterThreeGoodReviews() throws Exception {
+        for (int i = 0; i < 3; i++) {
+            await((Start<Void>) cb -> progress.reviewCard(USER, "tight", SrsAlgorithm.Button.GOOD, cb));
+        }
+        assertEquals(1, db.progressDao().countMastered(USER, ProgressRepository.MASTERED_REPETITIONS));
     }
 
     @Test
     public void studyMinutesAccumulateInOneDayRow() {
-        String today = com.masterenglish.app.utils.DateUtils.todayKey();
+        String today = DateUtils.todayKey();
         db.userDao().addStudyMinutes(USER, today, 5);
         db.userDao().addStudyMinutes(USER, today, 7);
         try (Cursor cursor = db.getOpenHelper().getReadableDatabase()
@@ -183,7 +228,7 @@ public class LearningPipelineTest {
 
     @Test
     public void streakBadgeUnlocksOnceAtThirtyDays() {
-        db.userDao().updateStreak(USER, 30, com.masterenglish.app.utils.DateUtils.todayKey(), System.currentTimeMillis());
+        db.userDao().updateStreak(USER, 30, DateUtils.todayKey(), System.currentTimeMillis());
         BadgeEvaluator evaluator = new BadgeEvaluator(db.badgeDao(), db.userDao(), db.progressDao());
         List<String> first = evaluator.evaluateNow(USER);
         List<String> second = evaluator.evaluateNow(USER);
@@ -191,5 +236,4 @@ public class LearningPipelineTest {
         assertEquals("Chiến thần 30 ngày Streak", first.get(0));
         assertTrue(second.isEmpty());
     }
-
 }
