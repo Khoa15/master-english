@@ -33,7 +33,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext;
 public class LocalDataSeeder {
 
     /** Raise this when assets/data/vocabulary.json changes. */
-    public static final int CONTENT_VERSION = 4;
+    public static final int CONTENT_VERSION = 5;
 
     /** The old content and progress tables were replaced in schema version 4; the first load starts from scratch. */
     private static final String TAG = "LocalDataSeeder";
@@ -125,8 +125,17 @@ public class LocalDataSeeder {
             e.cefrLevel = p.cefr_level;
             e.position = p.position;
             packs.add(e);
+            if (p.words != null) {
+                int position = 1;
+                for (String wordId : p.words) {
+                    PackWordEntity link = new PackWordEntity();
+                    link.packId = p.id;
+                    link.wordId = wordId;
+                    link.position = position++;
+                    links.add(link);
+                }
+            }
         }
-        java.util.Map<String, Integer> nextPosition = new java.util.HashMap<>();
         for (SeedModels.WordSeed w : file.words) {
             WordEntity e = new WordEntity();
             e.id = w.id;
@@ -144,15 +153,6 @@ public class LocalDataSeeder {
                     se.pos = s.pos;
                     se.definitionEn = s.definition == null ? "" : s.definition;
                     senses.add(se);
-                }
-            }
-            if (w.packs != null) {
-                for (String packId : w.packs) {
-                    PackWordEntity link = new PackWordEntity();
-                    link.packId = packId;
-                    link.wordId = w.id;
-                    link.position = nextPosition.merge(packId, 1, Integer::sum);
-                    links.add(link);
                 }
             }
         }

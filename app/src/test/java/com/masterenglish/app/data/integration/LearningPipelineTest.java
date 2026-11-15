@@ -101,18 +101,19 @@ public class LearningPipelineTest {
 
     @Test
     public void seedingLoadsWordsSensesAndPacks() {
-        assertEquals(4883, db.wordDao().countWords());
-        assertEquals(5, db.wordDao().countPacks());
-        // 4,883 words, 16 of them in two packs.
-        assertEquals(4899, db.wordDao().countPackWords());
-        assertTrue(db.wordDao().countSenses() > 4883);
+        // 4,883 Oxford words plus 99 common words that are not on the Oxford lists.
+        assertEquals(4982, db.wordDao().countWords());
+        assertEquals(6, db.wordDao().countPacks());
+        // 4,899 Oxford pack entries (16 words are in two packs) plus the 1,000 common words.
+        assertEquals(5899, db.wordDao().countPackWords());
+        assertTrue(db.wordDao().countSenses() > 4982);
         assertEquals(2, db.badgeDao().getBadges().size());
     }
 
     @Test
     public void everyWordHasAtLeastOneDefinition() {
         List<WordRow> rows = db.wordDao().getWordRows();
-        assertEquals(4883, rows.size());
+        assertEquals(4982, rows.size());
         for (WordRow row : rows) {
             assertNotNull("no definition for " + row.term, row.definition);
             assertFalse("empty definition for " + row.term, row.definition.isEmpty());
@@ -130,6 +131,7 @@ public class LearningPipelineTest {
         assertEquals(Integer.valueOf(665), size.get("B1"));
         assertEquals(Integer.valueOf(1284), size.get("B2"));
         assertEquals(Integer.valueOf(1311), size.get("C1"));
+        assertEquals(Integer.valueOf(1000), size.get("COMMON"));
     }
 
     @Test
@@ -211,8 +213,32 @@ public class LearningPipelineTest {
         context.getSharedPreferences("content_seed", Context.MODE_PRIVATE).edit().putInt("version", 0).commit();
         new LocalDataSeeder(context, db).seedIfEmpty();
         assertNotNull(db.progressDao().get(USER, "look"));
-        assertEquals(4883, db.wordDao().countWords());
-        assertEquals(4899, db.wordDao().countPackWords());
+        assertEquals(4982, db.wordDao().countWords());
+        assertEquals(5899, db.wordDao().countPackWords());
+    }
+
+    @Test
+    public void commonWordsPackIsInFrequencyOrderAndSharesOxfordWords() {
+        List<PackWordEntity> common = new java.util.ArrayList<>();
+        for (PackWordEntity link : db.wordDao().getPackWords()) {
+            if (link.packId.equals("COMMON")) {
+                common.add(link);
+            }
+        }
+        assertEquals(1000, common.size());
+        assertEquals("the", common.get(0).wordId);
+        assertEquals("of", common.get(1).wordId);
+        // "people" is an Oxford A1 word: the common pack links to it instead of making a second card.
+        boolean shared = false;
+        for (PackWordEntity link : common) {
+            if (link.wordId.equals("people")) {
+                shared = true;
+            }
+        }
+        assertTrue(shared);
+        assertEquals("A1", word("people").cefrLevel);
+        // Words that are not Oxford headwords are words of their own.
+        assertEquals("COMMON", word("is").cefrLevel);
     }
 
     @Test

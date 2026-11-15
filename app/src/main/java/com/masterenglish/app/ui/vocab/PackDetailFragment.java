@@ -57,7 +57,7 @@ public class PackDetailFragment extends DsFragment {
         int[] tone = Ui.TONES[pack.tone];
         screen.top.removeAllViews();
         screen.top.addView(Ui.titleBar(c, onBack(), pack.title,
-                "Oxford · " + pack.total() + (pack.total() == 1 ? " word" : " words")), Ui.matchWidth());
+                pack.total() + (pack.total() == 1 ? " word" : " words")), Ui.matchWidth());
         LinearLayout stat = Ui.row(c);
         stat.addView(Ui.text(c, pack.learned + " learned", 13, 600, Ui.INK), Ui.weight(1f));
         stat.addView(Ui.text(c, pack.percent() + "%", 13, 700, tone[2]), Ui.wrap());

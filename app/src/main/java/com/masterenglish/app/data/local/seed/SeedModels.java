@@ -18,6 +18,8 @@ public final class SeedModels {
         public String title;
         public String cefr_level;
         public int position;
+        /** Ids of the words in this pack, in the order they are listed. */
+        public List<String> words;
     }
 
     public static class WordSeed {
@@ -26,8 +28,6 @@ public final class SeedModels {
         public String ipa;
         public String cefr_level;
         public int rank;
-        /** Ids of the packs the word belongs to, in the order it should be listed. */
-        public List<String> packs;
         public List<SenseSeed> senses;
     }
 
