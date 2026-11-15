@@ -42,7 +42,7 @@ public final class GlassNav {
             }
         });
         pill.setClipToOutline(false);
-        pill.setElevation(12f * d);
+        pill.setElevation(10f * d);
         if (android.os.Build.VERSION.SDK_INT >= 28) {
             pill.setOutlineSpotShadowColor(0x3D1E2A24);
             pill.setOutlineAmbientShadowColor(0x141E2A24);

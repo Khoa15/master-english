@@ -85,15 +85,15 @@
 
     <!-- Floating nav: the selected tab is a dark ink disc (design: Roadmap artboard, nav). -->
     <style name="Widget.MasterEnglish.NavIndicator" parent="">
-        <item name="android:width">44dp</item>
-        <item name="android:height">40dp</item>
+        <item name="android:width">40dp</item>
+        <item name="android:height">32dp</item>
         <item name="shapeAppearance">@style/ShapeAppearance.MasterEnglish.Pill</item>
         <item name="android:color">@android:color/transparent</item>
     </style>
 
     <style name="ShapeAppearance.MasterEnglish.Pill" parent="">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">20dp</item>
+        <item name="cornerSize">16dp</item>
     </style>
 
     <style name="ShapeAppearance.MasterEnglish.Circle" parent="">
