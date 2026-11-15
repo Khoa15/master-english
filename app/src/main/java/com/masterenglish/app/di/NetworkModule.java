@@ -3,7 +3,6 @@ package com.masterenglish.app.di;
 import com.google.gson.Gson;
 import com.masterenglish.app.BuildConfig;
 import com.masterenglish.app.data.remote.ApiService;
-import com.masterenglish.app.data.remote.agent.AgentApi;
 
 import java.util.concurrent.TimeUnit;
 
@@ -21,9 +20,6 @@ import javax.inject.Singleton;
 @Module
 @InstallIn(SingletonComponent.class)
 public abstract class NetworkModule {
-
-    /** Placeholder only: the AI Agent URL is per-user and supplied at call time through @Url. */
-    private static final String AGENT_PLACEHOLDER_BASE_URL = "https://agent-gateway.invalid/";
 
     @Provides
     @Singleton
@@ -54,16 +50,5 @@ public abstract class NetworkModule {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build()
                 .create(ApiService.class);
-    }
-
-    @Provides
-    @Singleton
-    static AgentApi provideAgentApi(OkHttpClient client, Gson gson) {
-        return new Retrofit.Builder()
-                .baseUrl(AGENT_PLACEHOLDER_BASE_URL)
-                .client(client)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build()
-                .create(AgentApi.class);
     }
 }

@@ -1,17 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/roadmapFragment"
-        android:icon="@drawable/ic_nav_map"
-        android:title="@string/nav_tab_roadmap" />
-    <item
-        android:id="@+id/reviewFragment"
+        android:id="@+id/vocabularyFragment"
         android:icon="@drawable/ic_nav_book"
-        android:title="@string/nav_tab_practice" />
-    <item
-        android:id="@+id/tutorFragment"
-        android:icon="@drawable/ic_nav_mic"
-        android:title="@string/nav_tab_tutor" />
+        android:title="@string/vocab_title" />
     <item
         android:id="@+id/profileFragment"
         android:icon="@drawable/ic_nav_user"

@@ -5,325 +5,252 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.masterenglish.app.data.local.Enums.QuestionType;
-import com.masterenglish.app.data.local.entity.LessonQuestionEntity;
+import com.masterenglish.app.data.local.entity.UserEntity;
 import com.masterenglish.app.data.local.entity.UserItemRetentionEntity;
 import com.masterenglish.app.data.local.entity.VocabularyEntity;
 import com.masterenglish.app.data.local.prefs.AppPreferences;
 import com.masterenglish.app.data.repository.ContentRepository;
 import com.masterenglish.app.data.repository.ProgressRepository;
-import com.masterenglish.app.ui.lesson.QuestionModels;
-import com.masterenglish.app.utils.Callback;
-import com.masterenglish.app.utils.TextUtils;
+import com.masterenglish.app.data.repository.UserRepository;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Comparator;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
+import java.util.TreeSet;
 
 import javax.inject.Inject;
 
 import dagger.hilt.android.lifecycle.HiltViewModel;
 
-/**
- * Vocabulary screens. Topics are the CEFR levels of the seeded words; learned and mastered come
- * from the learner's SM-2 cards (mastered once a card has been repeated enough times).
- */
+/** The learner's vocabulary: every word with its SM-2 status, grouped into packs by domain. */
 @HiltViewModel
 public class VocabViewModel extends ViewModel {
 
-    /** Words per practice round. */
-    public static final int PRACTICE_SIZE = 10;
-
-    /** Words still to review on the completion screen. */
-    public static final int REVIEW_LIMIT = 5;
-
     public enum Status { NEW, LEARNING, MASTERED }
 
-    /** A word as shown in a list. */
+    /** A word as shown in lists and practised in a round. */
     public static final class Word {
         public final String id;
-        public final String word;
+        public final String term;
+        @Nullable public final String phonetic;
+        @Nullable public final String partOfSpeech;
         public final String meaning;
+        @Nullable public final String example;
+        @Nullable public final String exampleTranslation;
+        public final String packId;
         public final Status status;
+        /** Learned and due for a review now. */
+        public final boolean due;
+        /** 0..100, how close the card is to mastered. */
+        public final int mastery;
+        public final long lastReviewedAt;
 
-        Word(String id, String word, String meaning, Status status) {
-            this.id = id;
-            this.word = word;
-            this.meaning = meaning;
+        Word(VocabularyEntity e, String packId, Status status, boolean due, int mastery, long lastReviewedAt) {
+            this.id = e.id;
+            this.term = e.word;
+            this.phonetic = e.phonetic;
+            this.partOfSpeech = e.partOfSpeech;
+            this.meaning = e.meaningVi;
+            this.example = e.exampleSentence;
+            this.exampleTranslation = e.exampleTranslation;
+            this.packId = packId;
             this.status = status;
+            this.due = due;
+            this.mastery = mastery;
+            this.lastReviewedAt = lastReviewedAt;
+        }
+
+        public boolean learned() {
+            return status != Status.NEW;
+        }
+
+        /** "n." style short part of speech, e.g. "n.", "adj.". */
+        public String shortPos() {
+            if (partOfSpeech == null || partOfSpeech.isEmpty()) {
+                return "";
+            }
+            String p = partOfSpeech.toLowerCase();
+            switch (p) {
+                case "noun": return "n.";
+                case "verb": return "v.";
+                case "adjective": return "adj.";
+                case "adverb": return "adv.";
+                default: return p.length() > 4 ? p.substring(0, 3) + "." : p;
+            }
+        }
+
+        /** "meaning · n." as the lists show it. */
+        public String subtitle() {
+            String pos = shortPos();
+            return pos.isEmpty() ? meaning : meaning + " · " + pos;
         }
     }
 
-    /** One CEFR level of words. */
-    public static final class Topic {
-        public final String level;
-        public final String description;
-        public final int total;
-        public final int learned;
-        public final int mastered;
+    /** A pack: the words that share a domain. */
+    public static final class Pack {
+        public final String id;
+        public final String title;
+        public final String category;
+        public final int tone;
         public final List<Word> words;
+        public final int learned;
 
-        Topic(String level, String description, int total, int learned, int mastered, List<Word> words) {
-            this.level = level;
-            this.description = description;
-            this.total = total;
-            this.learned = learned;
-            this.mastered = mastered;
+        Pack(String id, List<Word> words) {
+            this.id = id;
+            int slash = id.indexOf(" / ");
+            String sub = slash > 0 ? id.substring(slash + 3) : id;
+            this.title = sub.equals("Other") ? "More " + id.substring(0, slash) : sub;
+            this.category = slash > 0 ? id.substring(0, slash) : "General";
+            this.tone = Math.abs(id.hashCode()) % 3;
             this.words = words;
+            int n = 0;
+            for (Word w : words) {
+                if (w.learned()) {
+                    n++;
+                }
+            }
+            this.learned = n;
+        }
+
+        public int total() {
+            return words.size();
+        }
+
+        public int percent() {
+            return words.isEmpty() ? 0 : learned * 100 / words.size();
         }
     }
 
-    /** Totals across every level, plus each level as a topic. */
-    public static final class Overview {
-        public final int total;
-        public final int learned;
-        public final int mastered;
-        public final List<Topic> topics;
+    /** Everything the vocabulary screens show. */
+    public static final class Library {
+        public final List<Word> words;
+        public final List<Pack> packs;
+        public final List<String> categories;
+        public final int dueCount;
+        public final int learnedCount;
+        public final int wordsToday;
 
-        Overview(int total, int learned, int mastered, List<Topic> topics) {
-            this.total = total;
-            this.learned = learned;
-            this.mastered = mastered;
-            this.topics = topics;
+        Library(List<Word> words, List<Pack> packs, int dueCount, int wordsToday) {
+            this.words = words;
+            this.packs = packs;
+            this.dueCount = dueCount;
+            this.wordsToday = wordsToday;
+            int learned = 0;
+            for (Word w : words) {
+                if (w.learned()) {
+                    learned++;
+                }
+            }
+            this.learnedCount = learned;
+            TreeSet<String> cats = new TreeSet<>();
+            for (Pack p : packs) {
+                cats.add(p.category);
+            }
+            this.categories = new ArrayList<>(cats);
         }
 
         @Nullable
-        public Topic topic(String level) {
-            for (Topic topic : topics) {
-                if (topic.level.equals(level)) {
-                    return topic;
+        public Pack pack(String id) {
+            for (Pack p : packs) {
+                if (p.id.equals(id)) {
+                    return p;
                 }
             }
             return null;
         }
     }
 
-    /** One multiple-choice question about a word. */
-    public static final class Challenge {
-        public final LessonQuestionEntity question;
-        public final String wordId;
-        public final String prompt;
-        public final String context;
-        public final List<String> options;
-        public final int correct;
-        public final String explanation;
-
-        Challenge(LessonQuestionEntity question, String wordId, String prompt, String context,
-                  List<String> options, int correct, String explanation) {
-            this.question = question;
-            this.wordId = wordId;
-            this.prompt = prompt;
-            this.context = context;
-            this.options = options;
-            this.correct = correct;
-            this.explanation = explanation;
-        }
-    }
-
-    /** What the completion screen shows after a round. */
-    public static final class Summary {
-        public final List<Word> stillToReview;
-        public final int masteredCount;
-
-        Summary(List<Word> stillToReview, int masteredCount) {
-            this.stillToReview = stillToReview;
-            this.masteredCount = masteredCount;
-        }
-    }
-
-    private static final class Snapshot {
-        final List<VocabularyEntity> words;
-        final Map<String, UserItemRetentionEntity> rows;
-
-        Snapshot(List<VocabularyEntity> words, Map<String, UserItemRetentionEntity> rows) {
-            this.words = words;
-            this.rows = rows;
-        }
-    }
-
     private final String userId;
     private final ContentRepository contentRepository;
     private final ProgressRepository progressRepository;
-    private final MutableLiveData<Overview> overview = new MutableLiveData<>();
-    private final MutableLiveData<List<Challenge>> challenges = new MutableLiveData<>();
-    private final MutableLiveData<Summary> summary = new MutableLiveData<>();
+    private final UserRepository userRepository;
+    private final MutableLiveData<Library> library = new MutableLiveData<>();
 
     @Inject
     public VocabViewModel(AppPreferences preferences, ContentRepository contentRepository,
-                          ProgressRepository progressRepository) {
+                          ProgressRepository progressRepository, UserRepository userRepository) {
         this.userId = preferences.getCurrentUserId() == null ? "" : preferences.getCurrentUserId();
         this.contentRepository = contentRepository;
         this.progressRepository = progressRepository;
+        this.userRepository = userRepository;
     }
 
-    public LiveData<Overview> overview() {
-        return overview;
+    public LiveData<Library> library() {
+        return library;
     }
 
-    public LiveData<List<Challenge>> challenges() {
-        return challenges;
+    public LiveData<UserEntity> user() {
+        return userRepository.observeUser(userId);
     }
 
-    public LiveData<Summary> summary() {
-        return summary;
+    /** Reloads words and SM-2 rows. */
+    public void load() {
+        contentRepository.getAllVocabulary(entities ->
+                progressRepository.loadVocabularyRetention(userId, rows -> library.setValue(build(entities, rows))));
     }
 
-    /** Loads totals and topics. */
-    public void loadOverview() {
-        loadSnapshot(snapshot -> overview.setValue(buildOverview(snapshot)));
+    private static final int MIN_PACK_WORDS = 6;
+
+    static String categoryOf(String domain) {
+        int slash = domain.indexOf(" / ");
+        return slash > 0 ? domain.substring(0, slash) : domain;
     }
 
-    /**
-     * Builds the questions for a practice round: the words of one level (or of every level when
-     * {@code topicId} is "all") that are not mastered yet.
-     */
-    public void startPractice(String topicId) {
-        loadSnapshot(snapshot -> {
-            List<VocabularyEntity> pool = new ArrayList<>();
-            for (VocabularyEntity word : snapshot.words) {
-                boolean inTopic = "all".equals(topicId) || topicId.equals(word.cefrLevel);
-                if (inTopic && statusOf(snapshot.rows.get(word.id)) != Status.MASTERED) {
-                    pool.add(word);
-                }
-            }
-            pool = pool.subList(0, Math.min(PRACTICE_SIZE, pool.size()));
-            Map<String, VocabularyEntity> byId = new HashMap<>();
-            List<String> ids = new ArrayList<>();
-            for (VocabularyEntity word : pool) {
-                byId.put(word.id, word);
-                ids.add(word.id);
-            }
-            contentRepository.loadVocabularyQuestions(ids, questions ->
-                    challenges.setValue(toChallenges(questions, byId)));
-        });
+    static String packIdOf(VocabularyEntity e) {
+        return e.domain == null || e.domain.isEmpty() ? "General English" : e.domain;
     }
 
-    /** Records one answer; wrong answers also count against the word's weakness and SM-2 card. */
-    public void recordAnswer(Challenge challenge, boolean correct) {
-        progressRepository.recordAnswer(userId, challenge.question, correct);
-    }
+    static Library build(List<VocabularyEntity> entities, Map<String, UserItemRetentionEntity> rows) {
+        long now = System.currentTimeMillis();
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        long startOfDay = cal.getTimeInMillis();
 
-    /**
-     * Loads the completion screen: words answered wrongly, and how many words from the round
-     * are now mastered. Call after the answers have been recorded.
-     */
-    public void loadSummary(List<String> roundWordIds, List<String> wrongWordIds) {
-        loadSnapshot(snapshot -> {
-            Map<String, VocabularyEntity> byId = new HashMap<>();
-            for (VocabularyEntity word : snapshot.words) {
-                byId.put(word.id, word);
-            }
-            List<Word> review = new ArrayList<>();
-            for (String id : wrongWordIds) {
-                VocabularyEntity word = byId.get(id);
-                if (word != null && review.size() < REVIEW_LIMIT) {
-                    review.add(toWord(word, snapshot.rows.get(id)));
-                }
-            }
-            int mastered = 0;
-            for (String id : roundWordIds) {
-                if (statusOf(snapshot.rows.get(id)) == Status.MASTERED) {
-                    mastered++;
-                }
-            }
-            summary.setValue(new Summary(review, mastered));
-        });
-    }
-
-    private void loadSnapshot(Callback<Snapshot> callback) {
-        contentRepository.getAllVocabulary(words ->
-                progressRepository.loadVocabularyRetention(userId, rows -> callback.onResult(new Snapshot(words, rows))));
-    }
-
-    private static Overview buildOverview(Snapshot snapshot) {
-        Map<String, List<VocabularyEntity>> byLevel = new TreeMap<>();
-        for (VocabularyEntity word : snapshot.words) {
-            byLevel.computeIfAbsent(word.cefrLevel, level -> new ArrayList<>()).add(word);
+        // Domains with only a few words are folded into "<category> / Other" so packs stay worth opening.
+        Map<String, Integer> domainSize = new java.util.HashMap<>();
+        for (VocabularyEntity e : entities) {
+            domainSize.merge(packIdOf(e), 1, Integer::sum);
         }
-        List<Topic> topics = new ArrayList<>();
-        int total = 0;
-        int learned = 0;
-        int mastered = 0;
-        for (Map.Entry<String, List<VocabularyEntity>> entry : byLevel.entrySet()) {
-            List<Word> words = new ArrayList<>();
-            int levelLearned = 0;
-            int levelMastered = 0;
-            for (VocabularyEntity word : entry.getValue()) {
-                UserItemRetentionEntity row = snapshot.rows.get(word.id);
-                Status status = statusOf(row);
-                if (row != null) {
-                    levelLearned++;
-                }
-                if (status == Status.MASTERED) {
-                    levelMastered++;
-                }
-                words.add(toWord(word, row));
+        List<Word> words = new ArrayList<>();
+        Map<String, List<Word>> byPack = new LinkedHashMap<>();
+        int due = 0;
+        int today = 0;
+        for (VocabularyEntity e : entities) {
+            UserItemRetentionEntity row = rows.get(e.id);
+            Status status = row == null ? Status.NEW
+                    : row.repetitionNumber >= ProgressRepository.MASTERED_REPETITIONS ? Status.MASTERED : Status.LEARNING;
+            boolean isDue = row != null && status != Status.MASTERED && row.nextReviewAt <= now;
+            int mastery = row == null ? 0
+                    : Math.min(100, 20 + row.repetitionNumber * 80 / ProgressRepository.MASTERED_REPETITIONS);
+            if (status == Status.MASTERED) {
+                mastery = 100;
             }
-            words.sort(Comparator.comparing((Word w) -> w.word.toLowerCase()));
-            int size = words.size();
-            topics.add(new Topic(entry.getKey(), mostCommonDomain(entry.getValue()), size, levelLearned,
-                    levelMastered, words));
-            total += size;
-            learned += levelLearned;
-            mastered += levelMastered;
-        }
-        return new Overview(total, learned, mastered, topics);
-    }
-
-    private static List<Challenge> toChallenges(List<LessonQuestionEntity> questions,
-                                                Map<String, VocabularyEntity> words) {
-        List<Challenge> out = new ArrayList<>();
-        for (LessonQuestionEntity question : questions) {
-            VocabularyEntity word = words.get(question.parentId);
-            if (question.questionType != QuestionType.MULTIPLE_CHOICE || word == null) {
-                continue;
+            String domain = packIdOf(e);
+            String packId = domainSize.get(domain) >= MIN_PACK_WORDS ? domain : categoryOf(domain) + " / Other";
+            Word w = new Word(e, packId, status, isDue, mastery, row == null ? 0 : row.lastReviewedAt);
+            words.add(w);
+            byPack.computeIfAbsent(w.packId, k -> new ArrayList<>()).add(w);
+            if (isDue) {
+                due++;
             }
-            List<String> options = QuestionModels.stringOptions(question);
-            String answer = TextUtils.normalizeAnswer(String.valueOf(QuestionModels.correctAnswer(question)));
-            int correct = -1;
-            for (int i = 0; i < options.size(); i++) {
-                if (TextUtils.normalizeAnswer(options.get(i)).equals(answer)) {
-                    correct = i;
-                }
-            }
-            if (options.size() < 2 || correct < 0) {
-                continue;
-            }
-            String context = word.word + (word.phonetic == null ? "" : " " + word.phonetic);
-            out.add(new Challenge(question, word.id, question.prompt, context, options, correct,
-                    question.explanation == null ? word.meaningVi : question.explanation));
-        }
-        return out;
-    }
-
-    private static Word toWord(VocabularyEntity word, @Nullable UserItemRetentionEntity row) {
-        return new Word(word.id, word.word, word.meaningVi, statusOf(row));
-    }
-
-    static Status statusOf(@Nullable UserItemRetentionEntity row) {
-        if (row == null) {
-            return Status.NEW;
-        }
-        return row.repetitionNumber >= ProgressRepository.MASTERED_REPETITIONS ? Status.MASTERED : Status.LEARNING;
-    }
-
-    private static String mostCommonDomain(List<VocabularyEntity> words) {
-        Map<String, Integer> counts = new HashMap<>();
-        String best = "";
-        int bestCount = 0;
-        for (VocabularyEntity word : words) {
-            if (word.domain == null) {
-                continue;
-            }
-            int count = counts.merge(word.domain, 1, Integer::sum);
-            if (count > bestCount) {
-                best = word.domain;
-                bestCount = count;
+            if (row != null && row.lastReviewedAt >= startOfDay) {
+                today++;
             }
         }
-        return best;
+        words.sort(Comparator.comparing((Word w) -> w.term.toLowerCase()));
+        List<Pack> packs = new ArrayList<>();
+        for (Map.Entry<String, List<Word>> entry : byPack.entrySet()) {
+            List<Word> list = entry.getValue();
+            list.sort(Comparator.comparing((Word w) -> w.term.toLowerCase()));
+            packs.add(new Pack(entry.getKey(), list));
+        }
+        packs.sort(Comparator.comparing((Pack p) -> p.title.toLowerCase()));
+        return new Library(words, packs, due, today);
     }
 }

@@ -78,7 +78,7 @@ public class AuthFragment extends Fragment {
         });
         viewModel.signedInUser().observe(getViewLifecycleOwner(), userId -> {
             if (userId != null) {
-                NavHostFragment.findNavController(this).navigate(R.id.action_auth_to_roadmap);
+                NavHostFragment.findNavController(this).navigate(R.id.action_auth_to_vocabulary);
             }
         });
         applyMode();

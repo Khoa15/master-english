@@ -5,6 +5,7 @@ import android.content.Context;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -68,8 +69,7 @@ public class AuthRepository {
             return;
         }
         FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(task -> handleResult(task.isSuccessful(), task.getResult(),
-                        task.getException(), listener));
+                .addOnCompleteListener(task -> handleResult(task, listener));
     }
 
     public void registerWithEmail(String email, String password, Listener listener) {
@@ -78,8 +78,7 @@ public class AuthRepository {
             return;
         }
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(task -> handleResult(task.isSuccessful(), task.getResult(),
-                        task.getException(), listener));
+                .addOnCompleteListener(task -> handleResult(task, listener));
     }
 
     public void signInWithGoogle(String idToken, Listener listener) {
@@ -88,8 +87,7 @@ public class AuthRepository {
             return;
         }
         FirebaseAuth.getInstance().signInWithCredential(GoogleAuthProvider.getCredential(idToken, null))
-                .addOnCompleteListener(task -> handleResult(task.isSuccessful(), task.getResult(),
-                        task.getException(), listener));
+                .addOnCompleteListener(task -> handleResult(task, listener));
     }
 
     /** Guest Mode: data stays in this device's SQLite database under a local id. */
@@ -106,8 +104,14 @@ public class AuthRepository {
         preferences.clearSession();
     }
 
-    private void handleResult(boolean success, AuthResult result, Exception error, Listener listener) {
-        if (!success || result == null || result.getUser() == null) {
+    /**
+     * Reads the outcome of a Firebase sign-in. {@code Task.getResult()} throws on a failed task, so the
+     * result is only read after {@code isSuccessful()} has been checked.
+     */
+    void handleResult(Task<AuthResult> task, Listener listener) {
+        AuthResult result = task.isSuccessful() ? task.getResult() : null;
+        if (result == null || result.getUser() == null) {
+            Exception error = task.getException();
             listener.onError(error != null && error.getMessage() != null ? error.getMessage() : "Đăng nhập thất bại");
             return;
         }

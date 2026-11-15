@@ -23,7 +23,7 @@ import javax.inject.Inject;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
-/** Single Activity host: a NavHostFragment with a bottom bar for the four main tabs and a vocabulary button. */
+/** Single Activity host: a NavHostFragment with a bottom bar for the two main tabs (Vocabulary, Profile). */
 @AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {
 
@@ -46,6 +46,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        // Status bar matches the paper background of every screen, with dark icons.
+        getWindow().setStatusBarColor(androidx.core.content.ContextCompat.getColor(this, R.color.neutral_bg_ds));
+        new androidx.core.view.WindowInsetsControllerCompat(getWindow(), binding.getRoot())
+                .setAppearanceLightStatusBars(true);
 
         NavHostFragment host = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host);
         if (host == null) {
@@ -54,10 +58,11 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = host.getNavController();
         NavGraph graph = navController.getNavInflater().inflate(R.navigation.nav_graph);
         boolean signedIn = preferences.isOnboardingDone() && preferences.getCurrentUserId() != null;
-        @IdRes int startDestination = signedIn ? R.id.roadmapFragment : R.id.onboardingFragment;
+        @IdRes int startDestination = signedIn ? R.id.vocabularyFragment : R.id.onboardingFragment;
         graph.setStartDestination(startDestination);
         navController.setGraph(graph);
 
+        // Keeps the selected item in sync with the destination; the click listener below takes over clicks.
         NavigationUI.setupWithNavController(binding.bottomNav, navController);
         // Tab switches are instant: NavigationUI's default listener adds ~200 ms fade/scale animations and
         // throws each tab's state away. Here there is no animation and each tab's state is saved and restored.
@@ -74,18 +79,13 @@ public class MainActivity extends AppCompatActivity {
             }
             return true;
         });
-        binding.bottomNav.setOnItemReselectedListener(item -> { });
         // Frosted glass pill: blurs whatever scrolls behind the floating navigation.
         com.masterenglish.app.ui.common.GlassNav.install(findViewById(R.id.content_root), binding.bottomNav);
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
             showTabFor(destination.getId());
             boolean mainTab = isMainTab(destination.getId());
             binding.bottomNav.setVisibility(mainTab ? View.VISIBLE : View.GONE);
-            // The design shows the vocabulary shortcut on the Roadmap only.
-            boolean onRoadmap = destination.getId() == R.id.roadmapFragment;
-            binding.vocabFab.setVisibility(onRoadmap ? View.VISIBLE : View.GONE);
         });
-        binding.vocabFab.setOnClickListener(v -> navController.navigate(R.id.vocabularyFragment));
 
         if (signedIn) {
             observeSoundSetting();
@@ -112,24 +112,15 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private static final int[] TAB_IDS = {R.id.roadmapFragment, R.id.reviewFragment, R.id.tutorFragment,
-            R.id.profileFragment};
-    private static final String[] TAB_TAGS = {"tab_roadmap", "tab_review", "tab_tutor", "tab_profile"};
+    // Vocabulary is a regular destination; Profile is the only fragment kept in the tab container.
+    private static final int[] TAB_IDS = {R.id.profileFragment};
+    private static final String[] TAB_TAGS = {"tab_profile"};
 
     /** Index of the tab fragment currently shown, or -1 while a non-tab screen is open. */
     private int visibleTab = -1;
 
     private static TabFragment createTab(int index) {
-        switch (index) {
-            case 0:
-                return new com.masterenglish.app.ui.roadmap.RoadmapFragment();
-            case 1:
-                return new com.masterenglish.app.ui.review.ReviewFragment();
-            case 2:
-                return new com.masterenglish.app.ui.tutor.TutorFragment();
-            default:
-                return new com.masterenglish.app.ui.profile.ProfileFragment();
-        }
+        return new com.masterenglish.app.ui.profile.ProfileFragment();
     }
 
     /**
@@ -187,9 +178,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private static boolean isMainTab(int destinationId) {
-        return destinationId == R.id.roadmapFragment
-                || destinationId == R.id.reviewFragment
-                || destinationId == R.id.tutorFragment
+        return destinationId == R.id.vocabularyFragment
+                || destinationId == R.id.allPacksFragment
                 || destinationId == R.id.profileFragment;
     }
 }

@@ -3,6 +3,7 @@ package com.masterenglish.app.data.repository;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
 
+import com.masterenglish.app.data.local.AppDatabase;
 import com.masterenglish.app.data.local.Enums.ItemType;
 import com.masterenglish.app.data.local.Enums.NodeStatus;
 import com.masterenglish.app.data.local.Enums.NodeType;
@@ -36,7 +37,8 @@ import com.masterenglish.app.data.local.dao.UserDao;
 
 /**
  * Roadmap progress, rewards, the weakness tracker and SM-2 review scheduling.
- * Every write is applied in a single transaction on the disk executor.
+ * Every write runs on the disk executor inside one Room transaction, so the read-modify-write steps of
+ * concurrent answers cannot overwrite each other and a lesson result is saved completely or not at all.
  */
 @Singleton
 public class ProgressRepository {
@@ -45,9 +47,12 @@ public class ProgressRepository {
     public static final float WEAK_THRESHOLD = 0.6f;
     private static final int WEAKNESS_LIMIT = 10;
     private static final long ONE_DAY_MILLIS = 24L * 60 * 60 * 1000;
+    /** SM-2 grade for a wrong lesson answer: a failed recall, milder than the flashcard "Again" button. */
+    private static final int LESSON_WRONG_QUALITY = 2;
     /** Repetitions in a row before a vocabulary card counts as mastered. */
     public static final int MASTERED_REPETITIONS = 3;
 
+    private final AppDatabase database;
     private final ProgressDao progressDao;
     private final ContentDao contentDao;
     private final UserDao userDao;
@@ -57,9 +62,10 @@ public class ProgressRepository {
     private final AppExecutors executors;
 
     @Inject
-    public ProgressRepository(ProgressDao progressDao, ContentDao contentDao, UserDao userDao,
+    public ProgressRepository(AppDatabase database, ProgressDao progressDao, ContentDao contentDao, UserDao userDao,
                               UserRepository userRepository, WeaknessDetector weaknessDetector,
                               BadgeEvaluator badgeEvaluator, AppExecutors executors) {
+        this.database = database;
         this.progressDao = progressDao;
         this.contentDao = contentDao;
         this.userDao = userDao;
@@ -136,7 +142,8 @@ public class ProgressRepository {
     public void completeLesson(String userId, RoadmapNodeEntity node, int correct, int total, int minutes,
                                Callback<LessonReward> callback) {
         executors.diskIO().execute(() -> {
-            LessonReward reward = completeLessonNow(userId, node, correct, total, minutes);
+            LessonReward reward = database.runInTransaction(
+                    () -> completeLessonNow(userId, node, correct, total, minutes));
             if (callback != null) {
                 executors.mainThread().execute(() -> callback.onResult(reward));
             }
@@ -146,8 +153,7 @@ public class ProgressRepository {
     private LessonReward completeLessonNow(String userId, RoadmapNodeEntity node, int correct, int total,
                                            int minutes) {
         long now = System.currentTimeMillis();
-        double ratio = total == 0 ? 0 : (double) correct / total;
-        int stars = ratio >= 0.9 ? 3 : ratio >= 0.6 ? 2 : 1;
+        int stars = LessonScorer.starsFor(correct, total);
 
         UserNodeProgressEntity existing = progressDao.getNodeProgressFor(userId, node.id);
         boolean firstCompletion = existing == null || existing.completedAt == null;
@@ -160,7 +166,7 @@ public class ProgressRepository {
             progress.nodeId = node.id;
         }
         progress.starsEarned = Math.max(previousStars, stars);
-        progress.status = progress.starsEarned == 3 ? NodeStatus.MASTERED : NodeStatus.COMPLETED;
+        progress.status = LessonScorer.isMastered(progress.starsEarned) ? NodeStatus.MASTERED : NodeStatus.COMPLETED;
         if (firstCompletion) {
             progress.completedAt = now;
         }
@@ -174,7 +180,8 @@ public class ProgressRepository {
         }
 
         int xp = correct * 10 + (firstCompletion ? 30 : 0);
-        int gems = (firstCompletion ? 5 : 0) + (stars == 3 && previousStars < 3 ? 5 : 0);
+        int gems = (firstCompletion ? 5 : 0)
+                + (LessonScorer.isMastered(stars) && !LessonScorer.isMastered(previousStars) ? 5 : 0);
         int streak = userRepository.touchActivityNow(userId, Math.max(1, minutes));
         userRepository.addRewardsNow(userId, xp, gems);
 
@@ -219,14 +226,14 @@ public class ProgressRepository {
     public void recordAnswer(String userId, LessonQuestionEntity question, boolean correct) {
         executors.diskIO().execute(() -> {
             WeaknessDetector.Detection detection = weaknessDetector.detect(question);
-            applyDetectionNow(userId, detection, correct);
+            database.runInTransaction(() -> applyDetectionNow(userId, detection, correct));
         });
     }
 
     /** Records a mistake reported by the AI mascot (error_tag, skill). */
     public void recordMistake(String userId, String errorTag, SkillType skill) {
-        executors.diskIO().execute(() -> applyDetectionNow(userId,
-                new WeaknessDetector.Detection(errorTag, skill, null, null), false));
+        executors.diskIO().execute(() -> database.runInTransaction(() -> applyDetectionNow(userId,
+                new WeaknessDetector.Detection(errorTag, skill, null, null), false)));
     }
 
     private void applyDetectionNow(String userId, WeaknessDetector.Detection detection, boolean correct) {
@@ -234,6 +241,16 @@ public class ProgressRepository {
             return;
         }
         long now = System.currentTimeMillis();
+        // The SM-2 card follows every answer, right or wrong, whether or not the tag is a known weakness.
+        if (detection.relatedItemType != null && detection.relatedItemId != null) {
+            applyLessonAnswerToSrsNow(userId, detection.relatedItemType, detection.relatedItemId, correct, now);
+        }
+        updateWeaknessNow(userId, detection, correct, now);
+        badgeEvaluator.evaluateNow(userId);
+    }
+
+    /** A correct answer only raises mastery of a tag the learner has already got wrong. */
+    private void updateWeaknessNow(String userId, WeaknessDetector.Detection detection, boolean correct, long now) {
         UserWeaknessEntity weakness = progressDao.getWeakness(userId, detection.errorTag);
         if (weakness == null) {
             if (correct) {
@@ -257,20 +274,33 @@ public class ProgressRepository {
             weakness.lastFailedAt = now;
         }
         progressDao.upsertWeakness(weakness);
+    }
 
-        if (detection.relatedItemType != null && detection.relatedItemId != null) {
-            applySrsNow(userId, detection.relatedItemType, detection.relatedItemId,
-                    correct ? SrsAlgorithm.QUALITY_GOOD : 2, now);
+    /**
+     * One lesson asks several questions about the same word. A wrong answer always resets the card, but
+     * correct answers count as a single successful review per item per day; otherwise one lesson would
+     * push a new word straight to "mastered".
+     */
+    private void applyLessonAnswerToSrsNow(String userId, ItemType type, String itemId, boolean correct, long now) {
+        if (correct) {
+            UserItemRetentionEntity row = progressDao.getRetention(userId, type, itemId);
+            boolean alreadyCreditedToday = row != null && row.repetitionNumber > 0
+                    && now - row.lastReviewedAt < ONE_DAY_MILLIS;
+            if (alreadyCreditedToday) {
+                return;
+            }
         }
-        badgeEvaluator.evaluateNow(userId);
+        applySrsNow(userId, type, itemId, correct ? SrsAlgorithm.QUALITY_GOOD : LESSON_WRONG_QUALITY, now);
     }
 
     /** Applies one SM-2 review. quality follows {@link SrsAlgorithm}. */
     public void reviewCard(String userId, ItemType type, String itemId, SrsAlgorithm.Button button,
                            Callback<Void> callback) {
         executors.diskIO().execute(() -> {
-            applySrsNow(userId, type, itemId, SrsAlgorithm.qualityForButton(button), System.currentTimeMillis());
-            badgeEvaluator.evaluateNow(userId);
+            database.runInTransaction(() -> {
+                applySrsNow(userId, type, itemId, SrsAlgorithm.qualityForButton(button), System.currentTimeMillis());
+                badgeEvaluator.evaluateNow(userId);
+            });
             if (callback != null) {
                 executors.mainThread().execute(() -> callback.onResult(null));
             }

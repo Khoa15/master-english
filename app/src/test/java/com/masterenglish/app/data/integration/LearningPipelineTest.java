@@ -75,7 +75,7 @@ public class LearningPipelineTest {
 
         content = new ContentRepository(db.contentDao(), executors);
         users = new UserRepository(db.userDao(), db.badgeDao(), executors);
-        progress = new ProgressRepository(db.progressDao(), db.contentDao(), db.userDao(), users,
+        progress = new ProgressRepository(db, db.progressDao(), db.contentDao(), db.userDao(), users,
                 new WeaknessDetector(), new BadgeEvaluator(db.badgeDao(), db.userDao(), db.progressDao()), executors);
         preferences = new AppPreferences(context);
         preferences.setCurrentUserId(USER);
@@ -189,6 +189,65 @@ public class LearningPipelineTest {
         Thread.sleep(200);
         UserWeaknessEntity recovering = db.progressDao().getWeakness(USER, question.skillTag);
         assertTrue(recovering.masteryScore > 0f);
+    }
+
+    private UserItemRetentionEntity waitForCard(String itemId, int repetitions) throws InterruptedException {
+        long deadline = System.currentTimeMillis() + 5_000;
+        UserItemRetentionEntity row = db.progressDao().getRetention(USER, ItemType.VOCABULARY, itemId);
+        while ((row == null || row.repetitionNumber != repetitions) && System.currentTimeMillis() < deadline) {
+            Thread.sleep(20);
+            row = db.progressDao().getRetention(USER, ItemType.VOCABULARY, itemId);
+        }
+        assertNotNull("no SM-2 card for " + itemId, row);
+        assertEquals(repetitions, row.repetitionNumber);
+        return row;
+    }
+
+    private LessonQuestionEntity firstWordQuestion() {
+        VocabularyEntity word = db.contentDao().getVocabularyByNode(firstNodeOfType(NodeType.VOCABULARY).id).get(0);
+        return db.contentDao().getQuestions(ParentType.VOCABULARY, word.id).get(0);
+    }
+
+    @Test
+    public void correctAnswerSchedulesTheCardWithoutAnyWeakness() throws Exception {
+        LessonQuestionEntity question = firstWordQuestion();
+
+        progress.recordAnswer(USER, question, true);
+
+        waitForCard(question.parentId, 1);
+        assertEquals(null, db.progressDao().getWeakness(USER, question.skillTag));
+    }
+
+    @Test
+    public void repeatedCorrectAnswersInOneLessonCountAsOneReview() throws Exception {
+        LessonQuestionEntity question = firstWordQuestion();
+
+        progress.recordAnswer(USER, question, true);
+        waitForCard(question.parentId, 1);
+        progress.recordAnswer(USER, question, true);
+        progress.recordAnswer(USER, question, true);
+        Thread.sleep(300);
+
+        waitForCard(question.parentId, 1);
+    }
+
+    @Test
+    public void concurrentWrongAnswersAreAllCounted() throws Exception {
+        LessonQuestionEntity question = firstWordQuestion();
+        int answers = 12;
+
+        for (int i = 0; i < answers; i++) {
+            progress.recordAnswer(USER, question, false);
+        }
+
+        long deadline = System.currentTimeMillis() + 5_000;
+        UserWeaknessEntity weak = db.progressDao().getWeakness(USER, question.skillTag);
+        while ((weak == null || weak.errorCount < answers) && System.currentTimeMillis() < deadline) {
+            Thread.sleep(20);
+            weak = db.progressDao().getWeakness(USER, question.skillTag);
+        }
+        assertNotNull(weak);
+        assertEquals(answers, weak.errorCount);
     }
 
     private UserWeaknessEntity waitForWeakness(String tag) throws InterruptedException {

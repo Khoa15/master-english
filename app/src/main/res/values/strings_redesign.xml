@@ -12,6 +12,7 @@
     <string name="ds_for_you">For you</string>
     <string name="ds_practice">Practice</string>
     <string name="ds_practice_again">Practice again</string>
+    <string name="ds_practice_now">Practice now</string>
     <string name="ds_back">Back</string>
     <string name="ds_close">Close</string>
     <string name="ds_done">Done</string>
@@ -75,10 +76,13 @@
 
     <!-- Vocabulary -->
     <string name="vocab_title">Vocabulary</string>
-    <string name="vocab_topics_title">Topics</string>
+    <string name="vocab_topics_title">Word packs</string>
+    <string name="vocab_review_label">Review: %1$d words</string>
+    <string name="vocab_review_now">Review now</string>
     <string name="vocab_learned_of">of %1$d words</string>
     <string name="vocab_mastered_of">of %1$d words</string>
     <string name="vocab_review_all">Review all %1$d non-mastered words</string>
+    <string name="vocab_pack_learned">%1$d / %2$d learned</string>
     <string name="vocab_word_count">%1$d words</string>
     <string name="vocab_topic_header">Vocabulary topic</string>
     <string name="vocab_words_title">Words in this topic</string>
@@ -120,4 +124,18 @@
     <string name="practice_section_writing">Writing</string>
     <string name="practice_section_speaking">Speaking</string>
     <string name="practice_section_empty">No lessons yet.</string>
+    <string name="analytics_title">Analytics</string>
+    <string name="analytics_cefr">CEFR level</string>
+    <string name="analytics_xp">XP</string>
+    <string name="analytics_xp_tier">Tier: %1$s</string>
+    <string name="analytics_weeks">Study minutes, last 4 weeks</string>
+    <string name="analytics_week_label">W%1$d</string>
+    <string name="analytics_week_total">%1$d min total</string>
+    <string name="analytics_total">Total</string>
+    <string name="analytics_review">Review</string>
+    <string name="analytics_word_count">%1$d words</string>
+    <string name="analytics_no_words">No words yet.</string>
+    <string name="analytics_accuracy">Accuracy by skill</string>
+    <string name="analytics_row">Analytics</string>
+    <string name="analytics_row_hint">Stats and progress</string>
 </resources>

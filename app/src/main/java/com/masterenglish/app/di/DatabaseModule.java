@@ -11,7 +11,6 @@ import com.masterenglish.app.data.local.dao.AiDao;
 import com.masterenglish.app.data.local.dao.BadgeDao;
 import com.masterenglish.app.data.local.dao.ContentDao;
 import com.masterenglish.app.data.local.dao.ProgressDao;
-import com.masterenglish.app.data.local.dao.SpeakingScenarioDao;
 import com.masterenglish.app.data.local.dao.UserDao;
 
 import dagger.Module;
@@ -39,12 +38,21 @@ public abstract class DatabaseModule {
         }
     };
 
+    /** Drops the speaking_scenarios table: its feature (Tutor / custom practice) has been removed. */
+    static final Migration MIGRATION_2_3 = new Migration(2, 3) {
+        @Override
+        public void migrate(SupportSQLiteDatabase db) {
+            db.execSQL("DROP TABLE IF EXISTS `speaking_scenarios`");
+        }
+    };
+
     @Provides
     @Singleton
     static AppDatabase provideDatabase(@ApplicationContext Context context) {
         return Room.databaseBuilder(context, AppDatabase.class, AppDatabase.NAME)
-                .addMigrations(MIGRATION_1_2)
-                .fallbackToDestructiveMigration()
+                // No destructive fallback: a version bump without a migration must fail loudly in development
+                // instead of silently wiping the learner's progress. Add a Migration for every new version.
+                .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
                 .build();
     }
 
@@ -73,8 +81,4 @@ public abstract class DatabaseModule {
         return database.badgeDao();
     }
 
-    @Provides
-    static SpeakingScenarioDao provideSpeakingScenarioDao(AppDatabase database) {
-        return database.speakingScenarioDao();
-    }
 }

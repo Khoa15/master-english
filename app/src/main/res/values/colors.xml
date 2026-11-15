@@ -14,7 +14,7 @@
     <color name="danger_red_light">#FBE4DF</color>
     <color name="neutral_text">#1B1A17</color>
     <color name="neutral_subtext">#6B6860</color>
-    <color name="neutral_bg">#F6F4EE</color>
+    <color name="neutral_bg">#FAF9F5</color>
     <color name="neutral_border">#E4E0D6</color>
     <color name="neutral_locked">#E9E6DE</color>
     <color name="neutral_locked_dark">#CFC9BC</color>
@@ -33,4 +33,5 @@
     <color name="badge_locked_bg">#3A3A3F</color>
     <color name="badge_locked_text">#B5B5BB</color>
     <color name="badge_locked_sub">#8A8A91</color>
+    <color name="neutral_bg_ds">#FAF9F5</color>
 </resources>

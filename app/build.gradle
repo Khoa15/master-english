@@ -32,6 +32,13 @@ android {
         buildConfigField 'String', 'AGENT_GATEWAY_URL', "\"${localProps.getProperty('agent.gateway.url', System.getenv('AGENT_GATEWAY_URL') ?: '')}\""
         buildConfigField 'String', 'AGENT_GATEWAY_TOKEN', "\"${localProps.getProperty('agent.gateway.token', System.getenv('AGENT_GATEWAY_TOKEN') ?: '')}\""
         buildConfigField 'String', 'API_BASE_URL', "\"${localProps.getProperty('api.base.url', 'https://api.masterenglish.invalid/api/')}\""
+
+        // Room writes each schema version to app/schemas/ (commit it): migrations are written and checked against it.
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += ['room.schemaLocation': "$projectDir/schemas".toString()]
+            }
+        }
     }
 
     buildFeatures {

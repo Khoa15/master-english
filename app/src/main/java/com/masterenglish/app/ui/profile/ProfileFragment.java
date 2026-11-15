@@ -1,444 +1,376 @@
 package com.masterenglish.app.ui.profile;
 
-import android.Manifest;
-import android.os.Build;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
+import android.content.Context;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.CompoundButton;
-import android.widget.Toast;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupMenu;
+import android.widget.TextView;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 
-import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
-import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
-import android.widget.TextView;
-import com.google.android.material.button.MaterialButton;
-import com.google.android.material.timepicker.MaterialTimePicker;
-import com.google.android.material.timepicker.TimeFormat;
 import com.masterenglish.app.R;
-import com.masterenglish.app.data.local.entity.BadgeEntity;
 import com.masterenglish.app.data.local.entity.DailyStudyLogEntity;
-import com.masterenglish.app.data.local.entity.UserBadgeEntity;
 import com.masterenglish.app.data.local.entity.UserEntity;
-import com.masterenglish.app.data.local.entity.UserSettingsEntity;
-import com.masterenglish.app.data.local.prefs.AppPreferences;
-import com.masterenglish.app.data.repository.SkillProgress;
-import com.masterenglish.app.databinding.FragmentProfileBinding;
-import com.masterenglish.app.ui.common.SkeletonView;
-import com.masterenglish.app.ui.common.TabFragment;
-import com.masterenglish.app.service.reminder.NotificationHelper;
 import com.masterenglish.app.service.reminder.ReminderScheduler;
-import com.masterenglish.app.service.sync.SyncScheduler;
-import com.masterenglish.app.utils.Levels;
-import com.masterenglish.app.utils.SoundManager;
-import com.masterenglish.app.ui.common.PullToRefresh;
-
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import com.masterenglish.app.ui.common.TabFragment;
+import com.masterenglish.app.ui.ds.Ui;
+import com.masterenglish.app.ui.vocab.VocabViewModel;
+import com.masterenglish.app.utils.CefrLevel;
 
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Arrays;
+import java.time.format.TextStyle;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Set;
-
-import javax.inject.Inject;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
-/** Profile tab: stats, badges and the week's study chart. Settings live on their own page. */
+/** Profile tab: identity, stats, streak calendar, personal info, links and preferences. */
 @AndroidEntryPoint
 public class ProfileFragment extends TabFragment {
 
-
-
-    private FragmentProfileBinding binding;
+    private Ui.Screen screen;
     private ProfileViewModel viewModel;
-    private SwipeRefreshLayout refreshLayout;
-    private BadgeAdapter badgeAdapter;
-
+    private VocabViewModel vocabViewModel;
+    private LinearLayout identity;
+    private LinearLayout stats;
+    private LinearLayout calendar;
+    private LinearLayout personal;
+    private LinearLayout preferences;
+    private UserEntity user;
+    private int learned;
+    private Set<Integer> activeDays = new HashSet<>();
+    private YearMonth month = YearMonth.now();
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        binding = FragmentProfileBinding.inflate(inflater, container, false);
-        // The root is the page's ScrollView, so it decides when a pull may start.
-        refreshLayout = PullToRefresh.wrap(requireContext(), binding.getRoot(), binding.getRoot(), this::onRefresh);
-        return withSkeleton(refreshLayout, SkeletonView.Variant.PROFILE);
-    }
+        Context c = requireContext();
+        screen = new Ui.Screen(c, 110);
+        LinearLayout header = Ui.row(c);
+        header.addView(Ui.text(c, "Profile", 26, 700, Ui.INK), Ui.weight(1f));
+        ImageView gear = Ui.icon(c, R.drawable.ic_ds_gear, 22, Ui.INK);
+        gear.setPadding(Ui.dp(c, 9), Ui.dp(c, 9), Ui.dp(c, 9), Ui.dp(c, 9));
+        gear.setBackground(Ui.shape(c, Ui.CARD, 12, Ui.LINE, 1));
+        gear.setContentDescription("Settings");
+        gear.setOnClickListener(v -> navigate(R.id.action_profile_to_settings));
+        header.addView(gear, new LinearLayout.LayoutParams(Ui.dp(c, 40), Ui.dp(c, 40)));
+        screen.top.addView(header, Ui.matchWidth());
+        screen.top.setPadding(Ui.dp(c, 20), Ui.dp(c, 24), Ui.dp(c, 20), Ui.dp(c, 4));
 
-    private void onRefresh() {
-        viewModel.refresh(success -> PullToRefresh.finish(refreshLayout, success, binding == null ? null : binding.getRoot()));
+        LinearLayout body = screen.body;
+        identity = Ui.card(c, 16, 20);
+        body.addView(identity, Ui.matchWidth());
+        stats = Ui.row(c);
+        stats.setBaselineAligned(false);
+        Ui.add(body, stats, 12);
+        calendar = Ui.card(c, 16, 18);
+        Ui.add(body, calendar, 12);
+        Ui.add(body, section(c, "Personal info"), 22);
+        personal = Ui.card(c, 4, 18);
+        Ui.add(body, personal, 8);
+        Ui.add(body, section(c, "Insights"), 22);
+        Ui.add(body, link(c, "Analytics", "Stats & progress", R.id.action_profile_to_analytics), 8);
+        Ui.add(body, link(c, "Subscription", "Free plan", R.id.action_profile_to_subscription), 8);
+        Ui.add(body, link(c, "Feedback", "Send us a note", R.id.action_profile_to_feedback), 8);
+        Ui.add(body, section(c, "Preferences"), 22);
+        preferences = Ui.card(c, 4, 18);
+        Ui.add(body, preferences, 8);
+        TextView signOut = Ui.text(c, "Sign out", 15, 700, Ui.RED);
+        signOut.setGravity(Gravity.CENTER);
+        signOut.setBackground(Ui.shape(c, Ui.CARD, 16, Ui.LINE, 1));
+        signOut.setMinHeight(Ui.dp(c, 52));
+        signOut.setClickable(true);
+        signOut.setOnClickListener(v -> {
+            viewModel.signOut();
+            navigate(R.id.action_profile_to_auth);
+        });
+        Ui.add(body, signOut, 22);
+        return screen.root;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        binding.skillListening.setOnClickListener(v -> openSkill(SkillProgress.LISTENING));
-        binding.skillReading.setOnClickListener(v -> openSkill(SkillProgress.READING));
-        binding.skillSpeaking.setOnClickListener(v -> openSkill(SkillProgress.SPEAKING));
-        binding.skillWriting.setOnClickListener(v -> openSkill(SkillProgress.WRITING));
-        binding.skillGrammar.setOnClickListener(v -> openSkill(SkillProgress.GRAMMAR));
         viewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
-        viewModel.skills().observe(getViewLifecycleOwner(), this::bindSkillChips);
-
-        badgeAdapter = new BadgeAdapter();
-        binding.badgeList.setLayoutManager(new GridLayoutManager(requireContext(), 3));
-        binding.badgeList.setAdapter(badgeAdapter);
-        binding.badgeList.setNestedScrollingEnabled(false);
-
-
-        binding.guestNote.setVisibility(viewModel.isGuest() ? View.VISIBLE : View.GONE);
-        binding.settingsRow.setOnClickListener(v -> NavHostFragment.findNavController(this)
-                .navigate(R.id.action_profile_to_settings));
-
-        viewModel.user().observe(getViewLifecycleOwner(), this::bindUser);
-        viewModel.studyLog().observe(getViewLifecycleOwner(), this::bindChart);
-        viewModel.badges().observe(getViewLifecycleOwner(), badges -> refreshBadges());
-        viewModel.unlocked().observe(getViewLifecycleOwner(), unlocked -> refreshBadges());
-        setupChart();
-    }
-
-    private void bindUser(UserEntity user) {
-        if (user == null || binding == null) {
-            return;
-        }
-        hideSkeleton();
-        binding.nameText.setText(user.displayName);
-        binding.emailText.setText(user.isGuest() ? getString(R.string.profile_guest_name) : user.email);
-        binding.tierText.setText(Levels.tierName(user.experiencePoints));
-        binding.xpText.setText(getString(R.string.profile_xp_format, user.experiencePoints,
-                Levels.tierName(user.experiencePoints)));
-        binding.xpBar.setProgress(Levels.progressPercent(user.experiencePoints));
-        binding.streakText.setText(String.valueOf(user.streakCount));
-        binding.gemText.setText(String.valueOf(user.gemCount));
-    }
-
-
-    @Override
-    public void onTabHidden() {
-        if (binding == null) {
-            return;
-        }
-        badgeAdapter.submit(new ArrayList<>(), new HashSet<>());
-        binding.weeklyChart.clear();
-        binding.cefrScale.removeAllViews();
-        binding.skillRows.removeAllViews();
-        binding.grammarErrors.removeAllViews();
-        binding.strongSkills.removeAllViews();
-        binding.weakSkills.removeAllViews();
-        showSkeleton();
+        vocabViewModel = new ViewModelProvider(this).get(VocabViewModel.class);
+        viewModel.user().observe(getViewLifecycleOwner(), u -> {
+            user = u;
+            bindIdentity();
+            bindStats();
+        });
+        viewModel.month().observe(getViewLifecycleOwner(), m -> month = m);
+        viewModel.monthLog().observe(getViewLifecycleOwner(), log -> {
+            activeDays = new HashSet<>();
+            if (log != null) {
+                for (DailyStudyLogEntity e : log) {
+                    if (e.minutes > 0) {
+                        activeDays.add(LocalDate.parse(e.dateKey).getDayOfMonth());
+                    }
+                }
+            }
+            bindCalendar();
+        });
+        vocabViewModel.library().observe(getViewLifecycleOwner(), l -> {
+            learned = l.learnedCount;
+            bindStats();
+        });
+        bindPersonal();
+        bindPreferences();
     }
 
     @Override
     public void onTabShown() {
-        if (binding == null) {
-            return;
-        }
-        Map<String, SkillProgress.Summary> skills = viewModel.skills().getValue();
-        if (skills != null) {
-            bindSkillChips(skills);
-        }
-        bindChart(viewModel.studyLog().getValue());
-        refreshBadges();
-        UserEntity user = viewModel.user().getValue();
-        if (user != null) {
-            bindUser(user);
+        if (viewModel != null) {
+            vocabViewModel.load();
+            bindPersonal();
+            bindPreferences();
         }
     }
-
-    private void refreshBadges() {
-        if (binding == null) {
-            return;
-        }
-        List<BadgeEntity> catalogue = viewModel.badges().getValue() == null
-                ? new ArrayList<>() : new ArrayList<>(viewModel.badges().getValue());
-        List<UserBadgeEntity> unlocked = viewModel.unlocked().getValue();
-        Set<String> unlockedIds = new HashSet<>();
-        if (unlocked != null) {
-            for (UserBadgeEntity row : unlocked) {
-                unlockedIds.add(row.badgeId);
-            }
-        }
-        // Unlocked badges first (stable, so catalogue order is kept within each group).
-        catalogue.sort(Comparator.comparing((BadgeEntity badge) -> !unlockedIds.contains(badge.id)));
-        badgeAdapter.submit(catalogue, unlockedIds);
-        int unlockedCount = 0;
-        for (BadgeEntity badge : catalogue) {
-            if (unlockedIds.contains(badge.id)) {
-                unlockedCount++;
-            }
-        }
-        binding.badgeCount.setText(getString(R.string.profile_badges_count, unlockedCount, catalogue.size()));
-    }
-
-    private void setupChart() {
-        binding.weeklyChart.getDescription().setEnabled(false);
-        binding.weeklyChart.getLegend().setEnabled(false);
-        binding.weeklyChart.setDrawGridBackground(false);
-        binding.weeklyChart.setScaleEnabled(false);
-        binding.weeklyChart.getAxisRight().setEnabled(false);
-        XAxis x = binding.weeklyChart.getXAxis();
-        x.setPosition(XAxis.XAxisPosition.BOTTOM);
-        x.setDrawGridLines(false);
-        x.setGranularity(1f);
-        binding.weeklyChart.getAxisLeft().setAxisMinimum(0f);
-    }
-
-    /** Minutes per day for the last seven days, oldest first, including days with no study. */
-    private void bindChart(List<DailyStudyLogEntity> log) {
-        if (binding == null) {
-            return;
-        }
-        LocalDate today = LocalDate.now(ZoneId.systemDefault());
-        List<BarEntry> entries = new ArrayList<>();
-        List<String> labels = new ArrayList<>();
-        DateTimeFormatter label = DateTimeFormatter.ofPattern("dd/MM", Locale.ROOT);
-        for (int i = 0; i < 7; i++) {
-            LocalDate day = today.minusDays(6 - i);
-            int minutes = 0;
-            if (log != null) {
-                for (DailyStudyLogEntity row : log) {
-                    if (row.dateKey.equals(day.toString())) {
-                        minutes = row.minutes;
-                    }
-                }
-            }
-            entries.add(new BarEntry(i, minutes));
-            labels.add(day.format(label));
-        }
-        BarDataSet dataSet = new BarDataSet(entries, getString(R.string.profile_study_days));
-        dataSet.setColor(ContextCompat.getColor(requireContext(), R.color.brand_green));
-        dataSet.setValueTextColor(ContextCompat.getColor(requireContext(), R.color.neutral_text));
-        dataSet.setValueTextSize(11f);
-        BarData data = new BarData(dataSet);
-        data.setBarWidth(0.55f);
-        binding.weeklyChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(labels));
-        binding.weeklyChart.setData(data);
-        binding.weeklyChart.invalidate();
-    }
-
 
     @Override
-    public void onDestroyView() {
-        binding = null;
-        super.onDestroyView();
+    public void onTabHidden() {
     }
 
-    /** Each skill chip shows its name and, once there are lessons for it, the CEFR level. */
-    private void bindSkillChips(Map<String, SkillProgress.Summary> skills) {
-        bindSkillChip(binding.skillListening, R.string.onboard_skill_listening, skills.get(SkillProgress.LISTENING));
-        bindSkillChip(binding.skillReading, R.string.onboard_skill_reading, skills.get(SkillProgress.READING));
-        bindSkillChip(binding.skillSpeaking, R.string.onboard_skill_speaking, skills.get(SkillProgress.SPEAKING));
-        bindSkillChip(binding.skillWriting, R.string.onboard_skill_writing, skills.get(SkillProgress.WRITING));
-        bindSkillChip(binding.skillGrammar, R.string.onboard_skill_grammar, skills.get(SkillProgress.GRAMMAR));
-        bindProfileSections(skills);
+    private void navigate(int action) {
+        try {
+            NavHostFragment.findNavController(requireActivity().getSupportFragmentManager()
+                    .findFragmentById(R.id.nav_host)).navigate(action);
+        } catch (IllegalArgumentException | IllegalStateException ignored) {
+            // Still on a tab placeholder or double tap.
+        }
     }
 
-    private static final String[] CEFR_LEVELS = {"A1", "A2", "B1", "B2", "C1", "C2"};
-    private static final String[] SKILL_IDS = {SkillProgress.LISTENING, SkillProgress.READING, SkillProgress.SPEAKING,
-            SkillProgress.WRITING, SkillProgress.GRAMMAR};
-    private static final int[] SKILL_NAME_RES = {R.string.onboard_skill_listening, R.string.onboard_skill_reading,
-            R.string.onboard_skill_speaking, R.string.onboard_skill_writing, R.string.onboard_skill_grammar};
+    // ----- Sections ---------------------------------------------------------
 
-    /** Fills the CEFR scale, the skill rows, grammar errors and the strongest and weakest skills. */
-    private void bindProfileSections(Map<String, SkillProgress.Summary> skills) {
-        // Current level: the highest CEFR level any skill is working in.
-        int current = 0;
-        for (SkillProgress.Summary summary : skills.values()) {
-            if (summary == null || summary.level == null) {
-                continue;
-            }
-            for (int i = 0; i < CEFR_LEVELS.length; i++) {
-                if (CEFR_LEVELS[i].equals(summary.level)) {
-                    current = Math.max(current, i);
-                }
-            }
-        }
-
-        binding.cefrScale.removeAllViews();
-        for (int i = 0; i < CEFR_LEVELS.length; i++) {
-            TextView step = new TextView(requireContext());
-            step.setText(CEFR_LEVELS[i]);
-            step.setGravity(android.view.Gravity.CENTER);
-            step.setTextSize(13);
-            step.setTypeface(null, android.graphics.Typeface.BOLD);
-            int bg = i < current ? 0xFFDDF0E6 : i == current ? 0xFFE0A030 : 0xFFFFFFFF;
-            int ink = i < current ? 0xFF1F5C41 : i == current ? 0xFF1B1A17 : 0xFF9C978A;
-            step.setBackgroundColor(bg);
-            step.setTextColor(ink);
-            android.widget.LinearLayout.LayoutParams params = new android.widget.LinearLayout.LayoutParams(0,
-                    dp(40), 1f);
-            params.setMarginEnd(dp(4));
-            binding.cefrScale.addView(step, params);
-        }
-
-        binding.skillRows.removeAllViews();
-        for (int i = 0; i < SKILL_IDS.length; i++) {
-            SkillProgress.Summary summary = skills.get(SKILL_IDS[i]);
-            android.widget.LinearLayout row = new android.widget.LinearLayout(requireContext());
-            row.setOrientation(android.widget.LinearLayout.VERTICAL);
-            row.setPadding(0, dp(10), 0, dp(10));
-            android.widget.LinearLayout head = new android.widget.LinearLayout(requireContext());
-            head.setOrientation(android.widget.LinearLayout.HORIZONTAL);
-            TextView name = new TextView(requireContext());
-            name.setText(getString(SKILL_NAME_RES[i]));
-            name.setTextSize(15);
-            name.setTextColor(0xFF1B1A17);
-            name.setTypeface(null, android.graphics.Typeface.BOLD);
-            android.widget.LinearLayout.LayoutParams nameParams = new android.widget.LinearLayout.LayoutParams(0,
-                    android.widget.LinearLayout.LayoutParams.WRAP_CONTENT, 1f);
-            head.addView(name, nameParams);
-            TextView level = new TextView(requireContext());
-            level.setText(summary == null || summary.level == null ? "—" : summary.level);
-            level.setTextSize(13);
-            level.setTypeface(null, android.graphics.Typeface.BOLD);
-            level.setTextColor(0xFF1B1A17);
-            level.setBackgroundResource(R.drawable.bg_ds_pill);
-            level.setPadding(dp(10), dp(3), dp(10), dp(3));
-            head.addView(level);
-            row.addView(head);
-            android.widget.ProgressBar bar = new android.widget.ProgressBar(requireContext(), null,
-                    android.R.attr.progressBarStyleHorizontal);
-            bar.setMax(100);
-            bar.setProgress(summary == null ? 0 : summary.percent());
-            bar.setProgressTintList(android.content.res.ColorStateList.valueOf(0xFF2E7D5B));
-            android.widget.LinearLayout.LayoutParams barParams = new android.widget.LinearLayout.LayoutParams(
-                    android.widget.LinearLayout.LayoutParams.MATCH_PARENT, dp(6));
-            barParams.topMargin = dp(8);
-            row.addView(bar, barParams);
-            String skillId = SKILL_IDS[i];
-            row.setOnClickListener(v -> openSkill(skillId));
-            binding.skillRows.addView(row);
-        }
-
-        // Grammar errors: each recurring tag with a bar scaled to the most frequent one.
-        binding.grammarErrors.removeAllViews();
-        SkillProgress.Summary grammar = skills.get(SkillProgress.GRAMMAR);
-        if (grammar == null || grammar.recent.isEmpty()) {
-            TextView empty = new TextView(requireContext());
-            empty.setText("—");
-            empty.setTextColor(0xFF6B6860);
-            binding.grammarErrors.addView(empty);
-        } else {
-            int max = 1;
-            for (SkillProgress.Mistake m : grammar.recent) {
-                max = Math.max(max, m.count);
-            }
-            for (SkillProgress.Mistake m : grammar.recent) {
-                android.widget.LinearLayout row = new android.widget.LinearLayout(requireContext());
-                row.setOrientation(android.widget.LinearLayout.HORIZONTAL);
-                row.setGravity(android.view.Gravity.CENTER_VERTICAL);
-                row.setPadding(0, dp(4), 0, dp(4));
-                TextView tag = new TextView(requireContext());
-                tag.setText(m.tag);
-                tag.setTextSize(13);
-                tag.setTextColor(0xFF1B1A17);
-                row.addView(tag, new android.widget.LinearLayout.LayoutParams(dp(130),
-                        android.widget.LinearLayout.LayoutParams.WRAP_CONTENT));
-                android.widget.ProgressBar bar = new android.widget.ProgressBar(requireContext(), null,
-                        android.R.attr.progressBarStyleHorizontal);
-                bar.setMax(max);
-                bar.setProgress(m.count);
-                bar.setProgressTintList(android.content.res.ColorStateList.valueOf(0xFFC2412D));
-                row.addView(bar, new android.widget.LinearLayout.LayoutParams(0, dp(8), 1f));
-                TextView count = new TextView(requireContext());
-                count.setText(String.valueOf(m.count));
-                count.setTextSize(13);
-                count.setTypeface(null, android.graphics.Typeface.BOLD);
-                count.setTextColor(0xFF1B1A17);
-                count.setPadding(dp(8), 0, 0, 0);
-                row.addView(count);
-                binding.grammarErrors.addView(row);
-            }
-        }
-
-        // Strongest and weakest skills, ordered by completion.
-        List<SkillProgress.Summary> ranked = new java.util.ArrayList<>();
-        for (String id : SKILL_IDS) {
-            SkillProgress.Summary summary = skills.get(id);
-            if (summary != null && summary.total > 0) {
-                ranked.add(summary);
-            }
-        }
-        ranked.sort((a, b) -> Integer.compare(b.percent(), a.percent()));
-        fillRanking(binding.strongSkills, R.string.profile_strong_title, ranked, true);
-        fillRanking(binding.weakSkills, R.string.profile_weak_title, ranked, false);
+    private TextView section(Context c, String title) {
+        return Ui.text(c, title, 18, 700, Ui.INK);
     }
 
-    private void fillRanking(android.widget.LinearLayout container, int titleRes,
-                             List<SkillProgress.Summary> ranked, boolean strongest) {
-        container.removeAllViews();
-        TextView title = new TextView(requireContext());
-        title.setText(titleRes);
-        title.setTextSize(13);
-        title.setTypeface(null, android.graphics.Typeface.BOLD);
-        title.setTextColor(strongest ? 0xFF1F5C41 : 0xFFC2412D);
-        container.addView(title);
-        if (ranked.isEmpty()) {
-            TextView empty = new TextView(requireContext());
-            empty.setText("—");
-            empty.setTextColor(0xFF6B6860);
-            container.addView(empty);
+    private void bindIdentity() {
+        if (user == null) {
             return;
         }
-        int count = Math.min(3, ranked.size());
-        for (int i = 0; i < count; i++) {
-            SkillProgress.Summary summary = strongest ? ranked.get(i) : ranked.get(ranked.size() - 1 - i);
-            TextView line = new TextView(requireContext());
-            line.setText(skillName(summary.skillId) + "  " + summary.percent() + "%");
-            line.setTextSize(13);
-            line.setTextColor(0xFF1B1A17);
-            line.setPadding(0, dp(6), 0, 0);
-            container.addView(line);
-        }
+        Context c = requireContext();
+        identity.removeAllViews();
+        LinearLayout row = Ui.row(c);
+        String name = user.displayName == null || user.displayName.isEmpty() ? "Learner" : user.displayName;
+        TextView avatar = Ui.text(c, name.substring(0, 1).toUpperCase(Locale.getDefault()), 24, 700, Ui.GREEN_INK);
+        avatar.setGravity(Gravity.CENTER);
+        avatar.setBackground(Ui.shape(c, Ui.GREEN_TINT, 999));
+        row.addView(avatar, new LinearLayout.LayoutParams(Ui.dp(c, 56), Ui.dp(c, 56)));
+        LinearLayout names = Ui.column(c);
+        names.addView(Ui.text(c, name, 18, 700, Ui.INK));
+        LocalDate joined = java.time.Instant.ofEpochMilli(user.createdAt).atZone(ZoneId.systemDefault()).toLocalDate();
+        Ui.add(names, Ui.text(c, "Joined " + joined.getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH)
+                + " " + joined.getYear(), 12, 400, Ui.MUTED), 3);
+        TextView level = Ui.pill(c, "Level " + CefrLevel.of(user.experiencePoints), Ui.AMBER_TINT, Ui.AMBER_INK, 12);
+        LinearLayout.LayoutParams lp = Ui.wrap();
+        lp.topMargin = Ui.dp(c, 8);
+        names.addView(level, lp);
+        LinearLayout.LayoutParams np = Ui.weight(1f);
+        np.leftMargin = Ui.dp(c, 14);
+        row.addView(names, np);
+        identity.addView(row, Ui.matchWidth());
     }
 
-    private String skillName(String skillId) {
-        for (int i = 0; i < SKILL_IDS.length; i++) {
-            if (SKILL_IDS[i].equals(skillId)) {
-                return getString(SKILL_NAME_RES[i]);
+    private void bindStats() {
+        if (user == null) {
+            return;
+        }
+        Context c = requireContext();
+        stats.removeAllViews();
+        statCard(c, String.format(Locale.US, "%,d", learned), "Words learned", Ui.GREEN_INK, 0);
+        statCard(c, String.valueOf(user.streakCount), "Day streak", Ui.AMBER_INK, 10);
+        statCard(c, String.format(Locale.US, "%,d", user.experiencePoints), "XP", Ui.BLUE_INK, 10);
+    }
+
+    private void statCard(Context c, String value, String label, int color, float left) {
+        LinearLayout box = Ui.column(c);
+        box.setBackground(Ui.shape(c, Ui.CARD, 16, Ui.LINE, 1));
+        box.setPadding(Ui.dp(c, 12), Ui.dp(c, 14), Ui.dp(c, 12), Ui.dp(c, 14));
+        box.addView(Ui.text(c, value, 20, 700, color));
+        Ui.add(box, Ui.text(c, label, 11, 600, Ui.MUTED), 4);
+        LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1f);
+        p.leftMargin = Ui.dp(c, left);
+        stats.addView(box, p);
+    }
+
+    private void bindCalendar() {
+        Context c = requireContext();
+        calendar.removeAllViews();
+        LinearLayout head = Ui.row(c);
+        head.addView(navArrow(c, R.drawable.ic_ds_back, "Previous month", -1));
+        TextView title = Ui.text(c, month.getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH) + " " + month.getYear(),
+                15, 700, Ui.INK);
+        title.setGravity(Gravity.CENTER);
+        head.addView(title, Ui.weight(1f));
+        head.addView(navArrow(c, R.drawable.ic_ds_chevron, "Next month", 1));
+        calendar.addView(head, Ui.matchWidth());
+
+        LinearLayout weekdays = Ui.row(c);
+        for (String d : new String[]{"S", "M", "T", "W", "T", "F", "S"}) {
+            TextView t = Ui.text(c, d, 11, 600, Ui.MUTED);
+            t.setGravity(Gravity.CENTER);
+            weekdays.addView(t, new LinearLayout.LayoutParams(0, Ui.dp(c, 24), 1f));
+        }
+        Ui.add(calendar, weekdays, 8);
+
+        int offset = month.atDay(1).getDayOfWeek().getValue() % 7;
+        int days = month.lengthOfMonth();
+        LocalDate today = LocalDate.now();
+        int cells = ((offset + days + 6) / 7) * 7;
+        LinearLayout line = null;
+        for (int i = 0; i < cells; i++) {
+            if (i % 7 == 0) {
+                line = Ui.row(c);
+                Ui.add(calendar, line, 2);
             }
+            int day = i - offset + 1;
+            TextView cell = Ui.text(c, day >= 1 && day <= days ? String.valueOf(day) : "", 13, 600, Ui.INK);
+            cell.setGravity(Gravity.CENTER);
+            if (day >= 1 && day <= days) {
+                if (activeDays.contains(day)) {
+                    cell.setBackground(Ui.shape(c, Ui.GREEN, 999));
+                    cell.setTextColor(0xFFFFFFFF);
+                } else if (month.atDay(day).equals(today)) {
+                    cell.setBackground(Ui.shape(c, 0, 999, Ui.GREEN, 1.5f));
+                }
+            }
+            LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(0, Ui.dp(c, 36), 1f);
+            line.addView(cell, p);
         }
-        return skillId;
+        LinearLayout legend = Ui.row(c);
+        View dot = new View(c);
+        dot.setBackground(Ui.shape(c, Ui.GREEN, 999));
+        legend.addView(dot, new LinearLayout.LayoutParams(Ui.dp(c, 10), Ui.dp(c, 10)));
+        LinearLayout.LayoutParams lp = Ui.wrap();
+        lp.leftMargin = Ui.dp(c, 6);
+        legend.addView(Ui.text(c, "Streak", 12, 600, Ui.MUTED), lp);
+        Ui.add(calendar, legend, 10);
     }
 
-    private int dp(int value) {
-        return Math.round(value * getResources().getDisplayMetrics().density);
+    private ImageView navArrow(Context c, int res, String description, int delta) {
+        ImageView v = Ui.icon(c, res, 20, Ui.INK);
+        v.setPadding(Ui.dp(c, 12), Ui.dp(c, 12), Ui.dp(c, 12), Ui.dp(c, 12));
+        v.setLayoutParams(new LinearLayout.LayoutParams(Ui.dp(c, 44), Ui.dp(c, 44)));
+        v.setContentDescription(description);
+        v.setOnClickListener(x -> viewModel.shiftMonth(delta));
+        return v;
     }
 
-    private void bindSkillChip(MaterialButton chip, int nameRes, @Nullable SkillProgress.Summary summary) {
-        String name = getString(nameRes);
-        chip.setText(summary == null || summary.level == null
-                ? name
-                : getString(R.string.skill_chip, name, summary.level));
+    private void bindPersonal() {
+        Context c = requireContext();
+        personal.removeAllViews();
+        addPicker(personal, "Display language", ProfileViewModel.LANGUAGE, "English", new String[]{"English", "Tiếng Việt"});
+        addPicker(personal, "Country", ProfileViewModel.COUNTRY, "Vietnam",
+                new String[]{"Vietnam", "United States", "United Kingdom", "Australia", "Canada", "Singapore", "Other"});
+        addPicker(personal, "Gender", ProfileViewModel.GENDER, "Prefer not to say",
+                new String[]{"Female", "Male", "Non-binary", "Prefer not to say"});
+        View birthday = infoRow(c, "Date of birth", viewModel.info(ProfileViewModel.BIRTHDAY, "Not set"), false);
+        birthday.setOnClickListener(v -> {
+            LocalDate d = LocalDate.of(2000, 1, 1);
+            new DatePickerDialog(c, (picker, y, m, day) ->
+                    {
+                        viewModel.setInfo(ProfileViewModel.BIRTHDAY, LocalDate.of(y, m + 1, day)
+                                .format(java.time.format.DateTimeFormatter.ofPattern("d MMM yyyy", Locale.ENGLISH)));
+                        bindPersonal();
+                    }, d.getYear(), d.getMonthValue() - 1, d.getDayOfMonth()).show();
+        });
+        personal.addView(birthday, Ui.matchWidth());
     }
 
-    private void openSkill(String skillId) {
-        android.os.Bundle args = new android.os.Bundle();
-        args.putString("skillId", skillId);
-        androidx.navigation.fragment.NavHostFragment.findNavController(this)
-                .navigate(R.id.action_profile_to_skill, args);
+    private void addPicker(LinearLayout parent, String label, String key, String fallback, String[] options) {
+        View row = infoRow(requireContext(), label, viewModel.info(key, fallback), true);
+        row.setOnClickListener(v -> {
+            PopupMenu menu = new PopupMenu(requireContext(), v);
+            for (int i = 0; i < options.length; i++) {
+                menu.getMenu().add(0, i, i, options[i]);
+            }
+            menu.setOnMenuItemClickListener(item -> {
+                viewModel.setInfo(key, options[item.getItemId()]);
+                bindPersonal();
+                return true;
+            });
+            menu.show();
+        });
+        parent.addView(row, Ui.matchWidth());
+    }
+
+    private void bindPreferences() {
+        Context c = requireContext();
+        preferences.removeAllViews();
+        View goal = infoRow(c, "Daily goal", viewModel.dailyGoal() + " words", true);
+        goal.setOnClickListener(v -> {
+            PopupMenu menu = new PopupMenu(c, v);
+            int[] goals = {10, 20, 30, 50};
+            for (int i = 0; i < goals.length; i++) {
+                menu.getMenu().add(0, goals[i], i, goals[i] + " words");
+            }
+            menu.setOnMenuItemClickListener(item -> {
+                viewModel.setDailyGoal(item.getItemId());
+                bindPreferences();
+                return true;
+            });
+            menu.show();
+        });
+        preferences.addView(goal, Ui.matchWidth());
+        int hour = viewModel.preferences().getReminderHour();
+        int minute = viewModel.preferences().getReminderMinute();
+        View reminder = infoRow(c, "Reminders", viewModel.preferences().isReminderEnabled()
+                ? formatTime(hour, minute) : "Off", true);
+        reminder.setOnClickListener(v -> new TimePickerDialog(c, (picker, h, m) -> {
+            viewModel.preferences().saveReminder(true, h, m);
+            ReminderScheduler.schedule(c, h, m);
+            bindPreferences();
+        }, hour, minute, false).show());
+        preferences.addView(reminder, Ui.matchWidth());
+    }
+
+    private static String formatTime(int hour, int minute) {
+        int h12 = hour % 12 == 0 ? 12 : hour % 12;
+        return String.format(Locale.US, "%d:%02d %s", h12, minute, hour < 12 ? "AM" : "PM");
+    }
+
+    private View infoRow(Context c, String label, String value, boolean divider) {
+        LinearLayout row = Ui.row(c);
+        row.setMinimumHeight(Ui.dp(c, 52));
+        row.setPadding(Ui.dp(c, 12), Ui.dp(c, 4), Ui.dp(c, 8), Ui.dp(c, 4));
+        row.setClickable(true);
+        row.addView(Ui.text(c, label, 15, 600, Ui.INK), Ui.weight(1f));
+        row.addView(Ui.text(c, value, 14, 400, Ui.MUTED), Ui.wrap());
+        ImageView arrow = Ui.icon(c, R.drawable.ic_ds_chevron, 18, Ui.MUTED);
+        LinearLayout.LayoutParams ap = new LinearLayout.LayoutParams(Ui.dp(c, 18), Ui.dp(c, 18));
+        ap.leftMargin = Ui.dp(c, 4);
+        row.addView(arrow, ap);
+        return row;
+    }
+
+    private View link(Context c, String title, String subtitle, int action) {
+        LinearLayout row = Ui.row(c);
+        row.setBackground(Ui.shape(c, Ui.CARD, 16, Ui.LINE, 1));
+        row.setPadding(Ui.dp(c, 16), Ui.dp(c, 14), Ui.dp(c, 12), Ui.dp(c, 14));
+        row.setClickable(true);
+        LinearLayout names = Ui.column(c);
+        names.addView(Ui.text(c, title, 15, 600, Ui.INK));
+        Ui.add(names, Ui.text(c, subtitle, 12, 400, Ui.MUTED), 2);
+        row.addView(names, Ui.weight(1f));
+        row.addView(Ui.icon(c, R.drawable.ic_ds_chevron, 18, Ui.MUTED));
+        row.setOnClickListener(v -> navigate(action));
+        return row;
     }
 }
