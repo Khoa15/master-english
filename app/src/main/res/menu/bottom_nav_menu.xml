@@ -5,6 +5,10 @@
         android:icon="@drawable/ic_nav_book"
         android:title="@string/vocab_title" />
     <item
+        android:id="@+id/entertainmentFragment"
+        android:icon="@drawable/ic_nav_games"
+        android:title="@string/nav_tab_entertainment" />
+    <item
         android:id="@+id/profileFragment"
         android:icon="@drawable/ic_nav_user"
         android:title="@string/nav_tab_profile" />

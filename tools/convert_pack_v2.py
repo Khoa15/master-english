@@ -5,7 +5,7 @@ pack/2 format described in data/source/README.md. Usage:
 The file is rewritten in place. Entry ids are <prefix><slug of the word>, the same ids build_vocabulary.py used to
 derive, so learner progress survives the switch.
 
---ids-from-pack <PACK> takes the ids from that pack of the current app/src/main/assets/data/vocabulary.json instead
+--ids-from-pack <PACK> takes the ids from that pack of the current app/src/main/assets/data/vocabulary.en.json instead
 (entries sorted by rank, in the pack's order). Use it for a pack whose ids were generated at build time and that may
 share words with other packs (all1000.json): run it before the build script is changed to read the new file."""
 import argparse, json, re
@@ -17,7 +17,7 @@ def slug(term):
 
 
 def pack_ids(pack):
-    vocab = json.loads((Path(__file__).resolve().parent.parent / "app/src/main/assets/data/vocabulary.json").read_text())
+    vocab = json.loads((Path(__file__).resolve().parent.parent / "app/src/main/assets/data/vocabulary.en.json").read_text())
     by_id = {w["id"]: w for w in vocab["words"]}
     ids = next(p for p in vocab["packs"] if p["id"] == pack)["words"]
     return ids, by_id

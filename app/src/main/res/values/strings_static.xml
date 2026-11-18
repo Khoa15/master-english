@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Text that is the same in every language. Everything translatable lives in tools/i18n/strings_*.py. -->
+<resources>
+    <!-- app_name is generated from APP_NAME in gradle.properties (see app/build.gradle). -->
+    <string name="google_web_client_id" translatable="false">YOUR_WEB_CLIENT_ID.apps.googleusercontent.com</string>
+    <string name="onboard_age_18_24" translatable="false">18 - 24</string>
+    <string name="onboard_age_25_34" translatable="false">25 - 34</string>
+    <string name="onboard_age_35_44" translatable="false">35 - 44</string>
+    <string name="onboard_age_45_54" translatable="false">45 - 54</string>
+</resources>

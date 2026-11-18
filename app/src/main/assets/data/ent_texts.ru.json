@@ -1,0 +1,215 @@
+{
+ "lang": "ru",
+ "texts": [
+  {
+   "type": "ACTIVITY",
+   "id": "game_word_match",
+   "field": "title",
+   "text": "Соедини слова"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "game_word_match",
+   "field": "subtitle",
+   "text": "Соединяйте изученные слова с их значениями"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "game_guess_word",
+   "field": "title",
+   "text": "Угадай слово"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "game_guess_word",
+   "field": "subtitle",
+   "text": "Прочитайте определение и выберите нужное слово"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "game_synonym_match",
+   "field": "title",
+   "text": "Синонимы"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "game_synonym_match",
+   "field": "subtitle",
+   "text": "Соедините каждое слово с синонимом"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "game_copy_speed",
+   "field": "title",
+   "text": "Быстрый набор"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "game_copy_speed",
+   "field": "subtitle",
+   "text": "Смотрите значение и быстро вводите слово"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "practice_mistakes",
+   "field": "title",
+   "text": "Работа над ошибками"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "practice_mistakes",
+   "field": "subtitle",
+   "text": "Слова, в которых вы часто ошибаетесь"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "practice_tung",
+   "field": "title",
+   "text": "Режим повторения"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "practice_tung",
+   "field": "subtitle",
+   "text": "Повторяйте слова вслух, чтобы запомнить"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "practice_sleeping",
+   "field": "title",
+   "text": "Слушать перед сном"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "practice_sleeping",
+   "field": "subtitle",
+   "text": "Слушайте свои слова, засыпая"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_word_match",
+   "field": "tag",
+   "text": "ИГРА ДНЯ"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_word_match",
+   "field": "title",
+   "text": "Соедини слова"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_word_match",
+   "field": "subtitle",
+   "text": "Соединяйте изученные слова с их значениями"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_word_match",
+   "field": "button_label",
+   "text": "Играть"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_guess_word",
+   "field": "tag",
+   "text": "НОВОЕ"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_guess_word",
+   "field": "title",
+   "text": "Угадай слово"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_guess_word",
+   "field": "subtitle",
+   "text": "Читайте определение, угадывайте слово, получайте бонусные очки"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_guess_word",
+   "field": "button_label",
+   "text": "Попробовать"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_contest",
+   "field": "tag",
+   "text": "КОНКУРС"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_contest",
+   "field": "title",
+   "text": "Король лексики A1"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_contest",
+   "field": "subtitle",
+   "text": "Бейтесь за первое место, топ-10 получит кристаллы"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_contest",
+   "field": "button_label",
+   "text": "Смотреть конкурс"
+  },
+  {
+   "type": "EVENT",
+   "id": "event_double_exp",
+   "field": "tag",
+   "text": "СОБЫТИЕ"
+  },
+  {
+   "type": "EVENT",
+   "id": "event_double_exp",
+   "field": "title",
+   "text": "Неделя лексики: 2x опыта"
+  },
+  {
+   "type": "EVENT",
+   "id": "event_double_exp",
+   "field": "description",
+   "text": "Каждая игра даёт двойной опыт"
+  },
+  {
+   "type": "CONTEST",
+   "id": "contest_a1_king",
+   "field": "title",
+   "text": "Король лексики A1"
+  },
+  {
+   "type": "CONTEST",
+   "id": "contest_a1_king",
+   "field": "description",
+   "text": "Отвечайте быстро и точно, чтобы подняться в рейтинге. Результат зависит от очков и времени прохождения."
+  },
+  {
+   "type": "CONTEST",
+   "id": "contest_weekend_speed",
+   "field": "title",
+   "text": "Скоростная гонка выходного дня"
+  },
+  {
+   "type": "CONTEST",
+   "id": "contest_weekend_speed",
+   "field": "description",
+   "text": "Соревнуйтесь на лексике A1 и A2. Самый быстрый и точный ученик возглавит таблицу."
+  },
+  {
+   "type": "CONTEST",
+   "id": "contest_a2_challenge",
+   "field": "title",
+   "text": "Испытание A2"
+  },
+  {
+   "type": "CONTEST",
+   "id": "contest_a2_challenge",
+   "field": "description",
+   "text": "Ответьте на 30 вопросов по лексике A2 за 12 минут."
+  }
+ ]
+}

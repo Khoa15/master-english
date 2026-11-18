@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Builds app/src/main/assets/data/vocabulary.json from the pack/2 files in data/source/ (see its README.md).
+"""Builds app/src/main/assets/data/vocabulary.en.json from the pack/2 files in data/source/ (see its README.md).
 
 Output shape (the app seeds its words, word_senses, translations, examples, packs and pack_words tables from it):
   {"packs": [{id, title, titles, cefr_level, position, words: [word ids in pack order]}],
@@ -16,7 +16,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "data" / "source"
-OUT = ROOT / "app" / "src" / "main" / "assets" / "data" / "vocabulary.json"
+OUT = ROOT / "app" / "src" / "main" / "assets" / "data" / "vocabulary.en.json"
 MAX_SENSES = 6
 # pack/2 files in pack order: (file, max definitions per part of speech, max senses per word).
 # The two crawler-based files keep at most MAX_SENSES senses per word; all1000.json also has 3 definitions per part of

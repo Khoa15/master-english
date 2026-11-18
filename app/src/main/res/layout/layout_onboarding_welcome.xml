@@ -17,7 +17,7 @@
             android:background="@drawable/bg_onboarding_pill"
             android:fontFamily="serif"
             android:gravity="center"
-            android:text="M"
+            android:text="@string/app_initial"
             android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:text="@string/onboard_brand"
+            android:text="@string/app_name"
             android:textColor="@color/onboarding_ink"
             android:textSize="15sp"
             android:textStyle="bold" />

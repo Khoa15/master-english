@@ -7,7 +7,7 @@
     <!-- Main tabs (BottomNavigationView): Vocabulary and Profile -->
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.masterenglish.app.ui.common.TabPlaceholderFragment"
+        android:name="com.doradodo.app.ui.common.TabPlaceholderFragment"
         android:label="@string/nav_tab_profile">
         <action
             android:id="@+id/action_profile_to_auth"
@@ -29,8 +29,68 @@
     </fragment>
 
     <fragment
+        android:id="@+id/entertainmentFragment"
+        android:name="com.doradodo.app.ui.entertainment.EntertainmentFragment"
+        android:label="@string/nav_tab_entertainment" />
+
+    <fragment
+        android:id="@+id/allGamesFragment"
+        android:name="com.doradodo.app.ui.entertainment.AllGamesFragment"
+        android:label="allGamesFragment" />
+
+    <fragment
+        android:id="@+id/contestFragment"
+        android:name="com.doradodo.app.ui.entertainment.ContestFragment"
+        android:label="contestFragment" />
+
+    <fragment
+        android:id="@+id/contestPlayFragment"
+        android:name="com.doradodo.app.ui.entertainment.ContestPlayFragment"
+        android:label="contestPlayFragment" />
+
+    <fragment
+        android:id="@+id/wordMatchFragment"
+        android:name="com.doradodo.app.ui.entertainment.WordMatchFragment"
+        android:label="wordMatchFragment" />
+
+    <fragment
+        android:id="@+id/synonymMatchFragment"
+        android:name="com.doradodo.app.ui.entertainment.SynonymMatchFragment"
+        android:label="synonymMatchFragment" />
+
+    <fragment
+        android:id="@+id/mistakesFragment"
+        android:name="com.doradodo.app.ui.entertainment.MistakesFragment"
+        android:label="mistakesFragment" />
+
+    <fragment
+        android:id="@+id/guessWordFragment"
+        android:name="com.doradodo.app.ui.entertainment.GuessWordFragment"
+        android:label="guessWordFragment" />
+
+    <fragment
+        android:id="@+id/copyFragment"
+        android:name="com.doradodo.app.ui.entertainment.CopyFragment"
+        android:label="copyFragment" />
+
+    <fragment
+        android:id="@+id/tungSetupFragment"
+        android:name="com.doradodo.app.ui.entertainment.TungSetupFragment"
+        android:label="tungSetupFragment" />
+
+    <fragment
+        android:id="@+id/tungFragment"
+        android:name="com.doradodo.app.ui.entertainment.TungFragment"
+        android:label="tungFragment" />
+
+    <fragment
+        android:id="@+id/sleepingFragment"
+        android:name="com.doradodo.app.ui.entertainment.SleepingFragment"
+        android:label="sleepingFragment" />
+
+    <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.masterenglish.app.ui.settings.SettingsFragment"
+        android:name="com.doradodo.app.ui.settings.SettingsFragment"
         android:label="@string/settings_title">
         <action
             android:id="@+id/action_settings_to_auth"
@@ -42,7 +102,7 @@
     <!-- Flows outside the tabs -->
     <fragment
         android:id="@+id/onboardingFragment"
-        android:name="com.masterenglish.app.ui.auth.OnboardingFragment"
+        android:name="com.doradodo.app.ui.auth.OnboardingFragment"
         android:label="onboarding">
         <action
             android:id="@+id/action_onboarding_to_auth"
@@ -51,7 +111,7 @@
 
     <fragment
         android:id="@+id/authFragment"
-        android:name="com.masterenglish.app.ui.auth.AuthFragment"
+        android:name="com.doradodo.app.ui.auth.AuthFragment"
         android:label="auth">
         <action
             android:id="@+id/action_auth_to_vocabulary"
@@ -62,7 +122,7 @@
 
     <fragment
         android:id="@+id/vocabularyFragment"
-        android:name="com.masterenglish.app.ui.vocab.VocabularyFragment"
+        android:name="com.doradodo.app.ui.vocab.VocabularyFragment"
         android:label="vocabulary">
         <action
             android:id="@+id/action_vocab_to_all_packs"
@@ -77,7 +137,7 @@
 
     <fragment
         android:id="@+id/allPacksFragment"
-        android:name="com.masterenglish.app.ui.vocab.AllPacksFragment"
+        android:name="com.doradodo.app.ui.vocab.AllPacksFragment"
         android:label="all_packs">
         <action
             android:id="@+id/action_allpacks_to_pack"
@@ -86,7 +146,7 @@
 
     <fragment
         android:id="@+id/packDetailFragment"
-        android:name="com.masterenglish.app.ui.vocab.PackDetailFragment"
+        android:name="com.doradodo.app.ui.vocab.PackDetailFragment"
         android:label="pack_detail">
         <argument
             android:name="packId"
@@ -100,7 +160,7 @@
 
     <fragment
         android:id="@+id/practiceFragment"
-        android:name="com.masterenglish.app.ui.vocab.PracticeFragment"
+        android:name="com.doradodo.app.ui.vocab.PracticeFragment"
         android:label="practice">
         <argument
             android:name="packId"
@@ -116,7 +176,7 @@
 
     <fragment
         android:id="@+id/summaryFragment"
-        android:name="com.masterenglish.app.ui.vocab.SummaryFragment"
+        android:name="com.doradodo.app.ui.vocab.SummaryFragment"
         android:label="summary">
         <action
             android:id="@+id/action_summary_to_home"
@@ -127,7 +187,7 @@
 
     <fragment
         android:id="@+id/analyticsFragment"
-        android:name="com.masterenglish.app.ui.analytics.AnalyticsFragment"
+        android:name="com.doradodo.app.ui.analytics.AnalyticsFragment"
         android:label="analytics">
         <action
             android:id="@+id/action_analytics_to_wordlist"
@@ -136,16 +196,16 @@
 
     <fragment
         android:id="@+id/wordListFragment"
-        android:name="com.masterenglish.app.ui.vocab.WordListFragment"
+        android:name="com.doradodo.app.ui.vocab.WordListFragment"
         android:label="word_list" />
 
     <fragment
         android:id="@+id/feedbackFragment"
-        android:name="com.masterenglish.app.ui.feedback.FeedbackFragment"
+        android:name="com.doradodo.app.ui.feedback.FeedbackFragment"
         android:label="feedback" />
 
     <fragment
         android:id="@+id/subscriptionFragment"
-        android:name="com.masterenglish.app.ui.subscription.SubscriptionFragment"
+        android:name="com.doradodo.app.ui.subscription.SubscriptionFragment"
         android:label="subscription" />
 </navigation>

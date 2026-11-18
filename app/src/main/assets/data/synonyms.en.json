@@ -1,0 +1,451 @@
+{
+ "lang": "en",
+ "groups": [
+  {
+   "words": [
+    "big",
+    "large",
+    "huge"
+   ]
+  },
+  {
+   "words": [
+    "small",
+    "little",
+    "tiny"
+   ]
+  },
+  {
+   "words": [
+    "happy",
+    "glad",
+    "pleased",
+    "cheerful"
+   ]
+  },
+  {
+   "words": [
+    "sad",
+    "unhappy",
+    "upset"
+   ]
+  },
+  {
+   "words": [
+    "fast",
+    "quick",
+    "rapid",
+    "speedy"
+   ]
+  },
+  {
+   "words": [
+    "slow",
+    "sluggish"
+   ]
+  },
+  {
+   "words": [
+    "smart",
+    "clever",
+    "intelligent",
+    "bright"
+   ]
+  },
+  {
+   "words": [
+    "begin",
+    "start",
+    "commence"
+   ]
+  },
+  {
+   "words": [
+    "end",
+    "finish",
+    "complete"
+   ]
+  },
+  {
+   "words": [
+    "buy",
+    "purchase"
+   ]
+  },
+  {
+   "words": [
+    "ask",
+    "question"
+   ]
+  },
+  {
+   "words": [
+    "answer",
+    "reply",
+    "respond"
+   ]
+  },
+  {
+   "words": [
+    "tired",
+    "sleepy",
+    "exhausted"
+   ]
+  },
+  {
+   "words": [
+    "angry",
+    "mad",
+    "furious"
+   ]
+  },
+  {
+   "words": [
+    "beautiful",
+    "pretty",
+    "lovely",
+    "gorgeous"
+   ]
+  },
+  {
+   "words": [
+    "ugly",
+    "unattractive"
+   ]
+  },
+  {
+   "words": [
+    "easy",
+    "simple",
+    "effortless"
+   ]
+  },
+  {
+   "words": [
+    "hard",
+    "difficult",
+    "tough"
+   ]
+  },
+  {
+   "words": [
+    "car",
+    "automobile"
+   ]
+  },
+  {
+   "words": [
+    "house",
+    "home",
+    "residence"
+   ]
+  },
+  {
+   "words": [
+    "kid",
+    "child"
+   ]
+  },
+  {
+   "words": [
+    "friend",
+    "buddy",
+    "pal"
+   ]
+  },
+  {
+   "words": [
+    "look",
+    "watch",
+    "see"
+   ]
+  },
+  {
+   "words": [
+    "talk",
+    "speak",
+    "chat"
+   ]
+  },
+  {
+   "words": [
+    "shout",
+    "yell",
+    "scream"
+   ]
+  },
+  {
+   "words": [
+    "walk",
+    "stroll"
+   ]
+  },
+  {
+   "words": [
+    "run",
+    "jog",
+    "sprint"
+   ]
+  },
+  {
+   "words": [
+    "jump",
+    "leap",
+    "hop"
+   ]
+  },
+  {
+   "words": [
+    "cold",
+    "chilly",
+    "cool"
+   ]
+  },
+  {
+   "words": [
+    "hot",
+    "warm"
+   ]
+  },
+  {
+   "words": [
+    "important",
+    "essential",
+    "crucial",
+    "vital"
+   ]
+  },
+  {
+   "words": [
+    "rich",
+    "wealthy"
+   ]
+  },
+  {
+   "words": [
+    "poor",
+    "needy"
+   ]
+  },
+  {
+   "words": [
+    "strong",
+    "powerful",
+    "sturdy"
+   ]
+  },
+  {
+   "words": [
+    "weak",
+    "feeble"
+   ]
+  },
+  {
+   "words": [
+    "scared",
+    "afraid",
+    "frightened"
+   ]
+  },
+  {
+   "words": [
+    "funny",
+    "amusing",
+    "humorous"
+   ]
+  },
+  {
+   "words": [
+    "boring",
+    "dull"
+   ]
+  },
+  {
+   "words": [
+    "smell",
+    "scent",
+    "odor"
+   ]
+  },
+  {
+   "words": [
+    "boss",
+    "manager",
+    "chief"
+   ]
+  },
+  {
+   "words": [
+    "job",
+    "work",
+    "occupation"
+   ]
+  },
+  {
+   "words": [
+    "money",
+    "cash"
+   ]
+  },
+  {
+   "words": [
+    "gift",
+    "present"
+   ]
+  },
+  {
+   "words": [
+    "trip",
+    "journey",
+    "voyage"
+   ]
+  },
+  {
+   "words": [
+    "error",
+    "mistake",
+    "fault"
+   ]
+  },
+  {
+   "words": [
+    "help",
+    "assist",
+    "aid"
+   ]
+  },
+  {
+   "words": [
+    "choose",
+    "pick",
+    "select"
+   ]
+  },
+  {
+   "words": [
+    "show",
+    "display",
+    "present"
+   ]
+  },
+  {
+   "words": [
+    "enough",
+    "sufficient"
+   ]
+  },
+  {
+   "words": [
+    "also",
+    "too"
+   ]
+  },
+  {
+   "words": [
+    "begin",
+    "launch"
+   ]
+  },
+  {
+   "words": [
+    "quiet",
+    "silent",
+    "calm"
+   ]
+  },
+  {
+   "words": [
+    "loud",
+    "noisy"
+   ]
+  },
+  {
+   "words": [
+    "clean",
+    "spotless"
+   ]
+  },
+  {
+   "words": [
+    "dirty",
+    "filthy"
+   ]
+  },
+  {
+   "words": [
+    "wrong",
+    "incorrect"
+   ]
+  },
+  {
+   "words": [
+    "right",
+    "correct"
+   ]
+  },
+  {
+   "words": [
+    "glad",
+    "delighted"
+   ]
+  },
+  {
+   "words": [
+    "near",
+    "close"
+   ]
+  },
+  {
+   "words": [
+    "far",
+    "distant"
+   ]
+  },
+  {
+   "words": [
+    "old",
+    "ancient",
+    "aged"
+   ]
+  },
+  {
+   "words": [
+    "new",
+    "fresh",
+    "modern"
+   ]
+  },
+  {
+   "note": "travel",
+   "words": [
+    "go",
+    "travel",
+    "proceed",
+    "journey"
+   ]
+  },
+  {
+   "note": "forms of go",
+   "words": [
+    "go",
+    "went",
+    "gone"
+   ]
+  },
+  {
+   "note": "forms of buy",
+   "words": [
+    "buy",
+    "bought"
+   ]
+  },
+  {
+   "note": "forms of see",
+   "words": [
+    "see",
+    "saw",
+    "seen"
+   ]
+  }
+ ]
+}

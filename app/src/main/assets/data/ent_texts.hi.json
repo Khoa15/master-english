@@ -1,0 +1,215 @@
+{
+ "lang": "hi",
+ "texts": [
+  {
+   "type": "ACTIVITY",
+   "id": "game_word_match",
+   "field": "title",
+   "text": "शब्द मिलान"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "game_word_match",
+   "field": "subtitle",
+   "text": "सीखे हुए शब्दों को उनके अर्थ से मिलाएँ"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "game_guess_word",
+   "field": "title",
+   "text": "शब्द पहचानो"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "game_guess_word",
+   "field": "subtitle",
+   "text": "परिभाषा पढ़ें, सही शब्द चुनें"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "game_synonym_match",
+   "field": "title",
+   "text": "समानार्थी मिलान"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "game_synonym_match",
+   "field": "subtitle",
+   "text": "हर शब्द को उसके समानार्थी से मिलाएँ"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "game_copy_speed",
+   "field": "title",
+   "text": "स्पीड टाइपिंग"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "game_copy_speed",
+   "field": "subtitle",
+   "text": "अर्थ देखें, शब्द तेज़ी से टाइप करें"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "practice_mistakes",
+   "field": "title",
+   "text": "गलतियों की समीक्षा"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "practice_mistakes",
+   "field": "subtitle",
+   "text": "वे शब्द जिनमें आप अक्सर गलती करते हैं"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "practice_tung",
+   "field": "title",
+   "text": "जप मोड"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "practice_tung",
+   "field": "subtitle",
+   "text": "याद रखने के लिए शब्द ज़ोर से दोहराएँ"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "practice_sleeping",
+   "field": "title",
+   "text": "नींद में सुनना"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "practice_sleeping",
+   "field": "subtitle",
+   "text": "सोते समय अपने शब्द सुनें"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_word_match",
+   "field": "tag",
+   "text": "चुनिंदा गेम"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_word_match",
+   "field": "title",
+   "text": "शब्द मिलान"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_word_match",
+   "field": "subtitle",
+   "text": "सीखे हुए शब्दों को उनके अर्थ से मिलाएँ"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_word_match",
+   "field": "button_label",
+   "text": "अभी खेलें"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_guess_word",
+   "field": "tag",
+   "text": "नया"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_guess_word",
+   "field": "title",
+   "text": "शब्द पहचानो"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_guess_word",
+   "field": "subtitle",
+   "text": "परिभाषा पढ़ें, शब्द पहचानें, बोनस अंक पाएँ"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_guess_word",
+   "field": "button_label",
+   "text": "अभी आज़माएँ"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_contest",
+   "field": "tag",
+   "text": "प्रतियोगिता"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_contest",
+   "field": "title",
+   "text": "A1 शब्दावली किंग"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_contest",
+   "field": "subtitle",
+   "text": "शीर्ष के लिए दौड़ें, टॉप 10 को रत्न मिलेंगे"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_contest",
+   "field": "button_label",
+   "text": "प्रतियोगिता देखें"
+  },
+  {
+   "type": "EVENT",
+   "id": "event_double_exp",
+   "field": "tag",
+   "text": "इवेंट"
+  },
+  {
+   "type": "EVENT",
+   "id": "event_double_exp",
+   "field": "title",
+   "text": "शब्दावली सप्ताह: 2x EXP"
+  },
+  {
+   "type": "EVENT",
+   "id": "event_double_exp",
+   "field": "description",
+   "text": "हर गेम में दोगुने अनुभव अंक मिलते हैं"
+  },
+  {
+   "type": "CONTEST",
+   "id": "contest_a1_king",
+   "field": "title",
+   "text": "A1 शब्दावली किंग"
+  },
+  {
+   "type": "CONTEST",
+   "id": "contest_a1_king",
+   "field": "description",
+   "text": "तेज़ी और सटीकता से जवाब दें और रैंकिंग में ऊपर चढ़ें। नतीजे अंक और पूरा करने के समय से तय होते हैं।"
+  },
+  {
+   "type": "CONTEST",
+   "id": "contest_weekend_speed",
+   "field": "title",
+   "text": "वीकेंड स्पीड रेस"
+  },
+  {
+   "type": "CONTEST",
+   "id": "contest_weekend_speed",
+   "field": "description",
+   "text": "A1 और A2 शब्दावली में दौड़ लगाएँ। सबसे तेज़ और सटीक शिक्षार्थी शीर्ष पर रहेगा।"
+  },
+  {
+   "type": "CONTEST",
+   "id": "contest_a2_challenge",
+   "field": "title",
+   "text": "A2 चैलेंज"
+  },
+  {
+   "type": "CONTEST",
+   "id": "contest_a2_challenge",
+   "field": "description",
+   "text": "12 मिनट में A2 शब्दावली के 30 प्रश्न पूरे करें।"
+  }
+ ]
+}

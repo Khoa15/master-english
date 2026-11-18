@@ -1,4 +1,4 @@
-# Master English
+# DoraDodo
 
 Ứng dụng học tiếng Anh cho Android, viết bằng **Java 17**, dành cho người đi làm trong ngành IT.
 Mỗi ngày vài phút, người học đi qua lộ trình từ A1 đến C2 gồm từ vựng, ngữ pháp, nghe và đọc, được
@@ -49,7 +49,7 @@ Lottie · Konfetti · MPAndroidChart · SoundPool · AlarmManager (exact) · Gso
 
 ```properties
 sdk.dir=/path/to/Android/Sdk
-api.base.url=https://your-server/api/   # máy chủ MySQL (tuỳ chọn)
+api.base.url=https://your-server/api/   # máy chủ PHP, xem server/README.md (tuỳ chọn)
 ```
 
 AI Agent (API Gateway): nhà phát triển khai báo trong `local.properties` (đã git-ignore) hoặc biến môi trường khi build CI:
@@ -89,3 +89,10 @@ Phần máy chủ chưa có trong repo này.
 - Đã kiểm chứng luồng học thử bằng Robolectric và chụp 13 ảnh màn hình.
 - Chưa chạy trên thiết bị hoặc emulator thật.
 - Chưa có máy chủ MySQL và chưa cấu hình Firebase/API Gateway trong repo.
+
+## Quy ước giao diện
+
+- **Nút hành động chính ở đáy màn hình luôn là nút nổi.** Dùng `Ui.Screen.setFooter(view)` cùng
+  `Ui.floatingButton(...)` (hoặc `Ui.primaryButton`). Footer là một dải trong suốt đè lên nội dung: không nền,
+  không viền, không thanh riêng; nội dung cuộn phía dưới và `Ui.Screen` tự chừa chỗ ở cuối. Không đặt
+  background cho `footer` và không tự thêm thanh nền quanh nút.

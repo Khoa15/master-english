@@ -1,0 +1,215 @@
+{
+ "lang": "es",
+ "texts": [
+  {
+   "type": "ACTIVITY",
+   "id": "game_word_match",
+   "field": "title",
+   "text": "Unir palabras"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "game_word_match",
+   "field": "subtitle",
+   "text": "Une las palabras que aprendiste con su significado"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "game_guess_word",
+   "field": "title",
+   "text": "Adivina la palabra"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "game_guess_word",
+   "field": "subtitle",
+   "text": "Lee la definición y elige la palabra correcta"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "game_synonym_match",
+   "field": "title",
+   "text": "Sinónimos"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "game_synonym_match",
+   "field": "subtitle",
+   "text": "Une cada palabra con su sinónimo"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "game_copy_speed",
+   "field": "title",
+   "text": "Escritura rápida"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "game_copy_speed",
+   "field": "subtitle",
+   "text": "Mira el significado y escribe la palabra rápido"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "practice_mistakes",
+   "field": "title",
+   "text": "Repasar errores"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "practice_mistakes",
+   "field": "subtitle",
+   "text": "Palabras que sueles fallar"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "practice_tung",
+   "field": "title",
+   "text": "Modo repetición"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "practice_tung",
+   "field": "subtitle",
+   "text": "Repite las palabras en voz alta para recordarlas"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "practice_sleeping",
+   "field": "title",
+   "text": "Escucha para dormir"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "practice_sleeping",
+   "field": "subtitle",
+   "text": "Escucha tus palabras mientras duermes"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_word_match",
+   "field": "tag",
+   "text": "JUEGO DESTACADO"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_word_match",
+   "field": "title",
+   "text": "Unir palabras"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_word_match",
+   "field": "subtitle",
+   "text": "Une las palabras que aprendiste con su significado"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_word_match",
+   "field": "button_label",
+   "text": "Jugar ahora"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_guess_word",
+   "field": "tag",
+   "text": "NUEVO"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_guess_word",
+   "field": "title",
+   "text": "Adivina la palabra"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_guess_word",
+   "field": "subtitle",
+   "text": "Lee la definición, adivina la palabra y gana puntos extra"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_guess_word",
+   "field": "button_label",
+   "text": "Probar ahora"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_contest",
+   "field": "tag",
+   "text": "CONCURSO"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_contest",
+   "field": "title",
+   "text": "Rey del vocabulario A1"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_contest",
+   "field": "subtitle",
+   "text": "Compite por el primer puesto y gana gemas si quedas en el top 10"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_contest",
+   "field": "button_label",
+   "text": "Ver concurso"
+  },
+  {
+   "type": "EVENT",
+   "id": "event_double_exp",
+   "field": "tag",
+   "text": "EVENTO"
+  },
+  {
+   "type": "EVENT",
+   "id": "event_double_exp",
+   "field": "title",
+   "text": "Semana del vocabulario: EXP x2"
+  },
+  {
+   "type": "EVENT",
+   "id": "event_double_exp",
+   "field": "description",
+   "text": "Cada juego da el doble de puntos de experiencia"
+  },
+  {
+   "type": "CONTEST",
+   "id": "contest_a1_king",
+   "field": "title",
+   "text": "Rey del vocabulario A1"
+  },
+  {
+   "type": "CONTEST",
+   "id": "contest_a1_king",
+   "field": "description",
+   "text": "Responde rápido y con precisión para subir en la clasificación. Los resultados se calculan por puntos y tiempo de finalización."
+  },
+  {
+   "type": "CONTEST",
+   "id": "contest_weekend_speed",
+   "field": "title",
+   "text": "Carrera de velocidad del fin de semana"
+  },
+  {
+   "type": "CONTEST",
+   "id": "contest_weekend_speed",
+   "field": "description",
+   "text": "Compite con el vocabulario A1 y A2. El estudiante más rápido y preciso lidera la tabla."
+  },
+  {
+   "type": "CONTEST",
+   "id": "contest_a2_challenge",
+   "field": "title",
+   "text": "Desafío A2"
+  },
+  {
+   "type": "CONTEST",
+   "id": "contest_a2_challenge",
+   "field": "description",
+   "text": "Responde 30 preguntas de vocabulario A2 en 12 minutos."
+  }
+ ]
+}

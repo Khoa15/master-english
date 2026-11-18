@@ -2,7 +2,7 @@
 <resources>
     <!-- Light navigation bar icons need API 27+; minSdk is 26, so this lives in its own folder.
          It extends the base theme: a same-named style in a qualifier folder does not inherit items. -->
-    <style name="Theme.MasterEnglish" parent="Base.Theme.MasterEnglish">
+    <style name="Theme.App" parent="Base.Theme.App">
         <item name="android:windowLightNavigationBar">true</item>
     </style>
 </resources>
