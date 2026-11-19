@@ -15,7 +15,7 @@ public class EntertainmentViewModelTest {
     /** Direct executors: the work and the hand-back both run right where they are submitted. */
     private static EntertainmentViewModel viewModel() {
         AppExecutors direct = new AppExecutors(Runnable::run, Runnable::run);
-        return new EntertainmentViewModel(null, null, null, direct);
+        return new EntertainmentViewModel(null, null, null, null, direct);
     }
 
     @Test

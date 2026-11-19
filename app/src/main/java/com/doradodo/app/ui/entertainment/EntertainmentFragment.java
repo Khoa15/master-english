@@ -33,6 +33,7 @@ import com.doradodo.app.ui.ds.Ui;
 import com.doradodo.app.ui.vocab.VocabViewModel;
 
 import java.util.ArrayList;
+import java.time.ZoneId;
 import java.util.List;
 
 import dagger.hilt.android.AndroidEntryPoint;
@@ -399,6 +400,12 @@ public class EntertainmentFragment extends GameFragment {
         box.addView(top, Ui.matchWidth());
         Ui.add(box, Ui.text(c, card.contest.title, 15, 700, Ui.INK), 10);
         Ui.add(box, Ui.text(c, meta, 12, 400, Ui.MUTED), 6);
+        if (card.contest.startsAt > now) {
+            ZoneId zone = vm().timeZone().zone();
+            Ui.add(box, Ui.text(c, c.getString(R.string.ent_starts_on,
+                    ContestTimes.format(card.contest.startsAt, zone, ContestTimes.WEEKDAY_TIME),
+                    ContestTimes.zone(card.contest.startsAt, zone)), 12, 400, Ui.MUTED), 6);
+        }
         if (card.topPrizeGems > 0) {
             Ui.add(box, Ui.text(c, c.getString(R.string.ent_first_prize, card.topPrizeGems), 12, 400, Ui.MUTED), 6);
         }

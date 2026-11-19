@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel;
 import com.doradodo.app.data.repository.ContestRepository;
 import com.doradodo.app.data.repository.EntertainmentRepository;
 import com.doradodo.app.data.repository.GameWordRepository;
+import com.doradodo.app.data.repository.UserTimeZone;
 import com.doradodo.app.utils.AppExecutors;
 
 import java.util.concurrent.Callable;
@@ -21,11 +22,13 @@ public class EntertainmentViewModel extends ViewModel {
     private final EntertainmentRepository repository;
     private final ContestRepository contests;
     private final GameWordRepository words;
+    private final UserTimeZone timeZone;
     private final AppExecutors executors;
 
     @Inject
     public EntertainmentViewModel(EntertainmentRepository repository, ContestRepository contests,
-                                  GameWordRepository words, AppExecutors executors) {
+                                  GameWordRepository words, UserTimeZone timeZone, AppExecutors executors) {
+        this.timeZone = timeZone;
         this.repository = repository;
         this.contests = contests;
         this.words = words;
@@ -39,6 +42,11 @@ public class EntertainmentViewModel extends ViewModel {
 
     public ContestRepository contests() {
         return contests;
+    }
+
+    /** The zone contest times are shown in. */
+    public UserTimeZone timeZone() {
+        return timeZone;
     }
 
     public GameWordRepository words() {

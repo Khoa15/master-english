@@ -20,7 +20,7 @@ import com.doradodo.app.data.repository.ContestDetail;
 import com.doradodo.app.data.repository.ContestState;
 import com.doradodo.app.ui.ds.Ui;
 
-import java.text.SimpleDateFormat;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.Locale;
 
@@ -150,12 +150,16 @@ public class ContestFragment extends GameFragment {
         meta.addView(Ui.text(c, getString(R.string.ent_questions_duration, k.questionCount, k.durationMinutes), 13, 600, Ui.MUTED), Ui.wrap());
         Ui.add(hero, meta, 14);
 
-        SimpleDateFormat fmt = new SimpleDateFormat(android.text.format.DateFormat.getBestDateTimePattern(Locale.getDefault(), "dMMMHm"),
-                Locale.getDefault());
-        Ui.add(hero, Ui.text(c, getString(R.string.ent_registration_window, fmt.format(new Date(k.registrationOpensAt)),
-                fmt.format(new Date(k.registrationClosesAt))), 12, 400, Ui.MUTED), 10);
-        Ui.add(hero, Ui.text(c, getString(R.string.ent_contest_window, fmt.format(new Date(k.startsAt)),
-                fmt.format(new Date(k.endsAt))), 12, 400, Ui.MUTED), 4);
+        ZoneId zone = vm().timeZone().zone();
+        String zoneName = ContestTimes.zone(k.startsAt, zone);
+        Ui.add(hero, Ui.text(c, getString(R.string.ent_registration_window,
+                ContestTimes.format(k.registrationOpensAt, zone, ContestTimes.DATE_TIME),
+                ContestTimes.format(k.registrationClosesAt, zone, ContestTimes.DATE_TIME)) + " (" + zoneName + ")",
+                12, 400, Ui.MUTED), 10);
+        Ui.add(hero, Ui.text(c, getString(R.string.ent_contest_window,
+                ContestTimes.format(k.startsAt, zone, ContestTimes.DATE_TIME),
+                ContestTimes.format(k.endsAt, zone, ContestTimes.DATE_TIME)) + " (" + zoneName + ")",
+                12, 400, Ui.MUTED), 4);
         if (d.card.registered) {
             Ui.add(hero, Ui.text(c, getString(R.string.ent_you_registered), 13, 700, Ui.GREEN), 10);
         }
