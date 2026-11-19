@@ -17,7 +17,7 @@ import com.doradodo.app.R;
 import com.doradodo.app.data.local.entity.ContestEntity;
 import com.doradodo.app.data.local.entity.ContestPrizeEntity;
 import com.doradodo.app.data.repository.EntertainmentRepository.ContestDetail;
-import com.doradodo.app.data.repository.EntertainmentRepository.ContestState;
+import com.doradodo.app.data.repository.ContestState;
 import com.doradodo.app.ui.ds.Ui;
 
 import java.text.SimpleDateFormat;

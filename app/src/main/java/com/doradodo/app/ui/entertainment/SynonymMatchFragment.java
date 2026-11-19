@@ -2,7 +2,7 @@ package com.doradodo.app.ui.entertainment;
 
 import com.doradodo.app.R;
 import com.doradodo.app.data.repository.EntertainmentRepository;
-import com.doradodo.app.data.repository.EntertainmentRepository.SynonymPair;
+import com.doradodo.app.data.repository.SynonymPair;
 
 import java.util.ArrayList;
 import java.util.List;

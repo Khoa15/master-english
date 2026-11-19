@@ -40,8 +40,6 @@ import javax.inject.Singleton;
 public class EntertainmentRepository {
 
 
-    public enum ContestState { REGISTRATION_SOON, REGISTRATION, LIVE, ENDED }
-
     /** An activity with how many learners opened it. {@code learners} is 0 when nobody has. */
     public static final class ActivityCard {
         public final ActivityEntity activity;
@@ -99,17 +97,6 @@ public class EntertainmentRepository {
         }
     }
 
-    /** Two words of a synonym group to be matched against each other. */
-    public static final class SynonymPair {
-        public final String left;
-        public final String right;
-
-        SynonymPair(String left, String right) {
-            this.left = left;
-            this.right = right;
-        }
-    }
-
     /** A pack (or the learner's own studied words) that a practice mode can read from. */
     public static final class WordSource {
         public static final String LEARNED = "LEARNED";
@@ -158,39 +145,9 @@ public class EntertainmentRepository {
     //     return languages.displayLanguage();
     // }
 
-    /**
-     * Replaces the default (English) texts of rows by their translation in the display language, when there is one.
-     * The rows are plain objects loaded for this call, so they are changed in place.
-     */
     private void localize(List<ActivityEntity> activities, List<BannerEntity> banners, List<EventEntity> events,
                           List<ContestEntity> contests) {
-        String lang = display();
-        Map<String, String> t = new HashMap<>();
-        for (EntTextEntity row : dao.getTexts(lang)) {
-            t.put(row.ownerType + "|" + row.ownerId + "|" + row.field, row.text);
-        }
-        if (t.isEmpty()) {
-            return;
-        }
-        for (ActivityEntity a : activities) {
-            a.title = t.getOrDefault("ACTIVITY|" + a.id + "|title", a.title);
-            a.subtitle = t.getOrDefault("ACTIVITY|" + a.id + "|subtitle", a.subtitle);
-        }
-        for (BannerEntity b : banners) {
-            b.tag = t.getOrDefault("BANNER|" + b.id + "|tag", b.tag);
-            b.title = t.getOrDefault("BANNER|" + b.id + "|title", b.title);
-            b.subtitle = t.getOrDefault("BANNER|" + b.id + "|subtitle", b.subtitle);
-            b.buttonLabel = t.getOrDefault("BANNER|" + b.id + "|button_label", b.buttonLabel);
-        }
-        for (EventEntity e : events) {
-            e.tag = t.getOrDefault("EVENT|" + e.id + "|tag", e.tag);
-            e.title = t.getOrDefault("EVENT|" + e.id + "|title", e.title);
-            e.description = t.getOrDefault("EVENT|" + e.id + "|description", e.description);
-        }
-        for (ContestEntity c : contests) {
-            c.title = t.getOrDefault("CONTEST|" + c.id + "|title", c.title);
-            c.description = t.getOrDefault("CONTEST|" + c.id + "|description", c.description);
-        }
+        new EntTextLocalizer(dao.getTexts(display())).localize(activities, banners, events, contests);
     }
 
     @Nullable
@@ -297,22 +254,12 @@ public class EntertainmentRepository {
 
     // ----- Contests --------------------------------------------------------
 
-    public static ContestState stateOf(ContestEntity c, long now) {
-        if (now >= c.endsAt) {
-            return ContestState.ENDED;
-        }
-        if (now >= c.startsAt) {
-            return ContestState.LIVE;
-        }
-        return now < c.registrationOpensAt ? ContestState.REGISTRATION_SOON : ContestState.REGISTRATION;
-    }
-
     private ContestCard card(ContestEntity c, long now, int participants) {
         int top = 0;
         for (ContestPrizeEntity p : dao.getPrizes(c.id)) {
             top = Math.max(top, p.rewardGems);
         }
-        return new ContestCard(c, stateOf(c, now), dao.isRegistered(c.id, uid()) > 0, participants, top);
+        return new ContestCard(c, ContestRules.stateOf(c, now), dao.isRegistered(c.id, uid()) > 0, participants, top);
     }
 
     @Nullable
@@ -329,17 +276,12 @@ public class EntertainmentRepository {
                 dao.getPrizes(c.id));
     }
 
-    /** True when the registration window is open right now. */
-    public static boolean canRegister(ContestEntity c, long now) {
-        return now >= c.registrationOpensAt && now < c.registrationClosesAt && now < c.endsAt;
-    }
-
     /** Registers the learner; false when the window is closed or there is no learner. */
     public boolean register(String contestId) {
         String id = userId();
         ContestEntity c = dao.getContest(contestId);
         long now = System.currentTimeMillis();
-        if (id == null || c == null || !canRegister(c, now)) {
+        if (id == null || c == null || !ContestRules.canRegister(c, now)) {
             return false;
         }
         ContestRegistrationEntity r = new ContestRegistrationEntity();
@@ -356,7 +298,7 @@ public class EntertainmentRepository {
         if (packs.isEmpty()) {
             return new ArrayList<>();
         }
-        return shorten(dao.getPackWords(uid(), packs, display(), limit));
+        return MeaningShortener.shorten(dao.getPackWords(uid(), packs, display(), limit));
     }
 
     // ----- Words for the games ---------------------------------------------
@@ -367,17 +309,17 @@ public class EntertainmentRepository {
 
     /** Studied words that have a meaning (and, if asked, a definition), random order. */
     public List<GameWord> learnedWords(int limit, boolean needDefinition) {
-        return shorten(dao.getLearnedWords(uid(), learning(), display(), false, limit));
+        return MeaningShortener.shorten(dao.getLearnedWords(uid(), learning(), display(), false, limit));
     }
 
     public List<GameWord> mistakeWords(int limit) {
-        return shorten(dao.getMistakeWords(uid(), learning(), display(), limit));
+        return MeaningShortener.shorten(dao.getMistakeWords(uid(), learning(), display(), limit));
     }
 
     /** Words to use as wrong answers; never one of {@code exclude}. */
     public List<GameWord> distractors(Set<String> exclude, int limit) {
         List<GameWord> out = new ArrayList<>();
-        for (GameWord w : shorten(dao.getRandomWords(uid(), learning(), display(), limit + exclude.size() + 8))) {
+        for (GameWord w : MeaningShortener.shorten(dao.getRandomWords(uid(), learning(), display(), limit + exclude.size() + 8))) {
             if (!exclude.contains(w.id) && out.size() < limit) {
                 out.add(w);
             }
@@ -385,92 +327,9 @@ public class EntertainmentRepository {
         return out;
     }
 
-    /**
-     * Pairs of synonyms in the language the learner is learning: each pair is two members of one group. Synonymy never
-     * crosses languages, so both words are in that one language. Groups with a word the learner studied come
-     * first, and no text appears twice, so every answer is unambiguous.
-     */
+    /** Pairs of synonyms in the language being learned; synonymy never crosses languages. */
     public List<SynonymPair> synonymPairs(int limit) {
-        Map<Long, List<SynonymRow>> groups = new LinkedHashMap<>();
-        for (SynonymRow r : dao.getSynonymMembers(uid(), learning())) {
-            groups.computeIfAbsent(r.groupId, k -> new ArrayList<>()).add(r);
-        }
-        List<List<SynonymRow>> usable = new ArrayList<>();
-        for (List<SynonymRow> members : groups.values()) {
-            if (members.size() >= 2) {
-                usable.add(members);
-            }
-        }
-        Collections.shuffle(usable, random);
-        // Stable sort: groups the learner knows move to the front, the shuffle order is kept inside each half.
-        Collections.sort(usable, (a, b) -> Boolean.compare(knows(b), knows(a)));
-        List<SynonymPair> pairs = new ArrayList<>();
-        Set<String> used = new HashSet<>();
-        for (List<SynonymRow> members : usable) {
-            if (pairs.size() >= limit) {
-                break;
-            }
-            List<SynonymRow> shuffled = new ArrayList<>(members);
-            Collections.shuffle(shuffled, random);
-            // Prefer a studied word on the left.
-            Collections.sort(shuffled, (a, b) -> Boolean.compare(b.learned, a.learned));
-            SynonymRow left = null;
-            SynonymRow right = null;
-            for (SynonymRow m : shuffled) {
-                if (used.contains(m.text.toLowerCase())) {
-                    continue;
-                }
-                if (left == null) {
-                    left = m;
-                } else {
-                    right = m;
-                    break;
-                }
-            }
-            if (left != null && right != null) {
-                used.add(left.text.toLowerCase());
-                used.add(right.text.toLowerCase());
-                pairs.add(new SynonymPair(left.text, right.text));
-            }
-        }
-        return pairs;
-    }
-
-    private static boolean knows(List<SynonymRow> members) {
-        for (SynonymRow m : members) {
-            if (m.learned) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /** Longest meaning that fits a game tile. */
-    private static final int MAX_MEANING = 60;
-
-    /** Cuts each meaning to its first clause so a long English definition still fits a tile. */
-    private static List<GameWord> shorten(List<GameWord> words) {
-        for (GameWord w : words) {
-            if (w.meaning == null) {
-                continue;
-            }
-            String m = w.meaning.trim();
-            int cut = m.length();
-            for (char sep : new char[]{';', '.', '('}) {
-                int i = m.indexOf(sep);
-                if (i > 3 && i < cut) {
-                    cut = i;
-                }
-            }
-            m = m.substring(0, cut).trim();
-            if (m.length() > MAX_MEANING) {
-                String head = m.substring(0, MAX_MEANING);
-                int space = head.lastIndexOf(' ');
-                m = (space > 20 ? head.substring(0, space) : head).trim() + "…";
-            }
-            w.meaning = m;
-        }
-        return words;
+        return SynonymPairBuilder.build(dao.getSynonymMembers(uid(), learning()), limit, random);
     }
 
     // ----- Chanting and sleeping -------------------------------------------
@@ -495,8 +354,8 @@ public class EntertainmentRepository {
     /** Words of a source with their meaning; a pack keeps its list order, studied words come shuffled. */
     public List<GameWord> sourceWords(String sourceId, int limit) {
         if (WordSource.LEARNED.equals(sourceId)) {
-            return shorten(dao.getLearnedWords(uid(), learning(), display(), false, limit));
+            return MeaningShortener.shorten(dao.getLearnedWords(uid(), learning(), display(), false, limit));
         }
-        return shorten(dao.getPackWordsInOrder(uid(), sourceId, display(), limit));
+        return MeaningShortener.shorten(dao.getPackWordsInOrder(uid(), sourceId, display(), limit));
     }
 }

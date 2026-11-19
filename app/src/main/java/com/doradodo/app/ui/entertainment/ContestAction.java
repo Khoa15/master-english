@@ -3,9 +3,10 @@ package com.doradodo.app.ui.entertainment;
 import android.content.Context;
 
 import com.doradodo.app.R;
+import com.doradodo.app.data.repository.ContestRules;
 import com.doradodo.app.data.repository.EntertainmentRepository;
 import com.doradodo.app.data.repository.EntertainmentRepository.ContestCard;
-import com.doradodo.app.data.repository.EntertainmentRepository.ContestState;
+import com.doradodo.app.data.repository.ContestState;
 
 /** What the main button of a contest does for this learner right now. */
 final class ContestAction {
@@ -29,7 +30,7 @@ final class ContestAction {
                     ? new ContestAction(Kind.PLAY, c.getString(R.string.ent_c_enter))
                     : new ContestAction(Kind.NONE, c.getString(R.string.ent_c_registered));
         }
-        if (EntertainmentRepository.canRegister(card.contest, now)) {
+        if (ContestRules.canRegister(card.contest, now)) {
             return new ContestAction(Kind.REGISTER, c.getString(R.string.ent_c_register));
         }
         return new ContestAction(Kind.NONE, card.state == ContestState.REGISTRATION_SOON

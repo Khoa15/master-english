@@ -28,7 +28,7 @@ import com.doradodo.app.data.local.entity.EventEntity;
 import com.doradodo.app.data.repository.EntertainmentRepository;
 import com.doradodo.app.data.repository.EntertainmentRepository.ActivityCard;
 import com.doradodo.app.data.repository.EntertainmentRepository.ContestCard;
-import com.doradodo.app.data.repository.EntertainmentRepository.ContestState;
+import com.doradodo.app.data.repository.ContestState;
 import com.doradodo.app.data.repository.EntertainmentRepository.Home;
 import com.doradodo.app.ui.ds.Ui;
 import com.doradodo.app.ui.vocab.VocabViewModel;

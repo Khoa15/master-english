@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
 import com.doradodo.app.data.local.entity.GameWord;
+import com.doradodo.app.data.repository.ContestState;
 import com.doradodo.app.data.repository.EntertainmentRepository;
 import com.doradodo.app.data.repository.EntertainmentRepository.ContestDetail;
 import java.util.ArrayList;
@@ -101,7 +102,7 @@ public class ContestPlayFragment extends GameFragment {
         Prepared p = new Prepared();
         p.detail = vm().repo().loadContest(contestId);
         if (p.detail == null || !p.detail.card.registered
-                || p.detail.card.state != EntertainmentRepository.ContestState.LIVE) {
+                || p.detail.card.state != ContestState.LIVE) {
             p.words = new Word[0];
             return p;
         }
@@ -166,7 +167,7 @@ public class ContestPlayFragment extends GameFragment {
         page.subtitle.setText(p.detail.card.contest.title);
         if (p.words.length < 3) {
             boolean eligible = p.detail.card.registered
-                    && p.detail.card.state == EntertainmentRepository.ContestState.LIVE;
+                    && p.detail.card.state == ContestState.LIVE;
             body.addView(emptyState(c, eligible ? getString(R.string.ent_not_enough_words) : getString(R.string.ent_cant_enter_yet),
                     eligible ? getString(R.string.ent_pack_too_small) : getString(R.string.ent_need_register)), Ui.matchWidth());
             return;
