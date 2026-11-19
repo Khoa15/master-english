@@ -37,9 +37,19 @@ import com.doradodo.app.R;
 import com.doradodo.app.ui.ds.DsFragment;
 import com.doradodo.app.ui.ds.Ui;
 import com.doradodo.app.ui.vocab.PracticeViewModel.Stage;
+import com.doradodo.app.ui.vocab.stage.ChoiceStage;
+import com.doradodo.app.ui.vocab.stage.FillBlankStage;
+import com.doradodo.app.ui.vocab.stage.FlashcardStage;
+import com.doradodo.app.ui.vocab.stage.ListeningStage;
+import com.doradodo.app.ui.vocab.stage.ReadingStage;
+import com.doradodo.app.ui.vocab.stage.SpeakingStage;
+import com.doradodo.app.ui.vocab.stage.StageHost;
+import com.doradodo.app.ui.vocab.stage.StageRenderer;
 import com.doradodo.app.utils.TextUtils;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
+import java.util.Map;
 import java.util.List;
 import java.util.Locale;
 
@@ -47,9 +57,19 @@ import dagger.hilt.android.AndroidEntryPoint;
 
 /** A practice round: every word goes through Flashcard, Listening, Speaking, Reading, Fill in the blank and Single choice. */
 @AndroidEntryPoint
-public class PracticeFragment extends DsFragment {
+public class PracticeFragment extends DsFragment implements StageHost {
 
     private static final Stage[] STAGES = Stage.values();
+
+    private final Map<Stage, StageRenderer> renderers = new EnumMap<>(Stage.class);
+    {
+        renderers.put(Stage.FLASHCARD, new FlashcardStage(this));
+        renderers.put(Stage.LISTENING, new ListeningStage(this));
+        renderers.put(Stage.SPEAKING, new SpeakingStage(this));
+        renderers.put(Stage.READING, new ReadingStage(this));
+        renderers.put(Stage.FILL_BLANK, new FillBlankStage(this));
+        renderers.put(Stage.CHOICE, new ChoiceStage(this));
+    }
 
     private PracticeViewModel viewModel;
     private Ui.Screen screen;
@@ -71,7 +91,6 @@ public class PracticeFragment extends DsFragment {
     private TextView feedback;
     private EditText input;
     private LinearLayout optionBox;
-    private int chosen = -1;
 
     @Nullable
     @Override
@@ -198,17 +217,13 @@ public class PracticeFragment extends DsFragment {
             advance();
             return;
         }
-        switch (s) {
-            case FLASHCARD:
-                advance();
-                break;
-            case LISTENING:
-            case FILL_BLANK:
-                checkTyped(s, w);
-                break;
-            default:
-                // Speaking, reading and choice reveal themselves; Next without an answer counts as skipped.
-                skipStep();
+        if (s == Stage.FLASHCARD) {
+            advance();
+        } else if (s.typed()) {
+            checkTyped(s, w);
+        } else {
+            // Speaking, reading and choice reveal themselves; Next without an answer counts as skipped.
+            skipStep();
         }
     }
 
@@ -216,7 +231,8 @@ public class PracticeFragment extends DsFragment {
         return stage == STAGES.length - 1 && index == words.size() - 1;
     }
 
-    private void markAnswered(Stage s, VocabViewModel.Word w, boolean correct, String message) {
+    @Override
+    public void markAnswered(Stage s, VocabViewModel.Word w, boolean correct, String message) {
         answered = true;
         viewModel.record(s, w.id, correct);
         if (feedback != null) {
@@ -260,11 +276,13 @@ public class PracticeFragment extends DsFragment {
                 : getString(R.string.practice_heard, heard == null || heard.isEmpty() ? getString(R.string.practice_nothing) : heard.get(0)));
     }
 
-    private void speak(String text) {
+    @Override
+    public void speak(String text) {
         speak(text, false);
     }
 
-    private void speak(String text, boolean quiet) {
+    @Override
+    public void speak(String text, boolean quiet) {
         if (tts != null && ttsReady) {
             tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, "word");
         } else if (!quiet) {
@@ -296,7 +314,6 @@ public class PracticeFragment extends DsFragment {
         Stage s = STAGES[stage];
         VocabViewModel.Word w = words.get(index);
         answered = false;
-        chosen = -1;
         feedback = null;
         input = null;
         optionBox = null;
@@ -306,161 +323,24 @@ public class PracticeFragment extends DsFragment {
         wordLabel.setText(getString(R.string.practice_word_label, index + 1, words.size()));
         Ui.setProgress(progress, (stage * words.size() + index + 1) * 100 / (STAGES.length * words.size()));
         skip.setVisibility(s == Stage.FLASHCARD ? View.GONE : View.VISIBLE);
-        action.setText(s == Stage.LISTENING || s == Stage.FILL_BLANK ? getString(R.string.practice_check_continue)
+        action.setText(s.typed() ? getString(R.string.practice_check_continue)
                 : isLastStep() ? getString(R.string.practice_finish) : getString(R.string.practice_next));
         action.setOnClickListener(v -> onAction());
 
         LinearLayout body = screen.body;
         body.removeAllViews();
         body.setGravity(Gravity.TOP);
-        switch (s) {
-            case FLASHCARD: flashcard(c, body, w); break;
-            case LISTENING: listening(c, body, w); break;
-            case SPEAKING: speaking(c, body, w); break;
-            case READING: reading(c, body, w); break;
-            case FILL_BLANK: fillBlank(c, body, w); break;
-            default: choice(c, body, w);
-        }
+        renderers.get(s).render(c, body, w);
         screen.scroll.scrollTo(0, 0);
     }
 
-    private void heading(Context c, LinearLayout body, String title, String subtitle) {
-        body.addView(Ui.text(c, title, 20, 700, Ui.INK), Ui.matchWidth());
-        Ui.add(body, Ui.text(c, subtitle, 14, 400, Ui.MUTED), 6);
-    }
 
-    private TextView feedbackView(Context c, LinearLayout body) {
-        TextView f = Ui.text(c, "", 14, 600, Ui.GREEN_INK);
-        f.setPadding(Ui.dp(c, 14), Ui.dp(c, 12), Ui.dp(c, 14), Ui.dp(c, 12));
-        f.setVisibility(View.GONE);
-        Ui.add(body, f, 16);
-        feedback = f;
-        return f;
-    }
 
-    private void flashcard(Context c, LinearLayout body, VocabViewModel.Word w) {
-        LinearLayout card = Ui.column(c);
-        card.setGravity(Gravity.CENTER_HORIZONTAL);
-        card.setBackground(Ui.shape(c, Ui.CARD, 24, Ui.LINE, 1));
-        card.setPadding(Ui.dp(c, 24), Ui.dp(c, 32), Ui.dp(c, 24), Ui.dp(c, 32));
-        card.setMinimumHeight(Ui.dp(c, 420));
-        card.setClickable(true);
-        String pos = w.partOfSpeech == null ? c.getString(R.string.practice_word_default) : capitalize(w.partOfSpeech);
-        TextView badge = Ui.pill(c, pos, Ui.GREEN_TINT, Ui.GREEN_INK, 12);
-        card.addView(badge, Ui.wrap());
-        TextView term = Ui.text(c, w.term, 36, 700, Ui.INK);
-        term.setGravity(Gravity.CENTER);
-        Ui.add(card, term, 36);
-        if (w.phonetic != null) {
-            TextView ph = Ui.text(c, w.phonetic, 16, 400, Ui.MUTED);
-            ph.setGravity(Gravity.CENTER);
-            Ui.add(card, ph, 8);
-        }
-        ImageView sound = Ui.icon(c, R.drawable.ic_ds_volume, 22, Ui.GREEN);
-        sound.setPadding(Ui.dp(c, 11), Ui.dp(c, 11), Ui.dp(c, 11), Ui.dp(c, 11));
-        sound.setBackground(Ui.shape(c, Ui.GREEN_TINT, 999));
-        sound.setContentDescription(c.getString(R.string.practice_play_pron));
-        sound.setOnClickListener(v -> speak(w.term));
-        LinearLayout.LayoutParams sp = new LinearLayout.LayoutParams(Ui.dp(c, 44), Ui.dp(c, 44));
-        sp.topMargin = Ui.dp(c, 14);
-        card.addView(sound, sp);
 
-        LinearLayout back = Ui.column(c);
-        back.setGravity(Gravity.CENTER_HORIZONTAL);
-        back.setVisibility(View.GONE);
-        View rule = new View(c);
-        rule.setBackgroundColor(Ui.LINE);
-        back.addView(rule, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 1));
-        TextView meaning = Ui.text(c, w.meaning, 24, 700, Ui.GREEN_INK);
-        meaning.setGravity(Gravity.CENTER);
-        Ui.add(back, meaning, 20);
-        if (w.translation != null) {
-            TextView tr = Ui.text(c, w.translation, 18, 600, Ui.INK);
-            tr.setGravity(Gravity.CENTER);
-            Ui.add(back, tr, 8);
-        }
-        if (w.example != null) {
-            TextView ex = Ui.text(c, "“" + w.example + "”", 15, 400, Ui.MUTED);
-            ex.setGravity(Gravity.CENTER);
-            Ui.add(back, ex, 12);
-            if (w.exampleTranslation != null) {
-                TextView ext = Ui.text(c, w.exampleTranslation, 14, 400, Ui.MUTED);
-                ext.setGravity(Gravity.CENTER);
-                Ui.add(back, ext, 6);
-            }
-        }
-        Ui.add(card, back, 24);
-        TextView hint = Ui.text(c, c.getString(R.string.practice_tap_card), 13, 400, Ui.MUTED);
-        hint.setGravity(Gravity.CENTER);
-        card.setOnClickListener(v -> {
-            boolean show = back.getVisibility() != View.VISIBLE;
-            back.setVisibility(show ? View.VISIBLE : View.GONE);
-            hint.setVisibility(show ? View.GONE : View.VISIBLE);
-        });
-        body.addView(card, Ui.matchWidth());
-        Ui.add(body, hint, 14);
-        speak(w.term, true);
-    }
 
-    private void listening(Context c, LinearLayout body, VocabViewModel.Word w) {
-        heading(c, body, c.getString(R.string.practice_listen_type), c.getString(R.string.practice_tap_play));
-        ImageView icon = Ui.icon(c, R.drawable.ic_ds_play, 36, Color.WHITE);
-        FrameLayout circle = new FrameLayout(c);
-        circle.setBackground(Ui.shape(c, Ui.GREEN, 999));
-        circle.setElevation(Ui.dp(c, 4));
-        circle.setClickable(true);
-        circle.setContentDescription(c.getString(R.string.practice_play_audio));
-        FrameLayout.LayoutParams ip = new FrameLayout.LayoutParams(Ui.dp(c, 36), Ui.dp(c, 36), Gravity.CENTER);
-        circle.addView(icon, ip);
-        circle.setOnClickListener(v -> speak(w.term));
-        LinearLayout.LayoutParams cp = new LinearLayout.LayoutParams(Ui.dp(c, 96), Ui.dp(c, 96));
-        cp.gravity = Gravity.CENTER_HORIZONTAL;
-        cp.topMargin = Ui.dp(c, 32);
-        body.addView(circle, cp);
-        label(c, body, c.getString(R.string.practice_your_answer));
-        input = editor(c, c.getString(R.string.practice_type_word));
-        Ui.add(body, input, 8);
-        Ui.add(body, Ui.text(c, c.getString(R.string.practice_hint_letters, w.term.codePointCount(0, w.term.length()),
-                new String(Character.toChars(w.term.codePointAt(0)))), 12, 400, Ui.MUTED), 8);
-        feedbackView(c, body);
-        speak(w.term, true);
-    }
 
-    private void speaking(Context c, LinearLayout body, VocabViewModel.Word w) {
-        heading(c, body, c.getString(R.string.practice_say_aloud), c.getString(R.string.practice_listen_repeat));
-        TextView term = Ui.text(c, w.term, 36, 700, Ui.INK);
-        term.setGravity(Gravity.CENTER);
-        Ui.add(body, term, 32);
-        if (w.phonetic != null) {
-            TextView ph = Ui.text(c, w.phonetic, 16, 400, Ui.MUTED);
-            ph.setGravity(Gravity.CENTER);
-            Ui.add(body, ph, 6);
-        }
-        TextView listen = Ui.pill(c, c.getString(R.string.practice_listen), Ui.GREEN_TINT, Ui.GREEN_INK, 13);
-        listen.setOnClickListener(v -> speak(w.term));
-        LinearLayout.LayoutParams lp = Ui.wrap();
-        lp.gravity = Gravity.CENTER_HORIZONTAL;
-        lp.topMargin = Ui.dp(c, 14);
-        body.addView(listen, lp);
-        FrameLayout mic = new FrameLayout(c);
-        mic.setBackground(Ui.shape(c, Ui.GREEN, 999));
-        mic.setElevation(Ui.dp(c, 4));
-        mic.setClickable(true);
-        mic.setContentDescription(c.getString(R.string.practice_start_recording));
-        mic.addView(Ui.icon(c, R.drawable.ic_ds_mic, 36, Color.WHITE),
-                new FrameLayout.LayoutParams(Ui.dp(c, 36), Ui.dp(c, 36), Gravity.CENTER));
-        mic.setOnClickListener(v -> startListening());
-        LinearLayout.LayoutParams mp = new LinearLayout.LayoutParams(Ui.dp(c, 96), Ui.dp(c, 96));
-        mp.gravity = Gravity.CENTER_HORIZONTAL;
-        mp.topMargin = Ui.dp(c, 36);
-        body.addView(mic, mp);
-        TextView tap = Ui.text(c, c.getString(R.string.practice_tap_speak), 14, 600, Ui.MUTED);
-        tap.setGravity(Gravity.CENTER);
-        Ui.add(body, tap, 12);
-        feedbackView(c, body);
-    }
-
-    private void startListening() {
+    @Override
+    public void startListening() {
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
                 .putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
                 .putExtra(RecognizerIntent.EXTRA_LANGUAGE, "en-US")
@@ -472,122 +352,30 @@ public class PracticeFragment extends DsFragment {
         }
     }
 
-    private void reading(Context c, LinearLayout body, VocabViewModel.Word w) {
-        boolean hasExample = w.example != null;
-        heading(c, body, c.getString(R.string.practice_read_answer), hasExample ? c.getString(R.string.practice_read_short)
-                : c.getString(R.string.practice_read_meaning));
-        TextView passage = Ui.text(c, "", 17, 400, Ui.INK);
-        passage.setLineSpacing(Ui.dp(c, 6), 1f);
-        // The Oxford lists have no example sentences: the passage is then the definition and the answers are words.
-        String text = hasExample ? w.example : w.meaning;
-        SpannableString span = new SpannableString(text);
-        int at = hasExample ? text.toLowerCase().indexOf(w.term.toLowerCase()) : -1;
-        if (at >= 0) {
-            span.setSpan(new ForegroundColorSpan(Ui.GREEN), at, at + w.term.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            span.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), at, at + w.term.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        }
-        passage.setText(span);
-        passage.setBackground(Ui.shape(c, Ui.CARD, 18, Ui.LINE, 1));
-        passage.setPadding(Ui.dp(c, 18), Ui.dp(c, 18), Ui.dp(c, 18), Ui.dp(c, 18));
-        Ui.add(body, passage, 20);
-        Ui.add(body, Ui.text(c, hasExample ? c.getString(R.string.practice_what_does_mean_text, w.term)
-                : c.getString(R.string.practice_which_word), 16, 700, Ui.INK), 20);
-        optionBox = Ui.column(c);
-        Ui.add(body, optionBox, 12);
-        if (hasExample) {
-            options(c, viewModel.meanings(w, 2), w.meaning, w, Stage.READING);
-        } else {
-            options(c, viewModel.terms(w, 2), w.term, w, Stage.READING);
-        }
-        feedbackView(c, body);
+    // ----- StageHost ---------------------------------------------------------
+
+    @Override
+    public PracticeViewModel viewModel() {
+        return viewModel;
     }
 
-    private void fillBlank(Context c, LinearLayout body, VocabViewModel.Word w) {
-        heading(c, body, c.getString(R.string.practice_fill_blank), c.getString(R.string.practice_type_missing));
-        String[] parts = PracticeViewModel.splitExample(w);
-        TextView sentence = Ui.text(c, "", 18, 400, Ui.INK);
-        sentence.setLineSpacing(Ui.dp(c, 8), 1f);
-        if (parts != null) {
-            sentence.setText(parts[0] + "_______" + parts[2]);
-        } else {
-            sentence.setText("_______  =  " + w.meaning);
-        }
-        sentence.setBackground(Ui.shape(c, Ui.CARD, 18, Ui.LINE, 1));
-        sentence.setPadding(Ui.dp(c, 20), Ui.dp(c, 20), Ui.dp(c, 20), Ui.dp(c, 20));
-        Ui.add(body, sentence, 24);
-        label(c, body, c.getString(R.string.practice_your_answer));
-        input = editor(c, c.getString(R.string.practice_type_missing));
-        Ui.add(body, input, 8);
-        feedbackView(c, body);
+    @Override
+    public boolean isAnswered() {
+        return answered;
     }
 
-    private void choice(Context c, LinearLayout body, VocabViewModel.Word w) {
-        heading(c, body, c.getString(R.string.practice_what_does_mean, w.term), c.getString(R.string.practice_choose_one));
-        optionBox = Ui.column(c);
-        Ui.add(body, optionBox, 20);
-        options(c, viewModel.meanings(w, 4), w.meaning, w, Stage.CHOICE);
-        feedbackView(c, body);
+    @Override
+    public void bindInput(EditText field) {
+        input = field;
     }
 
-    /** Tappable answer rows; the answer is revealed as soon as one is picked. */
-    private void options(Context c, List<String> list, String correct, VocabViewModel.Word w, Stage s) {
-        for (int i = 0; i < list.size(); i++) {
-            final int pos = i;
-            LinearLayout row = Ui.row(c);
-            row.setBackground(Ui.shape(c, Ui.CARD, 14, Ui.LINE, 1.5f));
-            row.setPadding(Ui.dp(c, 16), Ui.dp(c, 14), Ui.dp(c, 16), Ui.dp(c, 14));
-            row.setMinimumHeight(Ui.dp(c, 56));
-            row.setClickable(true);
-            row.setTag(list.get(i));
-            row.addView(Ui.text(c, list.get(i), 16, 600, Ui.INK), Ui.weight(1f));
-            row.setOnClickListener(v -> {
-                if (answered) {
-                    return;
-                }
-                chosen = pos;
-                boolean ok = list.get(pos).equals(correct);
-                for (int k = 0; k < optionBox.getChildCount(); k++) {
-                    View r = optionBox.getChildAt(k);
-                    boolean isRight = correct.equals(r.getTag());
-                    boolean isPicked = k == pos;
-                    if (isRight) {
-                        r.setBackground(Ui.shape(c, Ui.GREEN_TINT, 14, Ui.GREEN, 1.5f));
-                    } else if (isPicked) {
-                        r.setBackground(Ui.shape(c, Ui.RED_TINT, 14, Ui.RED, 1.5f));
-                    }
-                }
-                markAnswered(s, w, ok, ok ? getString(R.string.practice_correct) : getString(R.string.practice_wrong, correct));
-            });
-            Ui.add(optionBox, row, i == 0 ? 0 : 10);
-        }
+    @Override
+    public void bindOptionBox(LinearLayout box) {
+        optionBox = box;
     }
 
-    private void label(Context c, LinearLayout body, String text) {
-        Ui.add(body, Ui.text(c, text, 13, 600, Ui.MUTED), 24);
-    }
-
-    private EditText editor(Context c, String hint) {
-        EditText e = new EditText(c);
-        e.setHint(hint);
-        e.setSingleLine(true);
-        e.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
-        e.setTextSize(16);
-        e.setTextColor(Ui.INK);
-        e.setHintTextColor(0xFF8B948E);
-        e.setPadding(Ui.dp(c, 16), 0, Ui.dp(c, 16), 0);
-        e.setBackground(Ui.shape(c, Ui.CARD, 14, Ui.LINE, 1.5f));
-        e.setMinHeight(Ui.dp(c, 52));
-        Ui.font(e, 400);
-        e.addTextChangedListener(new TextWatcher() {
-            @Override public void beforeTextChanged(CharSequence s, int a, int b, int d) { }
-            @Override public void onTextChanged(CharSequence s, int a, int b, int d) { e.setError(null); }
-            @Override public void afterTextChanged(Editable s) { }
-        });
-        e.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, Ui.dp(c, 52)));
-        return e;
-    }
-
-    private static String capitalize(String s) {
-        return s.isEmpty() ? s : Character.toUpperCase(s.charAt(0)) + s.substring(1);
+    @Override
+    public void bindFeedback(TextView view) {
+        feedback = view;
     }
 }

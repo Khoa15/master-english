@@ -52,6 +52,11 @@ public class PracticeViewModel extends ViewModel {
         public boolean graded() {
             return this != FLASHCARD;
         }
+
+        /** Whether the learner types the answer and checks it with the button. */
+        public boolean typed() {
+            return this == LISTENING || this == FILL_BLANK;
+        }
     }
 
     /** What the summary screen shows. */
