@@ -364,6 +364,11 @@
     <string name="onboard_time_10">10 मिनट</string>
     <string name="onboard_time_20">20 मिनट</string>
     <string name="onboard_time_30">30 मिनट</string>
+    <string name="prof_time_zone">समय क्षेत्र</string>
+    <string name="prof_tz_pick">समय क्षेत्र चुनें</string>
+    <string name="prof_tz_auto">स्वचालित (डिवाइस के अनुसार)</string>
+    <string name="prof_tz_auto_tag">स्वचालित</string>
+    <string name="ent_starts_on">शुरू %1$s (%2$s)</string>
     <string name="vocab_streak">स्ट्रीक: %1$d</string>
     <string name="vocab_review_caps">समीक्षा:</string>
     <string name="vocab_nothing_due">कुछ भी बाकी नहीं। नए शब्द सीखें</string>

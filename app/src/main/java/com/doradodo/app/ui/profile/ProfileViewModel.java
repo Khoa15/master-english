@@ -15,6 +15,7 @@ import com.doradodo.app.data.repository.AuthRepository;
 import com.doradodo.app.data.repository.LanguageRepository;
 import com.doradodo.app.utils.AppExecutors;
 import com.doradodo.app.data.repository.UserRepository;
+import com.doradodo.app.data.repository.UserTimeZone;
 
 import java.time.YearMonth;
 import java.util.List;
@@ -35,6 +36,7 @@ public class ProfileViewModel extends ViewModel {
     public static final String DAILY_GOAL = "daily_goal";
 
     private final AppPreferences preferences;
+    private final UserTimeZone timeZone;
     private final AuthRepository authRepository;
     private final LanguageRepository languages;
     private final AppExecutors executors;
@@ -47,7 +49,8 @@ public class ProfileViewModel extends ViewModel {
     @Inject
     public ProfileViewModel(@ApplicationContext Context context, AppPreferences preferences,
                             UserRepository userRepository, AuthRepository authRepository,
-                            LanguageRepository languages, AppExecutors executors) {
+                            LanguageRepository languages, AppExecutors executors, UserTimeZone timeZone) {
+        this.timeZone = timeZone;
         this.languages = languages;
         this.executors = executors;
         this.preferences = preferences;
@@ -126,6 +129,10 @@ public class ProfileViewModel extends ViewModel {
 
     public void setDailyGoal(int words) {
         info.edit().putInt(DAILY_GOAL, words).apply();
+    }
+
+    public UserTimeZone timeZone() {
+        return timeZone;
     }
 
     public AppPreferences preferences() {

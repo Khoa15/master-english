@@ -364,6 +364,11 @@
     <string name="onboard_time_10">10 phút</string>
     <string name="onboard_time_20">20 phút</string>
     <string name="onboard_time_30">30 phút</string>
+    <string name="prof_time_zone">Múi giờ</string>
+    <string name="prof_tz_pick">Chọn múi giờ</string>
+    <string name="prof_tz_auto">Tự động (theo thiết bị)</string>
+    <string name="prof_tz_auto_tag">Tự động</string>
+    <string name="ent_starts_on">Bắt đầu %1$s (%2$s)</string>
     <string name="vocab_streak">Chuỗi: %1$d ngày</string>
     <string name="vocab_review_caps">ÔN TẬP:</string>
     <string name="vocab_nothing_due">Chưa có gì cần ôn. Học từ mới</string>

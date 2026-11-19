@@ -364,6 +364,11 @@
     <string name="onboard_time_10">10 minutes</string>
     <string name="onboard_time_20">20 minutes</string>
     <string name="onboard_time_30">30 minutes</string>
+    <string name="prof_time_zone">Fuseau horaire</string>
+    <string name="prof_tz_pick">Choisir le fuseau horaire</string>
+    <string name="prof_tz_auto">Automatique (appareil)</string>
+    <string name="prof_tz_auto_tag">Auto</string>
+    <string name="ent_starts_on">Début %1$s (%2$s)</string>
     <string name="vocab_streak">Série : %1$d</string>
     <string name="vocab_review_caps">RÉVISION :</string>
     <string name="vocab_nothing_due">Rien à réviser. Apprenez de nouveaux mots</string>

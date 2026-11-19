@@ -364,6 +364,11 @@
     <string name="onboard_time_10">10 分钟</string>
     <string name="onboard_time_20">20 分钟</string>
     <string name="onboard_time_30">30 分钟</string>
+    <string name="prof_time_zone">时区</string>
+    <string name="prof_tz_pick">选择时区</string>
+    <string name="prof_tz_auto">自动（跟随设备）</string>
+    <string name="prof_tz_auto_tag">自动</string>
+    <string name="ent_starts_on">开始于 %1$s（%2$s）</string>
     <string name="vocab_streak">连续：%1$d</string>
     <string name="vocab_review_caps">复习：</string>
     <string name="vocab_nothing_due">暂无需要复习的内容，去学新单词吧</string>

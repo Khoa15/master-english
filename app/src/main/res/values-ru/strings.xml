@@ -364,6 +364,11 @@
     <string name="onboard_time_10">10 минут</string>
     <string name="onboard_time_20">20 минут</string>
     <string name="onboard_time_30">30 минут</string>
+    <string name="prof_time_zone">Часовой пояс</string>
+    <string name="prof_tz_pick">Выберите часовой пояс</string>
+    <string name="prof_tz_auto">Автоматически (устройство)</string>
+    <string name="prof_tz_auto_tag">Авто</string>
+    <string name="ent_starts_on">Начало %1$s (%2$s)</string>
     <string name="vocab_streak">Серия: %1$d</string>
     <string name="vocab_review_caps">ПОВТОРЕНИЕ:</string>
     <string name="vocab_nothing_due">Повторять нечего. Выучите новые слова</string>

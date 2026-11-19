@@ -364,6 +364,11 @@
     <string name="onboard_time_10">10 menit</string>
     <string name="onboard_time_20">20 menit</string>
     <string name="onboard_time_30">30 menit</string>
+    <string name="prof_time_zone">Zona waktu</string>
+    <string name="prof_tz_pick">Pilih zona waktu</string>
+    <string name="prof_tz_auto">Otomatis (perangkat)</string>
+    <string name="prof_tz_auto_tag">Otomatis</string>
+    <string name="ent_starts_on">Mulai %1$s (%2$s)</string>
     <string name="vocab_streak">Rangkaian: %1$d</string>
     <string name="vocab_review_caps">ULANGAN:</string>
     <string name="vocab_nothing_due">Tidak ada yang perlu diulang. Pelajari kata baru</string>

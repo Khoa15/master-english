@@ -1,5 +1,6 @@
 package com.doradodo.app.ui.profile;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -19,6 +20,9 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.doradodo.app.R;
+import com.doradodo.app.utils.ZoneOptions;
+import com.doradodo.app.utils.ZoneLabel;
+import com.doradodo.app.data.repository.UserTimeZone;
 import com.doradodo.app.data.local.entity.DailyStudyLogEntity;
 import com.doradodo.app.data.local.entity.UserEntity;
 import com.doradodo.app.i18n.AppLanguages;
@@ -30,6 +34,7 @@ import com.doradodo.app.utils.CefrLevel;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
+import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.TextStyle;
 import java.util.HashSet;
@@ -431,6 +436,35 @@ public class ProfileFragment extends TabFragment {
             bindPreferences();
         }, hour, minute, false).show());
         preferences.addView(reminder, Ui.matchWidth());
+        preferences.addView(timeZoneRow(c), Ui.matchWidth());
+    }
+
+    /** The time zone dates are shown in: "UTC+7 · Ho Chi Minh (Auto)"; tap to pick another or follow the device. */
+    private View timeZoneRow(Context c) {
+        UserTimeZone userZone = viewModel.timeZone();
+        Instant now = Instant.now();
+        ZoneId zone = userZone.zone();
+        String city = zone.getId().substring(zone.getId().lastIndexOf('/') + 1).replace('_', ' ');
+        String value = ZoneLabel.format(zone, now) + " · " + city
+                + (userZone.isAutomatic() ? " (" + c.getString(R.string.prof_tz_auto_tag) + ")" : "");
+        View row = infoRow(c, c.getString(R.string.prof_time_zone), value, true);
+        row.setOnClickListener(v -> {
+            List<String> ids = ZoneOptions.build(now);
+            String[] labels = new String[ids.size() + 1];
+            labels[0] = c.getString(R.string.prof_tz_auto);
+            for (int i = 0; i < ids.size(); i++) {
+                labels[i + 1] = ZoneLabel.format(ZoneId.of(ids.get(i)), now) + " · " + ids.get(i).replace('_', ' ');
+            }
+            new AlertDialog.Builder(c).setTitle(R.string.prof_tz_pick).setItems(labels, (dialog, which) -> {
+                if (which == 0) {
+                    userZone.useAutomatic();
+                } else {
+                    userZone.set(ids.get(which - 1));
+                }
+                bindPreferences();
+            }).show();
+        });
+        return row;
     }
 
     private static String formatTime(Context c, int hour, int minute) {
