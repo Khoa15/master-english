@@ -4,24 +4,14 @@ import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
-import android.speech.tts.TextToSpeech;
-import android.text.Editable;
-import android.text.InputType;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.TextWatcher;
-import android.text.style.ForegroundColorSpan;
-import android.text.style.StyleSpan;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -51,7 +41,6 @@ import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.List;
-import java.util.Locale;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -79,13 +68,11 @@ public class PracticeFragment extends DsFragment implements StageHost {
     private ImageView leading;
     private TextView action;
     private TextView skip;
-    private TextToSpeech tts;
-    private boolean ttsReady;
+    private SpeechHelper speech;
     private ActivityResultLauncher<Intent> speechLauncher;
 
     private List<VocabViewModel.Word> words = new ArrayList<>();
-    private int stage;
-    private int index;
+    private final PracticeCursor cursor = new PracticeCursor(STAGES.length);
     /** The current step has been answered (or revealed), so the button now continues. */
     private boolean answered;
     private TextView feedback;
@@ -141,12 +128,7 @@ public class PracticeFragment extends DsFragment implements StageHost {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         viewModel = new ViewModelProvider(requireActivity()).get(PracticeViewModel.class);
-        tts = new TextToSpeech(requireContext().getApplicationContext(), status -> {
-            if (status == TextToSpeech.SUCCESS && tts != null) {
-                tts.setLanguage(Locale.US);
-                ttsReady = true;
-            }
-        });
+        speech = new SpeechHelper(requireContext());
         viewModel.words().observe(getViewLifecycleOwner(), list -> {
             if (list == null) {
                 return;
@@ -163,46 +145,33 @@ public class PracticeFragment extends DsFragment implements StageHost {
 
     @Override
     public void onDestroyView() {
-        if (tts != null) {
-            tts.stop();
-            tts.shutdown();
-            tts = null;
+        if (speech != null) {
+            speech.release();
+            speech = null;
         }
-        ttsReady = false;
         super.onDestroyView();
     }
 
     // ----- Flow -------------------------------------------------------------
 
     private void stepBack() {
-        if (stage == 0 && index == 0) {
+        if (!cursor.stepBack(words.size())) {
             back();
             return;
-        }
-        if (index > 0) {
-            index--;
-        } else {
-            stage--;
-            index = words.size() - 1;
         }
         render();
     }
 
     private void skipStep() {
         if (!answered) {
-            viewModel.record(STAGES[stage], words.get(index).id, false);
+            viewModel.record(STAGES[cursor.stage()], words.get(cursor.index()).id, false);
         }
         advance();
     }
 
     private void advance() {
         hideKeyboard();
-        if (index + 1 < words.size()) {
-            index++;
-        } else if (stage + 1 < STAGES.length) {
-            stage++;
-            index = 0;
-        } else {
+        if (!cursor.advance(words.size())) {
             viewModel.finish();
             nav().navigate(R.id.action_practice_to_summary);
             return;
@@ -211,8 +180,8 @@ public class PracticeFragment extends DsFragment implements StageHost {
     }
 
     private void onAction() {
-        Stage s = STAGES[stage];
-        VocabViewModel.Word w = words.get(index);
+        Stage s = STAGES[cursor.stage()];
+        VocabViewModel.Word w = words.get(cursor.index());
         if (answered) {
             advance();
             return;
@@ -228,7 +197,7 @@ public class PracticeFragment extends DsFragment implements StageHost {
     }
 
     private boolean isLastStep() {
-        return stage == STAGES.length - 1 && index == words.size() - 1;
+        return cursor.isLast(words.size());
     }
 
     @Override
@@ -247,9 +216,9 @@ public class PracticeFragment extends DsFragment implements StageHost {
     }
 
     private void checkTyped(Stage s, VocabViewModel.Word w) {
-        String typed = TextUtils.normalizeAnswer(input.getText().toString());
-        boolean ok = typed.equals(TextUtils.normalizeAnswer(w.term));
-        if (typed.isEmpty()) {
+        String typed = input.getText().toString();
+        boolean ok = AnswerChecker.typedMatches(typed, w.term);
+        if (TextUtils.normalizeAnswer(typed).isEmpty()) {
             input.setError(getString(R.string.practice_type_first));
             return;
         }
@@ -259,19 +228,11 @@ public class PracticeFragment extends DsFragment implements StageHost {
     }
 
     private void onSpoken(@Nullable List<String> heard) {
-        if (STAGES[stage] != Stage.SPEAKING || answered) {
+        if (STAGES[cursor.stage()] != Stage.SPEAKING || answered) {
             return;
         }
-        VocabViewModel.Word w = words.get(index);
-        boolean ok = false;
-        if (heard != null) {
-            for (String h : heard) {
-                if (TextUtils.normalizeAnswer(h).contains(TextUtils.normalizeAnswer(w.term))) {
-                    ok = true;
-                    break;
-                }
-            }
-        }
+        VocabViewModel.Word w = words.get(cursor.index());
+        boolean ok = AnswerChecker.spokenMatches(heard, w.term);
         markAnswered(Stage.SPEAKING, w, ok, ok ? getString(R.string.practice_great_pron)
                 : getString(R.string.practice_heard, heard == null || heard.isEmpty() ? getString(R.string.practice_nothing) : heard.get(0)));
     }
@@ -283,9 +244,10 @@ public class PracticeFragment extends DsFragment implements StageHost {
 
     @Override
     public void speak(String text, boolean quiet) {
-        if (tts != null && ttsReady) {
-            tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, "word");
-        } else if (!quiet) {
+        if (speech != null && speech.speak(text)) {
+            return;
+        }
+        if (!quiet) {
             Snackbar.make(screen.root, getString(R.string.practice_tts_not_ready), Snackbar.LENGTH_SHORT).show();
         }
     }
@@ -311,17 +273,17 @@ public class PracticeFragment extends DsFragment implements StageHost {
             skip.setVisibility(View.GONE);
             return;
         }
-        Stage s = STAGES[stage];
-        VocabViewModel.Word w = words.get(index);
+        Stage s = STAGES[cursor.stage()];
+        VocabViewModel.Word w = words.get(cursor.index());
         answered = false;
         feedback = null;
         input = null;
         optionBox = null;
 
-        leading.setImageResource(stage == 0 && index == 0 ? R.drawable.ic_ds_close : R.drawable.ic_ds_back);
-        stageLabel.setText(getString(R.string.practice_stage_label, getString(s.label), stage + 1, STAGES.length));
-        wordLabel.setText(getString(R.string.practice_word_label, index + 1, words.size()));
-        Ui.setProgress(progress, (stage * words.size() + index + 1) * 100 / (STAGES.length * words.size()));
+        leading.setImageResource(cursor.atStart() ? R.drawable.ic_ds_close : R.drawable.ic_ds_back);
+        stageLabel.setText(getString(R.string.practice_stage_label, getString(s.label), cursor.stage() + 1, STAGES.length));
+        wordLabel.setText(getString(R.string.practice_word_label, cursor.index() + 1, words.size()));
+        Ui.setProgress(progress, cursor.progressPercent(words.size()));
         skip.setVisibility(s == Stage.FLASHCARD ? View.GONE : View.VISIBLE);
         action.setText(s.typed() ? getString(R.string.practice_check_continue)
                 : isLastStep() ? getString(R.string.practice_finish) : getString(R.string.practice_next));
