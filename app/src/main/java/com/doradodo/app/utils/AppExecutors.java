@@ -13,11 +13,18 @@ import javax.inject.Singleton;
 @Singleton
 public class AppExecutors {
 
-    private final Executor diskIO = Executors.newFixedThreadPool(3);
-    private final Executor mainThread = new MainThreadExecutor();
+    private final Executor diskIO;
+    private final Executor mainThread;
 
     @Inject
     public AppExecutors() {
+        this(Executors.newFixedThreadPool(3), new MainThreadExecutor());
+    }
+
+    /** Runs work on the given executors; tests pass direct ones so results arrive without threads. */
+    public AppExecutors(Executor diskIO, Executor mainThread) {
+        this.diskIO = diskIO;
+        this.mainThread = mainThread;
     }
 
     public Executor diskIO() {
