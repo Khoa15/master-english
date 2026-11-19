@@ -177,51 +177,27 @@
   },
   {
    "type": "CONTEST",
-   "id": "contest_a1_king",
+   "id": "weekly_vocab_cup",
    "field": "title",
-   "text": "Король лексики A1"
+   "text": "Еженедельный кубок слов"
   },
   {
    "type": "CONTEST",
-   "id": "contest_a1_king",
+   "id": "weekly_vocab_cup",
    "field": "description",
-   "text": "Отвечайте быстро и точно, чтобы подняться в рейтинге. Результат зависит от очков и времени прохождения."
+   "text": "Соревнование каждую неделю. Отвечайте быстро и точно; рейтинг по очкам и времени."
   },
   {
-   "type": "CONTEST",
-   "id": "contest_weekend_speed",
+   "type": "ACTIVITY",
+   "id": "practice_context",
    "field": "title",
-   "text": "Скоростная гонка выходного дня"
+   "text": "Контекст"
   },
   {
-   "type": "CONTEST",
-   "id": "contest_weekend_speed",
-   "field": "description",
-   "text": "Соревнуйтесь на лексике A1 и A2. Самый быстрый и точный ученик возглавит таблицу."
-  },
-  {
-   "type": "CONTEST",
-   "id": "contest_a2_challenge",
-   "field": "title",
-   "text": "Испытание A2"
-  },
-  {
-   "type": "CONTEST",
-   "id": "contest_a2_challenge",
-   "field": "description",
-   "text": "Ответьте на 30 вопросов по лексике A2 за 12 минут."
-  },
-  {
-    "type": "ACTIVITY",
-    "id": "practice_context",
-    "field": "title",
-    "text": "Контекст"
-  },
-  {
-    "type": "ACTIVITY",
-    "id": "practice_context",
-    "field": "subtitle",
-    "text": "Выберите слово, подходящее к ситуации"
+   "type": "ACTIVITY",
+   "id": "practice_context",
+   "field": "subtitle",
+   "text": "Выберите слово, подходящее к ситуации"
   }
-]
+ ]
 }

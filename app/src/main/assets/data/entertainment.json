@@ -156,21 +156,25 @@
    "ends_offset_hours": 72
   }
  ],
- "contests": [
+ "contest_templates": [
   {
-   "id": "contest_a1_king",
-   "title": "A1 Vocabulary King",
-   "description": "Answer fast and accurately to climb the ranking. Results are scored by points and completion time.",
+   "id": "weekly_vocab_cup",
+   "title": "Weekly Vocabulary Cup",
+   "description": "Compete every week. Answer fast and accurately; results are ranked by points and completion time.",
    "image": "ic_ent_trophy",
    "accent": "AMBER",
-   "registration_opens_h": -72,
-   "registration_closes_h": 24,
-   "starts_h": -30,
-   "ends_h": 54,
+   "schedule": {
+    "registration_opens": "MON 00:00",
+    "registration_closes": "SAT 12:50",
+    "starts": "SAT 13:00",
+    "ends": "SUN 13:00"
+   },
    "question_count": 25,
    "duration_minutes": 10,
    "packs": [
-    "A1"
+    "A1",
+    "A2",
+    "B1"
    ],
    "prizes": [
     [
@@ -197,79 +201,6 @@
      20,
      null,
      10
-    ]
-   ]
-  },
-  {
-   "id": "contest_weekend_speed",
-   "title": "Weekend Speed Race",
-   "description": "Race through A1 and A2 vocabulary. The fastest accurate learner tops the board.",
-   "image": "ic_ent_bolt",
-   "accent": "BLUE",
-   "registration_opens_h": 24,
-   "registration_closes_h": 96,
-   "starts_h": 120,
-   "ends_h": 144,
-   "question_count": 40,
-   "duration_minutes": 8,
-   "packs": [
-    "A1",
-    "A2"
-   ],
-   "prizes": [
-    [
-     1,
-     1,
-     300
-    ],
-    [
-     2,
-     2,
-     200
-    ],
-    [
-     3,
-     3,
-     100
-    ],
-    [
-     4,
-     10,
-     30
-    ]
-   ]
-  },
-  {
-   "id": "contest_a2_challenge",
-   "title": "A2 Challenge",
-   "description": "Get through 30 A2 vocabulary questions in 12 minutes.",
-   "image": "ic_ent_cards",
-   "accent": "PURPLE",
-   "registration_opens_h": -12,
-   "registration_closes_h": 48,
-   "starts_h": 48,
-   "ends_h": 120,
-   "question_count": 30,
-   "duration_minutes": 12,
-   "packs": [
-    "A2",
-    "COMMON"
-   ],
-   "prizes": [
-    [
-     1,
-     1,
-     400
-    ],
-    [
-     2,
-     3,
-     150
-    ],
-    [
-     4,
-     10,
-     40
     ]
    ]
   }

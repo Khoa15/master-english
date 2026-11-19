@@ -177,51 +177,27 @@
   },
   {
    "type": "CONTEST",
-   "id": "contest_a1_king",
+   "id": "weekly_vocab_cup",
    "field": "title",
-   "text": "Rei do vocabulário A1"
+   "text": "Copa semanal de vocabulário"
   },
   {
    "type": "CONTEST",
-   "id": "contest_a1_king",
+   "id": "weekly_vocab_cup",
    "field": "description",
-   "text": "Responda rápido e com precisão para subir no ranking. O resultado considera pontos e tempo de conclusão."
+   "text": "Competição toda semana. Responda rápido e com precisão; o ranking usa pontos e tempo."
   },
   {
-   "type": "CONTEST",
-   "id": "contest_weekend_speed",
+   "type": "ACTIVITY",
+   "id": "practice_context",
    "field": "title",
-   "text": "Corrida de velocidade de fim de semana"
+   "text": "Contexto"
   },
   {
-   "type": "CONTEST",
-   "id": "contest_weekend_speed",
-   "field": "description",
-   "text": "Dispute com o vocabulário A1 e A2. O aluno mais rápido e preciso lidera o ranking."
-  },
-  {
-   "type": "CONTEST",
-   "id": "contest_a2_challenge",
-   "field": "title",
-   "text": "Desafio A2"
-  },
-  {
-   "type": "CONTEST",
-   "id": "contest_a2_challenge",
-   "field": "description",
-   "text": "Responda a 30 perguntas de vocabulário A2 em 12 minutos."
-  },
-  {
-    "type": "ACTIVITY",
-    "id": "practice_context",
-    "field": "title",
-    "text": "Contexto"
-  },
-  {
-    "type": "ACTIVITY",
-    "id": "practice_context",
-    "field": "subtitle",
-    "text": "Escolha a palavra que combina com a situação"
+   "type": "ACTIVITY",
+   "id": "practice_context",
+   "field": "subtitle",
+   "text": "Escolha a palavra que combina com a situação"
   }
-]
+ ]
 }

@@ -46,8 +46,10 @@ public final class EntTextLocalizer {
             e.description = text("EVENT", e.id, "description", e.description);
         }
         for (ContestEntity c : contests) {
-            c.title = text("CONTEST", c.id, "title", c.title);
-            c.description = text("CONTEST", c.id, "description", c.description);
+            // A weekly contest is "<template id>@<week>": every week shares the template's translation.
+            String template = c.id.contains("@") ? c.id.substring(0, c.id.indexOf('@')) : c.id;
+            c.title = text("CONTEST", template, "title", c.title);
+            c.description = text("CONTEST", template, "description", c.description);
         }
     }
 

@@ -78,4 +78,14 @@ public class EntTextLocalizerTest {
         l.localize(list, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         assertEquals("Title a", list.get(0).title);
     }
+
+    @Test
+    public void aWeeklyContestUsesTheTranslationOfItsTemplate() {
+        EntTextLocalizer l = new EntTextLocalizer(Arrays.asList(text("CONTEST", "weekly_cup", "title", "Cúp tuần")));
+        ContestEntity c = new ContestEntity();
+        c.id = "weekly_cup@2026-W47";
+        c.title = "Weekly Cup";
+        l.localize(new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), Collections.singletonList(c));
+        assertEquals("Cúp tuần", c.title);
+    }
 }

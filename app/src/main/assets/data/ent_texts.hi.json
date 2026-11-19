@@ -177,51 +177,27 @@
   },
   {
    "type": "CONTEST",
-   "id": "contest_a1_king",
+   "id": "weekly_vocab_cup",
    "field": "title",
-   "text": "A1 शब्दावली किंग"
+   "text": "साप्ताहिक शब्दावली कप"
   },
   {
    "type": "CONTEST",
-   "id": "contest_a1_king",
+   "id": "weekly_vocab_cup",
    "field": "description",
-   "text": "तेज़ी और सटीकता से जवाब दें और रैंकिंग में ऊपर चढ़ें। नतीजे अंक और पूरा करने के समय से तय होते हैं।"
+   "text": "हर हफ़्ते प्रतियोगिता। तेज़ और सही जवाब दें; परिणाम अंकों और पूरा करने के समय के आधार पर रैंक होते हैं।"
   },
   {
-   "type": "CONTEST",
-   "id": "contest_weekend_speed",
+   "type": "ACTIVITY",
+   "id": "practice_context",
    "field": "title",
-   "text": "वीकेंड स्पीड रेस"
+   "text": "संदर्भ"
   },
   {
-   "type": "CONTEST",
-   "id": "contest_weekend_speed",
-   "field": "description",
-   "text": "A1 और A2 शब्दावली में दौड़ लगाएँ। सबसे तेज़ और सटीक शिक्षार्थी शीर्ष पर रहेगा।"
-  },
-  {
-   "type": "CONTEST",
-   "id": "contest_a2_challenge",
-   "field": "title",
-   "text": "A2 चैलेंज"
-  },
-  {
-   "type": "CONTEST",
-   "id": "contest_a2_challenge",
-   "field": "description",
-   "text": "12 मिनट में A2 शब्दावली के 30 प्रश्न पूरे करें।"
-  },
-  {
-    "type": "ACTIVITY",
-    "id": "practice_context",
-    "field": "title",
-    "text": "संदर्भ"
-  },
-  {
-    "type": "ACTIVITY",
-    "id": "practice_context",
-    "field": "subtitle",
-    "text": "स्थिति के अनुकूल शब्द चुनें"
+   "type": "ACTIVITY",
+   "id": "practice_context",
+   "field": "subtitle",
+   "text": "स्थिति के अनुकूल शब्द चुनें"
   }
-]
+ ]
 }

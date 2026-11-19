@@ -177,51 +177,27 @@
   },
   {
    "type": "CONTEST",
-   "id": "contest_a1_king",
+   "id": "weekly_vocab_cup",
    "field": "title",
-   "text": "Giải Vua Từ Vựng A1"
+   "text": "Cúp Từ Vựng hằng tuần"
   },
   {
    "type": "CONTEST",
-   "id": "contest_a1_king",
+   "id": "weekly_vocab_cup",
    "field": "description",
-   "text": "Trả lời nhanh và đúng để leo hạng. Kết quả tính theo điểm và thời gian hoàn thành."
+   "text": "Thi đấu mỗi tuần. Trả lời nhanh và chính xác; kết quả xếp hạng theo điểm và thời gian hoàn thành."
   },
   {
-   "type": "CONTEST",
-   "id": "contest_weekend_speed",
+   "type": "ACTIVITY",
+   "id": "practice_context",
    "field": "title",
-   "text": "Đấu tốc độ cuối tuần"
+   "text": "Ngữ cảnh"
   },
   {
-   "type": "CONTEST",
-   "id": "contest_weekend_speed",
-   "field": "description",
-   "text": "Đua tốc độ với từ vựng A1 và A2. Ai nhanh và chính xác nhất sẽ lên đầu bảng."
-  },
-  {
-   "type": "CONTEST",
-   "id": "contest_a2_challenge",
-   "field": "title",
-   "text": "Thử thách A2"
-  },
-  {
-   "type": "CONTEST",
-   "id": "contest_a2_challenge",
-   "field": "description",
-   "text": "Vượt qua 30 câu từ vựng trình độ A2 trong vòng 12 phút."
-  },
-  {
-    "type": "ACTIVITY",
-    "id": "practice_context",
-    "field": "title",
-    "text": "Ngữ cảnh"
-  },
-  {
-    "type": "ACTIVITY",
-    "id": "practice_context",
-    "field": "subtitle",
-    "text": "Chọn từ phù hợp với tình huống"
+   "type": "ACTIVITY",
+   "id": "practice_context",
+   "field": "subtitle",
+   "text": "Chọn từ phù hợp với tình huống"
   }
-]
+ ]
 }

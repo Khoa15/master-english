@@ -10,9 +10,6 @@ import com.doradodo.app.data.local.AppDatabase;
 import com.doradodo.app.data.local.dao.EntertainmentDao;
 import com.doradodo.app.data.local.entity.ActivityEntity;
 import com.doradodo.app.data.local.entity.BannerEntity;
-import com.doradodo.app.data.local.entity.ContestEntity;
-import com.doradodo.app.data.local.entity.ContestPackEntity;
-import com.doradodo.app.data.local.entity.ContestPrizeEntity;
 import com.doradodo.app.data.local.entity.EntTextEntity;
 import com.doradodo.app.data.local.entity.EventEntity;
 import com.doradodo.app.data.local.entity.SynonymGroupEntity;
@@ -23,9 +20,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -34,15 +29,16 @@ import dagger.hilt.android.qualifiers.ApplicationContext;
 
 /**
  * Fills the Entertainment tables from assets/data/entertainment.json: the activity catalogue, carousel, events,
- * contests and, from assets/data/synonyms.<lang>.json (one file per language), the synonym groups. Rows are upserted and the ones missing from the file removed, so a content
- * update keeps learners' contest registrations. Times in the file are offsets in hours from the moment of seeding.
- * Must run after {@link LocalDataSeeder}: contests point at word packs and synonyms link to words.
+ * and, from assets/data/synonyms.<lang>.json (one file per language), the synonym groups. Rows are upserted and the ones missing from the file removed, so a content
+ * update keeps learners' data. Times in the file are offsets in hours from the moment of seeding. Contests are not
+ * seeded: they come from the weekly templates in the same file, see ContestRepository.
+ * Must run after {@link LocalDataSeeder}: synonyms link to words.
  */
 @Singleton
 public class EntertainmentSeeder {
 
     /** Raise this when assets/data/entertainment.json or a synonyms.<lang>.json changes. */
-    public static final int CONTENT_VERSION = 8;
+    public static final int CONTENT_VERSION = 9;
 
     private static final String TAG = "EntertainmentSeeder";
     private static final String PREFS = "entertainment_seed";
@@ -197,52 +193,6 @@ public class EntertainmentSeeder {
         dao.deleteEventsExcept(ids);
         dao.upsertEvents(events);
 
-        Set<String> packIds = new HashSet<>(database.wordDao().getPackIds());
-        ids = new ArrayList<>();
-        List<ContestEntity> contests = new ArrayList<>();
-        List<ContestPackEntity> packs = new ArrayList<>();
-        List<ContestPrizeEntity> prizes = new ArrayList<>();
-        for (ContestJson c : file.contests) {
-            ContestEntity e = new ContestEntity();
-            e.id = c.id;
-            e.title = c.title;
-            e.description = c.description;
-            e.image = c.image;
-            e.accent = c.accent;
-            e.registrationOpensAt = now + c.registrationOpensHours * HOUR_MS;
-            e.registrationClosesAt = now + c.registrationClosesHours * HOUR_MS;
-            e.startsAt = now + c.startsHours * HOUR_MS;
-            e.endsAt = now + c.endsHours * HOUR_MS;
-            e.questionCount = c.questionCount;
-            e.durationMinutes = c.durationMinutes;
-            contests.add(e);
-            ids.add(e.id);
-            int position = 0;
-            for (String packId : c.packs) {
-                if (packIds.contains(packId)) {
-                    ContestPackEntity p = new ContestPackEntity();
-                    p.contestId = c.id;
-                    p.packId = packId;
-                    p.position = position++;
-                    packs.add(p);
-                }
-            }
-            for (int[] pr : toRows(c.prizes)) {
-                ContestPrizeEntity p = new ContestPrizeEntity();
-                p.contestId = c.id;
-                p.rankFrom = pr[0];
-                p.rankTo = pr[1] == 0 ? null : pr[1];
-                p.rewardGems = pr[2];
-                prizes.add(p);
-            }
-        }
-        dao.deleteContestsExcept(ids);
-        dao.upsertContests(contests);
-        dao.deleteContestPacks();
-        dao.deleteContestPrizes();
-        dao.insertContestPacks(packs);
-        dao.insertContestPrizes(prizes);
-
         // Texts per language: the columns above hold the English default, these override it per display language.
         List<EntTextEntity> texts = new ArrayList<>();
         for (TextJson t : file.texts) {
@@ -276,22 +226,12 @@ public class EntertainmentSeeder {
         }
     }
 
-    /** Prize rows as {from, to (0 = open ended), gems}. */
-    private static List<int[]> toRows(List<List<Integer>> prizes) {
-        List<int[]> rows = new ArrayList<>();
-        for (List<Integer> p : prizes) {
-            rows.add(new int[]{p.get(0), p.get(1) == null ? 0 : p.get(1), p.get(2)});
-        }
-        return rows;
-    }
-
     // ----- File shape --------------------------------------------------------
 
     static final class File {
         List<ActivityJson> activities = new ArrayList<>();
         List<BannerJson> banners = new ArrayList<>();
         List<EventJson> events = new ArrayList<>();
-        List<ContestJson> contests = new ArrayList<>();
         List<SynonymJson> synonyms = new ArrayList<>();
         List<TextJson> texts = new ArrayList<>();
     }
@@ -346,19 +286,4 @@ public class EntertainmentSeeder {
         @SerializedName("ends_offset_hours") long endsOffsetHours;
     }
 
-    static final class ContestJson {
-        String id;
-        String title;
-        String description;
-        String image;
-        String accent;
-        @SerializedName("registration_opens_h") long registrationOpensHours;
-        @SerializedName("registration_closes_h") long registrationClosesHours;
-        @SerializedName("starts_h") long startsHours;
-        @SerializedName("ends_h") long endsHours;
-        @SerializedName("question_count") int questionCount;
-        @SerializedName("duration_minutes") int durationMinutes;
-        List<String> packs = new ArrayList<>();
-        List<List<Integer>> prizes = new ArrayList<>();
-    }
 }

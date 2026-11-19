@@ -177,51 +177,27 @@
   },
   {
    "type": "CONTEST",
-   "id": "contest_a1_king",
+   "id": "weekly_vocab_cup",
    "field": "title",
-   "text": "Raja Kosakata A1"
+   "text": "Piala Kosakata Mingguan"
   },
   {
    "type": "CONTEST",
-   "id": "contest_a1_king",
+   "id": "weekly_vocab_cup",
    "field": "description",
-   "text": "Jawab cepat dan tepat untuk naik peringkat. Hasil dihitung dari poin dan waktu penyelesaian."
+   "text": "Kompetisi setiap minggu. Jawab cepat dan tepat; peringkat berdasarkan poin dan waktu."
   },
   {
-   "type": "CONTEST",
-   "id": "contest_weekend_speed",
+   "type": "ACTIVITY",
+   "id": "practice_context",
    "field": "title",
-   "text": "Balapan kecepatan akhir pekan"
+   "text": "Konteks"
   },
   {
-   "type": "CONTEST",
-   "id": "contest_weekend_speed",
-   "field": "description",
-   "text": "Adu cepat dengan kosakata A1 dan A2. Pelajar tercepat dan paling akurat memimpin papan peringkat."
-  },
-  {
-   "type": "CONTEST",
-   "id": "contest_a2_challenge",
-   "field": "title",
-   "text": "Tantangan A2"
-  },
-  {
-   "type": "CONTEST",
-   "id": "contest_a2_challenge",
-   "field": "description",
-   "text": "Selesaikan 30 soal kosakata A2 dalam 12 menit."
-  },
-  {
-    "type": "ACTIVITY",
-    "id": "practice_context",
-    "field": "title",
-    "text": "Konteks"
-  },
-  {
-    "type": "ACTIVITY",
-    "id": "practice_context",
-    "field": "subtitle",
-    "text": "Pilih kata yang sesuai dengan situasi"
+   "type": "ACTIVITY",
+   "id": "practice_context",
+   "field": "subtitle",
+   "text": "Pilih kata yang sesuai dengan situasi"
   }
-]
+ ]
 }
