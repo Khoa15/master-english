@@ -210,6 +210,18 @@
    "id": "contest_a2_challenge",
    "field": "description",
    "text": "Ответьте на 30 вопросов по лексике A2 за 12 минут."
+  },
+  {
+    "type": "ACTIVITY",
+    "id": "practice_context",
+    "field": "title",
+    "text": "Контекст"
+  },
+  {
+    "type": "ACTIVITY",
+    "id": "practice_context",
+    "field": "subtitle",
+    "text": "Выберите слово, подходящее к ситуации"
   }
- ]
+]
 }

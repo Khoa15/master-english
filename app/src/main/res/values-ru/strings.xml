@@ -260,6 +260,10 @@
     <string name="ent_per_word">(раз на слово)</string>
     <string name="ent_decrease_freq">Уменьшить частоту</string>
     <string name="ent_increase_freq">Увеличить частоту</string>
+    <string name="fb_sent">Спасибо! Ваш отзыв отправлен.</string>
+    <string name="fb_failed">Не удалось отправить. Проверьте подключение и повторите.</string>
+    <string name="fb_sign_in">Войдите в аккаунт, чтобы отправить отзыв.</string>
+    <string name="fb_rate_limited">Вы недавно отправили много отзывов. Повторите попытку позже.</string>
     <string name="ent_learned_words">Выученные слова</string>
     <string name="auth_not_configured">Firebase не настроен. Используйте гостевой режим или добавьте google-services.json.</string>
     <string name="auth_failed">Не удалось войти</string>
@@ -338,10 +342,7 @@
     <string name="fb_optional">По желанию: опишите шаги для воспроизведения ошибки.</string>
     <string name="fb_send">Отправить отзыв</string>
     <string name="fb_write_first">Сначала напишите пару слов</string>
-    <string name="fb_sent">Спасибо! Ваш отзыв отправлен.</string>
-    <string name="fb_failed">Не удалось отправить. Проверьте подключение и повторите.</string>
-    <string name="fb_sign_in">Войдите в аккаунт, чтобы отправить отзыв.</string>
-    <string name="fb_rate_limited">Вы недавно отправили много отзывов. Повторите попытку позже.</string>
+    <string name="fb_no_app">Нет приложения для отправки отзыва</string>
     <string name="an_title">Статистика</string>
     <string name="an_week">Неделя</string>
     <string name="an_month">Месяц</string>

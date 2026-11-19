@@ -260,6 +260,10 @@
     <string name="ent_per_word">(lần mỗi từ)</string>
     <string name="ent_decrease_freq">Giảm tần suất</string>
     <string name="ent_increase_freq">Tăng tần suất</string>
+    <string name="fb_sent">Cảm ơn bạn! Góp ý đã được gửi.</string>
+    <string name="fb_failed">Không gửi được góp ý. Hãy kiểm tra kết nối và thử lại.</string>
+    <string name="fb_sign_in">Hãy đăng nhập tài khoản để gửi góp ý.</string>
+    <string name="fb_rate_limited">Bạn đã gửi khá nhiều góp ý gần đây. Vui lòng thử lại sau.</string>
     <string name="ent_learned_words">Từ đã học</string>
     <string name="auth_not_configured">Firebase chưa được cấu hình. Dùng chế độ học thử hoặc thêm google-services.json.</string>
     <string name="auth_failed">Đăng nhập thất bại</string>
@@ -338,10 +342,7 @@
     <string name="fb_optional">Tùy chọn: nêu các bước tái hiện nếu bạn gặp lỗi.</string>
     <string name="fb_send">Gửi góp ý</string>
     <string name="fb_write_first">Hãy viết vài từ trước</string>
-    <string name="fb_sent">Cảm ơn bạn! Góp ý đã được gửi.</string>
-    <string name="fb_failed">Không gửi được góp ý. Hãy kiểm tra kết nối và thử lại.</string>
-    <string name="fb_sign_in">Hãy đăng nhập tài khoản để gửi góp ý.</string>
-    <string name="fb_rate_limited">Bạn đã gửi khá nhiều góp ý gần đây. Vui lòng thử lại sau.</string>
+    <string name="fb_no_app">Không có ứng dụng nào để gửi góp ý</string>
     <string name="an_title">Thống kê</string>
     <string name="an_week">Tuần</string>
     <string name="an_month">Tháng</string>

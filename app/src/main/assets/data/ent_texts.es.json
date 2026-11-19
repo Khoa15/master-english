@@ -210,6 +210,18 @@
    "id": "contest_a2_challenge",
    "field": "description",
    "text": "Responde 30 preguntas de vocabulario A2 en 12 minutos."
+  },
+  {
+    "type": "ACTIVITY",
+    "id": "practice_context",
+    "field": "title",
+    "text": "Contexto"
+  },
+  {
+    "type": "ACTIVITY",
+    "id": "practice_context",
+    "field": "subtitle",
+    "text": "Elige la palabra que encaja con la situación"
   }
- ]
+]
 }

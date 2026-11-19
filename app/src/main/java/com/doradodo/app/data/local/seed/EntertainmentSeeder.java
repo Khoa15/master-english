@@ -42,7 +42,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext;
 public class EntertainmentSeeder {
 
     /** Raise this when assets/data/entertainment.json or a synonyms.<lang>.json changes. */
-    public static final int CONTENT_VERSION = 6;
+    public static final int CONTENT_VERSION = 8;
 
     private static final String TAG = "EntertainmentSeeder";
     private static final String PREFS = "entertainment_seed";

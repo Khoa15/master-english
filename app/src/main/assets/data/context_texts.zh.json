@@ -1,0 +1,55 @@
+{
+  "lang": "zh",
+  "items": [
+    {
+      "id": "ctx_send_boss",
+      "scenario": "老板问你是否已经把报告发给客户了。你要在工作邮件中礼貌地回复。",
+      "explain": "在工作邮件中，'send' 中性清晰。'Shoot over' 很随意，适合朋友之间。'Ship' 通常指把产品推向市场。"
+    },
+    {
+      "id": "ctx_shoot_over_friend",
+      "scenario": "你给好友发消息：想让对方快点把昨天的照片发过来。",
+      "explain": "'Shoot over' 非常随意、快捷，适合朋友或关系很近的同事。'Submit' 和 'dispatch' 听起来正式或机械。"
+    },
+    {
+      "id": "ctx_request_boss",
+      "scenario": "你写邮件请经理批准出差费用，语气正式。",
+      "explain": "'Request' 正式，适合工作文件。'Want' 太直接，'gimme' 非常随意，不适合对经理说。"
+    },
+    {
+      "id": "ctx_sorry_meeting",
+      "scenario": "你开会迟到了10分钟，进门时对经理说。",
+      "explain": "对上级，'Sorry' 最稳妥。'My bad' 轻松，适合平级同事。'Oops' 只用于小失误，且是轻声说。"
+    },
+    {
+      "id": "ctx_ship_release",
+      "scenario": "内部通知：技术团队刚刚发布了应用的新版本。",
+      "explain": "在工作中，'ship' 指把产品发布到市场。'Mail' 指寄信，'deliver' 指把货物送到客户手中。"
+    },
+    {
+      "id": "ctx_children_form",
+      "scenario": "奖学金申请表的家庭信息部分：需要提到你的孩子。语气正式。",
+      "explain": "'Children' 正式，用于官方文件。'Kids' 更口语，'babies' 只指很小的婴儿。"
+    },
+    {
+      "id": "ctx_purchase_policy",
+      "scenario": "公司关于新政策的正式通知：客户可以通过网站购买产品。",
+      "explain": "'Purchase' 正式，用于官方文件。'Buy' 更中性，'grab' 指快速买下，非常口语。"
+    },
+    {
+      "id": "ctx_huge_fish",
+      "scenario": "你兴奋地跟朋友讲刚钓到的一条大鱼。",
+      "explain": "'Huge' 用于兴奋时的日常说话。'Big' 中性、通用。'Vast' 通常形容大海、草原等广阔的空间。"
+    },
+    {
+      "id": "ctx_affect_salary",
+      "scenario": "报告中：新规定将影响员工的工资。",
+      "explain": "'Affect' 是动词，意为影响。'Effect' 通常是名词（效果、影响），容易混淆。'Involve' 意为涉及或包含，不表示影响。"
+    },
+    {
+      "id": "ctx_let_me_know_group",
+      "scenario": "你在群里发消息：想知道今晚谁会参加。语气友好。",
+      "explain": "'Let me know' 友好，工作和聊天中都很常用。'Inform me' 太正式，像官方通知。'Tell me' 略显直接。"
+    }
+  ]
+}

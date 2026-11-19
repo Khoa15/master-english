@@ -22,11 +22,18 @@ public abstract class QuizFragment extends GameFragment {
         final String prompt;
         final String[] opts;
         final int ans;
+        /** Optional explanation, shown under the feedback once the learner has answered. */
+        final String explain;
 
         Q(String prompt, String[] opts, int ans) {
+            this(prompt, opts, ans, null);
+        }
+
+        Q(String prompt, String[] opts, int ans, String explain) {
             this.prompt = prompt;
             this.opts = opts;
             this.ans = ans;
+            this.explain = explain;
         }
     }
 
@@ -154,6 +161,12 @@ public abstract class QuizFragment extends GameFragment {
             TextView f = Ui.text(c, feedback, 14, 700, picked == q.ans ? Ui.GREEN : Ui.RED);
             f.setMinHeight(Ui.dp(c, 20));
             Ui.add(body, f, 12);
+            // if (answered && q.explain != null) {
+            //     TextView e = GameUi.centered(c, q.explain, 14, 400, Ui.MUTED);
+            //     e.setGravity(android.view.Gravity.START);
+            //     e.setLineSpacing(0, 1.2f);
+            //     Ui.add(body, e, 4);
+            // }
         }
 
         int shown = finished ? total : index + 1;

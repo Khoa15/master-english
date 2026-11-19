@@ -68,6 +68,13 @@
         android:name="com.doradodo.app.ui.entertainment.GuessWordFragment"
         android:label="guessWordFragment" />
 
+    <!--
+    <fragment
+        android:id="@+id/contextFragment"
+        android:name="com.doradodo.app.ui.entertainment.ContextFragment"
+        android:label="contextFragment" />
+    -->
+
     <fragment
         android:id="@+id/copyFragment"
         android:name="com.doradodo.app.ui.entertainment.CopyFragment"

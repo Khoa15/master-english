@@ -1,0 +1,55 @@
+{
+  "lang": "pt",
+  "items": [
+    {
+      "id": "ctx_send_boss",
+      "scenario": "Seu chefe pergunta se você já enviou o relatório ao cliente. Você responde por e-mail de trabalho, com educação.",
+      "explain": "Em e-mail de trabalho, 'send' é neutro e claro. 'Shoot over' é informal, para amigos. 'Ship' geralmente significa lançar um produto."
+    },
+    {
+      "id": "ctx_shoot_over_friend",
+      "scenario": "Você manda mensagem para um amigo próximo: quer que ele envie rápido a foto de ontem.",
+      "explain": "'Shoot over' é muito informal e rápido, para amigos ou colegas bem próximos. 'Submit' e 'dispatch' soam formais ou mecânicos."
+    },
+    {
+      "id": "ctx_request_boss",
+      "scenario": "Você escreve um e-mail pedindo ao gestor a aprovação das despesas de viagem. Tom formal.",
+      "explain": "'Request' é formal e combina com documentos de trabalho. 'Want' é direto demais, 'gimme' é muito informal e não se usa com um gestor."
+    },
+    {
+      "id": "ctx_sorry_meeting",
+      "scenario": "Você chega 10 minutos atrasado a uma reunião. Diz isso ao gestor ao entrar.",
+      "explain": "Com um superior, 'Sorry' é a opção segura. 'My bad' é leve, para colegas do mesmo nível. 'Oops' só se diz após um pequeno deslize, em voz baixa."
+    },
+    {
+      "id": "ctx_ship_release",
+      "scenario": "Comunicado interno: a equipe técnica acabou de lançar uma nova versão do app.",
+      "explain": "No trabalho, 'ship' significa colocar um produto no mercado. 'Mail' é enviar cartas e 'deliver' é entregar mercadorias ao cliente."
+    },
+    {
+      "id": "ctx_children_form",
+      "scenario": "Formulário de bolsa, seção da família: você precisa mencionar seus filhos. Tom formal.",
+      "explain": "'Children' é formal e usado em documentos oficiais. 'Kids' é mais informal, 'babies' refere-se só a bebês bem pequenos."
+    },
+    {
+      "id": "ctx_purchase_policy",
+      "scenario": "Aviso oficial da empresa sobre uma nova política: os clientes podem comprar produtos pelo site.",
+      "explain": "'Purchase' é formal, próprio de documentos oficiais. 'Buy' é mais neutro, 'grab' significa comprar rápido e é muito informal."
+    },
+    {
+      "id": "ctx_huge_fish",
+      "scenario": "Você conta aos amigos sobre o peixe enorme que acabou de pescar, animado.",
+      "explain": "'Huge' é usado com entusiasmo, na conversa do dia a dia. 'Big' é neutro e geral. 'Vast' costuma descrever espaços amplos, como mares ou planícies."
+    },
+    {
+      "id": "ctx_affect_salary",
+      "scenario": "No seu relatório: a nova regra vai afetar os salários dos funcionários.",
+      "explain": "'Affect' é um verbo que significa influenciar. 'Effect' geralmente é substantivo (efeito, resultado), por isso é fácil confundir. 'Involve' significa envolver ou incluir, não influenciar."
+    },
+    {
+      "id": "ctx_let_me_know_group",
+      "scenario": "Você escreve no grupo: quer saber quem vai participar hoje à noite. Tom amigável.",
+      "explain": "'Let me know' é amigável e muito comum no trabalho e em mensagens. 'Inform me' é formal demais, como um aviso oficial. 'Tell me' pode soar um pouco seco."
+    }
+  ]
+}

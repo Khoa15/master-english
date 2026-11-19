@@ -260,6 +260,10 @@
     <string name="ent_per_word">(vezes por palavra)</string>
     <string name="ent_decrease_freq">Diminuir frequência</string>
     <string name="ent_increase_freq">Aumentar frequência</string>
+    <string name="fb_sent">Obrigado! Seu feedback foi enviado.</string>
+    <string name="fb_failed">Não foi possível enviar. Verifique a conexão e tente novamente.</string>
+    <string name="fb_sign_in">Entre na sua conta para enviar feedback.</string>
+    <string name="fb_rate_limited">Você enviou muitos feedbacks recentemente. Tente novamente mais tarde.</string>
     <string name="ent_learned_words">Palavras aprendidas</string>
     <string name="auth_not_configured">O Firebase não está configurado. Use o modo convidado ou adicione google-services.json.</string>
     <string name="auth_failed">Falha ao entrar</string>
@@ -338,10 +342,7 @@
     <string name="fb_optional">Opcional: inclua os passos para reproduzir se encontrou um erro.</string>
     <string name="fb_send">Enviar feedback</string>
     <string name="fb_write_first">Escreva algumas palavras primeiro</string>
-    <string name="fb_sent">Obrigado! Seu feedback foi enviado.</string>
-    <string name="fb_failed">Não foi possível enviar. Verifique a conexão e tente novamente.</string>
-    <string name="fb_sign_in">Entre na sua conta para enviar feedback.</string>
-    <string name="fb_rate_limited">Você enviou muitos feedbacks recentemente. Tente novamente mais tarde.</string>
+    <string name="fb_no_app">Nenhum app disponível para enviar feedback</string>
     <string name="an_title">Estatísticas</string>
     <string name="an_week">Semana</string>
     <string name="an_month">Mês</string>

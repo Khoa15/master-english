@@ -260,6 +260,10 @@
     <string name="ent_per_word">(times per word)</string>
     <string name="ent_decrease_freq">Decrease frequency</string>
     <string name="ent_increase_freq">Increase frequency</string>
+    <string name="fb_sent">Thank you! Your feedback was sent.</string>
+    <string name="fb_failed">Couldn\'t send feedback. Check your connection and try again.</string>
+    <string name="fb_sign_in">Sign in to your account to send feedback.</string>
+    <string name="fb_rate_limited">You\'ve sent a lot of feedback recently. Please try again later.</string>
     <string name="ent_learned_words">Learned words</string>
     <string name="auth_not_configured">Firebase isn\'t set up. Use guest mode or add google-services.json.</string>
     <string name="auth_failed">Sign-in failed</string>
@@ -338,10 +342,7 @@
     <string name="fb_optional">Optional: include steps to reproduce if you found a bug.</string>
     <string name="fb_send">Send feedback</string>
     <string name="fb_write_first">Write a few words first</string>
-    <string name="fb_sent">Thank you! Your feedback was sent.</string>
-    <string name="fb_failed">Couldn\'t send feedback. Check your connection and try again.</string>
-    <string name="fb_sign_in">Sign in to your account to send feedback.</string>
-    <string name="fb_rate_limited">You\'ve sent a lot of feedback recently. Please try again later.</string>
+    <string name="fb_no_app">No app available to send feedback</string>
     <string name="an_title">Analytics</string>
     <string name="an_week">Week</string>
     <string name="an_month">Month</string>

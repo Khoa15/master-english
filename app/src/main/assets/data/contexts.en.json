@@ -1,0 +1,106 @@
+{
+  "lang": "en",
+  "status": "pending_review",
+  "items": [
+    {
+      "id": "ctx_send_boss",
+      "term": "send",
+      "options": [
+        "send",
+        "shoot over",
+        "ship"
+      ],
+      "answer": "send"
+    },
+    {
+      "id": "ctx_shoot_over_friend",
+      "term": "shoot over",
+      "options": [
+        "shoot over",
+        "submit",
+        "dispatch"
+      ],
+      "answer": "shoot over"
+    },
+    {
+      "id": "ctx_request_boss",
+      "term": "request",
+      "options": [
+        "request",
+        "want",
+        "gimme"
+      ],
+      "answer": "request"
+    },
+    {
+      "id": "ctx_sorry_meeting",
+      "term": "sorry",
+      "options": [
+        "Sorry",
+        "My bad",
+        "Oops"
+      ],
+      "answer": "Sorry"
+    },
+    {
+      "id": "ctx_ship_release",
+      "term": "ship",
+      "options": [
+        "ship",
+        "mail",
+        "deliver"
+      ],
+      "answer": "ship"
+    },
+    {
+      "id": "ctx_children_form",
+      "term": "children",
+      "options": [
+        "kids",
+        "children",
+        "babies"
+      ],
+      "answer": "children"
+    },
+    {
+      "id": "ctx_purchase_policy",
+      "term": "purchase",
+      "options": [
+        "buy",
+        "purchase",
+        "grab"
+      ],
+      "answer": "purchase"
+    },
+    {
+      "id": "ctx_huge_fish",
+      "term": "huge",
+      "options": [
+        "big",
+        "huge",
+        "vast"
+      ],
+      "answer": "huge"
+    },
+    {
+      "id": "ctx_affect_salary",
+      "term": "affect",
+      "options": [
+        "affect",
+        "effect",
+        "involve"
+      ],
+      "answer": "affect"
+    },
+    {
+      "id": "ctx_let_me_know_group",
+      "term": "let me know",
+      "options": [
+        "Let me know",
+        "Tell me",
+        "Inform me"
+      ],
+      "answer": "Let me know"
+    }
+  ]
+}

@@ -260,6 +260,10 @@
     <string name="ent_per_word">（每个单词的次数）</string>
     <string name="ent_decrease_freq">减少次数</string>
     <string name="ent_increase_freq">增加次数</string>
+    <string name="fb_sent">谢谢！你的反馈已发送。</string>
+    <string name="fb_failed">发送失败，请检查网络后重试。</string>
+    <string name="fb_sign_in">请登录账号后再发送反馈。</string>
+    <string name="fb_rate_limited">你最近发送的反馈太多了，请稍后再试。</string>
     <string name="ent_learned_words">已学单词</string>
     <string name="auth_not_configured">尚未配置 Firebase。请使用游客模式，或添加 google-services.json。</string>
     <string name="auth_failed">登录失败</string>
@@ -338,10 +342,7 @@
     <string name="fb_optional">可选：如果遇到问题，请附上复现步骤。</string>
     <string name="fb_send">发送反馈</string>
     <string name="fb_write_first">请先写几句话</string>
-    <string name="fb_sent">谢谢！你的反馈已发送。</string>
-    <string name="fb_failed">发送失败，请检查网络后重试。</string>
-    <string name="fb_sign_in">请登录账号后再发送反馈。</string>
-    <string name="fb_rate_limited">你最近发送的反馈太多了，请稍后再试。</string>
+    <string name="fb_no_app">没有可用于发送反馈的应用</string>
     <string name="an_title">数据统计</string>
     <string name="an_week">周</string>
     <string name="an_month">月</string>

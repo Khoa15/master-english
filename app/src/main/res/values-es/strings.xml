@@ -260,6 +260,10 @@
     <string name="ent_per_word">(veces por palabra)</string>
     <string name="ent_decrease_freq">Reducir frecuencia</string>
     <string name="ent_increase_freq">Aumentar frecuencia</string>
+    <string name="fb_sent">¡Gracias! Tu comentario se ha enviado.</string>
+    <string name="fb_failed">No se pudo enviar. Revisa tu conexión e inténtalo de nuevo.</string>
+    <string name="fb_sign_in">Inicia sesión en tu cuenta para enviar comentarios.</string>
+    <string name="fb_rate_limited">Has enviado muchos comentarios recientemente. Inténtalo más tarde.</string>
     <string name="ent_learned_words">Palabras aprendidas</string>
     <string name="auth_not_configured">Firebase no está configurado. Usa el modo invitado o añade google-services.json.</string>
     <string name="auth_failed">Error al iniciar sesión</string>
@@ -338,10 +342,7 @@
     <string name="fb_optional">Opcional: incluye los pasos para reproducirlo si encontraste un error.</string>
     <string name="fb_send">Enviar comentarios</string>
     <string name="fb_write_first">Escribe primero unas palabras</string>
-    <string name="fb_sent">¡Gracias! Tu comentario se ha enviado.</string>
-    <string name="fb_failed">No se pudo enviar. Revisa tu conexión e inténtalo de nuevo.</string>
-    <string name="fb_sign_in">Inicia sesión en tu cuenta para enviar comentarios.</string>
-    <string name="fb_rate_limited">Has enviado muchos comentarios recientemente. Inténtalo más tarde.</string>
+    <string name="fb_no_app">No hay ninguna app para enviar comentarios</string>
     <string name="an_title">Estadísticas</string>
     <string name="an_week">Semana</string>
     <string name="an_month">Mes</string>

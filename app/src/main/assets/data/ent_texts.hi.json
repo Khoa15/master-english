@@ -210,6 +210,18 @@
    "id": "contest_a2_challenge",
    "field": "description",
    "text": "12 मिनट में A2 शब्दावली के 30 प्रश्न पूरे करें।"
+  },
+  {
+    "type": "ACTIVITY",
+    "id": "practice_context",
+    "field": "title",
+    "text": "संदर्भ"
+  },
+  {
+    "type": "ACTIVITY",
+    "id": "practice_context",
+    "field": "subtitle",
+    "text": "स्थिति के अनुकूल शब्द चुनें"
   }
- ]
+]
 }

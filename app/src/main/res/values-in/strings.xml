@@ -260,6 +260,10 @@
     <string name="ent_per_word">(kali per kata)</string>
     <string name="ent_decrease_freq">Kurangi frekuensi</string>
     <string name="ent_increase_freq">Tambah frekuensi</string>
+    <string name="fb_sent">Terima kasih! Masukan Anda sudah terkirim.</string>
+    <string name="fb_failed">Gagal mengirim. Periksa koneksi dan coba lagi.</string>
+    <string name="fb_sign_in">Masuk ke akun Anda untuk mengirim masukan.</string>
+    <string name="fb_rate_limited">Anda baru saja mengirim banyak masukan. Coba lagi nanti.</string>
     <string name="ent_learned_words">Kata yang dipelajari</string>
     <string name="auth_not_configured">Firebase belum dikonfigurasi. Gunakan mode tamu atau tambahkan google-services.json.</string>
     <string name="auth_failed">Gagal masuk</string>
@@ -338,10 +342,7 @@
     <string name="fb_optional">Opsional: sertakan langkah untuk mereproduksi jika menemukan bug.</string>
     <string name="fb_send">Kirim masukan</string>
     <string name="fb_write_first">Tulis beberapa kata dulu</string>
-    <string name="fb_sent">Terima kasih! Masukan Anda sudah terkirim.</string>
-    <string name="fb_failed">Gagal mengirim. Periksa koneksi dan coba lagi.</string>
-    <string name="fb_sign_in">Masuk ke akun Anda untuk mengirim masukan.</string>
-    <string name="fb_rate_limited">Anda baru saja mengirim banyak masukan. Coba lagi nanti.</string>
+    <string name="fb_no_app">Tidak ada aplikasi untuk mengirim masukan</string>
     <string name="an_title">Analitik</string>
     <string name="an_week">Minggu</string>
     <string name="an_month">Bulan</string>

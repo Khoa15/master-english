@@ -210,6 +210,18 @@
    "id": "contest_a2_challenge",
    "field": "description",
    "text": "Vượt qua 30 câu từ vựng trình độ A2 trong vòng 12 phút."
+  },
+  {
+    "type": "ACTIVITY",
+    "id": "practice_context",
+    "field": "title",
+    "text": "Ngữ cảnh"
+  },
+  {
+    "type": "ACTIVITY",
+    "id": "practice_context",
+    "field": "subtitle",
+    "text": "Chọn từ phù hợp với tình huống"
   }
- ]
+]
 }

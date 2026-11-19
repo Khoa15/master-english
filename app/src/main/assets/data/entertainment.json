@@ -91,6 +91,19 @@
    "design_for": [
     "en"
    ]
+  },
+  {
+   "id": "practice_context",
+   "section": "PRACTICE",
+   "code": "CONTEXT",
+   "title": "Context",
+   "subtitle": "Pick the word that fits the situation",
+   "image": "ic_ent_star",
+   "accent": "GREEN",
+   "position": 3,
+   "design_for": [
+    "en"
+   ]
   }
  ],
  "banners": [

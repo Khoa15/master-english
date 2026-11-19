@@ -260,6 +260,10 @@
     <string name="ent_per_word">(fois par mot)</string>
     <string name="ent_decrease_freq">Réduire la fréquence</string>
     <string name="ent_increase_freq">Augmenter la fréquence</string>
+    <string name="fb_sent">Merci ! Votre avis a été envoyé.</string>
+    <string name="fb_failed">Envoi impossible. Vérifiez votre connexion et réessayez.</string>
+    <string name="fb_sign_in">Connectez-vous à votre compte pour envoyer un avis.</string>
+    <string name="fb_rate_limited">Vous avez envoyé beaucoup d\'avis récemment. Réessayez plus tard.</string>
     <string name="ent_learned_words">Mots appris</string>
     <string name="auth_not_configured">Firebase n\'est pas configuré. Utilisez le mode invité ou ajoutez google-services.json.</string>
     <string name="auth_failed">Échec de la connexion</string>
@@ -338,10 +342,7 @@
     <string name="fb_optional">Facultatif : indiquez les étapes pour reproduire le bug.</string>
     <string name="fb_send">Envoyer</string>
     <string name="fb_write_first">Écrivez d\'abord quelques mots</string>
-    <string name="fb_sent">Merci ! Votre avis a été envoyé.</string>
-    <string name="fb_failed">Envoi impossible. Vérifiez votre connexion et réessayez.</string>
-    <string name="fb_sign_in">Connectez-vous à votre compte pour envoyer un avis.</string>
-    <string name="fb_rate_limited">Vous avez envoyé beaucoup d\'avis récemment. Réessayez plus tard.</string>
+    <string name="fb_no_app">Aucune application disponible pour envoyer</string>
     <string name="an_title">Statistiques</string>
     <string name="an_week">Semaine</string>
     <string name="an_month">Mois</string>

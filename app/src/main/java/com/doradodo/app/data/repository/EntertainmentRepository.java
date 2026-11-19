@@ -153,6 +153,11 @@ public class EntertainmentRepository {
         return languages.displayLanguage();
     }
 
+    // Ngữ cảnh only: public accessor, commented out with the context feature.
+    // public String displayLanguage() {
+    //     return languages.displayLanguage();
+    // }
+
     /**
      * Replaces the default (English) texts of rows by their translation in the display language, when there is one.
      * The rows are plain objects loaded for this call, so they are changed in place.

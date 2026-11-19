@@ -1,0 +1,55 @@
+{
+  "lang": "id",
+  "items": [
+    {
+      "id": "ctx_send_boss",
+      "scenario": "Bosmu bertanya apakah kamu sudah mengirim laporan ke klien. Kamu membalas lewat email kerja dengan sopan.",
+      "explain": "Dalam email kerja, 'send' netral dan jelas. 'Shoot over' santai, untuk teman. 'Ship' biasanya berarti merilis produk."
+    },
+    {
+      "id": "ctx_shoot_over_friend",
+      "scenario": "Kamu mengirim pesan ke teman dekat: kamu ingin dia cepat mengirim foto kemarin.",
+      "explain": "'Shoot over' sangat santai dan cepat, untuk teman atau rekan yang sangat dekat. 'Submit' dan 'dispatch' terdengar formal atau kaku."
+    },
+    {
+      "id": "ctx_request_boss",
+      "scenario": "Kamu menulis email meminta atasan menyetujui biaya perjalanan dinas. Nada formal.",
+      "explain": "'Request' formal dan cocok untuk dokumen kerja. 'Want' terlalu langsung, 'gimme' sangat santai dan tidak dipakai kepada atasan."
+    },
+    {
+      "id": "ctx_sorry_meeting",
+      "scenario": "Kamu terlambat 10 menit ke rapat. Kamu mengatakannya kepada atasan saat masuk.",
+      "explain": "Kepada atasan, 'Sorry' adalah pilihan yang aman. 'My bad' ringan, untuk rekan setara. 'Oops' hanya dipakai untuk kesalahan kecil, diucapkan pelan."
+    },
+    {
+      "id": "ctx_ship_release",
+      "scenario": "Pengumuman internal: tim teknis baru saja merilis versi baru aplikasi.",
+      "explain": "Di tempat kerja, 'ship' berarti merilis produk ke pasar. 'Mail' berarti mengirim surat, 'deliver' berarti mengantarkan barang ke pelanggan."
+    },
+    {
+      "id": "ctx_children_form",
+      "scenario": "Formulir beasiswa, bagian keluarga: kamu harus menyebut anak-anakmu. Nada formal.",
+      "explain": "'Children' formal dan dipakai dalam dokumen resmi. 'Kids' lebih santai, 'babies' hanya untuk bayi yang sangat kecil."
+    },
+    {
+      "id": "ctx_purchase_policy",
+      "scenario": "Pengumuman resmi perusahaan tentang kebijakan baru: pelanggan dapat membeli produk melalui situs web.",
+      "explain": "'Purchase' formal, lazim di dokumen resmi. 'Buy' lebih netral, 'grab' berarti membeli dengan cepat dan sangat santai."
+    },
+    {
+      "id": "ctx_huge_fish",
+      "scenario": "Kamu bercerita kepada teman tentang ikan besar yang baru saja kamu pancing, dengan semangat.",
+      "explain": "'Huge' dipakai saat bersemangat, dalam obrolan sehari-hari. 'Big' netral dan umum. 'Vast' biasanya menggambarkan area luas seperti laut atau padang."
+    },
+    {
+      "id": "ctx_affect_salary",
+      "scenario": "Dalam laporanmu: aturan baru akan memengaruhi gaji karyawan.",
+      "explain": "'Affect' adalah kata kerja yang berarti memengaruhi. 'Effect' biasanya kata benda (efek, hasil), jadi mudah tertukar. 'Involve' berarti melibatkan, bukan memengaruhi."
+    },
+    {
+      "id": "ctx_let_me_know_group",
+      "scenario": "Kamu menulis ke grup: ingin tahu siapa yang ikut malam ini. Nada ramah.",
+      "explain": "'Let me know' ramah dan sangat umum di tempat kerja dan percakapan. 'Inform me' terlalu formal, seperti pengumuman resmi. 'Tell me' bisa terdengar agak kasar."
+    }
+  ]
+}

@@ -260,6 +260,10 @@
     <string name="ent_per_word">(प्रति शब्द बार)</string>
     <string name="ent_decrease_freq">आवृत्ति घटाएं</string>
     <string name="ent_increase_freq">आवृत्ति बढ़ाएं</string>
+    <string name="fb_sent">धन्यवाद! आपका फीडबैक भेज दिया गया।</string>
+    <string name="fb_failed">भेजा नहीं जा सका। कनेक्शन जाँचें और फिर कोशिश करें।</string>
+    <string name="fb_sign_in">फीडबैक भेजने के लिए अपने खाते में साइन इन करें।</string>
+    <string name="fb_rate_limited">आपने हाल में बहुत फीडबैक भेजे हैं। कृपया बाद में कोशिश करें।</string>
     <string name="ent_learned_words">सीखे हुए शब्द</string>
     <string name="auth_not_configured">Firebase सेट नहीं है। अतिथि मोड का उपयोग करें या google-services.json जोड़ें।</string>
     <string name="auth_failed">साइन इन विफल रहा</string>
@@ -338,10 +342,7 @@
     <string name="fb_optional">वैकल्पिक: बग मिला हो तो दोहराने के चरण लिखें।</string>
     <string name="fb_send">प्रतिक्रिया भेजें</string>
     <string name="fb_write_first">पहले कुछ शब्द लिखें</string>
-    <string name="fb_sent">धन्यवाद! आपका फीडबैक भेज दिया गया।</string>
-    <string name="fb_failed">भेजा नहीं जा सका। कनेक्शन जाँचें और फिर कोशिश करें।</string>
-    <string name="fb_sign_in">फीडबैक भेजने के लिए अपने खाते में साइन इन करें।</string>
-    <string name="fb_rate_limited">आपने हाल में बहुत फीडबैक भेजे हैं। कृपया बाद में कोशिश करें।</string>
+    <string name="fb_no_app">प्रतिक्रिया भेजने के लिए कोई ऐप उपलब्ध नहीं</string>
     <string name="an_title">विश्लेषण</string>
     <string name="an_week">सप्ताह</string>
     <string name="an_month">महीना</string>

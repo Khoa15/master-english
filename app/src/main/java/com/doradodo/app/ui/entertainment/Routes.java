@@ -34,6 +34,8 @@ final class Routes {
                 return R.id.tungSetupFragment;
             case "SLEEPING":
                 return R.id.sleepingFragment;
+            // case "CONTEXT":
+            //     return R.id.contextFragment;
             default:
                 return 0;
         }
