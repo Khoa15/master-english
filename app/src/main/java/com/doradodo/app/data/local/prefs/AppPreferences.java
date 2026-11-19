@@ -30,6 +30,7 @@ public class AppPreferences {
     private static final String KEY_REMINDER_ENABLED = "reminder_enabled";
     private static final String KEY_REMINDER_HOUR = "reminder_hour";
     private static final String KEY_REMINDER_MINUTE = "reminder_minute";
+    private static final String KEY_TIME_ZONE = "time_zone_id";
 
     private final SharedPreferences prefs;
     private final Gson gson = new Gson();
@@ -104,6 +105,16 @@ public class AppPreferences {
 
     public int getReminderMinute() {
         return prefs.getInt(KEY_REMINDER_MINUTE, 0);
+    }
+
+    /** The zone the learner picked in the profile, or null to follow the device. */
+    @Nullable
+    public String getTimeZoneId() {
+        return prefs.getString(KEY_TIME_ZONE, null);
+    }
+
+    public void setTimeZoneId(@Nullable String zoneId) {
+        prefs.edit().putString(KEY_TIME_ZONE, zoneId).apply();
     }
 
     public void clearSession() {
