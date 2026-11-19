@@ -53,8 +53,28 @@ public class ContestPlayFragment extends GameFragment {
 
     private Word[] words = new Word[0];
 
-    private static final int[] ROUND_NAMES = {R.string.ent_r_listen, R.string.ent_r_speak, R.string.ent_r_read,
-            R.string.ent_r_write, R.string.ent_r_choice};
+    /** The rounds in play order; a new round is one more constant here. */
+    private enum Round {
+        LISTEN(R.string.ent_r_listen, ContestPlayFragment::renderListen),
+        SPEAK(R.string.ent_r_speak, ContestPlayFragment::renderSpeak),
+        READ(R.string.ent_r_read, ContestPlayFragment::renderRead),
+        WRITE(R.string.ent_r_write, ContestPlayFragment::renderWrite),
+        CHOICE(R.string.ent_r_choice, ContestPlayFragment::renderChoice);
+
+        interface Renderer {
+            void render(ContestPlayFragment fragment, Context c, Word w);
+        }
+
+        final int label;
+        final Renderer renderer;
+
+        Round(int label, Renderer renderer) {
+            this.label = label;
+            this.renderer = renderer;
+        }
+    }
+
+    private static final Round[] ROUNDS = Round.values();
     private static final int MAX_READS = 3;
 
     private GameUi.Page page;
@@ -187,7 +207,7 @@ public class ContestPlayFragment extends GameFragment {
     }
 
     private boolean canNext() {
-        return finished || (ri == 2 ? reads >= 1 : answered);
+        return finished || (ROUNDS[ri] == Round.READ ? reads >= 1 : answered);
     }
 
     private void advance() {
@@ -200,7 +220,7 @@ public class ContestPlayFragment extends GameFragment {
         }
         if (wi + 1 < words.length) {
             wi++;
-        } else if (ri + 1 < ROUND_NAMES.length) {
+        } else if (ri + 1 < ROUNDS.length) {
             ri++;
             wi = 0;
         } else {
@@ -224,28 +244,12 @@ public class ContestPlayFragment extends GameFragment {
             Ui.add(hero, GameUi.centered(c, getString(R.string.ent_all_rounds_done), 20, 700, Ui.INK), 10);
             body.addView(hero, Ui.matchWidth());
         } else {
-            switch (ri) {
-                case 0:
-                    renderListen(c, w);
-                    break;
-                case 1:
-                    renderSpeak(c, w);
-                    break;
-                case 2:
-                    renderRead(c, w);
-                    break;
-                case 3:
-                    renderWrite(c, w);
-                    break;
-                default:
-                    renderChoice(c, w);
-                    break;
-            }
+            ROUNDS[ri].renderer.render(this, c, w);
         }
-        int rounds = ROUND_NAMES.length;
+        int rounds = ROUNDS.length;
         int total = words.length;
         page.subtitle.setText(getString(R.string.ent_round_label, finished ? rounds : ri + 1, rounds,
-                finished ? getString(R.string.ent_finish) : getString(ROUND_NAMES[ri])));
+                finished ? getString(R.string.ent_finish) : getString(ROUNDS[ri].label)));
         page.badge.setText((finished ? total : wi + 1) + "/" + total);
         int doneUnits = finished ? rounds * total
                 : ri * total + wi + (canNext() ? 1 : 0);
