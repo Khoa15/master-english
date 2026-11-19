@@ -2,6 +2,7 @@ package com.doradodo.app.ui.ds;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Outline;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.text.TextUtils;
@@ -9,6 +10,7 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewOutlineProvider;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -179,6 +181,28 @@ public final class Ui {
         ImageViewCompat.setImageTintList(i, ColorStateList.valueOf(tint));
         i.setLayoutParams(new LinearLayout.LayoutParams(dp(c, sizeDp), dp(c, sizeDp)));
         return i;
+    }
+
+    /**
+     * A decorative picture across the top of a card: cropped to fill, with its two top corners rounded to match the
+     * card. It is not announced by screen readers.
+     */
+    public static ImageView headerImage(Context c, @DrawableRes int res, float heightDp, float topRadiusDp) {
+        ImageView image = new ImageView(c);
+        image.setImageResource(res);
+        image.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        image.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
+        image.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(c, heightDp)));
+        final float radius = dp(c, topRadiusDp);
+        image.setOutlineProvider(new ViewOutlineProvider() {
+            @Override
+            public void getOutline(View view, Outline outline) {
+                // The rectangle runs one radius below the view, so only the top corners are rounded.
+                outline.setRoundRect(0, 0, view.getWidth(), (int) (view.getHeight() + radius), radius);
+            }
+        });
+        image.setClipToOutline(true);
+        return image;
     }
 
     /** A rounded track with a coloured fill, {@code percent} 0..100. */

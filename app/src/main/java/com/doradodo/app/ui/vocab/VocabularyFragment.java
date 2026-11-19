@@ -92,15 +92,18 @@ public class VocabularyFragment extends DsFragment {
         // Review card
         LinearLayout review = Ui.column(c);
         review.setBackground(Ui.shape(c, Ui.GREEN, 20));
-        review.setPadding(Ui.dp(c, 18), Ui.dp(c, 18), Ui.dp(c, 18), Ui.dp(c, 18));
         review.setElevation(Ui.dp(c, 4));
+        review.addView(Ui.headerImage(c, R.drawable.art_review, 88, 20));
+        LinearLayout reviewBody = Ui.column(c);
+        reviewBody.setPadding(Ui.dp(c, 18), Ui.dp(c, 16), Ui.dp(c, 18), Ui.dp(c, 18));
+        review.addView(reviewBody, Ui.matchWidth());
         LinearLayout label = Ui.row(c);
         label.setGravity(Gravity.BOTTOM);
         TextView small = Ui.text(c, c.getString(R.string.vocab_review_caps) + " ", 12, 600, 0xD9FFFFFF);
         small.setLetterSpacing(0.05f);
         label.addView(small, Ui.wrap());
         label.addView(Ui.text(c, Ui.plural(c, R.plurals.plural_words, library.dueCount), 20, 700, Color.WHITE), Ui.wrap());
-        review.addView(label, Ui.wrap());
+        reviewBody.addView(label, Ui.wrap());
         TextView reviewNow = Ui.text(c, library.dueCount == 0 ? c.getString(R.string.vocab_nothing_due) : c.getString(R.string.vocab_review_now), 14, 700, Ui.GREEN_INK);
         reviewNow.setGravity(Gravity.CENTER);
         reviewNow.setBackground(Ui.shape(c, Color.WHITE, 12));
@@ -113,7 +116,7 @@ public class VocabularyFragment extends DsFragment {
                 go(R.id.action_vocab_to_pack, packArgs(library.packs.get(0).id));
             }
         });
-        Ui.add(review, reviewNow, 14);
+        Ui.add(reviewBody, reviewNow, 14);
         body.addView(review, Ui.matchWidth());
 
         if (library.packs.isEmpty()) {
@@ -168,16 +171,19 @@ public class VocabularyFragment extends DsFragment {
         int ink = tone[2];
         LinearLayout card = Ui.column(c);
         card.setBackground(Ui.shape(c, tint, 16));
-        card.setPadding(Ui.dp(c, 10), Ui.dp(c, 10), Ui.dp(c, 10), Ui.dp(c, 10));
+        card.addView(Ui.headerImage(c, PackArt.resolve(c, pack.id), 56, 16));
+        LinearLayout content = Ui.column(c);
+        content.setPadding(Ui.dp(c, 10), Ui.dp(c, 10), Ui.dp(c, 10), Ui.dp(c, 10));
+        card.addView(content, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1f));
         card.setClickable(true);
         card.setOnClickListener(v -> go(R.id.action_vocab_to_pack, packArgs(pack.id)));
         TextView name = Ui.text(c, pack.title, 14, 700, ink);
         name.setMaxLines(3);
-        card.addView(name, Ui.matchWidth());
+        content.addView(name, Ui.matchWidth());
         TextView sub = Ui.text(c, c.getString(R.string.vocab_to_go, pack.total() - pack.learned), 11, 400, ink);
-        Ui.add(card, sub, 3);
+        Ui.add(content, sub, 3);
         View grow = new View(c);
-        card.addView(grow, new LinearLayout.LayoutParams(1, 0, 1f));
+        content.addView(grow, new LinearLayout.LayoutParams(1, 0, 1f));
         LinearLayout foot = Ui.row(c);
         foot.addView(Ui.text(c, Ui.plural(c, R.plurals.plural_words, pack.total()), 10, 600, ink), Ui.weight(1f));
         TextView go = Ui.text(c, c.getString(R.string.vocab_practice_now), 11, 700, ink);
@@ -186,20 +192,24 @@ public class VocabularyFragment extends DsFragment {
         go.setSingleLine(true);
         go.setOnClickListener(v -> go(R.id.action_vocab_to_practice, packArgs(pack.id)));
         foot.addView(go, Ui.wrap());
-        Ui.add(card, foot, 10);
+        Ui.add(content, foot, 10);
         return card;
     }
 
     private View packCard(Context c, VocabViewModel.Pack pack) {
         int[] tone = Ui.TONES[pack.tone];
-        LinearLayout card = Ui.card(c, 16, 18);
+        LinearLayout card = Ui.card(c, 0, 18);
+        card.addView(Ui.headerImage(c, PackArt.resolve(c, pack.id), 72, 18));
+        LinearLayout content = Ui.column(c);
+        content.setPadding(Ui.dp(c, 16), Ui.dp(c, 14), Ui.dp(c, 16), Ui.dp(c, 16));
+        card.addView(content, Ui.matchWidth());
         card.setClickable(true);
         card.setOnClickListener(v -> go(R.id.action_vocab_to_pack, packArgs(pack.id)));
         LinearLayout top = Ui.row(c);
         top.addView(Ui.text(c, pack.title, 16, 700, Ui.INK), Ui.weight(1f));
         top.addView(Ui.text(c, c.getString(R.string.vocab_learned_of, pack.learned, pack.total()), 12, 400, Ui.MUTED), Ui.wrap());
-        card.addView(top, Ui.matchWidth());
-        Ui.add(card, Ui.progress(c, pack.percent(), tone[0]), 10);
+        content.addView(top, Ui.matchWidth());
+        Ui.add(content, Ui.progress(c, pack.percent(), tone[0]), 10);
         LinearLayout chips = Ui.row(c);
         for (int i = 0; i < Math.min(2, pack.words.size()); i++) {
             LinearLayout.LayoutParams p = Ui.wrap();
@@ -209,7 +219,7 @@ public class VocabularyFragment extends DsFragment {
         if (pack.total() > 2) {
             chips.addView(Ui.pill(c, c.getString(R.string.vocab_more, pack.total() - 2), Ui.CHIP, Ui.MUTED, 12), Ui.wrap());
         }
-        Ui.add(card, chips, 12);
+        Ui.add(content, chips, 12);
         return card;
     }
 }
