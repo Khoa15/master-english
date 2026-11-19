@@ -1,0 +1,203 @@
+{
+ "lang": "vi",
+ "texts": [
+  {
+   "type": "ACTIVITY",
+   "id": "game_word_match",
+   "field": "title",
+   "text": "Nối từ"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "game_word_match",
+   "field": "subtitle",
+   "text": "Nối từ đã học với nghĩa của chúng"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "game_guess_word",
+   "field": "title",
+   "text": "Đoán từ"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "game_guess_word",
+   "field": "subtitle",
+   "text": "Đọc định nghĩa, chọn đúng từ"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "game_synonym_match",
+   "field": "title",
+   "text": "Ghép cặp từ đồng nghĩa"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "game_synonym_match",
+   "field": "subtitle",
+   "text": "Ghép mỗi từ với từ đồng nghĩa"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "game_copy_speed",
+   "field": "title",
+   "text": "Chép siêu tốc"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "game_copy_speed",
+   "field": "subtitle",
+   "text": "Nhìn nghĩa, gõ lại từ thật nhanh"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "practice_mistakes",
+   "field": "title",
+   "text": "Ôn lỗi sai"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "practice_mistakes",
+   "field": "subtitle",
+   "text": "Những từ bạn hay trả lời sai"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "practice_tung",
+   "field": "title",
+   "text": "Tụng siêu cấp"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "practice_tung",
+   "field": "subtitle",
+   "text": "Đọc đi đọc lại để nhớ từ"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "practice_sleeping",
+   "field": "title",
+   "text": "Sleeping"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "practice_sleeping",
+   "field": "subtitle",
+   "text": "Nghe từ vựng khi ngủ"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_word_match",
+   "field": "tag",
+   "text": "GAME NỔI BẬT"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_word_match",
+   "field": "title",
+   "text": "Nối từ tiếng Anh"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_word_match",
+   "field": "subtitle",
+   "text": "Ghép đúng từ với nghĩa của những từ bạn đã học"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_word_match",
+   "field": "button_label",
+   "text": "Chơi ngay"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_guess_word",
+   "field": "tag",
+   "text": "MỚI"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_guess_word",
+   "field": "title",
+   "text": "Đoán từ bí ẩn"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_guess_word",
+   "field": "subtitle",
+   "text": "Đọc định nghĩa, đoán từ, nhận điểm thưởng"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_guess_word",
+   "field": "button_label",
+   "text": "Thử ngay"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_contest",
+   "field": "tag",
+   "text": "CUỘC THI"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_contest",
+   "field": "title",
+   "text": "Giải Vua Từ Vựng A1"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_contest",
+   "field": "subtitle",
+   "text": "Đua top, nhận kim cương cho top 10"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_contest",
+   "field": "button_label",
+   "text": "Xem giải"
+  },
+  {
+   "type": "EVENT",
+   "id": "event_double_exp",
+   "field": "tag",
+   "text": "SỰ KIỆN"
+  },
+  {
+   "type": "EVENT",
+   "id": "event_double_exp",
+   "field": "title",
+   "text": "Tuần lễ Vocab x2 EXP"
+  },
+  {
+   "type": "EVENT",
+   "id": "event_double_exp",
+   "field": "description",
+   "text": "Mọi game được nhân đôi điểm kinh nghiệm"
+  },
+  {
+   "type": "CONTEST",
+   "id": "weekly_vocab_cup",
+   "field": "title",
+   "text": "Cúp Từ Vựng hằng tuần"
+  },
+  {
+   "type": "CONTEST",
+   "id": "weekly_vocab_cup",
+   "field": "description",
+   "text": "Thi đấu mỗi tuần. Trả lời nhanh và chính xác; kết quả xếp hạng theo điểm và thời gian hoàn thành."
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "practice_context",
+   "field": "title",
+   "text": "Ngữ cảnh"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "practice_context",
+   "field": "subtitle",
+   "text": "Chọn từ phù hợp với tình huống"
+  }
+ ]
+}

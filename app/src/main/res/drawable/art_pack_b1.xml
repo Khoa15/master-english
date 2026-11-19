@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Header picture. Replace with real artwork by adding a drawable of the same name. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="360dp"
+    android:height="120dp"
+    android:viewportWidth="360"
+    android:viewportHeight="120">
+  <path android:pathData="M0,0h360v120h-360z">
+    <aapt:attr name="android:fillColor">
+      <gradient android:type="linear" android:startX="0" android:startY="0" android:endX="0" android:endY="120">
+        <item android:offset="0" android:color="#E4EEFB"/>
+        <item android:offset="1" android:color="#CBDDF5"/>
+      </gradient>
+    </aapt:attr>
+  </path>
+  <path android:fillColor="#FFFFFF" android:fillAlpha="0.8"
+      android:pathData="M56,34 a14,14 0 1,0 28,0 a14,14 0 1,0 -28,0 z"/>
+  <path android:fillColor="#FFFFFF" android:fillAlpha="0.8"
+      android:pathData="M78,38 a10,10 0 1,0 20,0 a10,10 0 1,0 -20,0 z"/>
+  <path android:fillColor="#9CC2EE"
+      android:pathData="M0,84 C60,62 120,64 180,78 C240,92 300,70 360,60 L360,120 L0,120 z"/>
+  <path android:fillColor="#6EA2E0"
+      android:pathData="M0,100 C70,82 140,90 200,98 C260,106 310,92 360,88 L360,120 L0,120 z"/>
+  <path android:fillColor="#6B4E3A"
+      android:pathData="M195.8,106 h8.399999999999999 v-30.799999999999997 h-8.399999999999999 z"/>
+  <path android:fillColor="#2D62C4"
+      android:pathData="M180.4,64.0 a19.599999999999998,19.599999999999998 0 1,0 39.199999999999996,0 a19.599999999999998,19.599999999999998 0 1,0 -39.199999999999996,0 z"/>
+  <path android:fillColor="#2D62C4" android:fillAlpha="0.9"
+      android:pathData="M174.8,75.2 a12.6,12.6 0 1,0 25.2,0 a12.6,12.6 0 1,0 -25.2,0 z"/>
+  <path android:fillColor="#2D62C4" android:fillAlpha="0.9"
+      android:pathData="M200.0,75.2 a12.6,12.6 0 1,0 25.2,0 a12.6,12.6 0 1,0 -25.2,0 z"/>
+</vector>

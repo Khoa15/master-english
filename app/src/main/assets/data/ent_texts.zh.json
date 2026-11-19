@@ -1,0 +1,203 @@
+{
+ "lang": "zh",
+ "texts": [
+  {
+   "type": "ACTIVITY",
+   "id": "game_word_match",
+   "field": "title",
+   "text": "单词连线"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "game_word_match",
+   "field": "subtitle",
+   "text": "将学过的单词与释义配对"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "game_guess_word",
+   "field": "title",
+   "text": "猜单词"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "game_guess_word",
+   "field": "subtitle",
+   "text": "阅读释义，选出正确的单词"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "game_synonym_match",
+   "field": "title",
+   "text": "同义词配对"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "game_synonym_match",
+   "field": "subtitle",
+   "text": "将每个单词与同义词配对"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "game_copy_speed",
+   "field": "title",
+   "text": "极速打字"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "game_copy_speed",
+   "field": "subtitle",
+   "text": "看释义，快速输入单词"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "practice_mistakes",
+   "field": "title",
+   "text": "错题复习"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "practice_mistakes",
+   "field": "subtitle",
+   "text": "你经常答错的单词"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "practice_tung",
+   "field": "title",
+   "text": "跟读模式"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "practice_tung",
+   "field": "subtitle",
+   "text": "反复朗读，帮助记忆单词"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "practice_sleeping",
+   "field": "title",
+   "text": "睡眠聆听"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "practice_sleeping",
+   "field": "subtitle",
+   "text": "睡觉时听你的单词"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_word_match",
+   "field": "tag",
+   "text": "精选游戏"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_word_match",
+   "field": "title",
+   "text": "单词连线"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_word_match",
+   "field": "subtitle",
+   "text": "将学过的单词与释义正确配对"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_word_match",
+   "field": "button_label",
+   "text": "立即开始"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_guess_word",
+   "field": "tag",
+   "text": "新"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_guess_word",
+   "field": "title",
+   "text": "猜单词"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_guess_word",
+   "field": "subtitle",
+   "text": "阅读释义，猜出单词，赢取奖励积分"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_guess_word",
+   "field": "button_label",
+   "text": "立即试玩"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_contest",
+   "field": "tag",
+   "text": "比赛"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_contest",
+   "field": "title",
+   "text": "A1 词汇王"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_contest",
+   "field": "subtitle",
+   "text": "争夺榜首，前 10 名赢取钻石"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_contest",
+   "field": "button_label",
+   "text": "查看比赛"
+  },
+  {
+   "type": "EVENT",
+   "id": "event_double_exp",
+   "field": "tag",
+   "text": "活动"
+  },
+  {
+   "type": "EVENT",
+   "id": "event_double_exp",
+   "field": "title",
+   "text": "词汇周：双倍经验"
+  },
+  {
+   "type": "EVENT",
+   "id": "event_double_exp",
+   "field": "description",
+   "text": "每款游戏都获得双倍经验值"
+  },
+  {
+   "type": "CONTEST",
+   "id": "weekly_vocab_cup",
+   "field": "title",
+   "text": "每周词汇杯"
+  },
+  {
+   "type": "CONTEST",
+   "id": "weekly_vocab_cup",
+   "field": "description",
+   "text": "每周一赛。又快又准地作答，成绩按得分和完成时间排名。"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "practice_context",
+   "field": "title",
+   "text": "语境"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "practice_context",
+   "field": "subtitle",
+   "text": "选择符合情境的单词"
+  }
+ ]
+}

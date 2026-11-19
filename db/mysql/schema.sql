@@ -231,3 +231,27 @@ CREATE TABLE daily_study_log (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     UNIQUE KEY uq_user_day (user_id, date_key)
 );
+
+-- 8. GÓP Ý (POST /api/v1/feedback từ màn hình Góp ý; chỉ tài khoản đăng nhập)
+CREATE TABLE feedback (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id VARCHAR(128) NOT NULL,       -- Firebase uid lấy từ ID token đã xác thực, không phải từ body
+    rating TINYINT NOT NULL DEFAULT 0,   -- 0 = không đánh giá, 1..5
+    type ENUM('Bug', 'Idea', 'Question', 'Other') NOT NULL,
+    message TEXT NOT NULL,
+    app_version VARCHAR(32) NULL,
+    sdk_int INT NULL,
+    locale VARCHAR(16) NULL,
+    sent_at BIGINT NOT NULL,             -- epoch ms theo đồng hồ máy
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    INDEX idx_feedback_created (created_at),
+    INDEX idx_feedback_user (user_id, created_at)
+);
+
+-- 9. GIỚI HẠN TẦN SUẤT (cửa sổ cố định; bucket đã băm HMAC nên không lưu IP/uid thô)
+CREATE TABLE rate_limits (
+    bucket VARCHAR(80) NOT NULL,
+    window_start INT UNSIGNED NOT NULL,
+    hits INT UNSIGNED NOT NULL DEFAULT 0,
+    PRIMARY KEY (bucket, window_start)
+);

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Header picture. Replace with real artwork by adding a drawable of the same name. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="360dp"
+    android:height="120dp"
+    android:viewportWidth="360"
+    android:viewportHeight="120">
+  <path android:pathData="M0,0h360v120h-360z">
+    <aapt:attr name="android:fillColor">
+      <gradient android:type="linear" android:startX="0" android:startY="0" android:endX="0" android:endY="120">
+        <item android:offset="0" android:color="#E3F3F6"/>
+        <item android:offset="1" android:color="#C6E6EC"/>
+      </gradient>
+    </aapt:attr>
+  </path>
+  <path android:fillColor="#FFD87A"
+      android:pathData="M45,30 a15,15 0 1,0 30,0 a15,15 0 1,0 -30,0 z"/>
+  <path android:fillColor="#8CCDC0"
+      android:pathData="M0,84 C60,62 120,64 180,78 C240,92 300,70 360,60 L360,120 L0,120 z"/>
+  <path android:fillColor="#5DB3A5"
+      android:pathData="M0,100 C70,82 140,90 200,98 C260,106 310,92 360,88 L360,120 L0,120 z"/>
+  <path android:fillColor="#2A7F73"
+      android:pathData="M178,106 h4 v-38 h-4 z"/>
+  <path android:fillColor="#37A08F"
+      android:pathData="M180,60 C150,62 148,42 164,40 C178,42 178,58 180,60 z"/>
+  <path android:fillColor="#45B3A1"
+      android:pathData="M180,70 C182,72 180,52 196,50 C210,52 210,68 180,70 z"/>
+  <path android:fillColor="#45B3A1"
+      android:pathData="M180,78 C152,80 150,60 166,58 C180,60 180,76 180,78 z"/>
+</vector>

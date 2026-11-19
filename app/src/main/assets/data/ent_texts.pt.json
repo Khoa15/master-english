@@ -1,0 +1,203 @@
+{
+ "lang": "pt",
+ "texts": [
+  {
+   "type": "ACTIVITY",
+   "id": "game_word_match",
+   "field": "title",
+   "text": "Ligar palavras"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "game_word_match",
+   "field": "subtitle",
+   "text": "Ligue as palavras aprendidas aos seus significados"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "game_guess_word",
+   "field": "title",
+   "text": "Adivinhe a palavra"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "game_guess_word",
+   "field": "subtitle",
+   "text": "Leia a definição e escolha a palavra certa"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "game_synonym_match",
+   "field": "title",
+   "text": "Sinônimos"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "game_synonym_match",
+   "field": "subtitle",
+   "text": "Ligue cada palavra ao seu sinônimo"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "game_copy_speed",
+   "field": "title",
+   "text": "Digitação rápida"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "game_copy_speed",
+   "field": "subtitle",
+   "text": "Veja o significado e digite a palavra rápido"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "practice_mistakes",
+   "field": "title",
+   "text": "Revisar erros"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "practice_mistakes",
+   "field": "subtitle",
+   "text": "Palavras que você costuma errar"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "practice_tung",
+   "field": "title",
+   "text": "Modo repetição"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "practice_tung",
+   "field": "subtitle",
+   "text": "Repita as palavras em voz alta para memorizar"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "practice_sleeping",
+   "field": "title",
+   "text": "Ouvir para dormir"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "practice_sleeping",
+   "field": "subtitle",
+   "text": "Ouça suas palavras enquanto dorme"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_word_match",
+   "field": "tag",
+   "text": "JOGO EM DESTAQUE"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_word_match",
+   "field": "title",
+   "text": "Ligar palavras"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_word_match",
+   "field": "subtitle",
+   "text": "Ligue as palavras aprendidas aos seus significados"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_word_match",
+   "field": "button_label",
+   "text": "Jogar agora"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_guess_word",
+   "field": "tag",
+   "text": "NOVO"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_guess_word",
+   "field": "title",
+   "text": "Adivinhe a palavra"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_guess_word",
+   "field": "subtitle",
+   "text": "Leia a definição, adivinhe a palavra e ganhe pontos extras"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_guess_word",
+   "field": "button_label",
+   "text": "Experimentar"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_contest",
+   "field": "tag",
+   "text": "CONCURSO"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_contest",
+   "field": "title",
+   "text": "Rei do vocabulário A1"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_contest",
+   "field": "subtitle",
+   "text": "Dispute o topo e ganhe gemas no top 10"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_contest",
+   "field": "button_label",
+   "text": "Ver concurso"
+  },
+  {
+   "type": "EVENT",
+   "id": "event_double_exp",
+   "field": "tag",
+   "text": "EVENTO"
+  },
+  {
+   "type": "EVENT",
+   "id": "event_double_exp",
+   "field": "title",
+   "text": "Semana do vocabulário: EXP x2"
+  },
+  {
+   "type": "EVENT",
+   "id": "event_double_exp",
+   "field": "description",
+   "text": "Cada jogo dá o dobro de pontos de experiência"
+  },
+  {
+   "type": "CONTEST",
+   "id": "weekly_vocab_cup",
+   "field": "title",
+   "text": "Copa semanal de vocabulário"
+  },
+  {
+   "type": "CONTEST",
+   "id": "weekly_vocab_cup",
+   "field": "description",
+   "text": "Competição toda semana. Responda rápido e com precisão; o ranking usa pontos e tempo."
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "practice_context",
+   "field": "title",
+   "text": "Contexto"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "practice_context",
+   "field": "subtitle",
+   "text": "Escolha a palavra que combina com a situação"
+  }
+ ]
+}

@@ -1,0 +1,55 @@
+{
+  "lang": "fr",
+  "items": [
+    {
+      "id": "ctx_send_boss",
+      "scenario": "Votre chef vous demande si vous avez déjà envoyé le rapport au client. Vous répondez par e-mail professionnel, poliment.",
+      "explain": "Dans un e-mail professionnel, 'send' est neutre et clair. 'Shoot over' est familier, pour des amis. 'Ship' signifie souvent mettre un produit sur le marché."
+    },
+    {
+      "id": "ctx_shoot_over_friend",
+      "scenario": "Vous écrivez à un ami proche : vous voulez qu'il vous envoie vite la photo d'hier.",
+      "explain": "'Shoot over' est très familier et rapide, pour des amis ou des collègues très proches. 'Submit' et 'dispatch' sonnent formels ou mécaniques."
+    },
+    {
+      "id": "ctx_request_boss",
+      "scenario": "Vous écrivez un e-mail pour demander à votre responsable de valider des frais de déplacement. Ton formel.",
+      "explain": "'Request' est formel et convient aux documents professionnels. 'Want' est trop direct, 'gimme' est très familier et ne se dit pas à un responsable."
+    },
+    {
+      "id": "ctx_sorry_meeting",
+      "scenario": "Vous arrivez 10 minutes en retard à une réunion. Vous le dites à votre responsable en entrant.",
+      "explain": "Avec un supérieur, 'Sorry' est le choix sûr. 'My bad' est léger, pour des collègues du même niveau. 'Oops' ne se dit qu'après une petite maladresse, à voix basse."
+    },
+    {
+      "id": "ctx_ship_release",
+      "scenario": "Annonce interne : l'équipe technique vient de publier une nouvelle version de l'application.",
+      "explain": "Au travail, 'ship' signifie mettre un produit sur le marché. 'Mail' signifie envoyer du courrier, 'deliver' signifie livrer des marchandises au client."
+    },
+    {
+      "id": "ctx_children_form",
+      "scenario": "Dossier de bourse, partie famille : vous devez mentionner vos enfants. Ton formel.",
+      "explain": "'Children' est formel et utilisé dans les documents officiels. 'Kids' est plus familier, 'babies' ne désigne que de très jeunes bébés."
+    },
+    {
+      "id": "ctx_purchase_policy",
+      "scenario": "Communiqué officiel de l'entreprise sur une nouvelle politique : les clients peuvent acheter les produits sur le site.",
+      "explain": "'Purchase' est formel, propre aux documents officiels. 'Buy' est plus neutre, 'grab' signifie acheter vite et est très familier."
+    },
+    {
+      "id": "ctx_huge_fish",
+      "scenario": "Vous racontez à vos amis le gros poisson que vous venez de pêcher, avec enthousiasme.",
+      "explain": "'Huge' s'emploie avec enthousiasme, dans la conversation courante. 'Big' est neutre et général. 'Vast' décrit surtout de grands espaces comme la mer ou les plaines."
+    },
+    {
+      "id": "ctx_affect_salary",
+      "scenario": "Dans votre rapport : la nouvelle règle va affecter les salaires des employés.",
+      "explain": "'Affect' est un verbe qui signifie influencer. 'Effect' est généralement un nom (effet, résultat), donc il est facile à confondre. 'Involve' signifie impliquer ou inclure, pas influencer."
+    },
+    {
+      "id": "ctx_let_me_know_group",
+      "scenario": "Vous écrivez au groupe : vous voulez savoir qui vient ce soir. Ton amical.",
+      "explain": "'Let me know' est amical et très courant au travail et dans les messages. 'Inform me' est trop formel, comme un avis officiel. 'Tell me' peut paraître un peu brusque."
+    }
+  ]
+}

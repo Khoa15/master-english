@@ -1,6 +1,6 @@
 # data/source
 
-Source files for `tools/build_vocabulary.py`, which builds `app/src/main/assets/data/vocabulary.json`.
+Source files for `tools/build_vocabulary.py`, which builds `app/src/main/assets/data/vocabulary.en.json`.
 
 ## pack/2 — the standard for curated packs
 
@@ -57,7 +57,7 @@ To convert an old-shape file (flat `vietnamese`, `example`, `example_vi`): `tool
 
 ## What the build writes
 
-`vocabulary.json` keeps the legacy sense keys (`definition`, `definition_vi`, `example`, `example_vi`) that the app reads today, and adds `translations` and `examples` to senses that have them, plus `titles` on packs. The app reads them: Room schema 5 (`app/schemas/.../5.json`, migration `MIGRATION_4_5`) has `sense_translations`, `sense_examples`, `example_translations` and `pack_titles`, filled by `LocalDataSeeder`. An asset without the new keys still works (`definition_vi` / `example` / `example_vi` are read as the `vi` translation and first example).
+`vocabulary.en.json` keeps the legacy sense keys (`definition`, `definition_vi`, `example`, `example_vi`) that the app reads today, and adds `translations` and `examples` to senses that have them, plus `titles` on packs. The app reads them: Room schema 5 (`app/schemas/.../5.json`, migration `MIGRATION_4_5`) has `sense_translations`, `sense_examples`, `example_translations` and `pack_titles`, filled by `LocalDataSeeder`. An asset without the new keys still works (`definition_vi` / `example` / `example_vi` are read as the `vi` translation and first example).
 
 ## Still to do in the app
 

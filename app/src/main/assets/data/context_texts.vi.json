@@ -1,0 +1,55 @@
+{
+  "lang": "vi",
+  "items": [
+    {
+      "id": "ctx_send_boss",
+      "scenario": "Sếp hỏi bạn đã gửi báo cáo cho khách chưa. Bạn trả lời qua email công việc, giọng lịch sự.",
+      "explain": "Trong email công việc, 'send' trung tính và rõ ràng. 'Shoot over' thân mật, hợp nhắn bạn bè. 'Ship' thường nghĩa là đưa sản phẩm ra thị trường."
+    },
+    {
+      "id": "ctx_shoot_over_friend",
+      "scenario": "Bạn nhắn cho bạn thân: muốn bạn gửi nhanh tấm ảnh hôm qua.",
+      "explain": "'Shoot over' rất thân mật và nhanh, dùng với bạn bè hoặc đồng nghiệp thân. 'Submit' và 'dispatch' nghe trang trọng hoặc máy móc."
+    },
+    {
+      "id": "ctx_request_boss",
+      "scenario": "Bạn viết email xin sếp duyệt khoản chi phí đi công tác. Giọng trang trọng.",
+      "explain": "'Request' trang trọng, phù hợp văn bản công việc. 'Want' quá trực tiếp, 'gimme' rất thân mật và không dùng với sếp."
+    },
+    {
+      "id": "ctx_sorry_meeting",
+      "scenario": "Bạn vào họp muộn 10 phút. Bạn nói với sếp ngay khi bước vào phòng.",
+      "explain": "'Sorry' là lựa chọn an toàn với cấp trên. 'My bad' nhẹ nhàng, hợp đồng nghiệp ngang hàng. 'Oops' chỉ nói khi vừa làm rơi hoặc vấp."
+    },
+    {
+      "id": "ctx_ship_release",
+      "scenario": "Thông báo nội bộ: đội kỹ thuật vừa phát hành phiên bản mới của app.",
+      "explain": "Trong công việc, 'ship' nghĩa là đưa sản phẩm ra thị trường. 'Mail' là gửi thư, 'deliver' là giao hàng đến tay khách."
+    },
+    {
+      "id": "ctx_children_form",
+      "scenario": "Đơn xin học bổng, phần thông tin gia đình: bạn cần nói về con của mình. Giọng trang trọng.",
+      "explain": "'Children' trang trọng, dùng trong văn bản chính thức. 'Kids' thân mật hơn, 'babies' chỉ trẻ rất nhỏ."
+    },
+    {
+      "id": "ctx_purchase_policy",
+      "scenario": "Thông báo chính thức của công ty về chính sách mới: khách hàng có thể mua sản phẩm qua website.",
+      "explain": "'Purchase' trang trọng, dùng trong văn bản chính thức. 'Buy' trung tính hơn, 'grab' nghĩa là mua nhanh, rất thân mật."
+    },
+    {
+      "id": "ctx_huge_fish",
+      "scenario": "Bạn kể với bạn bè về con cá to vừa câu được, giọng hào hứng.",
+      "explain": "'Huge' dùng khi hào hứng, trong nói chuyện hằng ngày. 'Big' trung tính và chung chung. 'Vast' thường tả không gian rộng như biển hay đồng cỏ."
+    },
+    {
+      "id": "ctx_affect_salary",
+      "scenario": "Bạn viết báo cáo: quy định mới sẽ ảnh hưởng đến lương của nhân viên.",
+      "explain": "'Affect' là động từ, nghĩa là ảnh hưởng đến. 'Effect' thường là danh từ (hiệu quả, tác động) nên dễ nhầm. 'Involve' là liên quan hoặc bao gồm, không đúng nghĩa ảnh hưởng."
+    },
+    {
+      "id": "ctx_let_me_know_group",
+      "scenario": "Bạn nhắn cho nhóm bạn: muốn biết ai sẽ tham gia buổi tối nay. Giọng thân thiện.",
+      "explain": "'Let me know' thân thiện, dùng hằng ngày trong công việc và nhắn tin. 'Inform me' quá trang trọng, như thông báo chính thức. 'Tell me' hơi trực tiếp."
+    }
+  ]
+}

@@ -1,0 +1,203 @@
+{
+ "lang": "id",
+ "texts": [
+  {
+   "type": "ACTIVITY",
+   "id": "game_word_match",
+   "field": "title",
+   "text": "Cocokkan kata"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "game_word_match",
+   "field": "subtitle",
+   "text": "Cocokkan kata yang sudah dipelajari dengan artinya"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "game_guess_word",
+   "field": "title",
+   "text": "Tebak kata"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "game_guess_word",
+   "field": "subtitle",
+   "text": "Baca definisi, pilih kata yang tepat"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "game_synonym_match",
+   "field": "title",
+   "text": "Cocokkan sinonim"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "game_synonym_match",
+   "field": "subtitle",
+   "text": "Cocokkan setiap kata dengan sinonimnya"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "game_copy_speed",
+   "field": "title",
+   "text": "Ketik cepat"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "game_copy_speed",
+   "field": "subtitle",
+   "text": "Lihat artinya, ketik kata dengan cepat"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "practice_mistakes",
+   "field": "title",
+   "text": "Tinjau kesalahan"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "practice_mistakes",
+   "field": "subtitle",
+   "text": "Kata yang sering Anda salah"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "practice_tung",
+   "field": "title",
+   "text": "Mode pengulangan"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "practice_tung",
+   "field": "subtitle",
+   "text": "Ucapkan kata berulang kali agar ingat"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "practice_sleeping",
+   "field": "title",
+   "text": "Mendengar saat tidur"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "practice_sleeping",
+   "field": "subtitle",
+   "text": "Dengarkan kata Anda saat tidur"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_word_match",
+   "field": "tag",
+   "text": "GIM UNGGULAN"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_word_match",
+   "field": "title",
+   "text": "Cocokkan kata"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_word_match",
+   "field": "subtitle",
+   "text": "Cocokkan kata yang sudah dipelajari dengan artinya"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_word_match",
+   "field": "button_label",
+   "text": "Main sekarang"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_guess_word",
+   "field": "tag",
+   "text": "BARU"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_guess_word",
+   "field": "title",
+   "text": "Tebak kata"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_guess_word",
+   "field": "subtitle",
+   "text": "Baca definisi, tebak kata, dapatkan poin bonus"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_guess_word",
+   "field": "button_label",
+   "text": "Coba sekarang"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_contest",
+   "field": "tag",
+   "text": "KOMPETISI"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_contest",
+   "field": "title",
+   "text": "Raja Kosakata A1"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_contest",
+   "field": "subtitle",
+   "text": "Berebut peringkat teratas, 10 besar dapat permata"
+  },
+  {
+   "type": "BANNER",
+   "id": "banner_contest",
+   "field": "button_label",
+   "text": "Lihat kompetisi"
+  },
+  {
+   "type": "EVENT",
+   "id": "event_double_exp",
+   "field": "tag",
+   "text": "ACARA"
+  },
+  {
+   "type": "EVENT",
+   "id": "event_double_exp",
+   "field": "title",
+   "text": "Pekan Kosakata: EXP 2x"
+  },
+  {
+   "type": "EVENT",
+   "id": "event_double_exp",
+   "field": "description",
+   "text": "Setiap gim memberi poin pengalaman ganda"
+  },
+  {
+   "type": "CONTEST",
+   "id": "weekly_vocab_cup",
+   "field": "title",
+   "text": "Piala Kosakata Mingguan"
+  },
+  {
+   "type": "CONTEST",
+   "id": "weekly_vocab_cup",
+   "field": "description",
+   "text": "Kompetisi setiap minggu. Jawab cepat dan tepat; peringkat berdasarkan poin dan waktu."
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "practice_context",
+   "field": "title",
+   "text": "Konteks"
+  },
+  {
+   "type": "ACTIVITY",
+   "id": "practice_context",
+   "field": "subtitle",
+   "text": "Pilih kata yang sesuai dengan situasi"
+  }
+ ]
+}

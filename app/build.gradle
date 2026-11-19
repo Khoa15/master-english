@@ -17,11 +17,14 @@ if (localPropsFile.exists()) {
 }
 
 android {
-    namespace 'com.masterenglish.app'
+    namespace 'com.doradodo.app'
     compileSdk 34
 
     defaultConfig {
-        applicationId 'com.masterenglish.app'
+        applicationId project.property('APP_ID')
+        // The one app_name string every layout, manifest and Java caller reads (R.string.app_name).
+        resValue 'string', 'app_name', project.property('APP_NAME')
+        resValue 'string', 'app_initial', project.property('APP_NAME').substring(0, 1)  // logo monogram
         minSdk 26
         targetSdk 34
         versionCode 1
@@ -31,7 +34,7 @@ android {
         // The AI Agent token is compiled into the debug/release build: keep it out of git.
         buildConfigField 'String', 'AGENT_GATEWAY_URL', "\"${localProps.getProperty('agent.gateway.url', System.getenv('AGENT_GATEWAY_URL') ?: '')}\""
         buildConfigField 'String', 'AGENT_GATEWAY_TOKEN', "\"${localProps.getProperty('agent.gateway.token', System.getenv('AGENT_GATEWAY_TOKEN') ?: '')}\""
-        buildConfigField 'String', 'API_BASE_URL', "\"${localProps.getProperty('api.base.url', 'https://api.masterenglish.invalid/api/')}\""
+        buildConfigField 'String', 'API_BASE_URL', "\"${localProps.getProperty('api.base.url', "https://api.${project.property('APP_NAME').toLowerCase()}.invalid/api/")}\""
 
         // Room writes each schema version to app/schemas/ (commit it): migrations are written and checked against it.
         javaCompileOptions {

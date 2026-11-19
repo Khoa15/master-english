@@ -15,5 +15,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = 'MasterEnglish'
+rootProject.name = providers.gradleProperty('APP_NAME').get()
 include ':app'

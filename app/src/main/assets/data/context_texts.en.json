@@ -1,0 +1,55 @@
+{
+  "lang": "en",
+  "items": [
+    {
+      "id": "ctx_send_boss",
+      "scenario": "Your boss asks if you have sent the report to the client yet. You reply by work email, politely.",
+      "explain": "In a work email, 'send' is neutral and clear. 'Shoot over' is casual, for friends. 'Ship' usually means releasing a product."
+    },
+    {
+      "id": "ctx_shoot_over_friend",
+      "scenario": "You text a close friend: you want them to send yesterday's photo quickly.",
+      "explain": "'Shoot over' is very casual and quick, for friends or close colleagues. 'Submit' and 'dispatch' sound formal or mechanical."
+    },
+    {
+      "id": "ctx_request_boss",
+      "scenario": "You write an email asking your manager to approve travel expenses. Formal tone.",
+      "explain": "'Request' is formal and suits work documents. 'Want' is too direct, 'gimme' is very casual and not for a manager."
+    },
+    {
+      "id": "ctx_sorry_meeting",
+      "scenario": "You arrive at a meeting 10 minutes late. You say it to your manager as you enter.",
+      "explain": "'Sorry' is the safe choice with a superior. 'My bad' is light, for equal colleagues. 'Oops' is only for a small slip, said quietly."
+    },
+    {
+      "id": "ctx_ship_release",
+      "scenario": "Internal announcement: the tech team has just released a new version of the app.",
+      "explain": "At work, 'ship' means releasing a product to market. 'Mail' means sending letters, 'deliver' means handing goods to a customer."
+    },
+    {
+      "id": "ctx_children_form",
+      "scenario": "Scholarship application, family section: you need to mention your children. Formal tone.",
+      "explain": "'Children' is formal and used in official documents. 'Kids' is more casual, 'babies' only refers to very young children."
+    },
+    {
+      "id": "ctx_purchase_policy",
+      "scenario": "The company's official notice of a new policy: customers can purchase products through the website.",
+      "explain": "'Purchase' is formal, used in official documents. 'Buy' is more neutral, 'grab' means buying quickly and is very casual."
+    },
+    {
+      "id": "ctx_huge_fish",
+      "scenario": "You tell friends about the big fish you just caught, excited.",
+      "explain": "'Huge' is used when excited, in everyday talk. 'Big' is neutral and general. 'Vast' usually describes wide spaces like seas or plains."
+    },
+    {
+      "id": "ctx_affect_salary",
+      "scenario": "In your report: the new rule will affect employees' salaries.",
+      "explain": "'Affect' is a verb meaning to have an influence on. 'Effect' is usually a noun (result, impact), so it is easy to confuse. 'Involve' means include or require, not influence."
+    },
+    {
+      "id": "ctx_let_me_know_group",
+      "scenario": "You message your group: you want to know who will join tonight. Friendly tone.",
+      "explain": "'Let me know' is friendly and common at work and in messages. 'Inform me' is too formal, like an official notice. 'Tell me' is a bit blunt."
+    }
+  ]
+}

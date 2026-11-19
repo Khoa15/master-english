@@ -1,0 +1,208 @@
+{
+ "version": 1,
+ "activities": [
+  {
+   "id": "game_word_match",
+   "section": "GAME",
+   "code": "WORD_MATCH",
+   "title": "Word Match",
+   "subtitle": "Match words you've learned with their meanings",
+   "image": "ic_ent_link",
+   "accent": "GREEN",
+   "position": 0,
+   "design_for": [
+    "en"
+   ]
+  },
+  {
+   "id": "game_guess_word",
+   "section": "GAME",
+   "code": "GUESS_WORD",
+   "title": "Guess the Word",
+   "subtitle": "Read a definition, pick the right word",
+   "image": "ic_ent_help",
+   "accent": "BLUE",
+   "position": 1,
+   "design_for": [
+    "en"
+   ]
+  },
+  {
+   "id": "game_synonym_match",
+   "section": "GAME",
+   "code": "SYNONYM_MATCH",
+   "title": "Synonym Match",
+   "subtitle": "Match each word with a synonym",
+   "image": "ic_ent_cards",
+   "accent": "PURPLE",
+   "position": 2,
+   "design_for": [
+    "en"
+   ]
+  },
+  {
+   "id": "game_copy_speed",
+   "section": "GAME",
+   "code": "COPY_SPEED",
+   "title": "Speed Typing",
+   "subtitle": "See the meaning, type the word fast",
+   "image": "ic_ent_bolt",
+   "accent": "AMBER",
+   "position": 3,
+   "design_for": [
+    "en"
+   ]
+  },
+  {
+   "id": "practice_mistakes",
+   "section": "PRACTICE",
+   "code": "MISTAKES",
+   "title": "Review Mistakes",
+   "subtitle": "Words you often get wrong",
+   "image": "ic_ent_star",
+   "accent": "AMBER",
+   "position": 0,
+   "design_for": [
+    "en"
+   ]
+  },
+  {
+   "id": "practice_tung",
+   "section": "PRACTICE",
+   "code": "TUNG",
+   "title": "Chant Mode",
+   "subtitle": "Repeat words aloud to remember them",
+   "image": "ic_ent_pen",
+   "accent": "BLUE",
+   "position": 1,
+   "design_for": [
+    "en"
+   ]
+  },
+  {
+   "id": "practice_sleeping",
+   "section": "PRACTICE",
+   "code": "SLEEPING",
+   "title": "Sleep Listening",
+   "subtitle": "Hear your words while you sleep",
+   "image": "ic_ent_moon",
+   "accent": "PURPLE",
+   "position": 2,
+   "design_for": [
+    "en"
+   ]
+  },
+  {
+   "id": "practice_context",
+   "section": "PRACTICE",
+   "code": "CONTEXT",
+   "title": "Context",
+   "subtitle": "Pick the word that fits the situation",
+   "image": "ic_ent_star",
+   "accent": "GREEN",
+   "position": 3,
+   "design_for": [
+    "en"
+   ]
+  }
+ ],
+ "banners": [
+  {
+   "id": "banner_word_match",
+   "tag": "FEATURED GAME",
+   "title": "Word Match",
+   "subtitle": "Match words you've learned with their meanings",
+   "button_label": "Play now",
+   "image": "ic_ent_link",
+   "accent": "GREEN",
+   "action_type": "ACTIVITY",
+   "action_target": "WORD_MATCH",
+   "position": 0
+  },
+  {
+   "id": "banner_guess_word",
+   "tag": "NEW",
+   "title": "Guess the Word",
+   "subtitle": "Read the definition, guess the word, earn bonus points",
+   "button_label": "Try now",
+   "image": "ic_ent_help",
+   "accent": "PURPLE",
+   "action_type": "ACTIVITY",
+   "action_target": "GUESS_WORD",
+   "position": 1
+  },
+  {
+   "id": "banner_contest",
+   "tag": "CONTEST",
+   "title": "A1 Vocabulary King",
+   "subtitle": "Race for the top and win gems for the top 10",
+   "button_label": "View contest",
+   "image": "ic_ent_trophy",
+   "accent": "BLUE",
+   "action_type": "CONTEST",
+   "action_target": "contest_a1_king",
+   "position": 2
+  }
+ ],
+ "events": [
+  {
+   "id": "event_double_exp",
+   "tag": "EVENT",
+   "title": "Vocab Week: 2x EXP",
+   "description": "Every game gives double experience points",
+   "image": "ic_ent_trophy",
+   "accent": "RED",
+   "starts_offset_hours": -24,
+   "ends_offset_hours": 72
+  }
+ ],
+ "contest_templates": [
+  {
+   "id": "weekly_vocab_cup",
+   "title": "Weekly Vocabulary Cup",
+   "description": "Compete every week. Answer fast and accurately; results are ranked by points and completion time.",
+   "image": "ic_ent_trophy",
+   "accent": "AMBER",
+   "schedule": {
+    "registration_opens": "MON 00:00",
+    "registration_closes": "SAT 12:50",
+    "starts": "SAT 13:00",
+    "ends": "SUN 13:00"
+   },
+   "question_count": 25,
+   "duration_minutes": 10,
+   "packs": [
+    "A1",
+    "A2",
+    "B1"
+   ],
+   "prizes": [
+    [
+     1,
+     1,
+     500
+    ],
+    [
+     2,
+     2,
+     300
+    ],
+    [
+     3,
+     3,
+     150
+    ],
+    [
+     4,
+     10,
+     50
+    ],
+    [
+     20,
+     null,
+     10
+    ]
+   ]
+  }
+ ]
+}
