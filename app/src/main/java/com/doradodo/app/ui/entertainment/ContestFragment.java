@@ -21,7 +21,6 @@ import com.doradodo.app.data.repository.ContestState;
 import com.doradodo.app.ui.ds.Ui;
 
 import java.time.ZoneId;
-import java.util.Date;
 import java.util.Locale;
 
 import dagger.hilt.android.AndroidEntryPoint;

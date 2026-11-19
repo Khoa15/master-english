@@ -12,8 +12,8 @@ import java.util.Locale;
 /** Contest moments written in the learner's time zone, with the zone named so the time is unambiguous. */
 final class ContestTimes {
 
-    /** Weekday and time, e.g. "Sat 20:00". */
-    static final String WEEKDAY_TIME = "EEEHm";
+    /** Weekday, day, month and time, e.g. "Sat 21 Nov, 20:00". */
+    static final String WEEKDAY_TIME = "EEEdMMMHm";
     /** Day, month and time, e.g. "21 Nov, 20:00". */
     static final String DATE_TIME = "dMMMHm";
 
