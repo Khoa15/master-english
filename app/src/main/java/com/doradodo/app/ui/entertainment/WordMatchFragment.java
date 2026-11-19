@@ -2,7 +2,7 @@ package com.doradodo.app.ui.entertainment;
 
 import com.doradodo.app.R;
 import com.doradodo.app.data.local.entity.GameWord;
-import com.doradodo.app.data.repository.EntertainmentRepository;
+import com.doradodo.app.data.repository.GameWordRepository;
 import com.doradodo.app.ui.ds.Ui;
 
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ public class WordMatchFragment extends MatchFragment {
     }
 
     @Override
-    protected List<String[]> loadPairs(EntertainmentRepository repo) {
+    protected List<String[]> loadPairs(GameWordRepository repo) {
         List<String[]> pairs = new ArrayList<>();
         for (GameWord w : repo.learnedWords(PAIRS, false)) {
             pairs.add(new String[]{w.term, w.meaning});

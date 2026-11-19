@@ -18,7 +18,7 @@ import androidx.annotation.Nullable;
 
 import com.doradodo.app.R;
 import com.doradodo.app.data.local.entity.GameWord;
-import com.doradodo.app.data.repository.EntertainmentRepository.WordSource;
+import com.doradodo.app.data.repository.WordSource;
 import java.util.ArrayList;
 import java.util.List;
 import com.doradodo.app.ui.ds.Ui;
@@ -80,7 +80,7 @@ public class SleepingFragment extends GameFragment {
         body = page.screen.body;
         body.setPadding(Ui.dp(c, 20), Ui.dp(c, 18), Ui.dp(c, 20), Ui.dp(c, 16));
         body.addView(loadingState(c));
-        load(() -> vm().repo().wordSources(), list -> {
+        load(() -> vm().words().wordSources(), list -> {
             tracks = list == null ? new ArrayList<>() : list;
             render();
         });
@@ -102,7 +102,7 @@ public class SleepingFragment extends GameFragment {
         WordSource src = tracks.get(track);
         load(() -> {
             List<String[]> out = new ArrayList<>();
-            for (GameWord w : vm().repo().sourceWords(src.id, 300)) {
+            for (GameWord w : vm().words().sourceWords(src.id, 300)) {
                 out.add(new String[]{w.term});
             }
             return out;

@@ -25,9 +25,8 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.doradodo.app.R;
 import com.doradodo.app.data.local.entity.BannerEntity;
 import com.doradodo.app.data.local.entity.EventEntity;
-import com.doradodo.app.data.repository.EntertainmentRepository;
 import com.doradodo.app.data.repository.EntertainmentRepository.ActivityCard;
-import com.doradodo.app.data.repository.EntertainmentRepository.ContestCard;
+import com.doradodo.app.data.repository.ContestCard;
 import com.doradodo.app.data.repository.ContestState;
 import com.doradodo.app.data.repository.EntertainmentRepository.Home;
 import com.doradodo.app.ui.ds.Ui;
@@ -427,7 +426,7 @@ public class EntertainmentFragment extends GameFragment {
         if (action.kind == ContestAction.Kind.PLAY) {
             go(R.id.contestPlayFragment, Routes.contestArgs(card.contest.id));
         } else if (action.kind == ContestAction.Kind.REGISTER) {
-            load(() -> vm().repo().register(card.contest.id), ok -> {
+            load(() -> vm().contests().register(card.contest.id), ok -> {
                 Toast.makeText(requireContext(), Boolean.TRUE.equals(ok)
                         ? getString(R.string.ent_registered_for, card.contest.title) : getString(R.string.ent_register_failed), Toast.LENGTH_SHORT).show();
                 reload();

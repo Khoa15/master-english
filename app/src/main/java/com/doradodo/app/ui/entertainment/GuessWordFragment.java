@@ -2,7 +2,7 @@ package com.doradodo.app.ui.entertainment;
 
 import com.doradodo.app.R;
 import com.doradodo.app.data.local.entity.GameWord;
-import com.doradodo.app.data.repository.EntertainmentRepository;
+import com.doradodo.app.data.repository.GameWordRepository;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -40,7 +40,7 @@ public class GuessWordFragment extends QuizFragment {
     }
 
     @Override
-    protected Q[] buildQuestions(EntertainmentRepository repo) {
+    protected Q[] buildQuestions(GameWordRepository repo) {
         List<GameWord> words = repo.learnedWords(QUESTIONS, true);
         if (words.size() < 3) {
             return new Q[0];

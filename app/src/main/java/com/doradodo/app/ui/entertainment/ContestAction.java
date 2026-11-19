@@ -4,8 +4,7 @@ import android.content.Context;
 
 import com.doradodo.app.R;
 import com.doradodo.app.data.repository.ContestRules;
-import com.doradodo.app.data.repository.EntertainmentRepository;
-import com.doradodo.app.data.repository.EntertainmentRepository.ContestCard;
+import com.doradodo.app.data.repository.ContestCard;
 import com.doradodo.app.data.repository.ContestState;
 
 /** What the main button of a contest does for this learner right now. */

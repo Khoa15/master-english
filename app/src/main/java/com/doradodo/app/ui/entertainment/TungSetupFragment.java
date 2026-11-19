@@ -14,7 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.doradodo.app.R;
-import com.doradodo.app.data.repository.EntertainmentRepository.WordSource;
+import com.doradodo.app.data.repository.WordSource;
 import java.util.ArrayList;
 import java.util.List;
 import com.doradodo.app.ui.ds.Ui;
@@ -63,7 +63,7 @@ public class TungSetupFragment extends GameFragment {
         });
         GameUi.setFooter(c, page.screen, start);
         render();
-        load(() -> vm().repo().wordSources(), list -> {
+        load(() -> vm().words().wordSources(), list -> {
             sources = list == null ? new ArrayList<>() : list;
             loaded = true;
             render();

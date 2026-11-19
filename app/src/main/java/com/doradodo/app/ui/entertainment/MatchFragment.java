@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.doradodo.app.R;
-import com.doradodo.app.data.repository.EntertainmentRepository;
+import com.doradodo.app.data.repository.GameWordRepository;
 import com.doradodo.app.ui.ds.Ui;
 
 import java.util.ArrayList;
@@ -50,7 +50,7 @@ public abstract class MatchFragment extends GameFragment {
     protected abstract Config config();
 
     /** The pairs to match ({left, right}), read from the database off the main thread. */
-    protected abstract List<String[]> loadPairs(EntertainmentRepository repo);
+    protected abstract List<String[]> loadPairs(GameWordRepository repo);
 
     /** Fewest pairs that make a round worth playing. */
     private static final int MIN_PAIRS = 3;
@@ -108,7 +108,7 @@ public abstract class MatchFragment extends GameFragment {
         wrong = -1;
         done.clear();
         page.screen.footer.setVisibility(View.GONE);
-        load(() -> loadPairs(vm().repo()), pairs -> {
+        load(() -> loadPairs(vm().words()), pairs -> {
             Context c = requireContext();
             ViewGroup parent = page.screen.body;
             parent.removeView(status);

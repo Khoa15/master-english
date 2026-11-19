@@ -16,7 +16,7 @@ import androidx.annotation.Nullable;
 import com.doradodo.app.R;
 import com.doradodo.app.data.local.entity.ContestEntity;
 import com.doradodo.app.data.local.entity.ContestPrizeEntity;
-import com.doradodo.app.data.repository.EntertainmentRepository.ContestDetail;
+import com.doradodo.app.data.repository.ContestDetail;
 import com.doradodo.app.data.repository.ContestState;
 import com.doradodo.app.ui.ds.Ui;
 
@@ -55,7 +55,7 @@ public class ContestFragment extends GameFragment {
     }
 
     private void reload() {
-        load(() -> vm().repo().loadContest(contestId), this::render);
+        load(() -> vm().contests().loadContest(contestId), this::render);
     }
 
     private void render(@Nullable ContestDetail d) {
@@ -178,7 +178,7 @@ public class ContestFragment extends GameFragment {
                 if (action.kind == ContestAction.Kind.PLAY) {
                     go(R.id.contestPlayFragment, Routes.contestArgs(contestId));
                 } else {
-                    load(() -> vm().repo().register(contestId), ok -> {
+                    load(() -> vm().contests().register(contestId), ok -> {
                         Toast.makeText(requireContext(), Boolean.TRUE.equals(ok) ? getString(R.string.ent_registered_ok)
                                 : getString(R.string.ent_register_failed), Toast.LENGTH_SHORT).show();
                         reload();

@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.doradodo.app.R;
-import com.doradodo.app.data.repository.EntertainmentRepository;
+import com.doradodo.app.data.repository.GameWordRepository;
 import com.doradodo.app.ui.ds.Ui;
 
 /** One question per screen with three or four answers, instant feedback and a score. */
@@ -60,7 +60,7 @@ public abstract class QuizFragment extends GameFragment {
     protected abstract Config config();
 
     /** The questions, built from the database off the main thread. */
-    protected abstract Q[] buildQuestions(EntertainmentRepository repo);
+    protected abstract Q[] buildQuestions(GameWordRepository repo);
 
     private Q[] questions = new Q[0];
 
@@ -84,7 +84,7 @@ public abstract class QuizFragment extends GameFragment {
         button = GameUi.footerButton(c, "", Ui.INK, Ui.AMBER, GameUi.AMBER_EDGE);
         button.setOnClickListener(v -> next());
         body.addView(loadingState(c));
-        load(() -> buildQuestions(vm().repo()), qs -> {
+        load(() -> buildQuestions(vm().words()), qs -> {
             body.removeAllViews();
             if (qs == null || qs.length == 0) {
                 body.addView(emptyState(requireContext(), cfg.emptyTitle, cfg.emptyMessage), Ui.matchWidth());

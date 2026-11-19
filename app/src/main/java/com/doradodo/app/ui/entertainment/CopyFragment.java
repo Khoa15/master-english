@@ -64,7 +64,7 @@ public class CopyFragment extends GameFragment {
         body.addView(loadingState(c));
         load(() -> {
             List<String[]> out = new ArrayList<>();
-            for (GameWord w : vm().repo().learnedWords(ROUND_COUNT * 3, false)) {
+            for (GameWord w : vm().words().learnedWords(ROUND_COUNT * 3, false)) {
                 // Single words of any script (letters only, two or more) can be typed back.
                 if (w.term.matches("\\p{L}{2,}") && out.size() < ROUND_COUNT) {
                     out.add(new String[]{w.term.toLowerCase(java.util.Locale.ROOT), w.meaning});

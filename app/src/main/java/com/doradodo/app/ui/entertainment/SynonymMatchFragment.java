@@ -1,7 +1,7 @@
 package com.doradodo.app.ui.entertainment;
 
 import com.doradodo.app.R;
-import com.doradodo.app.data.repository.EntertainmentRepository;
+import com.doradodo.app.data.repository.GameWordRepository;
 import com.doradodo.app.data.repository.SynonymPair;
 
 import java.util.ArrayList;
@@ -38,7 +38,7 @@ public class SynonymMatchFragment extends MatchFragment {
     }
 
     @Override
-    protected List<String[]> loadPairs(EntertainmentRepository repo) {
+    protected List<String[]> loadPairs(GameWordRepository repo) {
         List<String[]> pairs = new ArrayList<>();
         for (SynonymPair p : repo.synonymPairs(PAIRS)) {
             pairs.add(new String[]{p.left, p.right});

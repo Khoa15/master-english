@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
+import com.doradodo.app.data.repository.WordSource;
 import com.doradodo.app.R;
 import com.doradodo.app.ui.ds.Ui;
 
@@ -170,8 +171,8 @@ final class GameUi {
     }
 
     /** The name of a word source: the learner's own words are named here, packs carry their own title. */
-    static String sourceTitle(Context c, com.doradodo.app.data.repository.EntertainmentRepository.WordSource s) {
-        return com.doradodo.app.data.repository.EntertainmentRepository.WordSource.LEARNED.equals(s.id)
+    static String sourceTitle(Context c, com.doradodo.app.data.repository.WordSource s) {
+        return com.doradodo.app.data.repository.WordSource.LEARNED.equals(s.id)
                 ? c.getString(R.string.ent_learned_words) : s.title;
     }
 

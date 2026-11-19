@@ -10,7 +10,7 @@
 // import androidx.annotation.Nullable;
 //
 // import com.doradodo.app.R;
-// import com.doradodo.app.data.repository.EntertainmentRepository;
+// import com.doradodo.app.data.repository.GameWordRepository;
 // import com.doradodo.app.ui.ds.Ui;
 // import com.google.gson.Gson;
 //
@@ -73,7 +73,7 @@
 //     }
 //
 //     @Override
-//     protected Q[] buildQuestions(EntertainmentRepository repo) {
+//     protected Q[] buildQuestions(GameWordRepository repo) {
 //         List<Item> items = readJson(LEARNING_ASSET, ContextFile.class).items;
 //         Map<String, Text> english = textsFor(DEFAULT_LANG);
 //         String lang = repo.displayLanguage();

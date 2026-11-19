@@ -15,8 +15,7 @@ import android.widget.TextView;
 import androidx.annotation.DrawableRes;
 import com.doradodo.app.data.local.entity.GameWord;
 import com.doradodo.app.data.repository.ContestState;
-import com.doradodo.app.data.repository.EntertainmentRepository;
-import com.doradodo.app.data.repository.EntertainmentRepository.ContestDetail;
+import com.doradodo.app.data.repository.ContestDetail;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -100,14 +99,14 @@ public class ContestPlayFragment extends GameFragment {
 
     private Prepared prepare(String contestId) {
         Prepared p = new Prepared();
-        p.detail = vm().repo().loadContest(contestId);
+        p.detail = vm().contests().loadContest(contestId);
         if (p.detail == null || !p.detail.card.registered
                 || p.detail.card.state != ContestState.LIVE) {
             p.words = new Word[0];
             return p;
         }
-        List<GameWord> list = vm().repo().contestWords(contestId, 5);
-        List<GameWord> others = vm().repo().distractors(idsOf(list), 6);
+        List<GameWord> list = vm().contests().contestWords(contestId, 5);
+        List<GameWord> others = vm().words().distractors(idsOf(list), 6);
         p.words = new Word[list.size()];
         for (int i = 0; i < list.size(); i++) {
             p.words[i] = buildWord(list.get(i), list, others);

@@ -18,7 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.doradodo.app.R;
-import com.doradodo.app.data.repository.EntertainmentRepository.WordSource;
+import com.doradodo.app.data.repository.WordSource;
 import com.doradodo.app.data.local.entity.GameWord;
 import com.doradodo.app.ui.ds.Ui;
 
@@ -133,7 +133,7 @@ public class TungFragment extends GameFragment {
         controls.addView(playHolder.root, pp);
         page.screen.setFooter(controls);
 
-        load(() -> vm().repo().wordSources(), list -> {
+        load(() -> vm().words().wordSources(), list -> {
             sources = list == null ? new ArrayList<>() : list;
             boolean known = false;
             for (WordSource w : sources) {
@@ -200,7 +200,7 @@ public class TungFragment extends GameFragment {
         clearStage();
         renderChips();
         load(() -> {
-            List<GameWord> all = new ArrayList<>(vm().repo().sourceWords(id, 400));
+            List<GameWord> all = new ArrayList<>(vm().words().sourceWords(id, 400));
             Collections.shuffle(all, random);
             List<String[]> out = new ArrayList<>();
             for (GameWord w : all.subList(0, Math.min(perRound, all.size()))) {
