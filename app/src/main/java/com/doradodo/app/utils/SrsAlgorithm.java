@@ -10,8 +10,8 @@ package com.doradodo.app.utils;
  */
 public final class SrsAlgorithm {
 
-    public static final double DEFAULT_EASINESS = SuperMemo2Helper.DEFAULT_FACTOR;
-    public static final double MIN_EASINESS = SuperMemo2Helper.MIN_FACTOR;
+    public static final double DEFAULT_EASINESS = 2.5;
+    public static final double MIN_EASINESS = 1.3;
     public static final int QUALITY_FAILED = 1;
     public static final int QUALITY_HARD = 3;
     public static final int QUALITY_GOOD = 4;
@@ -37,11 +37,34 @@ public final class SrsAlgorithm {
         }
     }
 
-    /** Computes the next state after the learner answered with {@code quality}. */
+    /**
+     * Computes the next state after the learner answered with {@code quality} (0 = blackout .. 5 = perfect).
+     *
+     * @throws IllegalArgumentException if quality is outside 0..5
+     */
     public static State review(State current, int quality) {
-        SuperMemo2Helper.SrsResult next = SuperMemo2Helper.calculateNextReview(
-                quality, current.repetitions, current.easinessFactor, current.intervalDays);
-        return new State(next.stabilityFactor, next.repetitionNumber, next.intervalDays);
+        if (quality < 0 || quality > 5) {
+            throw new IllegalArgumentException("SM-2 quality must be within 0..5, was " + quality);
+        }
+        // EF' = EF + (0.1 - (5 - q) * (0.08 + (5 - q) * 0.02)), never below the minimum
+        double factor = current.easinessFactor + (0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02));
+        if (factor < MIN_EASINESS) {
+            factor = MIN_EASINESS;
+        }
+        if (quality < 3) {
+            // Failed recall: restart the repetition chain, review tomorrow.
+            return new State(factor, 0, 1);
+        }
+        int repetitions = current.repetitions + 1;
+        int interval;
+        if (repetitions == 1) {
+            interval = 1;
+        } else if (repetitions == 2) {
+            interval = 6;
+        } else {
+            interval = (int) Math.round(current.intervalDays * factor);
+        }
+        return new State(factor, repetitions, interval);
     }
 
     /** Maps the four flashcard buttons (Again, Hard, Good, Easy) to SM-2 quality grades. */
