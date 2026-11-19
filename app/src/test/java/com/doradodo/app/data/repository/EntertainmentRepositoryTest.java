@@ -30,7 +30,8 @@ public class EntertainmentRepositoryTest {
     public void setUp() {
         fx = new EntertainmentTestFixture();
         repo = new EntertainmentRepository(fx.db.entertainmentDao(), fx.learner,
-                new ContestRepository(fx.db.entertainmentDao(), fx.learner));
+                new ContestRepository(fx.db.entertainmentDao(), fx.db.wordDao(), fx.learner,
+                        new ContestTemplates(java.util.Collections.emptyList())));
     }
 
     @After

@@ -66,6 +66,13 @@ public interface EntertainmentDao {
     @Query("DELETE FROM ent_contests WHERE id NOT IN (:keep)")
     void deleteContestsExcept(List<String> keep);
 
+    /** Contests from before the weekly ones: their id has no "@<week>" part. */
+    @Query("DELETE FROM ent_contests WHERE id NOT LIKE '%@%'")
+    void deleteLegacyContests();
+
+    @Query("DELETE FROM ent_contests WHERE ends_at < :cutoff")
+    void deleteContestsEndedBefore(long cutoff);
+
     @Insert
     long insertSynonymGroup(SynonymGroupEntity group);
 

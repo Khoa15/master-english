@@ -34,6 +34,12 @@ public class ContestTemplates {
         this.context = context;
     }
 
+    /** Fixed templates, for tests. */
+    public ContestTemplates(List<ContestTemplate> templates) {
+        this.context = null;
+        this.templates = templates;
+    }
+
     public synchronized List<ContestTemplate> all() {
         if (templates == null) {
             try (InputStream stream = context.getAssets().open("data/entertainment.json");
